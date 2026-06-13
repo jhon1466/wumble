@@ -1,0 +1,5 @@
+{
+  "AGORA_APP_ID": "your-agora-app-id",
+  "GIPHY_API_KEY": "your-giphy-api-key",
+  "CLOUDINARY_CLOUD_NAME": "your-cloudinary-cloud-name"
+}

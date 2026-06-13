@@ -1,0 +1,15 @@
+<svg width="48" height="38" viewBox="0 0 48 38" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sombra -->
+  <ellipse cx="24" cy="18" rx="18" ry="12" fill="#00000022"></ellipse>
+  
+  <!-- Burbuja principal -->
+  <path d="M10 18
+           C8 10, 16 6, 24 8
+           C32 4, 40 10, 38 18
+           C40 24, 32 30, 22 26
+           C16 28, 12 24, 10 18 Z" fill="white" stroke="#222222" stroke-width="1.5"></path>
+
+  <!-- Puntitos -->
+  <circle cx="8" cy="28" r="4" fill="white" stroke="#222222" stroke-width="1"></circle>
+  <circle cx="4" cy="34" r="2.5" fill="white" stroke="#222222" stroke-width="1"></circle>
+</svg>
