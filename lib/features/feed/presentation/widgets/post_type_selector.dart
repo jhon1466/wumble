@@ -68,6 +68,19 @@ class PostTypeSelector extends StatelessWidget {
                 },
               ),
               _PostTypeButton(
+                label: 'Personaje',
+                icon: Icons.face_retouching_natural,
+                color: Colors.deepPurple,
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WikiEditorScreen(isOC: true)),
+                  );
+                },
+              ),
+              _PostTypeButton(
                 label: 'Encuesta',
                 icon: Icons.poll_outlined,
                 color: Colors.blue,

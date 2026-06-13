@@ -17,8 +17,14 @@ import 'widgets/rich_text_controller.dart';
 class WikiEditorScreen extends StatefulWidget {
   final String? communityId;
   final WikiPage? wikiToEdit;
+  final bool isOC; // When true, creates an Original Character (personaje) entry.
 
-  const WikiEditorScreen({super.key, this.communityId, this.wikiToEdit});
+  const WikiEditorScreen({
+    super.key,
+    this.communityId,
+    this.wikiToEdit,
+    this.isOC = false,
+  });
 
   @override
   State<WikiEditorScreen> createState() => _WikiEditorScreenState();
@@ -42,12 +48,30 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
     {'label': 'Calificación', 'value': '⭐⭐⭐⭐⭐'},
   ];
 
+  bool get _isOC => widget.isOC || widget.wikiToEdit?.type == 'oc';
+
   @override
   void initState() {
     super.initState();
+
+    // Original Character template: structured fields typical of an OC sheet.
+    if (_isOC) {
+      _infoFields
+        ..clear()
+        ..addAll([
+          {'label': 'Apodo', 'value': ''},
+          {'label': 'Edad', 'value': ''},
+          {'label': 'Género', 'value': ''},
+          {'label': 'Especie / Raza', 'value': ''},
+          {'label': 'Personalidad', 'value': ''},
+          {'label': 'Lo que me gusta', 'value': ''},
+          {'label': 'Lo que no me gusta', 'value': ''},
+        ]);
+    }
+
     if (widget.wikiToEdit != null) {
       _nameController.text = widget.wikiToEdit!.title;
-      
+
       // Load labels
       for (var field in _infoFields) {
         if (widget.wikiToEdit!.labels.containsKey(field['label'])) {
@@ -82,6 +106,43 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
       }
     }
     super.dispose();
+  }
+
+  Future<void> _addCustomField() async {
+    final controller = TextEditingController();
+    final name = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: Wumbleheme.surfaceColor,
+        title: const Text('Nuevo campo', style: TextStyle(color: Colors.white)),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          style: const TextStyle(color: Colors.white),
+          decoration: const InputDecoration(
+            hintText: 'Ej: Arma favorita, Frase…',
+            hintStyle: TextStyle(color: Colors.white24),
+          ),
+          onSubmitted: (v) => Navigator.pop(ctx, v.trim()),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, controller.text.trim()),
+            child: const Text('Añadir', style: TextStyle(color: Wumbleheme.secondaryColor)),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (name != null && name.isNotEmpty) {
+      // Avoid duplicate labels (they are used as map keys).
+      if (_infoFields.any((f) => f['label'] == name)) return;
+      setState(() => _infoFields.add({'label': name, 'value': ''}));
+    }
   }
 
   void _addTextBlock({String? initialText, bool autoFocus = true}) {
@@ -280,7 +341,8 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
 
       final wikiId = widget.wikiToEdit?.id ?? const Uuid().v4();
       final labels = {
-        for (var field in _infoFields) field['label']!: field['value']!
+        for (var field in _infoFields)
+          if (field['value']!.trim().isNotEmpty) field['label']!: field['value']!
       };
 
       final List<Map<String, dynamic>> parsedBlocks = [];
@@ -335,6 +397,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
         authorAvatarUrl: widget.wikiToEdit?.authorAvatarUrl ?? authorAvatarUrl,
         authorAvatarFrameUrl: widget.wikiToEdit?.authorAvatarFrameUrl ?? authorAvatarFrameUrl,
         title: _nameController.text.trim(),
+        type: widget.wikiToEdit?.type ?? (_isOC ? 'oc' : 'wiki'),
         content: plainContentFallback.trim(),
         blocks: parsedBlocks,
         iconUrl: _wikiIconPath ?? widget.wikiToEdit?.iconUrl,
@@ -388,7 +451,9 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(widget.wikiToEdit != null ? 'Editar Wiki' : 'Nueva Wiki'),
+        title: Text(_isOC
+            ? (widget.wikiToEdit != null ? 'Editar Personaje' : 'Nuevo Personaje')
+            : (widget.wikiToEdit != null ? 'Editar Wiki' : 'Nueva Wiki')),
         actions: [
           IconButton(
             icon: const Icon(Icons.visibility_outlined),
@@ -482,10 +547,10 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
                 controller: _nameController,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                decoration: const InputDecoration(
-                  hintText: 'Nombre de la Wiki',
+                decoration: InputDecoration(
+                  hintText: _isOC ? 'Nombre del personaje' : 'Nombre de la Wiki',
                   border: InputBorder.none,
-                  hintStyle: TextStyle(color: Colors.white24),
+                  hintStyle: const TextStyle(color: Colors.white24),
                 ),
               ),
             ),
@@ -495,36 +560,53 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                children: _infoFields.asMap().entries.map((entry) {
-                  int idx = entry.key;
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.info_outline, size: 18, color: Wumbleheme.textSecondary),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          flex: 2,
-                          child: Text(entry.value['label']!, style: const TextStyle(color: Wumbleheme.textSecondary)),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: TextFormField(
-                            initialValue: entry.value['value'], // Use initialValue instead of controller for simplicity here
-                            onChanged: (val) => _infoFields[idx]['value'] = val,
-                            decoration: InputDecoration(
-                              hintText: 'Añadir...',
-                              hintStyle: const TextStyle(color: Colors.white10),
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(vertical: 4),
-                              enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.yellow.withOpacity(0.3))),
+                children: [
+                  ..._infoFields.asMap().entries.map((entry) {
+                    int idx = entry.key;
+                    return Padding(
+                      key: ValueKey('field_${entry.value['label']}_$idx'),
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.info_outline, size: 18, color: Wumbleheme.textSecondary),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            flex: 2,
+                            child: Text(entry.value['label']!, style: const TextStyle(color: Wumbleheme.textSecondary)),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: TextFormField(
+                              initialValue: entry.value['value'], // Use initialValue instead of controller for simplicity here
+                              onChanged: (val) => _infoFields[idx]['value'] = val,
+                              decoration: InputDecoration(
+                                hintText: 'Añadir...',
+                                hintStyle: const TextStyle(color: Colors.white10),
+                                isDense: true,
+                                contentPadding: const EdgeInsets.symmetric(vertical: 4),
+                                enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.yellow.withOpacity(0.3))),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          IconButton(
+                            icon: const Icon(Icons.close, size: 16, color: Colors.white24),
+                            visualDensity: VisualDensity.compact,
+                            tooltip: 'Quitar campo',
+                            onPressed: () => setState(() => _infoFields.removeAt(idx)),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton.icon(
+                      onPressed: _addCustomField,
+                      icon: const Icon(Icons.add_circle_outline, size: 18, color: Wumbleheme.secondaryColor),
+                      label: const Text('Añadir campo', style: TextStyle(color: Wumbleheme.secondaryColor)),
                     ),
-                  );
-                }).toList(),
+                  ),
+                ],
               ),
             ),
             
@@ -704,7 +786,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
                     ),
                     const SizedBox(height: 50),
                     Text(
-                      _nameController.text.isEmpty ? 'Nombre de la Wiki' : _nameController.text,
+                      _nameController.text.isEmpty ? (_isOC ? 'Nombre del personaje' : 'Nombre de la Wiki') : _nameController.text,
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),

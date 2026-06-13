@@ -186,6 +186,7 @@ class _ProfileViewState extends State<_ProfileView> {
 
                 if (!widget.isGlobal) {
                   visibleTabs.add({'label': 'Posts', 'index': 1, 'widget': ProfilePosts(user: effectiveUser, communityId: widget.communityId)});
+                  visibleTabs.add({'label': 'Personajes', 'index': 5, 'widget': ProfileWikis(user: effectiveUser, communityId: widget.communityId, ocOnly: true)});
                   visibleTabs.add({'label': 'Wiki', 'index': 2, 'widget': ProfileWikis(user: effectiveUser, communityId: widget.communityId)});
                 }
 
@@ -504,6 +505,22 @@ class _ProfileViewState extends State<_ProfileView> {
                   MaterialPageRoute(
                     builder: (context) =>
                         WikiEditorScreen(communityId: communityId ?? ''),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.face_retouching_natural,
+                  color: Colors.white),
+              title: const Text('Crear Personaje (OC)',
+                  style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        WikiEditorScreen(communityId: communityId ?? '', isOC: true),
                   ),
                 );
               },

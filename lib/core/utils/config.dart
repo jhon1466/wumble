@@ -1,8 +1,7 @@
+import 'package:wumble/core/config/app_secrets.dart';
+
 class AppConfig {
-  // Secrets are injected at build time via --dart-define / --dart-define-from-file.
-  // See dart_defines.example.json. Never hardcode keys (this repo is public).
-  static const String giphyApiKey =
-      String.fromEnvironment('GIPHY_API_KEY', defaultValue: '');
-  static const String cloudinaryCloudName =
-      String.fromEnvironment('CLOUDINARY_CLOUD_NAME', defaultValue: 'dsub6ipzt');
+  // Keys live in app_secrets.dart (gitignored, not in the public repo).
+  static const String giphyApiKey = AppSecrets.giphyApiKey;
+  static const String cloudinaryCloudName = AppSecrets.cloudinaryCloudName;
 }

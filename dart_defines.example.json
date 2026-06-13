@@ -1,5 +1,7 @@
 {
   "AGORA_APP_ID": "your-agora-app-id",
   "GIPHY_API_KEY": "your-giphy-api-key",
-  "CLOUDINARY_CLOUD_NAME": "your-cloudinary-cloud-name"
+  "CLOUDINARY_CLOUD_NAME": "your-cloudinary-cloud-name",
+  "SUPABASE_URL": "https://xxxx.supabase.co",
+  "SUPABASE_ANON_KEY": "your-supabase-anon-public-key"
 }

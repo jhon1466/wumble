@@ -66,7 +66,8 @@ class _WikiCardState extends State<WikiCard> {
 
   void _handleShare() {
     final String shareUrl = 'https://wumble.link/w/${widget.wiki.id}';
-    final String shareText = '¡Mira esta Wiki en Wumble!\n$shareUrl\n\n${widget.wiki.title}\n${widget.wiki.content}';
+    final String kind = widget.wiki.type == 'oc' ? 'personaje' : 'Wiki';
+    final String shareText = '¡Mira este $kind en Wumble!\n$shareUrl\n\n${widget.wiki.title}\n${widget.wiki.content}';
     
     ShareHelper.share(
       context: context,
@@ -99,7 +100,7 @@ class _WikiCardState extends State<WikiCard> {
             if (_isAuthor) ...[
               ListTile(
                 leading: const Icon(Icons.edit_outlined, color: Colors.blueAccent),
-                title: const Text('Editar Wiki', style: TextStyle(color: Colors.white)),
+                title: Text(widget.wiki.type == 'oc' ? 'Editar Personaje' : 'Editar Wiki', style: const TextStyle(color: Colors.white)),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -134,7 +135,7 @@ class _WikiCardState extends State<WikiCard> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('¿Eliminar Wiki?', style: TextStyle(color: Colors.white)),
+        title: Text(widget.wiki.type == 'oc' ? '¿Eliminar Personaje?' : '¿Eliminar Wiki?', style: const TextStyle(color: Colors.white)),
         content: const Text('Esta acción no se puede deshacer.', style: TextStyle(color: Colors.white70)),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
@@ -213,15 +214,43 @@ class _WikiCardState extends State<WikiCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Title
-                Text(
-                  widget.wiki.title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    letterSpacing: -0.5,
-                  ),
+                // Title (+ OC badge for characters)
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        widget.wiki.title,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          letterSpacing: -0.5,
+                        ),
+                      ),
+                    ),
+                    if (widget.wiki.type == 'oc') ...[
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                              colors: [Color(0xFF8E2DE2), Color(0xFF6A1B9A)]),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: const Text(
+                          'OC',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
                 const SizedBox(height: 8),
 
@@ -274,8 +303,14 @@ class _WikiCardState extends State<WikiCard> {
                                       colors: [themeColor.withOpacity(0.3), Colors.black54],
                                     ),
                                   ),
-                                  child: const Center(
-                                    child: Icon(Icons.book_outlined, color: Colors.white24, size: 48),
+                                  child: Center(
+                                    child: Icon(
+                                      widget.wiki.type == 'oc'
+                                          ? Icons.face_retouching_natural
+                                          : Icons.book_outlined,
+                                      color: Colors.white24,
+                                      size: 48,
+                                    ),
                                   ),
                                 ),
                         ),

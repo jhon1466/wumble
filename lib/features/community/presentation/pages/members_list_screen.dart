@@ -8,6 +8,7 @@ import 'package:wumble/features/community/domain/community_member_model.dart';
 import 'package:wumble/features/community/domain/community_model.dart';
 import 'package:wumble/features/community/presentation/bloc/community_members_bloc.dart';
 import 'package:wumble/features/community/presentation/widgets/member_mini_profile.dart';
+import 'package:wumble/features/community/presentation/widgets/online_now_bar.dart';
 import 'package:wumble/core/widgets/user_badge_widget.dart';
 import 'package:wumble/core/widgets/user_avatar.dart';
 import 'package:wumble/features/profile/domain/user_model.dart';
@@ -134,7 +135,11 @@ class _MembersListViewState extends State<_MembersListView> {
           ),
         ),
       ),
-      body: BlocBuilder<CommunityMembersBloc, CommunityMembersState>(
+      body: Column(
+        children: [
+          OnlineNowBar(communityId: widget.community.id),
+          Expanded(
+            child: BlocBuilder<CommunityMembersBloc, CommunityMembersState>(
         builder: (context, state) {
           if (state.isLoading && state.members.isEmpty) {
             return Center(child: CircularProgressIndicator(color: widget.community.themeColor));
@@ -173,6 +178,9 @@ class _MembersListViewState extends State<_MembersListView> {
             },
           );
         },
+            ),
+          ),
+        ],
       ),
     ),
       ],

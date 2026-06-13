@@ -58,8 +58,9 @@ functions/
 lib/firebase_options.dart
 admin-dashboard/lib/firebase.ts
 
-# API keys / build-time secrets
+# API keys / local secrets
 dart_defines.json
+lib/core/config/app_secrets.dart
 **/*.env
 **/.env
 **/.env.*

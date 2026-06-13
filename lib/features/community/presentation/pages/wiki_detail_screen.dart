@@ -204,8 +204,10 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Borrar Wiki'),
-        content: const Text('¿Estás seguro de que quieres borrar esta Wiki? Esta acción no se puede deshacer.'),
+        title: Text(widget.wiki.type == 'oc' ? 'Borrar Personaje' : 'Borrar Wiki'),
+        content: Text(widget.wiki.type == 'oc'
+            ? '¿Estás seguro de que quieres borrar este personaje? Esta acción no se puede deshacer.'
+            : '¿Estás seguro de que quieres borrar esta Wiki? Esta acción no se puede deshacer.'),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancelar')),
           TextButton(
@@ -221,7 +223,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
         await di.sl<WikiRepository>().deleteWiki(widget.wiki.id);
         if (mounted) {
           Navigator.pop(context, true); // Close detail with success result
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Wiki borrada')));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(widget.wiki.type == 'oc' ? 'Personaje borrado' : 'Wiki borrada')));
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -410,7 +412,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                                     imageUrl: widget.wiki.iconUrl!,
                                     fit: BoxFit.cover,
                                   )
-                                : Icon(Icons.menu_book_rounded, color: widget.themeColor, size: 40),
+                                : Icon(widget.wiki.type == 'oc' ? Icons.face_retouching_natural : Icons.menu_book_rounded, color: widget.themeColor, size: 40),
                           ),
                         ),
                         const SizedBox(width: 16),

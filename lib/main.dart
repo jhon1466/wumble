@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wumble/core/widgets/update_dialog.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide AuthState;
+import 'package:wumble/core/services/presence_service_supabase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -54,12 +56,24 @@ void main() async {
   
   // 1. Initialize Firebase first
   await Firebase.initializeApp();
-  
+
   // Configure Firestore persistence and cache size (100MB)
   FirebaseFirestore.instance.settings = const Settings(
     persistenceEnabled: true,
     cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
   );
+
+  // Initialize Supabase (used only for live presence; no Firebase cost).
+  if (SupabaseConfig.isConfigured) {
+    try {
+      await Supabase.initialize(
+        url: SupabaseConfig.url,
+        anonKey: SupabaseConfig.anonKey,
+      );
+    } catch (e) {
+      debugPrint('Supabase init failed: $e');
+    }
+  }
   
   // 2. Now initialize dependency injection
   await di.init();

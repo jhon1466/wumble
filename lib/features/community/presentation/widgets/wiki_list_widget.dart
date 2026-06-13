@@ -19,6 +19,7 @@ class WikiListWidget extends StatefulWidget {
 
 class WikiListWidgetState extends State<WikiListWidget> with AutomaticKeepAliveClientMixin {
   late Future<List<WikiPage>> _wikisFuture;
+  String _filter = 'all'; // 'all' | 'wiki' | 'oc'
 
   @override
   bool get wantKeepAlive => true;
@@ -65,12 +66,22 @@ class WikiListWidgetState extends State<WikiListWidget> with AutomaticKeepAliveC
             return Center(child: Text('Error: ${snapshot.error}', style: const TextStyle(color: Colors.red)));
           }
           
-          final wikis = snapshot.data ?? [];
+          final allWikis = snapshot.data ?? [];
+          final wikis = _filter == 'all'
+              ? allWikis
+              : allWikis
+                  .where((w) =>
+                      _filter == 'oc' ? w.type == 'oc' : w.type != 'oc')
+                  .toList();
 
-          return Container(
-            color: Colors.transparent,
-            child: wikis.isEmpty
-                ? CustomScrollView(
+          return Column(
+            children: [
+              _buildFilterBar(allWikis),
+              Expanded(
+                child: Container(
+                  color: Colors.transparent,
+                  child: wikis.isEmpty
+                      ? CustomScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     slivers: [
                       SliverFillRemaining(
@@ -87,20 +98,63 @@ class WikiListWidgetState extends State<WikiListWidget> with AutomaticKeepAliveC
                       ),
                     ],
                   )
-                : ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(0, 16, 0, 100), // Padding for nav pill
-                    itemCount: wikis.length,
-                    separatorBuilder: (context, index) => const SizedBox(height: 0),
-                    itemBuilder: (context, index) {
-                      final wiki = wikis[index];
-                      return WikiCard(
-                        wiki: wiki,
-                        onDeleted: _onRefresh,
-                      );
-                    },
-                  ),
+                      : ListView.separated(
+                          padding: const EdgeInsets.fromLTRB(0, 16, 0, 100), // Padding for nav pill
+                          itemCount: wikis.length,
+                          separatorBuilder: (context, index) => const SizedBox(height: 0),
+                          itemBuilder: (context, index) {
+                            final wiki = wikis[index];
+                            return WikiCard(
+                              wiki: wiki,
+                              onDeleted: _onRefresh,
+                            );
+                          },
+                        ),
+                ),
+              ),
+            ],
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildFilterBar(List<WikiPage> all) {
+    final int ocCount = all.where((w) => w.type == 'oc').length;
+    // Hide the bar entirely if there are no characters to filter.
+    if (ocCount == 0) return const SizedBox.shrink();
+
+    Widget chip(String value, String label) {
+      final bool selected = _filter == value;
+      final themeColor = Theme.of(context).colorScheme.secondary;
+      return Padding(
+        padding: const EdgeInsets.only(right: 8),
+        child: ChoiceChip(
+          label: Text(label),
+          selected: selected,
+          showCheckmark: false,
+          labelStyle: TextStyle(
+            color: selected ? Colors.white : Colors.white70,
+            fontWeight: FontWeight.w600,
+            fontSize: 13,
+          ),
+          backgroundColor: Colors.white10,
+          selectedColor: themeColor,
+          side: BorderSide(color: selected ? themeColor : Colors.white12),
+          onSelected: (_) => setState(() => _filter = value),
+        ),
+      );
+    }
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+      child: Row(
+        children: [
+          chip('all', 'Todos'),
+          chip('wiki', 'Wikis'),
+          chip('oc', 'Personajes'),
+        ],
       ),
     );
   }

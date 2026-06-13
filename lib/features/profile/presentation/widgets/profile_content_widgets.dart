@@ -563,7 +563,8 @@ class _ProfilePostsState extends State<ProfilePosts> {
 class ProfileWikis extends StatefulWidget {
   final UserProfile user;
   final String? communityId;
-  const ProfileWikis({super.key, required this.user, this.communityId});
+  final bool ocOnly; // true -> show only Original Characters; false -> only wikis
+  const ProfileWikis({super.key, required this.user, this.communityId, this.ocOnly = false});
 
   @override
   State<ProfileWikis> createState() => _ProfileWikisState();
@@ -623,16 +624,21 @@ class _ProfileWikisState extends State<ProfileWikis> {
           );
         }
 
-        final wikis = snapshot.data ?? [];
+        final all = snapshot.data ?? [];
+        final wikis = all
+            .where((w) => widget.ocOnly ? w.type == 'oc' : w.type != 'oc')
+            .toList();
 
         if (wikis.isEmpty) {
-          return const Padding(
-            padding: EdgeInsets.all(40.0),
+          return Padding(
+            padding: const EdgeInsets.all(40.0),
             child: Column(
               children: [
-                Icon(Icons.book_outlined, size: 48, color: Colors.white12),
-                SizedBox(height: 10),
-                Text('No hay entradas Wiki.', style: TextStyle(color: Colors.white24)),
+                Icon(widget.ocOnly ? Icons.face_retouching_natural : Icons.book_outlined,
+                    size: 48, color: Colors.white12),
+                const SizedBox(height: 10),
+                Text(widget.ocOnly ? 'No hay personajes todavía.' : 'No hay entradas Wiki.',
+                    style: const TextStyle(color: Colors.white24)),
               ],
             ),
           );

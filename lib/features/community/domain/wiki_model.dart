@@ -9,6 +9,7 @@ class WikiPage extends Equatable {
   final String authorAvatarUrl; // NEW
   final String? authorAvatarFrameUrl; // NEW
   final String title;
+  final String type; // 'wiki' (default) or 'oc' (Original Character / personaje)
   final String content; // Legacy text or fallback
   final List<Map<String, dynamic>> blocks; // Rich text / Custom blocks [{ "type": "text", "value": "..." }]
   final String? iconUrl;
@@ -28,6 +29,7 @@ class WikiPage extends Equatable {
     required this.authorAvatarUrl, // NEW
     this.authorAvatarFrameUrl, // NEW
     required this.title,
+    this.type = 'wiki',
     required this.content,
     this.blocks = const [],
     this.iconUrl,
@@ -48,6 +50,7 @@ class WikiPage extends Equatable {
     String? authorAvatarUrl, // NEW
     String? authorAvatarFrameUrl, // NEW
     String? title,
+    String? type,
     String? content,
     List<Map<String, dynamic>>? blocks,
     String? iconUrl,
@@ -67,6 +70,7 @@ class WikiPage extends Equatable {
       authorAvatarUrl: authorAvatarUrl ?? this.authorAvatarUrl, // NEW
       authorAvatarFrameUrl: authorAvatarFrameUrl ?? this.authorAvatarFrameUrl, // NEW
       title: title ?? this.title,
+      type: type ?? this.type,
       content: content ?? this.content,
       blocks: blocks ?? this.blocks,
       iconUrl: iconUrl ?? this.iconUrl,
@@ -89,6 +93,7 @@ class WikiPage extends Equatable {
       'authorAvatarUrl': authorAvatarUrl, // NEW
       'authorAvatarFrameUrl': authorAvatarFrameUrl, // NEW
       'title': title,
+      'type': type,
       'content': content,
       'blocks': blocks,
       'iconUrl': iconUrl,
@@ -111,6 +116,7 @@ class WikiPage extends Equatable {
       authorAvatarUrl: map['authorAvatarUrl']?.toString() ?? '',
       authorAvatarFrameUrl: map['authorAvatarFrameUrl']?.toString(),
       title: map['title']?.toString() ?? '',
+      type: map['type']?.toString() ?? 'wiki',
       content: map['content']?.toString() ?? '',
       blocks: map['blocks'] != null 
           ? List<Map<String, dynamic>>.from(
@@ -136,6 +142,7 @@ class WikiPage extends Equatable {
         communityId,
         authorId,
         title,
+        type,
         content,
         blocks,
         iconUrl,

@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wumble/core/widgets/user_avatar.dart';
 import 'package:wumble/features/community/domain/community_member_model.dart';
 import 'package:wumble/features/community/presentation/widgets/member_mini_profile.dart';
+import 'package:wumble/features/community/presentation/widgets/online_avatar_cluster.dart';
 import 'package:wumble/features/profile/domain/user_model.dart';
 import '../../domain/navigation_tab_model.dart';
 
@@ -31,6 +32,7 @@ class CommunityNavigationPill extends StatelessWidget {
   final Color themeColor;
   final NavigationTabType activeTabType;          // ← Dynamic action label based on type
   final bool isMember;                            // ← NEW: Check if user is member
+  final String? communityId;                      // ← For online avatars cluster
 
   final VoidCallback onMenuTap;
   final VoidCallback onMembersTap;
@@ -48,6 +50,7 @@ class CommunityNavigationPill extends StatelessWidget {
     required this.onPlusTap,
     required this.activeTabType,
     this.isMember = true,
+    this.communityId,
   });
 
   @override
@@ -89,9 +92,19 @@ class CommunityNavigationPill extends StatelessWidget {
                 if (isMember) ...[
                   GestureDetector(
                     onTap: onMembersTap,
-                    child: const Text(
-                      'Miembros',
-                      style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.w500),
+                    behavior: HitTestBehavior.opaque,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          'Miembros',
+                          style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.w500),
+                        ),
+                        if (communityId != null) ...[
+                          const SizedBox(width: 8),
+                          OnlineAvatarCluster(communityId: communityId!),
+                        ],
+                      ],
                     ),
                   ),
                   const Spacer(),

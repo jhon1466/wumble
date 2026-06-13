@@ -1,12 +1,12 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/foundation.dart';
+import 'package:wumble/core/config/app_secrets.dart';
 import 'dart:async';
 
 class LiveAudioService {
-  // Injected at build time via --dart-define (see dart_defines.example.json).
-  static const String appId =
-      String.fromEnvironment('AGORA_APP_ID', defaultValue: '');
+  // Key lives in app_secrets.dart (gitignored, not in the public repo).
+  static const String appId = AppSecrets.agoraAppId;
   
   RtcEngine? _engine;
   bool _isInitialized = false;

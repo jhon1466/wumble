@@ -33,6 +33,7 @@ import 'widgets/welcome_celebration_sheet.dart';
 import 'widgets/level_up_celebration_sheet.dart';
 import 'widgets/daily_check_in_dialog.dart';
 import 'pages/members_list_screen.dart'; // Added
+import 'widgets/community_activity_sheet.dart';
 import 'pages/create_public_chat_screen.dart'; // Added
 import 'widgets/public_chat_list_widget.dart'; // Added
 import '../../profile/presentation/notifications_screen.dart';
@@ -455,6 +456,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                         child: CommunityNavigationPill(
                               themeColor: community.themeColor,
                               isMember: state.memberProfile != null,
+                              communityId: community.id,
                                 activeTabType: (visibleTabs.length > _currentTabIndex) 
                                     ? visibleTabs[_currentTabIndex].type 
                                     : visibleTabs.first.type,
@@ -485,14 +487,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                   }
                                 },
                               onMembersTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => MembersListScreen(
-                                      community: community,
-                                    ),
-                                  ),
-                                );
+                                showCommunityActivity(context, community);
                               },
                               onJoinTap: () {
                                 Navigator.push(
@@ -1111,12 +1106,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                   title: const Text('Miembros', style: TextStyle(color: Colors.white)),
                                   onTap: () {
                                     Navigator.pop(context);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MembersListScreen(community: community),
-                                      ),
-                                    );
+                                    showCommunityActivity(context, community);
                                   },
                                 ),
                                 const Divider(color: Colors.white10, height: 1),
@@ -1399,6 +1389,24 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                       final result = await Navigator.push(
                         context, 
                         MaterialPageRoute(builder: (_) => WikiEditorScreen(communityId: community.id))
+                      );
+                      if (context.mounted) Navigator.pop(context, result);
+                    },
+                  ),
+                  _buildCreateOption(
+                    context,
+                    icon: Icons.face_retouching_natural,
+                    label: 'Personaje',
+                    color: Colors.deepPurpleAccent,
+                    onTap: () async {
+                      final result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => WikiEditorScreen(
+                            communityId: community.id,
+                            isOC: true,
+                          ),
+                        ),
                       );
                       if (context.mounted) Navigator.pop(context, result);
                     },
