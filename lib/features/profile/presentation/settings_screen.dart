@@ -415,9 +415,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   trailing: selected
                       ? const Icon(Icons.check, color: Wumbleheme.secondaryColor)
                       : null,
-                  onTap: () async {
-                    await LocaleController.setLocale(code);
-                    if (ctx.mounted) Navigator.pop(ctx);
+                  onTap: () {
+                    // Close the sheet FIRST, then switch locale on the next
+                    // frame so the MaterialApp rebuild doesn't happen while a
+                    // modal route is still open (which caused a black screen).
+                    Navigator.pop(ctx);
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      LocaleController.setLocale(code);
+                    });
                   },
                 );
               }),
