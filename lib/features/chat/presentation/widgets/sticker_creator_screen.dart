@@ -276,7 +276,7 @@ class _StickerCreatorScreenState extends State<StickerCreatorScreen> {
                   children: [
                     _buildModeButton(
                       icon: Icons.auto_awesome,
-                      label: 'Magia',
+                      label: tr('Magia'),
                       active: _isMagicMode,
                       disabled: _isGif,
                       onTap: () {
@@ -289,7 +289,7 @@ class _StickerCreatorScreenState extends State<StickerCreatorScreen> {
                     const SizedBox(width: 12),
                     _buildModeButton(
                       icon: Icons.fullscreen,
-                      label: 'Completo',
+                      label: tr('Completo'),
                       active: !_isMagicMode,
                       onTap: () {
                         if (_isMagicMode) {

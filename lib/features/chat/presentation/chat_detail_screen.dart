@@ -3008,7 +3008,7 @@ Widget _buildCallInvitation(LiveSession session) {
                   _buildAttachmentOption(
                     icon: Icons.image_rounded,
                     color: Colors.blueAccent,
-                    label: 'Fotos',
+                    label: tr('Fotos'),
                     onTap: () {
                       Navigator.pop(ctx);
                       _sendImage();
@@ -3017,7 +3017,7 @@ Widget _buildCallInvitation(LiveSession session) {
                   _buildAttachmentOption(
                     icon: Icons.sticky_note_2,
                     color: Colors.purpleAccent,
-                    label: 'Stickers',
+                    label: tr('Stickers'),
                     onTap: () {
                       Navigator.pop(ctx);
                       setState(() => _showStickers = true);

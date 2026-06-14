@@ -229,12 +229,12 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
                 if (_selectedLayerIndex != -1)
                   Positioned(
                     top: 0,
-                    child: Text('ARRASTRA PARA MOVER CAPA', style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
+                    child: Text(tr('ARRASTRA PARA MOVER CAPA'), style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
                   ),
                 if (hasCustomPoints)
                   Positioned(
                     bottom: 0,
-                    child: Text('ARRASTRA PUNTOS PARA AJUSTAR GEOMETRÍA', style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
+                    child: Text(tr('ARRASTRA PUNTOS PARA AJUSTAR GEOMETRÍA'), style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
@@ -249,7 +249,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
     return ListView(
       padding: EdgeInsets.all(16),
       children: [
-        Text('CONFIGURACIÓN BASE', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+        Text(tr('CONFIGURACIÓN BASE'), style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
         SizedBox(height: 16),
         _buildColorPickerTile('Fondo Principal', _currentStyle.backgroundColorValue, (color) {
           _updateStyle(_currentStyle.copyWith(backgroundColorValue: color.value));
@@ -268,7 +268,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
           _updateStyle(_currentStyle.copyWith(textColorValue: color.value));
         }),
         Divider(color: Colors.white12),
-        Text('GEOMETRÍA', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+        Text(tr('GEOMETRÍA'), style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
         SizedBox(height: 12),
         SizedBox(height: 100, child: _buildShapeSelector()),
         if (_currentStyle.shapeId == 'custom') ...[
@@ -424,7 +424,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: SwitchListTile(
             title: Text(tr('Recortar Capas (Clipping)'), style: TextStyle(color: Colors.white, fontSize: 13)),
-            subtitle: Text('Mantiene las capas dentro de la forma de la burbuja', style: TextStyle(color: Colors.white54, fontSize: 10)),
+            subtitle: Text(tr('Mantiene las capas dentro de la forma de la burbuja'), style: TextStyle(color: Colors.white54, fontSize: 10)),
             value: _config.clipLayers,
             activeColor: Wumbleheme.primaryColor,
             onChanged: (val) => _updateConfig(_config.copyWith(clipLayers: val)),
@@ -566,7 +566,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
     return ListView(
       padding: EdgeInsets.all(16),
       children: [
-        Text('MARGENES DEL TEXTO (INTERNO)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        Text(tr('MARGENES DEL TEXTO (INTERNO)'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         Text(tr('Controla dónde aparece el texto dentro de la burbuja.'), style: TextStyle(color: Colors.white54, fontSize: 11)),
         SizedBox(height: 16),
         _buildSlider('Superior', _config.paddingTop, 0, 50, (val) => _updateConfig(_config.copyWith(paddingTop: val))),
@@ -625,7 +625,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
     return ListView(
       padding: EdgeInsets.all(16),
       children: [
-        Text('9-SLICE (ESTIRAMIENTO DEL FONDO)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        Text(tr('9-SLICE (ESTIRAMIENTO DEL FONDO)'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         Text(tr('Define los bordes fijos que no deben deformarse al estirar la imagen.'), style: TextStyle(color: Colors.white54, fontSize: 11)),
         SizedBox(height: 20),
         _buildSlider('Guía Superior', _config.sliceTop, 0, 100, (val) => _updateConfig(_config.copyWith(sliceTop: val))),
@@ -640,7 +640,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
             children: [
               Icon(Icons.info_outline, color: Colors.blueAccent),
               SizedBox(width: 12),
-              Expanded(child: Text('Asegúrate de que la imagen de fondo sea lo suficientemente grande para estas guías.', style: TextStyle(color: Colors.white70, fontSize: 11))),
+              Expanded(child: Text(tr('Asegúrate de que la imagen de fondo sea lo suficientemente grande para estas guías.'), style: TextStyle(color: Colors.white70, fontSize: 11))),
             ],
           ),
         ),
@@ -965,7 +965,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('PUNTOS DE RUTA (Relativos 0-1)', style: TextStyle(color: Colors.amber, fontSize: 11, fontWeight: FontWeight.bold)),
+              Text(tr('PUNTOS DE RUTA (Relativos 0-1)'), style: TextStyle(color: Colors.amber, fontSize: 11, fontWeight: FontWeight.bold)),
               IconButton(
                 icon: const Icon(Icons.add_circle, color: Colors.greenAccent, size: 20),
                 onPressed: () {

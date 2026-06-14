@@ -221,7 +221,7 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
                           Icon(Icons.auto_awesome, size: 10, color: accentColor),
                           SizedBox(width: 4),
                           Text(
-                            'AI AGENT',
+                            tr('AI AGENT'),
                             style: TextStyle(
                               color: accentColor,
                               fontSize: 10,

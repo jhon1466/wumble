@@ -556,7 +556,7 @@ class ProfileHeader extends StatelessWidget {
         creatorId != null && creatorId.isNotEmpty && creatorId == u.id;
     if (isCreator) {
       return _RoleBadge(
-        label: 'Dueño',
+        label: tr('Dueño'),
         icon: Icons.workspace_premium,
         colors: [Color(0xFF8E2DE2), Color(0xFF7B1FA2)],
       );
@@ -564,13 +564,13 @@ class ProfileHeader extends StatelessWidget {
     switch (u.communityRole) {
       case 'leader':
         return _RoleBadge(
-          label: 'Admin',
+          label: tr('Admin'),
           icon: Icons.shield,
           colors: [Color(0xFFFFB300), Color(0xFFF57C00)],
         );
       case 'curator':
         return _RoleBadge(
-          label: 'Moderador',
+          label: tr('Moderador'),
           icon: Icons.verified_user,
           colors: [Color(0xFF00BFA5), Color(0xFF00897B)],
         );

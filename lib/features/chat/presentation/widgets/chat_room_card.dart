@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui';
@@ -191,9 +192,9 @@ class ChatRoomCard extends StatelessWidget {
                             ),
                             const SizedBox(width: 8),
                             if (chat.isClosed)
-                             const _InfoPill(
+                             _InfoPill(
                                 icon: Icons.lock_outline_rounded,
-                                label: 'Cerrado',
+                                label: tr('Cerrado'),
                                 color: Colors.redAccent,
                               ),
                             const Spacer(),

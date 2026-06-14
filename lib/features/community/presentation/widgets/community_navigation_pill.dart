@@ -146,7 +146,7 @@ class CommunityNavigationPill extends StatelessWidget {
                               Icon(action.icon, color: effectiveColor, size: 20),
                               const SizedBox(width: 8),
                               Text(
-                                action.label,
+                                tr(action.label),
                                 style: TextStyle(
                                   color: effectiveTextColor,
                                   fontWeight: FontWeight.bold,

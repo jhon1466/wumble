@@ -496,7 +496,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                         SizedBox(width: 20),
                         _interactionItem(
                           icon: Icons.volunteer_activism_rounded,
-                          label: 'Donar',
+                          label: tr('Donar'),
                           color: Colors.pinkAccent,
                           onTap: () {
                              if (context.read<CommunityContextBloc>().state.memberProfile == null) {

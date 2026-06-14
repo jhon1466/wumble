@@ -1328,7 +1328,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   _buildCreateOption(
                     context,
                     icon: Icons.chat_outlined,
-                    label: 'Estado',
+                    label: tr('Estado'),
                     color: Colors.pinkAccent,
                     onTap: () async {
                       final bloc = context.read<CommunityContextBloc>();
@@ -1355,7 +1355,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   _buildCreateOption(
                     context,
                     icon: Icons.edit_note_rounded,
-                    label: 'Blog',
+                    label: tr('Blog'),
                     color: Colors.blueAccent,
                     onTap: () async {
                       final result = await Navigator.push(
@@ -1368,7 +1368,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   _buildCreateOption(
                     context,
                     icon: Icons.chat_bubble_rounded,
-                    label: 'Chat',
+                    label: tr('Chat'),
                     color: Colors.greenAccent,
                     onTap: () async {
                       final result = await Navigator.push(
@@ -1384,7 +1384,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   _buildCreateOption(
                     context,
                     icon: Icons.menu_book_rounded,
-                    label: 'Wiki',
+                    label: tr('Wiki'),
                     color: Colors.orangeAccent,
                     onTap: () async {
                       final result = await Navigator.push(
@@ -1397,7 +1397,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   _buildCreateOption(
                     context,
                     icon: Icons.face_retouching_natural,
-                    label: 'Personaje',
+                    label: tr('Personaje'),
                     color: Colors.deepPurpleAccent,
                     onTap: () async {
                       final result = await Navigator.push(
@@ -1415,7 +1415,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   _buildCreateOption(
                     context,
                     icon: Icons.quiz_rounded,
-                    label: 'Quiz',
+                    label: tr('Quiz'),
                     color: Colors.purpleAccent,
                     onTap: () async {
                       final result = await Navigator.push(
@@ -1431,7 +1431,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   _buildCreateOption(
                     context,
                     icon: Icons.poll_rounded,
-                    label: 'Encuesta',
+                    label: tr('Encuesta'),
                     color: Colors.tealAccent,
                     onTap: () async {
                       final result = await Navigator.push(
@@ -1447,7 +1447,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   _buildCreateOption(
                     context,
                     icon: Icons.sensors_rounded,
-                    label: 'En Vivo',
+                    label: tr('En Vivo'),
                     color: Colors.redAccent,
                     enabled: false,
                     onTap: () {},
@@ -1590,8 +1590,8 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   builder: (dialogContext) => AlertDialog(
                     backgroundColor: Wumbleheme.surfaceColor,
                     title: Text(tr('¿Abandonar Comunidad?'), style: TextStyle(color: Colors.white)),
-                    content: const Text(
-                      'Perderás tu rango y progreso en esta comunidad. ¿Estás seguro de que quieres salir?',
+                    content: Text(
+                      tr('Perderás tu rango y progreso en esta comunidad. ¿Estás seguro de que quieres salir?'),
                       style: TextStyle(color: Colors.white70),
                     ),
                     actions: [

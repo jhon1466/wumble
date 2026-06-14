@@ -231,10 +231,10 @@ class _CreatePublicChatScreenState extends State<CreatePublicChatScreen> {
                                   ),
                                 ),
                                 if (_bannerFile != null || widget.existingChat?.bannerUrl != null)
-                                   const Positioned(
+                                   Positioned(
                                     bottom: 50,
                                     right: 16,
-                                    child: Text('BANNER DE LA TARJETA', style: TextStyle(color: Colors.white24, fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+                                    child: Text(tr('BANNER DE LA TARJETA'), style: TextStyle(color: Colors.white24, fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
                                   ),
                               ],
                             ),
@@ -288,7 +288,7 @@ class _CreatePublicChatScreenState extends State<CreatePublicChatScreen> {
                         
                         _customTextField(
                           controller: _titleController,
-                          label: 'Título del Chat',
+                          label: tr('Título del Chat'),
                           hint: 'Ej: Zona de Rol, Debate Amino...',
                           icon: Icons.title_rounded,
                         ),
@@ -297,7 +297,7 @@ class _CreatePublicChatScreenState extends State<CreatePublicChatScreen> {
                         
                         _customTextField(
                           controller: _descController,
-                          label: 'Descripción (Opcional)',
+                          label: tr('Descripción (Opcional)'),
                           hint: '¿De qué trata este chat?',
                           icon: Icons.description_outlined,
                           maxLines: 4,

@@ -294,13 +294,13 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _CounterBadge(
-                    label: 'REPUTACIÓN',
+                    label: tr('REPUTACIÓN'),
                     value: _currentRep,
                     color: themeColor,
                   ),
                   SizedBox(width: 24),
                   _CounterBadge(
-                    label: 'WUMBLE COINS',
+                    label: tr('WUMBLE COINS'),
                     value: _currentCoins,
                     color: Colors.amber,
                     emoji: '🪙',

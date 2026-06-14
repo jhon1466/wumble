@@ -499,8 +499,8 @@ class CommunityInfoScreen extends StatelessWidget {
                   builder: (dialogContext) => AlertDialog(
                     backgroundColor: Wumbleheme.surfaceColor,
                     title: Text(tr('¿Abandonar Comunidad?'), style: TextStyle(color: Colors.white)),
-                    content: const Text(
-                      'Perderás tu rango y progreso en esta comunidad. ¿Estás seguro de que quieres salir?',
+                    content: Text(
+                      tr('Perderás tu rango y progreso en esta comunidad. ¿Estás seguro de que quieres salir?'),
                       style: TextStyle(color: Colors.white70),
                     ),
                     actions: [

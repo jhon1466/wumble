@@ -167,7 +167,7 @@ class _EditDetailsTabState extends State<_EditDetailsTab> {
             ],
           ),
           SizedBox(height: 20),
-          _buildSectionTitle('Información'),
+          _buildSectionTitle(tr('Información')),
           SizedBox(height: 10),
           TextField(
             controller: _nameController,

@@ -228,7 +228,7 @@ class _PublicChatListWidgetState extends State<PublicChatListWidget> with Automa
                         builder: (ctx) => AlertDialog(
                           backgroundColor: Wumbleheme.surfaceColor,
                           title: Text(tr('¿Eliminar sala de chat?'), style: TextStyle(color: Colors.white)),
-                          content: Text('Esta acción borrará permanentemente la sala y todos sus mensajes para todos los miembros.'),
+                          content: Text(tr('Esta acción borrará permanentemente la sala y todos sus mensajes para todos los miembros.')),
                           actions: [
                             TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('CANCELAR'))),
                             TextButton(

@@ -45,7 +45,7 @@ class PostTypeSelector extends StatelessWidget {
             crossAxisSpacing: 20,
             children: [
               _PostTypeButton(
-                label: 'Blog',
+                label: tr('Blog'),
                 icon: Icons.article_outlined,
                 color: Colors.green,
                 onTap: () {
@@ -57,7 +57,7 @@ class PostTypeSelector extends StatelessWidget {
                 },
               ),
               _PostTypeButton(
-                label: 'Wiki',
+                label: tr('Wiki'),
                 icon: Icons.book_outlined,
                 color: Colors.orange,
                 onTap: () {
@@ -69,7 +69,7 @@ class PostTypeSelector extends StatelessWidget {
                 },
               ),
               _PostTypeButton(
-                label: 'Personaje',
+                label: tr('Personaje'),
                 icon: Icons.face_retouching_natural,
                 color: Colors.deepPurple,
                 onTap: () {
@@ -82,7 +82,7 @@ class PostTypeSelector extends StatelessWidget {
                 },
               ),
               _PostTypeButton(
-                label: 'Encuesta',
+                label: tr('Encuesta'),
                 icon: Icons.poll_outlined,
                 color: Colors.blue,
                 onTap: () {
@@ -94,19 +94,19 @@ class PostTypeSelector extends StatelessWidget {
                 },
               ),
               _PostTypeButton(
-                label: 'Quiz',
+                label: tr('Quiz'),
                 icon: Icons.extension_outlined,
                 color: Colors.purple,
                 onTap: () {},
               ),
               _PostTypeButton(
-                label: 'Pregunta',
+                label: tr('Pregunta'),
                 icon: Icons.help_outline_rounded,
                 color: Colors.pink,
                 onTap: () {},
               ),
               _PostTypeButton(
-                label: 'Link',
+                label: tr('Link'),
                 icon: Icons.link_rounded,
                 color: Colors.cyan,
                 onTap: () {},

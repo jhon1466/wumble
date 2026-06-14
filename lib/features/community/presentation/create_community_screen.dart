@@ -304,7 +304,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: Debes iniciar sesión para crear una comunidad.'), backgroundColor: Colors.red),
+        SnackBar(content: Text(tr('Error: Debes iniciar sesión para crear una comunidad.')), backgroundColor: Colors.red),
       );
       return;
     }
@@ -584,19 +584,19 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
             
             _buildPrivacyOption(
                 title: tr('Abierta'), 
-                subtitle: 'Cualquiera puede entrar.', 
+                subtitle: tr('Cualquiera puede entrar.'), 
                 icon: Icons.public,
                 value: CommunityPrivacy.open
             ),
             _buildPrivacyOption(
                 title: tr('Requiere Aprobación'), 
-                subtitle: 'Debes aceptar las solicitudes.', 
+                subtitle: tr('Debes aceptar las solicitudes.'), 
                 icon: Icons.approval,
                 value: CommunityPrivacy.approval
             ),
             _buildPrivacyOption(
                 title: tr('Privada'), 
-                subtitle: 'Solo con invitación.', 
+                subtitle: tr('Solo con invitación.'), 
                 icon: Icons.lock,
                 value: CommunityPrivacy.private
             ),
@@ -731,10 +731,10 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                       ),
                       child: Column(
                           children: [
-                              _ReviewRow(label: 'Nombre', value: _name),
-                              _ReviewRow(label: 'URL', value: 'Wumble.app/c/$_handle'),
+                              _ReviewRow(label: tr('Nombre'), value: _name),
+                              _ReviewRow(label: tr('URL'), value: 'Wumble.app/c/$_handle'),
                               _ReviewRow(
-                                label: 'Privacidad', 
+                                label: tr('Privacidad'), 
                                 value: _privacy == CommunityPrivacy.open 
                                   ? 'ABIERTA' 
                                   : _privacy == CommunityPrivacy.approval 

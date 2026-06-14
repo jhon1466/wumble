@@ -661,21 +661,21 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                             },
                           ),
                           _buildCircularActionButton(
-                            label: 'Reportar',
+                            label: tr('Reportar'),
                             icon: Icons.report_gmailerrorred_rounded,
                             color: contentColor.withOpacity(0.1),
                             contentColor: contentColor,
                             onTap: () => _showReportDialog(context),
                           ),
                           _buildCircularActionButton(
-                            label: 'Bloquear',
+                            label: tr('Bloquear'),
                             icon: Icons.block_flipped,
                             color: contentColor.withOpacity(0.1),
                             contentColor: contentColor,
                             onTap: () => _showBlockConfirmation(context),
                           ),
                           _buildCircularActionButton(
-                            label: 'Donar',
+                            label: tr('Donar'),
                             icon: Icons.volunteer_activism_rounded,
                             color: Colors.pinkAccent.withOpacity(0.1),
                             contentColor: Colors.pinkAccent,
@@ -690,7 +690,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: _buildActionButton(
-                  label: 'Ver Perfil Completo',
+                  label: tr('Ver Perfil Completo'),
                   icon: Icons.account_circle_rounded,
                   color: contentColor.withOpacity(0.08),
                   contentColor: contentColor,
@@ -756,28 +756,28 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             const SizedBox(height: 20),
             _buildExpulsionTile(
               title: tr('Solo Expulsar'),
-              subtitle: 'El usuario es removido pero puede volver a unirse.',
+              subtitle: tr('El usuario es removido pero puede volver a unirse.'),
               icon: Icons.exit_to_app_rounded,
               color: Colors.white,
               onTap: () => _handleExpulsion(context, type: 'kick'),
             ),
             _buildExpulsionTile(
               title: tr('Falta: 24 Horas'),
-              subtitle: 'Expulsión y baneo temporal por 1 día.',
+              subtitle: tr('Expulsión y baneo temporal por 1 día.'),
               icon: Icons.history_rounded,
               color: Colors.orangeAccent,
               onTap: () => _handleExpulsion(context, type: 'ban_24h'),
             ),
             _buildExpulsionTile(
               title: tr('Falta: 72 Horas'),
-              subtitle: 'Expulsión y baneo temporal por 3 días.',
+              subtitle: tr('Expulsión y baneo temporal por 3 días.'),
               icon: Icons.timer_rounded,
               color: Colors.deepOrangeAccent,
               onTap: () => _handleExpulsion(context, type: 'ban_72h'),
             ),
             _buildExpulsionTile(
               title: tr('Baneo Permanente'),
-              subtitle: 'Expulsión definitiva de la comunidad.',
+              subtitle: tr('Expulsión definitiva de la comunidad.'),
               icon: Icons.gavel_rounded,
               color: Colors.redAccent,
               onTap: () => _handleExpulsion(context, type: 'ban_perm'),
@@ -1039,7 +1039,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             children: [
               Expanded(
                 child: _buildModerationButton(
-                  label: 'Expulsar',
+                  label: tr('Expulsar'),
                   icon: Icons.gavel_rounded,
                   color: Colors.redAccent,
                   onTap: () => _showExpulsionOptions(context),
@@ -1048,7 +1048,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
               SizedBox(width: 8),
               Expanded(
                 child: _buildModerationButton(
-                  label: 'Advertir',
+                  label: tr('Advertir'),
                   icon: Icons.report_problem_rounded,
                   color: Colors.orangeAccent,
                   onTap: () => _showWarnDialog(context),

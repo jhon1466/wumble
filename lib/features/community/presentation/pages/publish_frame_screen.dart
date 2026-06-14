@@ -206,7 +206,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
                 child: const Icon(Icons.image_rounded, color: Colors.blueAccent),
               ),
               title: Text(tr('Marco Normal (Clásico)'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
-              subtitle: const Text('PNG o GIF transparente en tamaño estándar', style: TextStyle(color: Colors.white38, fontSize: 11)),
+              subtitle: Text(tr('PNG o GIF transparente en tamaño estándar'), style: TextStyle(color: Colors.white38, fontSize: 11)),
               onTap: () { Navigator.pop(ctx); _addFrame(false); },
             ),
             ListTile(
@@ -219,7 +219,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
                 child: const Icon(Icons.auto_awesome_rounded, color: Colors.amberAccent),
               ),
               title: Text(tr('Efecto Especial (Animado)'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
-              subtitle: const Text('Fondo negro desaparece, tamaño gigante', style: TextStyle(color: Colors.white38, fontSize: 11)),
+              subtitle: Text(tr('Fondo negro desaparece, tamaño gigante'), style: TextStyle(color: Colors.white38, fontSize: 11)),
               onTap: () { Navigator.pop(ctx); _addFrame(true); },
             ),
             const SizedBox(height: 16),

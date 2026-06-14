@@ -304,7 +304,7 @@ class _FrameShopScreenState extends State<FrameShopScreen> {
                       ),
                       child: Column(
                         children: [
-                          const Text('COMPLETAR PACK COMPLETO', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11)),
+                          Text(tr('COMPLETAR PACK COMPLETO'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11)),
                           Text(
                             'Obtén los ${frame.packSize} marcos del pack "${frame.packName}"',
                             style: TextStyle(fontSize: 9, color: Colors.white.withOpacity(0.7)),
@@ -328,7 +328,7 @@ class _FrameShopScreenState extends State<FrameShopScreen> {
                       context.read<ProfileBloc>().add(PurchaseFrameRequested(widget.user.id, frame.id, frame.price));
                     },
                     style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                    child: const Text('COMPRAR SOLO ESTE'),
+                    child: Text(tr('COMPRAR SOLO ESTE')),
                   ),
                 ],
               ),

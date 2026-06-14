@@ -330,7 +330,7 @@ class _ModerationCenterScreenState extends State<ModerationCenterScreen> with Si
         builder: (context) => AlertDialog(
           backgroundColor: Wumbleheme.surfaceColor,
           title: Text(tr('¿Eliminar contenido?'), style: TextStyle(color: Colors.white)),
-          content: const Text('Esta acción eliminará permanentemente el contenido reportado y notificará al usuario.'),
+          content: Text(tr('Esta acción eliminará permanentemente el contenido reportado y notificará al usuario.')),
           actions: [
             TextButton(onPressed: () => Navigator.pop(context, false), child: Text(tr('CANCELAR'))),
             TextButton(

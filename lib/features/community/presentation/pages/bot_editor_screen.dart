@@ -213,9 +213,9 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                   const SizedBox(height: 20),
                   
                   _buildModalTextField(triggerController, 'Activador (Palabra clave)', Icons.terminal),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 4, left: 4),
-                    child: Text('Usa "*" para capturar cualquier mensaje no definido.', style: TextStyle(color: Colors.white24, fontSize: 10, fontStyle: FontStyle.italic)),
+                    child: Text(tr('Usa "*" para capturar cualquier mensaje no definido.'), style: TextStyle(color: Colors.white24, fontSize: 10, fontStyle: FontStyle.italic)),
                   ),
                   SizedBox(height: 12),
                   _buildModalTextField(responseController, 'Respuesta Principal', Icons.chat_bubble),
@@ -851,9 +851,9 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildTextField(_prefixController, 'Prefijo', Icons.terminal),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 4, left: 4),
-                    child: Text('Símbolo para activar comandos (ej: /)', style: TextStyle(color: Colors.white24, fontSize: 9, fontStyle: FontStyle.italic)),
+                    child: Text(tr('Símbolo para activar comandos (ej: /)'), style: TextStyle(color: Colors.white24, fontSize: 9, fontStyle: FontStyle.italic)),
                   ),
                 ],
               ),
@@ -1171,7 +1171,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('IMAGEN DE PERFIL DEL BOT', style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
+        Text(tr('IMAGEN DE PERFIL DEL BOT'), style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
         SizedBox(height: 12),
         Row(
           children: [
@@ -1260,8 +1260,8 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
           const SizedBox(height: 12),
           _buildTextField(_onLeaveController, 'Trigger al salir (onLeave)', Icons.person_remove),
           const SizedBox(height: 8),
-          const Text(
-            'Escribe el activador de un comando (ej: bienvenida) que el bot ejecutará automáticamente.',
+          Text(
+            tr('Escribe el activador de un comando (ej: bienvenida) que el bot ejecutará automáticamente.'),
             style: TextStyle(color: Colors.white24, fontSize: 10, fontStyle: FontStyle.italic),
           ),
         ],

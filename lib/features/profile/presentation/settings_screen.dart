@@ -158,7 +158,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             padding: EdgeInsets.all(20),
             children: [
               // ──── CUENTA ────
-              _buildSectionTitle('Cuenta'),
+              _buildSectionTitle(tr('Cuenta')),
               _buildSettingsCard([
                 _buildListTile(
                   icon: Icons.email_outlined,
@@ -169,7 +169,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _buildListTile(
                   icon: Icons.lock_outline_rounded,
                   title: tr('Cambiar Contraseña'),
-                  subtitle: 'Actualiza tu seguridad',
+                  subtitle: tr('Actualiza tu seguridad'),
                   onTap: () => _showChangePasswordDialog(context),
                 ),
               ]),
@@ -190,7 +190,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
 
               // ──── NOTIFICACIONES ────
-              _buildSectionTitle('Notificaciones'),
+              _buildSectionTitle(tr('Notificaciones')),
               _buildSettingsCard([
                 _buildSwitchTile(
                   icon: Icons.chat_bubble_outline,
@@ -235,7 +235,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
 
               // ──── PRIVACIDAD ────
-              _buildSectionTitle('Privacidad'),
+              _buildSectionTitle(tr('Privacidad')),
               _buildSettingsCard([
                 _buildPrivacyTile(
                   title: tr('¿Quién puede comentar en mi muro?'),
@@ -258,12 +258,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
 
               // ──── CHAT ────
-              _buildSectionTitle('Chat'),
+              _buildSectionTitle(tr('Chat')),
               _buildSettingsCard([
                 _buildSwitchTile(
                   icon: Icons.done_all,
                   title: tr('Confirmación de lectura'),
-                  subtitle: 'Mostrar el "visto" en tus mensajes',
+                  subtitle: tr('Mostrar el "visto" en tus mensajes'),
                   value: _showReadReceipts,
                   onChanged: (val) {
                     setState(() => _showReadReceipts = val);
@@ -274,26 +274,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
 
               // ──── SEGURIDAD ────
-              _buildSectionTitle('Seguridad'),
+              _buildSectionTitle(tr('Seguridad')),
               _buildSettingsCard([
                 _buildListTile(
                   icon: Icons.shield_outlined,
                   title: tr('Verificación en dos pasos'),
-                  subtitle: 'Protege tu cuenta con 2FA',
+                  subtitle: tr('Protege tu cuenta con 2FA'),
                   onTap: () => _show2FAInfo(context),
                 ),
                 _buildDivider(),
                 _buildListTile(
                   icon: Icons.devices_rounded,
                   title: tr('Sesiones activas'),
-                  subtitle: 'Gestiona tus dispositivos conectados',
+                  subtitle: tr('Gestiona tus dispositivos conectados'),
                   onTap: () => _showActiveSessionsInfo(context),
                 ),
               ]),
               const SizedBox(height: 24),
 
               // ──── BLOQUEOS ────
-              _buildSectionTitle('Bloqueos'),
+              _buildSectionTitle(tr('Bloqueos')),
               _buildSettingsCard([
                 _buildListTile(
                   icon: Icons.block_rounded,
@@ -309,7 +309,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
 
               // ──── ALMACENAMIENTO ────
-              _buildSectionTitle('Almacenamiento'),
+              _buildSectionTitle(tr('Almacenamiento')),
               _buildSettingsCard([
                 _buildListTile(
                   icon: Icons.folder_outlined,
@@ -321,14 +321,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _buildListTile(
                   icon: Icons.cleaning_services_rounded,
                   title: tr('Limpiar caché'),
-                  subtitle: 'Libera espacio eliminando datos temporales',
+                  subtitle: tr('Libera espacio eliminando datos temporales'),
                   onTap: () => _showClearCacheDialog(context),
                 ),
               ]),
               const SizedBox(height: 24),
 
               // ──── ACERCA DE ────
-              _buildSectionTitle('Acerca de'),
+              _buildSectionTitle(tr('Acerca de')),
               _buildSettingsCard([
                 FutureBuilder<PackageInfo>(
                   future: PackageInfo.fromPlatform(),
@@ -348,7 +348,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _buildListTile(
                   icon: Icons.description_outlined,
                   title: tr('Licencias'),
-                  subtitle: 'Licencias de código abierto',
+                  subtitle: tr('Licencias de código abierto'),
                   onTap: () {
                     showLicensePage(
                       context: context,
@@ -361,7 +361,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _buildListTile(
                   icon: Icons.support_agent_rounded,
                   title: tr('Contacto y soporte'),
-                  subtitle: 'Escríbenos para ayuda',
+                  subtitle: tr('Escríbenos para ayuda'),
                   onTap: () => _showSupportDialog(context),
                 ),
               ]),

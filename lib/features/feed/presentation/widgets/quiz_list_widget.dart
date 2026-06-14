@@ -121,7 +121,7 @@ class _QuizCard extends StatelessWidget {
             const SizedBox(height: 32),
             _buildPlayOption(
               context, 
-              label: 'Jugar (Normal)', 
+              label: tr('Jugar (Normal)'), 
               icon: Icons.play_arrow_rounded, 
               color: Colors.blueAccent, 
               onTap: () => _startQuiz(context, false),
@@ -129,7 +129,7 @@ class _QuizCard extends StatelessWidget {
             const SizedBox(height: 12),
             _buildPlayOption(
               context, 
-              label: 'Modo Infernal (Difícil)', 
+              label: tr('Modo Infernal (Difícil)'), 
               icon: Icons.local_fire_department_rounded, 
               color: Colors.redAccent, 
               onTap: () => _startQuiz(context, true),

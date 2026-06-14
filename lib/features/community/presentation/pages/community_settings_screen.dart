@@ -894,7 +894,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
                 context: context,
                 builder: (context) => AlertDialog(
                   backgroundColor: Wumbleheme.surfaceColor,
-                  title: Text('BORRAR ABSOLUTAMENTE TODO', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                  title: Text(tr('BORRAR ABSOLUTAMENTE TODO'), style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -1023,8 +1023,8 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
           const SizedBox(height: 20),
           _buildTextField('Texto de Bienvenida', _welcomeMessageController, maxLines: 4),
           const SizedBox(height: 8),
-          const Text(
-            'Consejo: ¡Sé creativo! Un buen mensaje hace que los miembros se sientan como en casa.',
+          Text(
+            tr('Consejo: ¡Sé creativo! Un buen mensaje hace que los miembros se sientan como en casa.'),
             style: TextStyle(color: Colors.white24, fontSize: 10, fontStyle: FontStyle.italic),
           ),
         ],
