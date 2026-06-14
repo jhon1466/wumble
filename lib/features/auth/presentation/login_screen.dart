@@ -6,7 +6,7 @@ import 'auth_bloc.dart';
 import '../../../../core/theme.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -81,18 +81,18 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Center(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: EdgeInsets.all(24.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const SizedBox(height: 40),
+                      SizedBox(height: 40),
                       // Logo or Icon
                       Transform.translate(
-                        offset: const Offset(0, 60),
+                        offset: Offset(0, 60),
                         child: Image.asset('assets/images/app_icon.png', height: 150),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       Image.asset(
                         'assets/images/app_name.png',
                         height: 60,
@@ -101,25 +101,25 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         _isLoginMode ? 'Inicia sesión para continuar' : 'Crea una cuenta nueva',
                         textAlign: TextAlign.center,
-                        style: const TextStyle(color: Wumbleheme.textSecondary),
+                        style: TextStyle(color: Wumbleheme.textSecondary),
                       ),
-                      const SizedBox(height: 40),
+                      SizedBox(height: 40),
                       
                       // Form
                       TextField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                          labelText: 'Correo electrónico',
+                        decoration: InputDecoration(
+                          labelText: tr('Correo electrónico'),
                           prefixIcon: Icon(Icons.email_outlined),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       TextField(
                         controller: _passwordController,
                         obscureText: true,
-                        decoration: const InputDecoration(
-                          labelText: 'Contraseña',
+                        decoration: InputDecoration(
+                          labelText: tr('Contraseña'),
                           prefixIcon: Icon(Icons.lock_outline),
                         ),
                       ),
@@ -188,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 16),
                                       child: Text(
-                                        'O continúa con',
+                                        tr('O continúa con'),
                                         style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 12),
                                       ),
                                     ),

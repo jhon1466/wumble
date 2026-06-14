@@ -193,14 +193,14 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
     showModalBottomSheet(
       context: context,
       backgroundColor: Wumbleheme.surfaceColor,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (context) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           _buildOption(
             icon: Icons.admin_panel_settings_rounded,
-            title: 'Cambiar Rol',
+            title: tr('Cambiar Rol'),
             onTap: () {
               Navigator.pop(context);
               _showRolePicker(member);
@@ -208,7 +208,7 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
           ),
           _buildOption(
             icon: Icons.title_rounded,
-            title: 'Editar Etiquetas',
+            title: tr('Editar Etiquetas'),
             onTap: () {
               Navigator.pop(context);
               _showTitlesEditor(member);
@@ -216,14 +216,14 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
           ),
           _buildOption(
             icon: Icons.person_off_rounded,
-            title: 'Expulsar Miembro',
+            title: tr('Expulsar Miembro'),
             color: Colors.redAccent,
             onTap: () {
               Navigator.pop(context);
               _showExpulsionOptions(member);
             },
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
         ],
       ),
     );
@@ -249,7 +249,7 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
             Navigator.pop(context);
             _refreshMembers();
           },
-          child: Text(CommunityMember.getRoleTitle(role).toUpperCase(), style: const TextStyle(color: Colors.white70)),
+          child: Text(CommunityMember.getRoleTitle(role).toUpperCase(), style: TextStyle(color: Colors.white70)),
         )).toList(),
       ),
     );
@@ -262,9 +262,9 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
 
     final List<Color> labelPresets = [
       widget.themeColor,
-      const Color(0xFFF44336), // Red
-      const Color(0xFFE91E63), // Pink
-      const Color(0xFF9C27B0), // Purple
+      Color(0xFFF44336), // Red
+      Color(0xFFE91E63), // Pink
+      Color(0xFF9C27B0), // Purple
       Color(0xFF2196F3), // Blue
       Color(0xFF00BCD4), // Cyan
       Color(0xFF4CAF50), // Green
@@ -345,7 +345,7 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
                   controller: titleController,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    hintText: 'Nueva etiqueta...',
+                    hintText: tr('Nueva etiqueta...'),
                     hintStyle: const TextStyle(color: Colors.white24),
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.05),
@@ -391,8 +391,8 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 24),
-        decoration: const BoxDecoration(
+        padding: EdgeInsets.symmetric(vertical: 24),
+        decoration: BoxDecoration(
           color: Color(0xFF1E1E2C),
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         ),
@@ -408,8 +408,8 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            const Text(
-              'OPCIONES DE EXPULSIÓN',
+            Text(
+              tr('OPCIONES DE EXPULSIÓN'),
               style: TextStyle(color: Colors.white38, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1.2),
             ),
             const SizedBox(height: 12),
@@ -421,28 +421,28 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
               ),
             ),
             _buildExpulsionTile(
-              title: 'Solo Expulsar',
+              title: tr('Solo Expulsar'),
               subtitle: 'El usuario es removido pero puede volver a unirse.',
               icon: Icons.exit_to_app_rounded,
               color: Colors.white,
               onTap: () => _handleExpulsion(member, type: 'kick'),
             ),
             _buildExpulsionTile(
-              title: 'Falta: 24 Horas',
+              title: tr('Falta: 24 Horas'),
               subtitle: 'Expulsión y baneo temporal por 1 día.',
               icon: Icons.history_rounded,
               color: Colors.orangeAccent,
               onTap: () => _handleExpulsion(member, type: 'ban_24h'),
             ),
             _buildExpulsionTile(
-              title: 'Falta: 72 Horas',
+              title: tr('Falta: 72 Horas'),
               subtitle: 'Expulsión y baneo temporal por 3 días.',
               icon: Icons.timer_rounded,
               color: Colors.deepOrangeAccent,
               onTap: () => _handleExpulsion(member, type: 'ban_72h'),
             ),
             _buildExpulsionTile(
-              title: 'Baneo Permanente',
+              title: tr('Baneo Permanente'),
               subtitle: 'Expulsión definitiva de la comunidad.',
               icon: Icons.gavel_rounded,
               color: Colors.redAccent,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:wumble/core/theme.dart';
 import 'package:wumble/features/community/domain/community_member_model.dart';
 
@@ -47,7 +48,7 @@ class UserBadgeWidget extends StatelessWidget {
               ],
             ),
             child: Text(
-              'BOT',
+              tr('BOT'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: fontSize,

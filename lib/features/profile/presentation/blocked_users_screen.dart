@@ -37,12 +37,12 @@ class BlockedUsersScreen extends StatelessWidget {
                   Icon(Icons.block_rounded, size: 64, color: Colors.white.withOpacity(0.15)),
                   const SizedBox(height: 16),
                   Text(
-                    'No tienes usuarios bloqueados',
+                    tr('No tienes usuarios bloqueados'),
                     style: TextStyle(color: Colors.white.withOpacity(0.4), fontSize: 16),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Los usuarios que bloquees aparecerán aquí',
+                    tr('Los usuarios que bloquees aparecerán aquí'),
                     style: TextStyle(color: Colors.white.withOpacity(0.25), fontSize: 13),
                   ),
                 ],

@@ -180,7 +180,7 @@ class _StatusCreationSheetState extends State<StatusCreationSheet> {
                     autofocus: true,
                     style: TextStyle(color: Colors.white, fontSize: 16),
                     decoration: InputDecoration(
-                      hintText: '¿Qué estás pensando?',
+                      hintText: tr('¿Qué estás pensando?'),
                       hintStyle: TextStyle(color: Colors.white38),
                       border: InputBorder.none,
                       enabledBorder: InputBorder.none,
@@ -334,17 +334,17 @@ class _StatusCreationSheetState extends State<StatusCreationSheet> {
                 IconButton(
                   onPressed: _pickImage,
                   icon: const Icon(Icons.image_outlined, color: Wumbleheme.primaryColor),
-                  tooltip: 'Agregar imagen',
+                  tooltip: tr('Agregar imagen'),
                 ),
                 IconButton(
                   onPressed: _showStickerPicker,
                   icon: const Icon(Icons.sticky_note_2_outlined, color: Wumbleheme.primaryColor),
-                  tooltip: 'Agregar sticker',
+                  tooltip: tr('Agregar sticker'),
                 ),
                 IconButton(
                   onPressed: _addPollOption,
                   icon: const Icon(Icons.poll_outlined, color: Wumbleheme.primaryColor),
-                  tooltip: 'Agregar encuesta',
+                  tooltip: tr('Agregar encuesta'),
                 ),
                 const Spacer(),
                 ElevatedButton(

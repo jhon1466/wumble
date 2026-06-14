@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/user_model.dart';
@@ -161,7 +162,7 @@ class _CheckInWidgetState extends State<CheckInWidget>
 
 class _CheckInSuccessDialog extends StatefulWidget {
   final UserProfile user;
-  const _CheckInSuccessDialog({required this.user});
+  _CheckInSuccessDialog({required this.user});
 
   @override
   State<_CheckInSuccessDialog> createState() => _CheckInSuccessDialogState();
@@ -175,15 +176,15 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
   int _currentRep = 0;
   bool _isFinished = false;
 
-  static const int _coinsReward = 5;
-  static const int _repReward = 10;
+  static int _coinsReward = 5;
+  static int _repReward = 10;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1500),
+      duration: Duration(milliseconds: 1500),
     );
     _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.elasticOut),
@@ -193,7 +194,7 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
   }
 
   void _startCounting() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: 500));
 
     // Count up both coins and rep in parallel
     final maxSteps = _repReward; // rep is bigger, drive loop by it
@@ -205,7 +206,7 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
         _currentCoins = ((i / maxSteps) * _coinsReward).round();
       });
       HapticFeedback.lightImpact();
-      await Future.delayed(const Duration(milliseconds: 50));
+      await Future.delayed(Duration(milliseconds: 50));
     }
 
     if (mounted) {
@@ -232,8 +233,8 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
       child: ScaleTransition(
         scale: _scaleAnimation,
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 40),
-          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+          margin: EdgeInsets.symmetric(horizontal: 40),
+          padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
           decoration: BoxDecoration(
             color: Wumbleheme.backgroundColor.withOpacity(0.97),
             borderRadius: BorderRadius.circular(32),
@@ -251,22 +252,22 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
             children: [
               // Success icon
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.green.withOpacity(0.1),
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.green.withOpacity(0.3)),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.check_circle_rounded,
                   color: Colors.green,
                   size: 48,
                 ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
 
-              const Text(
-                '¡CHECK-IN EXITOSO!',
+              Text(
+                tr('¡CHECK-IN EXITOSO!'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -275,7 +276,7 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
                   letterSpacing: 2,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 widget.user.displayName,
                 textAlign: TextAlign.center,
@@ -286,7 +287,7 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
                 ),
               ),
 
-              const SizedBox(height: 36),
+              SizedBox(height: 36),
 
               // Counters row
               Row(
@@ -297,7 +298,7 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
                     value: _currentRep,
                     color: themeColor,
                   ),
-                  const SizedBox(width: 24),
+                  SizedBox(width: 24),
                   _CounterBadge(
                     label: 'WUMBLE COINS',
                     value: _currentCoins,
@@ -308,9 +309,9 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
               ),
 
               if (widget.user.checkInStreak > 0) ...[
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                  padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                   decoration: BoxDecoration(
                     color: Colors.orange.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(20),
@@ -327,10 +328,10 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
                 ),
               ],
 
-              const SizedBox(height: 36),
+              SizedBox(height: 36),
 
               AnimatedOpacity(
-                duration: const Duration(milliseconds: 300),
+                duration: Duration(milliseconds: 300),
                 opacity: _isFinished ? 1.0 : 0.3,
                 child: ElevatedButton(
                   onPressed: _isFinished ? () => Navigator.pop(context) : null,
@@ -344,8 +345,8 @@ class _CheckInSuccessDialogState extends State<_CheckInSuccessDialog>
                     elevation: _isFinished ? 8 : 0,
                     shadowColor: themeColor.withOpacity(0.5),
                   ),
-                  child: const Text(
-                    '¡GENIAL!',
+                  child: Text(
+                    tr('¡GENIAL!'),
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
                       fontSize: 16,

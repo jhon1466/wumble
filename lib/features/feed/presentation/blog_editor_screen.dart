@@ -48,7 +48,7 @@ class _BlogEditorScreenState extends State<BlogEditorScreen> {
               );
             },
             child: Text(
-              'Publicar',
+              tr('Publicar'),
               style: TextStyle(
                 color: Wumbleheme.accentColor,
                 fontWeight: FontWeight.bold,
@@ -91,27 +91,27 @@ class _BlogEditorScreenState extends State<BlogEditorScreen> {
                     : null,
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // Title Field
             TextField(
               controller: _titleController,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              decoration: const InputDecoration(
-                hintText: 'Título del blog...',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              decoration: InputDecoration(
+                hintText: tr('Título del blog...'),
                 border: InputBorder.none,
                 hintStyle: TextStyle(color: Colors.white24),
               ),
             ),
-            const Divider(color: Colors.white10),
+            Divider(color: Colors.white10),
             
             // Content Field
             TextField(
               controller: _contentController,
               maxLines: null,
-              style: const TextStyle(fontSize: 16, height: 1.5),
-              decoration: const InputDecoration(
-                hintText: 'Escribe algo increíble...',
+              style: TextStyle(fontSize: 16, height: 1.5),
+              decoration: InputDecoration(
+                hintText: tr('Escribe algo increíble...'),
                 border: InputBorder.none,
                 hintStyle: TextStyle(color: Colors.white24),
               ),

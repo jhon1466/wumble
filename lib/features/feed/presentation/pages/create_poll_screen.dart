@@ -128,7 +128,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
         question: question,
         options: optionsText.map((text) {
           // If editing, try to keep existing IDs for options if possible (not strictly necessary here but good practice)
-          return PollOption(id: const Uuid().v4(), text: text);
+          return PollOption(id: Uuid().v4(), text: text);
         }).toList(),
         durationDays: _durationDays,
         endsAt: widget.poll?.endsAt ?? DateTime.now().add(Duration(days: _durationDays)),
@@ -161,11 +161,11 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E),
+      backgroundColor: Color(0xFF1A1A2E),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(widget.poll != null ? 'Editar Encuesta' : 'Nueva Encuesta', style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(widget.poll != null ? 'Editar Encuesta' : 'Nueva Encuesta', style: TextStyle(fontWeight: FontWeight.bold)),
         actions: [
           TextButton(
             onPressed: _isLoading ? null : _submitPoll,
@@ -176,7 +176,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -185,7 +185,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
               style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
               maxLines: null,
               decoration: InputDecoration(
-                hintText: 'Haz una pregunta...',
+                hintText: tr('Haz una pregunta...'),
                 hintStyle: const TextStyle(color: Colors.white30),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -195,12 +195,12 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                 fillColor: Colors.white.withOpacity(0.05),
               ),
             ),
-            const SizedBox(height: 24),
-            const Text(
-              'Opciones',
+            SizedBox(height: 24),
+            Text(
+              tr('Opciones'),
               style: TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             ..._optionControllers.asMap().entries.map((entry) {
               final index = entry.key;
               final controller = entry.value;
@@ -240,9 +240,9 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                 icon: Icon(Icons.add, color: widget.themeColor),
                 label: Text(tr('Agregar opción'), style: TextStyle(color: widget.themeColor)),
               ),
-            const SizedBox(height: 24),
-            const Text(
-              'Duración de la encuesta',
+            SizedBox(height: 24),
+            Text(
+              tr('Duración de la encuesta'),
               style: TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),

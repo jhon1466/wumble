@@ -119,7 +119,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'Descubrir',
+                            tr('Descubrir'),
                             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -133,7 +133,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const UnifiedSearchScreen()),
+                                    MaterialPageRoute(builder: (context) => UnifiedSearchScreen()),
                                   );
                                 },
                               ),
@@ -304,20 +304,20 @@ class _ExploreScreenState extends State<ExploreScreen> {
         children: [
           const SizedBox(height: 12),
           Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2))),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              'Mercado',
+              tr('Mercado'),
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 color: Colors.white,
                 fontSize: 20,
               ),
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           ListTile(
-            leading: const Icon(Icons.storefront_rounded, color: Colors.amber, size: 28),
+            leading: Icon(Icons.storefront_rounded, color: Colors.amber, size: 28),
             title: Text(tr('Workshop de Marcos'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
             subtitle: Text(tr('Compra o publica marcos de perfil'), style: TextStyle(color: Colors.white54, fontSize: 12)),
             onTap: () {
@@ -329,7 +329,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.chat_bubble_rounded, color: Colors.lightBlue, size: 28),
+            leading: Icon(Icons.chat_bubble_rounded, color: Colors.lightBlue, size: 28),
             title: Text(tr('Tienda de Burbujas'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
             subtitle: Text(tr('Personaliza tus chats'), style: TextStyle(color: Colors.white54, fontSize: 12)),
             onTap: () {
@@ -340,7 +340,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               );
             },
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
         ],
       ),
     );
@@ -350,13 +350,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return SliverToBoxAdapter(
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 60),
+          padding: EdgeInsets.symmetric(vertical: 60),
           child: Column(
             children: [
-              const Icon(Icons.search_off_rounded, size: 64, color: Colors.white10),
-              const SizedBox(height: 16),
-              const Text(
-                'No hay comunidades que coincidan',
+              Icon(Icons.search_off_rounded, size: 64, color: Colors.white10),
+              SizedBox(height: 16),
+              Text(
+                tr('No hay comunidades que coincidan'),
                 style: TextStyle(color: Colors.white38, fontSize: 16),
               ),
             ],

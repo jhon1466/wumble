@@ -227,12 +227,12 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
                   }),
 
                 if (_selectedLayerIndex != -1)
-                  const Positioned(
+                  Positioned(
                     top: 0,
                     child: Text('ARRASTRA PARA MOVER CAPA', style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
                   ),
                 if (hasCustomPoints)
-                  const Positioned(
+                  Positioned(
                     bottom: 0,
                     child: Text('ARRASTRA PUNTOS PARA AJUSTAR GEOMETRÍA', style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
                   ),
@@ -249,7 +249,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
     return ListView(
       padding: EdgeInsets.all(16),
       children: [
-        const Text('CONFIGURACIÓN BASE', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+        Text('CONFIGURACIÓN BASE', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
         SizedBox(height: 16),
         _buildColorPickerTile('Fondo Principal', _currentStyle.backgroundColorValue, (color) {
           _updateStyle(_currentStyle.copyWith(backgroundColorValue: color.value));
@@ -359,7 +359,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
               right: 8,
               child: IconButton(
                 onPressed: () => _updateStyle(_currentStyle.copyWith(backgroundImageUrl: '')),
-                icon: const Icon(Icons.delete_forever, color: Colors.redAccent),
+                icon: Icon(Icons.delete_forever, color: Colors.redAccent),
               ),
             ),
         ],
@@ -376,12 +376,12 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('CAPAS (${layers.length}/10)', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              Text('CAPAS (${layers.length}/10)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
               Row(
                 children: [
                   IconButton(
                     icon: const Icon(Icons.add_box, color: Colors.blueAccent),
-                    tooltip: 'Añadir Contenedor',
+                    tooltip: tr('Añadir Contenedor'),
                     onPressed: () {
                       final newLayer = BubbleLayer(
                         id: 'layer_${DateTime.now().millisecondsSinceEpoch}',
@@ -424,7 +424,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: SwitchListTile(
             title: Text(tr('Recortar Capas (Clipping)'), style: TextStyle(color: Colors.white, fontSize: 13)),
-            subtitle: const Text('Mantiene las capas dentro de la forma de la burbuja', style: TextStyle(color: Colors.white54, fontSize: 10)),
+            subtitle: Text('Mantiene las capas dentro de la forma de la burbuja', style: TextStyle(color: Colors.white54, fontSize: 10)),
             value: _config.clipLayers,
             activeColor: Wumbleheme.primaryColor,
             onChanged: (val) => _updateConfig(_config.copyWith(clipLayers: val)),
@@ -473,14 +473,14 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
               borderRadius: BorderRadius.circular(4),
             ),
             child: layer.type == 'box' 
-              ? const Icon(Icons.crop_square, color: Colors.white54)
+              ? Icon(Icons.crop_square, color: Colors.white54)
               : (layer.url.startsWith('http')
                 ? Image.network(layer.url, fit: BoxFit.contain)
                 : (layer.url.startsWith('assets/')
                   ? Image.asset(layer.url, fit: BoxFit.contain)
                   : Image.file(File(layer.url), fit: BoxFit.contain))),
           ),
-          title: Text(layer.type == 'box' ? 'Contenedor ${index + 1}' : 'Imagen ${index + 1}', style: const TextStyle(color: Colors.white)),
+          title: Text(layer.type == 'box' ? 'Contenedor ${index + 1}' : 'Imagen ${index + 1}', style: TextStyle(color: Colors.white)),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -491,11 +491,11 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
                   _updateConfig(_config.copyWith(layers: newLayers));
                   setState(() => _selectedLayerIndex = -1);
                 },
-                icon: const Icon(Icons.delete, color: Colors.white54, size: 20),
+                icon: Icon(Icons.delete, color: Colors.white54, size: 20),
               ),
               ReorderableDragStartListener(
                 index: index,
-                child: const Icon(Icons.drag_handle, color: Colors.white54),
+                child: Icon(Icons.drag_handle, color: Colors.white54),
               ),
               Icon(isSelected ? Icons.expand_less : Icons.expand_more, color: Colors.white54),
             ],
@@ -504,7 +504,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
         ),
         if (isSelected)
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             color: Colors.black12,
             child: Column(
               children: [
@@ -566,18 +566,18 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
     return ListView(
       padding: EdgeInsets.all(16),
       children: [
-        const Text('MARGENES DEL TEXTO (INTERNO)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        Text('MARGENES DEL TEXTO (INTERNO)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         Text(tr('Controla dónde aparece el texto dentro de la burbuja.'), style: TextStyle(color: Colors.white54, fontSize: 11)),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         _buildSlider('Superior', _config.paddingTop, 0, 50, (val) => _updateConfig(_config.copyWith(paddingTop: val))),
         _buildSlider('Inferior', _config.paddingBottom, 0, 50, (val) => _updateConfig(_config.copyWith(paddingBottom: val))),
         _buildSlider('Izquierda', _config.paddingLeft, 0, 50, (val) => _updateConfig(_config.copyWith(paddingLeft: val))),
         _buildSlider('Derecha', _config.paddingRight, 0, 50, (val) => _updateConfig(_config.copyWith(paddingRight: val))),
-        const Divider(color: Colors.white12),
+        Divider(color: Colors.white12),
         Text(tr('ESTILO DE TEXTO'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         _buildFontSelector(),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         _buildColorPickerTile('Color de Sombra', _config.shadowColorValue ?? 0x00000000, (color) => _updateConfig(_config.copyWith(shadowColorValue: color.value))),
         _buildSlider('Desenfoque Sombra', _config.shadowBlurRadius, 0, 20, (val) => _updateConfig(_config.copyWith(shadowBlurRadius: val))),
         _buildSlider('Offset X Sombra', _config.shadowOffsetX, -10, 10, (val) => _updateConfig(_config.copyWith(shadowOffsetX: val))),
@@ -592,7 +592,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(tr('Tipografía'), style: TextStyle(color: Colors.white70, fontSize: 12)),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         SizedBox(
           height: 40,
           child: ListView.builder(
@@ -602,7 +602,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
               final font = fonts[index];
               final isSelected = _config.fontStyle == font || (_config.fontStyle == null && font == 'Default');
               return Padding(
-                padding: const EdgeInsets.only(right: 8),
+                padding: EdgeInsets.only(right: 8),
                 child: ChoiceChip(
                   label: Text(font, style: TextStyle(fontFamily: font == 'Default' ? null : font)),
                   selected: isSelected,
@@ -625,18 +625,18 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
     return ListView(
       padding: EdgeInsets.all(16),
       children: [
-        const Text('9-SLICE (ESTIRAMIENTO DEL FONDO)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        Text('9-SLICE (ESTIRAMIENTO DEL FONDO)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         Text(tr('Define los bordes fijos que no deben deformarse al estirar la imagen.'), style: TextStyle(color: Colors.white54, fontSize: 11)),
-        const SizedBox(height: 20),
+        SizedBox(height: 20),
         _buildSlider('Guía Superior', _config.sliceTop, 0, 100, (val) => _updateConfig(_config.copyWith(sliceTop: val))),
         _buildSlider('Guía Inferior', _config.sliceBottom, 0, 100, (val) => _updateConfig(_config.copyWith(sliceBottom: val))),
         _buildSlider('Guía Izquierda', _config.sliceLeft, 0, 100, (val) => _updateConfig(_config.copyWith(sliceLeft: val))),
         _buildSlider('Guía Derecha', _config.sliceRight, 0, 100, (val) => _updateConfig(_config.copyWith(sliceRight: val))),
-        const SizedBox(height: 24),
+        SizedBox(height: 24),
         Container(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(12),
           decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
-          child: const Row(
+          child: Row(
             children: [
               Icon(Icons.info_outline, color: Colors.blueAccent),
               SizedBox(width: 12),
@@ -655,8 +655,8 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: const TextStyle(color: Colors.white70, fontSize: 12)),
-            Text(value.toStringAsFixed(1), style: const TextStyle(color: Wumbleheme.primaryColor, fontSize: 12, fontWeight: FontWeight.bold)),
+            Text(label, style: TextStyle(color: Colors.white70, fontSize: 12)),
+            Text(value.toStringAsFixed(1), style: TextStyle(color: Wumbleheme.primaryColor, fontSize: 12, fontWeight: FontWeight.bold)),
           ],
         ),
         Slider(
@@ -726,20 +726,20 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
                   TextField(
                     controller: nameCtrl,
                     style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(labelText: 'Nombre del Pack', labelStyle: TextStyle(color: Colors.white54)),
+                    decoration: InputDecoration(labelText: tr('Nombre del Pack'), labelStyle: TextStyle(color: Colors.white54)),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   TextField(
                     controller: descCtrl,
                     style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(labelText: 'Descripción Corta', labelStyle: TextStyle(color: Colors.white54)),
+                    decoration: InputDecoration(labelText: tr('Descripción Corta'), labelStyle: TextStyle(color: Colors.white54)),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   DropdownButtonFormField<String>(
                     value: selectedCategory,
                     dropdownColor: Wumbleheme.surfaceColor,
                     style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(labelText: 'Categoría', labelStyle: TextStyle(color: Colors.white54)),
+                    decoration: InputDecoration(labelText: tr('Categoría'), labelStyle: TextStyle(color: Colors.white54)),
                     items: categories.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
                     onChanged: (val) {
                       if (val != null) setStateBuilder(() => selectedCategory = val);

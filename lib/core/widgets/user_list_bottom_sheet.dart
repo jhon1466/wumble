@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:wumble/features/profile/domain/user_model.dart';
 import 'package:wumble/core/theme.dart';
 import 'package:wumble/core/widgets/user_avatar.dart';
@@ -11,7 +12,7 @@ class UserListBottomSheet extends StatefulWidget {
   final List<String> userIds;
   final String? communityId;
 
-  const UserListBottomSheet({
+  UserListBottomSheet({
     super.key,
     required this.title,
     required this.userIds,
@@ -116,7 +117,7 @@ class _UserListBottomSheetState extends State<UserListBottomSheet> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.7,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Wumbleheme.surfaceColor,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -155,7 +156,7 @@ class _UserListBottomSheetState extends State<UserListBottomSheet> {
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Row(
         children: [
           Expanded(
@@ -191,9 +192,9 @@ class _UserListBottomSheetState extends State<UserListBottomSheet> {
   }
 
   Widget _buildEmpty() {
-    return const Center(
+    return Center(
       child: Text(
-        'No hay usuarios por aquí',
+        tr('No hay usuarios por aquí'),
         style: TextStyle(color: Colors.white24, fontSize: 16),
       ),
     );

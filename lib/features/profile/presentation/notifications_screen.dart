@@ -11,7 +11,7 @@ import '../../../injection_container.dart';
 
 class NotificationsScreen extends StatefulWidget {
   final String userId;
-  const NotificationsScreen({super.key, required this.userId});
+  NotificationsScreen({super.key, required this.userId});
   @override
   State<NotificationsScreen> createState() => _NotificationsScreenState();
 }
@@ -172,13 +172,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.delete_sweep_rounded, color: Colors.white70),
-            tooltip: 'Borrar todo',
+            icon: Icon(Icons.delete_sweep_rounded, color: Colors.white70),
+            tooltip: tr('Borrar todo'),
             onPressed: _clearAll,
           ),
           IconButton(
-            icon: const Icon(Icons.refresh_rounded, color: Colors.white70),
-            tooltip: 'Actualizar',
+            icon: Icon(Icons.refresh_rounded, color: Colors.white70),
+            tooltip: tr('Actualizar'),
             onPressed: _refresh,
           ),
         ],
@@ -186,19 +186,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 12),
+            padding: EdgeInsets.symmetric(vertical: 12),
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.02),
-              border: const Border(bottom: BorderSide(color: Colors.white10, width: 0.5)),
+              border: Border(bottom: BorderSide(color: Colors.white10, width: 0.5)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.swipe_left, size: 16, color: Wumbleheme.secondaryColor.withOpacity(0.5)),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
-                  'Desliza hacia la izquierda para eliminar',
+                  tr('Desliza hacia la izquierda para eliminar'),
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.3),
                     fontSize: 11,
@@ -213,12 +213,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               future: _notificationsFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.hasError) {
-                  return const Center(
+                  return Center(
                     child: Text(
-                      'Error cargando notificaciones',
+                      tr('Error cargando notificaciones'),
                       style: TextStyle(color: Colors.white54),
                     ),
                   );
@@ -227,9 +227,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 final notifications = snapshot.data ?? [];
 
                 if (notifications.isEmpty) {
-                  return const Center(
+                  return Center(
                     child: Text(
-                      'Sin nuevas notificaciones',
+                      tr('Sin nuevas notificaciones'),
                       style: TextStyle(color: Colors.white54, fontSize: 16),
                     ),
                   );

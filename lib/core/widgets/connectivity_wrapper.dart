@@ -13,7 +13,7 @@ class ConnectivityWrapper extends StatelessWidget {
       builder: (context, state) {
         debugPrint('ConnectivityWrapper: Building with state: $state');
         if (state == ConnectivityStatus.offline) {
-          return const OfflineScreen();
+          return OfflineScreen();
         }
         return child;
       },

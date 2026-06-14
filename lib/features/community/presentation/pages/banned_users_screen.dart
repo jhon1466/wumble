@@ -97,7 +97,7 @@ class _BannedUsersScreenState extends State<BannedUsersScreen> {
         elevation: 0,
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : _bannedMembers.isEmpty
               ? _buildEmptyState()
               : ListView.builder(
@@ -117,9 +117,9 @@ class _BannedUsersScreenState extends State<BannedUsersScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.gavel_rounded, size: 80, color: Colors.white.withOpacity(0.05)),
-          const SizedBox(height: 16),
-          const Text(
-            'No hay usuarios expulsados',
+          SizedBox(height: 16),
+          Text(
+            tr('No hay usuarios expulsados'),
             style: TextStyle(color: Colors.white38, fontSize: 16),
           ),
         ],

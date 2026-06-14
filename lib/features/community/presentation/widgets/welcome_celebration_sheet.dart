@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:ui';
 import '../../domain/community_model.dart';
@@ -7,7 +8,7 @@ import '../../../../core/theme.dart';
 class WelcomeCelebrationSheet extends StatelessWidget {
   final Community community;
 
-  const WelcomeCelebrationSheet({super.key, required this.community});
+  WelcomeCelebrationSheet({super.key, required this.community});
 
   static void show(BuildContext context, Community community) {
     showModalBottomSheet(
@@ -25,7 +26,7 @@ class WelcomeCelebrationSheet extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.75,
       decoration: BoxDecoration(
         color: Wumbleheme.backgroundColor.withOpacity(0.9),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         border: Border.all(color: community.themeColor.withOpacity(0.3), width: 1.5),
       ),
       child: Stack(
@@ -53,7 +54,7 @@ class WelcomeCelebrationSheet extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 // Grab Handle
                 Container(
                   width: 40,
@@ -63,7 +64,7 @@ class WelcomeCelebrationSheet extends StatelessWidget {
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
-                const SizedBox(height: 40),
+                SizedBox(height: 40),
 
                 // Celebration Icon
                 TweenAnimationBuilder<double>(
@@ -104,11 +105,11 @@ class WelcomeCelebrationSheet extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
 
                 // Welcome Text
-                const Text(
-                  '¡BIENVENIDO!',
+                Text(
+                  tr('¡BIENVENIDO!'),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -122,34 +123,34 @@ class WelcomeCelebrationSheet extends StatelessWidget {
                   child: Text(
                     community.name,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
+                  padding: EdgeInsets.symmetric(horizontal: 50),
                   child: Text(
                     (community.isWelcomeMessageEnabled && community.welcomeMessage != null && community.welcomeMessage!.isNotEmpty)
                         ? community.welcomeMessage!
                         : 'Ahora eres parte oficial de esta gran comunidad.\n¡Explora, comparte y diviértete!',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white70,
                       fontSize: 15,
                       height: 1.5,
                     ),
                   ),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
 
                 // Quick Actions or Stats
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 24),
-                  padding: const EdgeInsets.all(20),
+                  margin: EdgeInsets.symmetric(horizontal: 24),
+                  padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.05),
                     borderRadius: BorderRadius.circular(20),
@@ -164,11 +165,11 @@ class WelcomeCelebrationSheet extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 40),
+                SizedBox(height: 40),
 
                 // Action Button
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 40),
+                  padding: EdgeInsets.fromLTRB(24, 0, 24, 40),
                   child: ElevatedButton(
                     onPressed: () => Navigator.pop(context),
                     style: ElevatedButton.styleFrom(
@@ -179,8 +180,8 @@ class WelcomeCelebrationSheet extends StatelessWidget {
                       elevation: 12,
                       shadowColor: community.themeColor.withOpacity(0.5),
                     ),
-                    child: const Text(
-                      'EMPEZAR A EXPLORAR',
+                    child: Text(
+                      tr('EMPEZAR A EXPLORAR'),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,

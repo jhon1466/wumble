@@ -9,7 +9,7 @@ class LevelRankScreen extends StatelessWidget {
   final Map<String, String>? levelTitles;
   final Color themeColor;
 
-  const LevelRankScreen({
+  LevelRankScreen({
     super.key, 
     required this.user, 
     this.levelTitles,
@@ -50,26 +50,26 @@ class LevelRankScreen extends StatelessWidget {
         title: Text(tr('Niveles y Títulos')),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildCurrentStatus(context, levels),
-            const SizedBox(height: 32),
-            const Text(
-              'Rangos de Reputación',
+            SizedBox(height: 32),
+            Text(
+              tr('Rangos de Reputación'),
               style: TextStyle(
                 fontSize: 18, 
                 fontWeight: FontWeight.bold, 
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ListView.separated(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               itemCount: levels.length,
-              separatorBuilder: (context, index) => const Divider(color: Colors.white10),
+              separatorBuilder: (context, index) => Divider(color: Colors.white10),
               itemBuilder: (context, index) {
                 final lvl = levels[index];
                 final bool isUnlocked = user.reputation >= lvl['xp'];
@@ -155,7 +155,7 @@ class LevelRankScreen extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Wumbleheme.surfaceColor,
         borderRadius: BorderRadius.circular(24),
@@ -164,7 +164,7 @@ class LevelRankScreen extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
             blurRadius: 20,
-            offset: const Offset(0, 10),
+            offset: Offset(0, 10),
           ),
         ],
       ),
@@ -176,8 +176,8 @@ class LevelRankScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'TU REPUTACIÓN', 
+                  Text(
+                    tr('TU REPUTACIÓN'), 
                     style: TextStyle(
                       color: Colors.white38, 
                       fontSize: 10, 
@@ -197,7 +197,7 @@ class LevelRankScreen extends StatelessWidget {
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   color: currentRank['color'].withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -214,7 +214,7 @@ class LevelRankScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Stack(
             children: [
               ClipRRect(
@@ -228,7 +228,7 @@ class LevelRankScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -246,8 +246,8 @@ class LevelRankScreen extends StatelessWidget {
                   style: const TextStyle(color: Colors.white24, fontSize: 10),
                 )
               else
-                const Text(
-                  '¡HAS ALCANZADO EL RANGO MÁXIMO!', 
+                Text(
+                  tr('¡HAS ALCANZADO EL RANGO MÁXIMO!'), 
                   style: TextStyle(
                     color: Colors.amber, 
                     fontSize: 10, 

@@ -177,22 +177,22 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (ctx) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: EdgeInsets.symmetric(vertical: 8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               width: 40, height: 4,
-              margin: const EdgeInsets.only(bottom: 16),
+              margin: EdgeInsets.only(bottom: 16),
               decoration: BoxDecoration(
                 color: Colors.white24,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(bottom: 12),
               child: Text(
-                'Tipo de Marco',
+                tr('Tipo de Marco'),
                 style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
@@ -257,7 +257,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
           ? (packPrice / total).ceil()
           : (int.tryParse(_priceController.text.trim()) ?? 0);
       final packId = isPack 
-          ? (widget.initialFrames?.first.packId ?? const Uuid().v4()) 
+          ? (widget.initialFrames?.first.packId ?? Uuid().v4()) 
           : null;
 
       // Clean up previous pack associations if editing
@@ -284,7 +284,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
           // --- COMPRESIÓN DE SEGURIDAD ---
           final fileToUpload = await MediaHelper.compressFile(entry.file!);
 
-          const ext = 'png';
+          final ext = 'png';
           final storageRef = FirebaseStorage.instance
               .ref()
               .child('avatar_frames')
@@ -356,13 +356,13 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
       appBar: AppBar(
         title: Text(
           _frames.length > 1 ? 'Crear Pack de Marcos (${_frames.length})' : 'Crear Marco',
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Wumbleheme.surfaceColor,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: Colors.white),
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
+          preferredSize: Size.fromHeight(1),
           child: Container(height: 1, color: Colors.white10),
         ),
       ),
@@ -458,7 +458,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
                               const Icon(Icons.calculate_outlined, color: Colors.amber, size: 16),
                               const SizedBox(width: 8),
                               Text(
-                                'Precio individual por marco: ',
+                                tr('Precio individual por marco: '),
                                 style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 12),
                               ),
                               Text(
@@ -550,15 +550,15 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
 
   Widget _buildPreviewSection() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 28),
+      padding: EdgeInsets.symmetric(vertical: 28),
       decoration: BoxDecoration(
         color: Wumbleheme.surfaceColor.withOpacity(0.5),
         border: Border(bottom: BorderSide(color: Colors.white.withOpacity(0.07))),
       ),
       child: Column(
         children: [
-          const Text(
-            'VISTA PREVIA',
+          Text(
+            tr('VISTA PREVIA'),
             style: TextStyle(color: Colors.white38, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2),
           ),
           const SizedBox(height: 24),
@@ -574,7 +574,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
 
           // Page indicator when multiple frames
           if (_frames.length > 1) ...[
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(_frames.length, (i) {
@@ -595,20 +595,20 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
                 );
               }),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'Marco ${_previewIndex + 1} de ${_frames.length}',
-              style: const TextStyle(color: Colors.white38, fontSize: 11),
+              style: TextStyle(color: Colors.white38, fontSize: 11),
             ),
           ],
 
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
 
           // Add button
           GestureDetector(
             onTap: _showAddPicker,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
                 color: Wumbleheme.primaryColor.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(24),
@@ -633,7 +633,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
   }
 
   Widget _buildLivePreview() {
-    const double size = 120;
+    double size = 120;
 
     // Avatar base
     Widget avatarBase = _loadingUser
@@ -643,7 +643,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
               shape: BoxShape.circle,
               color: Colors.white10,
             ),
-            child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+            child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
           )
         : CircleAvatar(
             radius: size / 2,
@@ -714,17 +714,17 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
   // ── Frames List ────────────────────────────────────────────
 
   Widget _buildFramesList() {
-    if (_frames.isEmpty) return const SizedBox();
+    if (_frames.isEmpty) return SizedBox();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 8),
           child: Row(
             children: [
-              const Text(
-                'MARCOS EN EL PACK',
+              Text(
+                tr('MARCOS EN EL PACK'),
                 style: TextStyle(color: Colors.white38, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.1),
               ),
               const Spacer(),

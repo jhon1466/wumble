@@ -11,7 +11,7 @@ import '../../../../core/theme.dart';
 class StickerCreatorScreen extends StatefulWidget {
   final XFile imageFile;
 
-  const StickerCreatorScreen({super.key, required this.imageFile});
+  StickerCreatorScreen({super.key, required this.imageFile});
 
   @override
   State<StickerCreatorScreen> createState() => _StickerCreatorScreenState();
@@ -195,7 +195,7 @@ class _StickerCreatorScreenState extends State<StickerCreatorScreen> {
         elevation: 0,
         title: Text(tr('Creador de Sticker'), style: TextStyle(color: Colors.white)),
         leading: IconButton(
-          icon: const Icon(Icons.close, color: Colors.white),
+          icon: Icon(Icons.close, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -204,10 +204,10 @@ class _StickerCreatorScreenState extends State<StickerCreatorScreen> {
           Expanded(
             child: Center(
               child: _isProcessing 
-                ? const CircularProgressIndicator()
+                ? CircularProgressIndicator()
                 : _processedFile != null
                   ? Container(
-                      padding: const EdgeInsets.all(40),
+                      padding: EdgeInsets.all(40),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.03),
                         borderRadius: BorderRadius.circular(20),
@@ -227,9 +227,9 @@ class _StickerCreatorScreenState extends State<StickerCreatorScreen> {
                             ),
                             child: Image.file(_processedFile!),
                           ),
-                          const SizedBox(height: 20),
-                          const Text(
-                            'Vista Previa',
+                          SizedBox(height: 20),
+                          Text(
+                            tr('Vista Previa'),
                             style: TextStyle(color: Colors.white38, fontSize: 12, letterSpacing: 1),
                           ),
                         ],
@@ -304,7 +304,7 @@ class _StickerCreatorScreenState extends State<StickerCreatorScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 12),
                     child: Text(
-                      'Magia no disponible para GIFs o WebP animados',
+                      tr('Magia no disponible para GIFs o WebP animados'),
                       style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 11),
                     ),
                   ),

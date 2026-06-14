@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import '../../domain/community_model.dart';
@@ -253,7 +254,7 @@ class CommunityContextBloc extends Bloc<CommunityContextEvent, CommunityContextS
                 
                 NotificationService.showLocalNotification(
                   id: report.id.hashCode,
-                  title: '🛡️ ALERTA DE MODERACIÓN',
+                  title: tr('🛡️ ALERTA DE MODERACIÓN'),
                   body: 'La IA ha detectado contenido sospechoso en la comunidad.',
                   data: {
                     'type': 'moderation_report',

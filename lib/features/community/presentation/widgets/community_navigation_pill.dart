@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wumble/core/widgets/user_avatar.dart';
@@ -40,7 +41,7 @@ class CommunityNavigationPill extends StatelessWidget {
   final VoidCallback onJoinTap;                  // ← NEW: Action for guests
   final VoidCallback onPlusTap;                  // ← NEW: Open multi-action menu
 
-  const CommunityNavigationPill({
+  CommunityNavigationPill({
     super.key,
     required this.themeColor,
     required this.onMenuTap,
@@ -57,7 +58,7 @@ class CommunityNavigationPill extends StatelessWidget {
   Widget build(BuildContext context) {
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
     final action = _tabActions[activeTabType] ??
-        const _CreateAction(icon: Icons.add_circle_outline_rounded, label: 'Crear');
+        _CreateAction(icon: Icons.add_circle_outline_rounded, label: 'Crear');
 
     final effectiveColor = action.enabled ? themeColor : Colors.white24;
     final effectiveTextColor = action.enabled ? Colors.white : Colors.white38;
@@ -81,11 +82,11 @@ class CommunityNavigationPill extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
 
                 // 1. Menu Button (Always visible)
                 IconButton(
-                  icon: const Icon(Icons.menu_rounded, color: Colors.white),
+                  icon: Icon(Icons.menu_rounded, color: Colors.white),
                   onPressed: onMenuTap,
                 ),
 
@@ -96,8 +97,8 @@ class CommunityNavigationPill extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
-                          'Miembros',
+                        Text(
+                          tr('Miembros'),
                           style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.w500),
                         ),
                         if (communityId != null) ...[
@@ -119,7 +120,7 @@ class CommunityNavigationPill extends StatelessWidget {
 
                   // 3. Dynamic Create Button (right side - Member Only)
                   AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 200),
+                    duration: Duration(milliseconds: 200),
                     transitionBuilder: (child, anim) =>
                         FadeTransition(opacity: anim, child: ScaleTransition(scale: anim, child: child)),
                     child: Material(
@@ -129,8 +130,8 @@ class CommunityNavigationPill extends StatelessWidget {
                         onTap: action.enabled ? onCreateTap : null,
                         borderRadius: BorderRadius.circular(24),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          margin: const EdgeInsets.all(4),
+                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          margin: EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             color: effectiveColor.withOpacity(action.enabled ? 0.15 : 0.06),
                             borderRadius: BorderRadius.circular(24),
@@ -166,8 +167,8 @@ class CommunityNavigationPill extends StatelessWidget {
                       onTap: onPlusTap,
                       borderRadius: BorderRadius.circular(24),
                       child: Container(
-                        padding: const EdgeInsets.all(8),
-                        margin: const EdgeInsets.all(4),
+                        padding: EdgeInsets.all(8),
+                        margin: EdgeInsets.all(4),
                         decoration: BoxDecoration(
                           color: effectiveColor.withOpacity(0.2),
                           shape: BoxShape.circle,
@@ -189,15 +190,15 @@ class CommunityNavigationPill extends StatelessWidget {
                   ),
                 ] else ...[
                   // 4. JOIN BUTTON (Alternative for non-members)
-                  const Spacer(),
+                  Spacer(),
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
                       onTap: onJoinTap,
                       borderRadius: BorderRadius.circular(24),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                        margin: const EdgeInsets.all(4),
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        margin: EdgeInsets.all(4),
                         decoration: BoxDecoration(
                           color: themeColor.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(24),
@@ -217,9 +218,9 @@ class CommunityNavigationPill extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(Icons.person_add_rounded, color: themeColor, size: 20),
-                            const SizedBox(width: 10),
-                            const Text(
-                              'Unirte a esta comunidad',
+                            SizedBox(width: 10),
+                            Text(
+                              tr('Unirte a esta comunidad'),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

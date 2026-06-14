@@ -20,7 +20,7 @@ class WikiEditorScreen extends StatefulWidget {
   final WikiPage? wikiToEdit;
   final bool isOC; // When true, creates an Original Character (personaje) entry.
 
-  const WikiEditorScreen({
+  WikiEditorScreen({
     super.key,
     this.communityId,
     this.wikiToEdit,
@@ -119,9 +119,9 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
         content: TextField(
           controller: controller,
           autofocus: true,
-          style: const TextStyle(color: Colors.white),
-          decoration: const InputDecoration(
-            hintText: 'Ej: Arma favorita, Frase…',
+          style: TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            hintText: tr('Ej: Arma favorita, Frase…'),
             hintStyle: TextStyle(color: Colors.white24),
           ),
           onSubmitted: (v) => Navigator.pop(ctx, v.trim()),
@@ -449,7 +449,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.close),
+          icon: Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(_isOC
@@ -457,16 +457,16 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
             : (widget.wikiToEdit != null ? 'Editar Wiki' : 'Nueva Wiki')),
         actions: [
           IconButton(
-            icon: const Icon(Icons.visibility_outlined),
+            icon: Icon(Icons.visibility_outlined),
             onPressed: _showPreview,
-            tooltip: 'Vista Previa',
+            tooltip: tr('Vista Previa'),
           ),
           TextButton(
             onPressed: _isSaving ? null : _saveWiki,
             child: _isSaving 
-              ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
-              : const Text(
-                  'Guardar',
+              ? SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
+              : Text(
+                  tr('Guardar'),
                   style: TextStyle(
                     color: Wumbleheme.accentColor,
                     fontWeight: FontWeight.bold,
@@ -592,7 +592,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
                           IconButton(
                             icon: const Icon(Icons.close, size: 16, color: Colors.white24),
                             visualDensity: VisualDensity.compact,
-                            tooltip: 'Quitar campo',
+                            tooltip: tr('Quitar campo'),
                             onPressed: () => setState(() => _infoFields.removeAt(idx)),
                           ),
                         ],

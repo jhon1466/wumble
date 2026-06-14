@@ -43,7 +43,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> with SingleTicker
         backgroundColor: Colors.transparent,
         toolbarHeight: 40,
         title: Text(
-          'Salón de Fama',
+          tr('Salón de Fama'),
           style: TextStyle(
             fontWeight: FontWeight.bold, 
             fontSize: 24,

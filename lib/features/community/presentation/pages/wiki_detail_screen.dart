@@ -37,7 +37,7 @@ class WikiDetailScreen extends StatefulWidget {
   final WikiPage wiki;
   final Color themeColor;
 
-  const WikiDetailScreen({
+  WikiDetailScreen({
     super.key,
     required this.wiki,
     required this.themeColor,
@@ -128,7 +128,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
         backgroundColor: Wumbleheme.surfaceColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Text(tr('¡Únete a la comunidad!'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        content: const Text(
+        content: Text(
           'Para interactuar con esta wiki, dar corazón o donar, necesitas ser miembro de esta comunidad.',
           style: TextStyle(color: Colors.white70),
         ),
@@ -246,7 +246,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
             pinned: true,
             backgroundColor: Wumbleheme.backgroundColor,
             leading: Container(
-              margin: const EdgeInsets.all(8),
+              margin: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -258,11 +258,11 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                 ],
               ),
               child: IconButton(
-                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () => Navigator.pop(context),
               ),
             ),
-            iconTheme: const IconThemeData(color: Colors.white),
+            iconTheme: IconThemeData(color: Colors.white),
             actions: [
               BlocBuilder<CommunityContextBloc, CommunityContextState>(
                 builder: (context, state) {
@@ -270,10 +270,10 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                   final bool isAuthor = userId != null && userId == widget.wiki.authorId;
                   final bool isModerator = state.memberProfile?.role == 'leader' || state.memberProfile?.role == 'curator';
                   
-                  if (!isAuthor && !isModerator) return const SizedBox.shrink();
+                  if (!isAuthor && !isModerator) return SizedBox.shrink();
 
                   return Container(
-                    margin: const EdgeInsets.only(right: 8),
+                    margin: EdgeInsets.only(right: 8),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       boxShadow: [
@@ -285,7 +285,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                       ],
                     ),
                     child: PopupMenuButton<String>(
-                      icon: const Icon(Icons.more_vert, color: Colors.white),
+                      icon: Icon(Icons.more_vert, color: Colors.white),
                       onSelected: (value) async {
                         if (value == 'edit') {
                           final updated = await Navigator.push(
@@ -377,7 +377,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                           Colors.transparent,
                           Wumbleheme.backgroundColor,
                         ],
-                        stops: const [0.0, 0.5, 1.0],
+                        stops: [0.0, 0.5, 1.0],
                       ),
                     ),
                   ),
@@ -402,7 +402,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.5),
                                 blurRadius: 15,
-                                offset: const Offset(0, 5),
+                                offset: Offset(0, 5),
                               ),
                             ],
                           ),
@@ -416,18 +416,18 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                                 : Icon(widget.wiki.type == 'oc' ? Icons.face_retouching_natural : Icons.menu_book_rounded, color: widget.themeColor, size: 40),
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        SizedBox(width: 16),
                         // Title
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
+                            padding: EdgeInsets.only(bottom: 8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
                                   widget.wiki.title,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
@@ -442,14 +442,14 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                                 ),
                                 if (widget.wiki.isApproved)
                                   Container(
-                                    margin: const EdgeInsets.only(top: 4),
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                    margin: EdgeInsets.only(top: 4),
+                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                     decoration: BoxDecoration(
                                       color: Colors.amber.shade700,
                                       borderRadius: BorderRadius.circular(4),
                                     ),
-                                    child: const Text(
-                                      'CURADO',
+                                    child: Text(
+                                      tr('CURADO'),
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 10,
@@ -472,7 +472,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
           // Content
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -485,7 +485,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                         color: _isLiked ? Colors.red : Colors.white70,
                         onTap: _toggleLike,
                       ),
-                      const SizedBox(width: 20),
+                      SizedBox(width: 20),
                       _interactionItem(
                         icon: Icons.chat_bubble_outline,
                         label: '$_commentsCount',
@@ -493,7 +493,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                         onTap: _showCommentsSheet,
                       ),
                       if (widget.wiki.authorId != _currentUserId) ...[
-                        const SizedBox(width: 20),
+                        SizedBox(width: 20),
                         _interactionItem(
                           icon: Icons.volunteer_activism_rounded,
                           label: 'Donar',
@@ -535,29 +535,29 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                       ],
                     ],
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // Author Section
                   _buildAuthorSection(),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // Info Labels (Properties)
                   if (widget.wiki.labels.isNotEmpty) ...[
-                    const Text(
-                      'Información',
+                    Text(
+                      tr('Información'),
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Wumbleheme.textSecondary,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     Wrap(
                       spacing: 10,
                       runSpacing: 10,
                       children: widget.wiki.labels.entries.map((entry) {
                         return Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.05),
                             borderRadius: BorderRadius.circular(10),
@@ -568,11 +568,11 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                             children: [
                               Text(
                                 '${entry.key}: ',
-                                style: const TextStyle(color: Wumbleheme.textSecondary, fontSize: 13),
+                                style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 13),
                               ),
                               Text(
                                 entry.value,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 13,
@@ -583,30 +583,30 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                         );
                       }).toList(),
                     ),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32),
                   ],
 
                   // About Content
-                  const Text(
-                    'Sobre',
+                  Text(
+                    tr('Sobre'),
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Wumbleheme.textSecondary,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   if (widget.wiki.blocks.isNotEmpty)
                     ...widget.wiki.blocks.map((block) {
                       if (block['type'] == 'text') {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
+                          padding: EdgeInsets.only(bottom: 16),
                           child: _buildRichText(block['value'] ?? ''),
                         );
                       } else if (block['type'] == 'image') {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
+                          padding: EdgeInsets.only(bottom: 16),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: GestureDetector(
@@ -624,19 +624,19 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                           ),
                         );
                       }
-                      return const SizedBox.shrink();
+                      return SizedBox.shrink();
                     })
                   else
                     LinkifyText(
                       widget.wiki.content.isEmpty ? 'Sin descripción.' : widget.wiki.content,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 15,
                         color: Colors.white,
                         height: 1.6,
                       ),
                     ),
                   
-                  const SizedBox(height: 80), // Space for bottom
+                  SizedBox(height: 80), // Space for bottom
                 ],
               ),
             ),
@@ -648,7 +648,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
 
   Widget _buildAuthorSection() {
     if (_authorName == null) {
-      return const SizedBox(
+      return SizedBox(
         height: 50,
         child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
       );
@@ -679,7 +679,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
       },
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(12),
@@ -694,13 +694,13 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
               radius: 20,
               communityId: widget.wiki.communityId,
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Autor',
+                  Text(
+                    tr('Autor'),
                     style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 11, fontWeight: FontWeight.bold),
                   ),
                   Row(
@@ -710,12 +710,12 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                           name,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                          style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       // Hardcoded or fetched level if available in CommunityMember
-                      const UserBadgeWidget(level: 1, showTitles: false),
+                      UserBadgeWidget(level: 1, showTitles: false),
                     ],
                   ),
                 ],
@@ -761,7 +761,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, color: color, size: 22),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Text(
             label,
             style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 16),
@@ -783,7 +783,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
       if (m == null) {
         return LinkifyText(
           line, 
-          style: const TextStyle(color: Colors.white, fontSize: 16, height: 1.5)
+          style: TextStyle(color: Colors.white, fontSize: 16, height: 1.5)
         );
       }
       final tags    = m.group(1)!;
@@ -845,7 +845,7 @@ class _WikiCommentsSheet extends StatefulWidget {
   final VoidCallback? onCommentAdded;
   final VoidCallback? onCommentDeleted;
 
-  const _WikiCommentsSheet({
+  _WikiCommentsSheet({
     required this.wiki, 
     this.onCommentAdded, 
     this.onCommentDeleted
@@ -1107,7 +1107,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.85,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Wumbleheme.backgroundColor,
         borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
@@ -1115,7 +1115,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
         children: [
           // Handle
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 12),
+            margin: EdgeInsets.symmetric(vertical: 12),
             width: 40,
             height: 4,
             decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)),
@@ -1128,12 +1128,12 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                 ? Center(child: Text(tr('Sin comentarios aún'), style: TextStyle(color: Colors.white54)))
                 : ListView.builder(
                     controller: _scrollController,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     itemCount: _comments.length,
                     itemBuilder: (context, index) {
                       final c = _comments[index];
                       return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        padding: EdgeInsets.symmetric(vertical: 12),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -1144,7 +1144,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                               radius: 18,
                               communityId: widget.wiki.communityId,
                             ),
-                            const SizedBox(width: 12),
+                            SizedBox(width: 12),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1164,7 +1164,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                                                 style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white70, fontSize: 13)
                                               ),
                                             ),
-                                            const SizedBox(width: 6),
+                                            SizedBox(width: 6),
                                             UserBadgeWidget(
                                               level: c.authorLevel,
                                               titles: c.authorTitles,
@@ -1174,7 +1174,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                                             ),
                                           ],
                                         ),
-                                        const SizedBox(height: 4),
+                                        SizedBox(height: 4),
                                           if (c.stickerUrl != null)
                                             GestureDetector(
                                               onTap: () => Navigator.push(
@@ -1219,27 +1219,27 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                                             ),
                                           )
                                         else
-                                          LinkifyText(c.content, style: const TextStyle(color: Colors.white, fontSize: 14)),
+                                          LinkifyText(c.content, style: TextStyle(color: Colors.white, fontSize: 14)),
                                         _buildCommentReactions(c),
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(height: 4),
+                                  SizedBox(height: 4),
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
                                         _replyingTo = c;
                                       });
                                     },
-                                    child: const Text(
-                                      'Responder',
+                                    child: Text(
+                                      tr('Responder'),
                                       style: TextStyle(color: Colors.white54, fontSize: 12, fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                   if (c.replies.isNotEmpty) ...[
-                                    const SizedBox(height: 8),
+                                    SizedBox(height: 8),
                                     ...c.replies.map((reply) => Padding(
-                                      padding: const EdgeInsets.only(top: 8.0, left: 12),
+                                      padding: EdgeInsets.only(top: 8.0, left: 12),
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
@@ -1283,7 +1283,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 32, top: 4),
+                                            padding: EdgeInsets.only(left: 32, top: 4),
                                             child: GestureDetector(
                                               onTap: () {
                                                 setState(() {
@@ -1291,8 +1291,8 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                                                   _commentController.text = '@${reply.authorName} ';
                                                 });
                                               },
-                                              child: const Text(
-                                                'Responder',
+                                              child: Text(
+                                                tr('Responder'),
                                                 style: TextStyle(color: Colors.white54, fontSize: 11, fontWeight: FontWeight.w600),
                                               ),
                                             ),
@@ -1306,7 +1306,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                             ),
                             IconButton(
                               onPressed: () => _showCommentOptions(c),
-                              icon: const Icon(Icons.more_vert, size: 18, color: Colors.white38),
+                              icon: Icon(Icons.more_vert, size: 18, color: Colors.white38),
                             ),
                           ],
                         ),
@@ -1327,7 +1327,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
           // Replying To Header
           if (_replyingTo != null)
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               color: Wumbleheme.surfaceColor,
               child: Row(
                 children: [
@@ -1335,9 +1335,9 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                     'Respondiendo a ${_replyingTo!.authorName}',
                     style: TextStyle(color: Wumbleheme.primaryColor, fontSize: 12),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   IconButton(
-                    icon: const Icon(Icons.close, size: 16, color: Colors.white54),
+                    icon: Icon(Icons.close, size: 16, color: Colors.white54),
                     onPressed: () => setState(() => _replyingTo = null),
                   ),
                 ],
@@ -1350,7 +1350,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.4),
                     border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1))),
@@ -1360,31 +1360,31 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                     child: Row(
                       children: [
                         Container(
-                          padding: const EdgeInsets.all(8),
+                          padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: Wumbleheme.primaryColor.withOpacity(0.12),
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(Icons.lock_person_rounded, color: Wumbleheme.primaryColor, size: 18),
+                          child: Icon(Icons.lock_person_rounded, color: Wumbleheme.primaryColor, size: 18),
                         ),
-                        const SizedBox(width: 12),
-                        const Expanded(
+                        SizedBox(width: 12),
+                        Expanded(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Modo Lectura',
+                                tr('Modo Lectura'),
                                 style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                'Únete para participar',
+                                tr('Únete para participar'),
                                 style: TextStyle(color: Colors.white54, fontSize: 11),
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12),
                         ElevatedButton(
                           onPressed: () async {
                              try {
@@ -1432,16 +1432,16 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                   Expanded(
                     child: TextField(
                       controller: _commentController,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: const InputDecoration(
-                        hintText: 'Escribe un comentario...',
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: tr('Escribe un comentario...'),
                         hintStyle: TextStyle(color: Colors.white24),
                         border: InputBorder.none,
                       ),
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.send, color: Wumbleheme.primaryColor),
+                    icon: Icon(Icons.send, color: Wumbleheme.primaryColor),
                     onPressed: _addComment,
                   ),
                 ],
@@ -1466,7 +1466,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
           child: Container(
             decoration: BoxDecoration(
               color: Wumbleheme.surfaceColor.withOpacity(0.9),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
               border: Border.all(color: Colors.white10),
             ),
             padding: EdgeInsets.only(
@@ -1481,7 +1481,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                   Container(
                     width: 40,
                     height: 4,
-                    margin: const EdgeInsets.only(bottom: 20),
+                    margin: EdgeInsets.only(bottom: 20),
                     decoration: BoxDecoration(
                       color: Colors.white24,
                       borderRadius: BorderRadius.circular(2),
@@ -1490,11 +1490,11 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
 
                   // Comment Preview
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: [
-                        const Text(
-                          'COMENTARIO',
+                        Text(
+                          tr('COMENTARIO'),
                           style: TextStyle(
                             color: Colors.white38,
                             fontSize: 10,
@@ -1601,7 +1601,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                   // Menu Options
                   _buildMenuTile(
                     icon: Icons.copy_rounded,
-                    title: 'Copiar texto',
+                    title: tr('Copiar texto'),
                     onTap: () {
                       Navigator.pop(ctx);
                       Clipboard.setData(ClipboardData(text: comment.content));
@@ -1616,7 +1616,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                   ),
                   _buildMenuTile(
                     icon: Icons.reply_rounded,
-                    title: 'Responder',
+                    title: tr('Responder'),
                     onTap: () {
                       Navigator.pop(ctx);
                       setState(() {
@@ -1630,7 +1630,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                   if (isAuthor) ...[
                     _buildMenuTile(
                       icon: Icons.edit_rounded,
-                      title: 'Editar',
+                      title: tr('Editar'),
                       onTap: () {
                         Navigator.pop(ctx);
                         if (isReply) {
@@ -1642,7 +1642,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                     ),
                     _buildMenuTile(
                       icon: Icons.delete_outline_rounded,
-                      title: 'Eliminar',
+                      title: tr('Eliminar'),
                       color: Colors.redAccent,
                       onTap: () {
                         Navigator.pop(ctx);
@@ -1670,7 +1670,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
     Color color = Colors.white,
   }) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+      contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
       leading: Icon(icon, color: color.withOpacity(0.8), size: 22),
       title: Text(
         title,
@@ -1691,8 +1691,8 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
         backgroundColor: Wumbleheme.surfaceColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Text(tr('¡Únete a la comunidad!'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        content: const Text(
-          'Para reaccionar a comentarios necesitas ser miembro de esta comunidad.',
+        content: Text(
+          tr('Para reaccionar a comentarios necesitas ser miembro de esta comunidad.'),
           style: TextStyle(color: Colors.white70),
         ),
         actions: [

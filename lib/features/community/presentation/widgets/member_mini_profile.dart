@@ -31,8 +31,8 @@ import '../../../../features/profile/presentation/widgets/donation_modal.dart';
 import 'bot_mini_profile.dart'; // Add this
 
 
-const String _youtubeSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>';
-const String _facebookSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978 1.602 0 2.703.117 2.703.117v3.382h-1.728c-1.903 0-2.236 1.062-2.236 2.15v2.474h3.334L16.42 15.71h-2.923v7.98H9.101" fill="currentColor"/></svg>';
+String _youtubeSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>';
+String _facebookSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978 1.602 0 2.703.117 2.703.117v3.382h-1.728c-1.903 0-2.236 1.062-2.236 2.15v2.474h3.334L16.42 15.71h-2.923v7.98H9.101" fill="currentColor"/></svg>';
 String _instagramSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.355 1.079 2.126 1.384c.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.079-1.354 1.384-2.126c.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.354-1.079-2.126-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.584-.071 4.85c-.055 1.17-.249 1.805-.415 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.164-1.056.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.584-.015-4.85-.071c-1.17-.055-1.805-.249-2.227-.415-.562-.217-.96-.477-1.382-.896-.419-.42-.819-.679-1.381-.896-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.015-3.584.071-4.85c.055-1.17.249-1.805.415-2.227.217-.562.477-.96.896-1.382.42-.419.819-.679 1.381-.896.422-.164 1.057-.36 2.227-.413 1.266-.057 1.646-.07 4.85-.07zM12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" fill="currentColor"/></svg>';
 String _xSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" fill="currentColor"/></svg>';
 String _discordSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2758-3.68-.2758-5.4876 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9945a.0771.0771 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1971.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z" fill="currentColor"/></svg>';
@@ -279,7 +279,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                                         const Icon(Icons.unfold_more_rounded, color: Colors.white, size: 32),
                                         const SizedBox(height: 8),
                                         Text(
-                                          'Arrastra para ajustar',
+                                          tr('Arrastra para ajustar'),
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -474,7 +474,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                       const SizedBox(width: 8),
                       _buildStatItem('Monedas', profileUser.coins.toString(), Icons.monetization_on_rounded, Colors.yellowAccent, contentColor: contentColor, onTap: () {
                          if (di.sl<FirebaseAuth>().currentUser?.uid == widget.user.id) {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const WalletScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => WalletScreen()));
                          }
                       }),
                       const SizedBox(width: 8),
@@ -500,7 +500,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: _buildSection(
-                    title: 'SOBRE MÍ',
+                    title: tr('SOBRE MÍ'),
                     contentColor: contentColor,
                     child: Text(
                       bio,
@@ -520,7 +520,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'CONEXIONES',
+                        tr('CONEXIONES'),
                         style: TextStyle(color: contentColor.withValues(alpha: 0.4), fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2),
                       ),
                       const SizedBox(height: 12),
@@ -543,7 +543,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                   children: [
                     const SizedBox(height: 12),
                     _buildSection(
-                      title: 'MIEMBRO DESDE',
+                      title: tr('MIEMBRO DESDE'),
                       contentColor: contentColor,
                       child: Row(
                         children: [
@@ -732,8 +732,8 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 24),
-        decoration: const BoxDecoration(
+        padding: EdgeInsets.symmetric(vertical: 24),
+        decoration: BoxDecoration(
           color: Color(0xFF1E1E2C),
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         ),
@@ -749,34 +749,34 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            const Text(
-              'OPCIONES DE EXPULSIÓN',
+            Text(
+              tr('OPCIONES DE EXPULSIÓN'),
               style: TextStyle(color: Colors.white38, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1.2),
             ),
             const SizedBox(height: 20),
             _buildExpulsionTile(
-              title: 'Solo Expulsar',
+              title: tr('Solo Expulsar'),
               subtitle: 'El usuario es removido pero puede volver a unirse.',
               icon: Icons.exit_to_app_rounded,
               color: Colors.white,
               onTap: () => _handleExpulsion(context, type: 'kick'),
             ),
             _buildExpulsionTile(
-              title: 'Falta: 24 Horas',
+              title: tr('Falta: 24 Horas'),
               subtitle: 'Expulsión y baneo temporal por 1 día.',
               icon: Icons.history_rounded,
               color: Colors.orangeAccent,
               onTap: () => _handleExpulsion(context, type: 'ban_24h'),
             ),
             _buildExpulsionTile(
-              title: 'Falta: 72 Horas',
+              title: tr('Falta: 72 Horas'),
               subtitle: 'Expulsión y baneo temporal por 3 días.',
               icon: Icons.timer_rounded,
               color: Colors.deepOrangeAccent,
               onTap: () => _handleExpulsion(context, type: 'ban_72h'),
             ),
             _buildExpulsionTile(
-              title: 'Baneo Permanente',
+              title: tr('Baneo Permanente'),
               subtitle: 'Expulsión definitiva de la comunidad.',
               icon: Icons.gavel_rounded,
               color: Colors.redAccent,
@@ -872,7 +872,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
               style: TextStyle(color: Colors.white),
               maxLines: 3,
               decoration: InputDecoration(
-                hintText: 'Ej: Comportamiento inadecuado, spam...',
+                hintText: tr('Ej: Comportamiento inadecuado, spam...'),
                 hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                 filled: true,
                 fillColor: Colors.black.withOpacity(0.2),
@@ -939,7 +939,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             letterSpacing: 1.2,
           ),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 10),
         child,
       ],
     );
@@ -951,7 +951,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: textColor.withOpacity(0.05),
           borderRadius: BorderRadius.circular(16),
@@ -960,7 +960,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
         child: Column(
           children: [
             Icon(icon, color: color, size: 20),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               value,
               style: TextStyle(color: textColor, fontWeight: FontWeight.w900, fontSize: 18),
@@ -1030,11 +1030,11 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'MODERACIÓN',
+          Text(
+            tr('MODERACIÓN'),
             style: TextStyle(color: Colors.redAccent, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Row(
             children: [
               Expanded(
@@ -1045,7 +1045,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                   onTap: () => _showExpulsionOptions(context),
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Expanded(
                 child: _buildModerationButton(
                   label: 'Advertir',
@@ -1066,7 +1066,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
@@ -1076,7 +1076,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, color: color, size: 16),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Text(
               label,
               style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold),
@@ -1191,10 +1191,10 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF2B2D31),
+        backgroundColor: Color(0xFF2B2D31),
         title: Text(tr('¿Bloquear usuario?'), style: TextStyle(color: Colors.white)),
         content: Text(
-          'No podrás ver sus mensajes ni interactuar con sus publicaciones.',
+          tr('No podrás ver sus mensajes ni interactuar con sus publicaciones.'),
           style: TextStyle(color: Colors.white.withOpacity(0.7)),
         ),
         actions: [
@@ -1227,23 +1227,23 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF2B2D31),
+        backgroundColor: Color(0xFF2B2D31),
         title: Text(tr('Reportar Usuario'), style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Indica el motivo del reporte:',
+              tr('Indica el motivo del reporte:'),
               style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 13),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             TextField(
               controller: controller,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white),
               maxLines: 3,
               decoration: InputDecoration(
-                hintText: 'Ej: Spam, acoso, contenido inapropiado...',
+                hintText: tr('Ej: Spam, acoso, contenido inapropiado...'),
                 hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                 filled: true,
                 fillColor: Colors.black.withOpacity(0.2),
@@ -1287,8 +1287,8 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
   Widget _buildTitleBadge(CommunityLabel title) {
     final color = title.colorValue != null ? Color(title.colorValue!) : Colors.white70;
     return Container(
-      margin: const EdgeInsets.only(right: 8, bottom: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      margin: EdgeInsets.only(right: 8, bottom: 8),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(4),
@@ -1296,7 +1296,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
           BoxShadow(
             color: Colors.black.withOpacity(0.4),
             blurRadius: 6,
-            offset: const Offset(0, 3),
+            offset: Offset(0, 3),
           ),
         ],
         border: Border.all(
@@ -1306,7 +1306,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       ),
       child: Text(
         title.text,
-        style: const TextStyle(
+        style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w900,
           fontSize: 11,
@@ -1329,7 +1329,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       builder: (context) => Container(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(24),
         decoration: BoxDecoration(
           color: Color(0xFF000000), // Pure black as requested/in screenshot
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
@@ -1348,7 +1348,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Center(
               child: Text(
                 'Estado de $name',
@@ -1359,7 +1359,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -1394,7 +1394,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                 ),
               ],
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: 40),
           ],
         ),
       ),
@@ -1416,7 +1416,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             left: 20,
             right: 20,
           ),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: Color(0xFF18191C),
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
           ),
@@ -1424,16 +1424,16 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'EDITAR ESTADO',
+              Text(
+                tr('EDITAR ESTADO'),
                 style: TextStyle(color: Colors.white38, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1.2),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               TextField(
                 controller: controller,
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  hintText: '¿Qué estás pensando?',
+                  hintText: tr('¿Qué estás pensando?'),
                   hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -1445,7 +1445,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -1549,7 +1549,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             BoxShadow(
               color: color.withOpacity(0.2),
               blurRadius: 12,
-              offset: const Offset(0, 4),
+              offset: Offset(0, 4),
             ),
           ] : null,
         ),
@@ -1600,13 +1600,13 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                 ),
               ),
             ),
-            const Text(
-              'OPCIONES DE PERFIL',
+            Text(
+              tr('OPCIONES DE PERFIL'),
               style: TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ListTile(
-              leading: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white70),
+              leading: Icon(Icons.chat_bubble_outline_rounded, color: Colors.white70),
               title: Text(tr('Editar Estado'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -1614,7 +1614,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.palette_outlined, color: Colors.white70),
+              leading: Icon(Icons.palette_outlined, color: Colors.white70),
               title: Text(tr('Color de Tema'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -1622,7 +1622,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.aspect_ratio_rounded, color: Colors.white70),
+              leading: Icon(Icons.aspect_ratio_rounded, color: Colors.white70),
               title: Text(tr('Ajustar Posición del Banner'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -1633,7 +1633,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.account_circle_outlined, color: Colors.white70),
+              leading: Icon(Icons.account_circle_outlined, color: Colors.white70),
               title: Text(tr('Editar Perfil Completo'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -1689,7 +1689,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             left: 20,
             right: 20,
           ),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: Color(0xFF18191C),
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
           ),
@@ -1708,8 +1708,8 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                   ),
                 ),
               ),
-              const Text(
-                'COLOR DE TEMA',
+              Text(
+                tr('COLOR DE TEMA'),
                 style: TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2),
               ),
               const SizedBox(height: 20),

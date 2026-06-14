@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:http/http.dart' as http;
 import 'package:wumble/core/domain/link_preview_data.dart';
 import 'package:wumble/injection_container.dart';
@@ -204,7 +205,7 @@ class LinkPreviewHelper {
     if (type == 'c') {
       return LinkPreviewData(
         url: url,
-        title: 'Comunidad en Wumble',
+        title: tr('Comunidad en Wumble'),
         description: 'Explora esta comunidad, únete a chats y comparte con otros miembros.',
         imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1000&auto=format&fit=crop',
         siteName: 'Wumble Community',
@@ -212,7 +213,7 @@ class LinkPreviewHelper {
     } else if (type == 'u') {
       return LinkPreviewData(
         url: url,
-        title: 'Perfil de Usuario',
+        title: tr('Perfil de Usuario'),
         description: 'Mira el perfil, muro y seguidores de este usuario.',
         imageUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1000&auto=format&fit=crop',
         siteName: 'Wumble Profile',
@@ -220,7 +221,7 @@ class LinkPreviewHelper {
     } else if (type == 'p') {
       return LinkPreviewData(
         url: url,
-        title: 'Publicación en Wumble',
+        title: tr('Publicación en Wumble'),
         description: 'Mira este nuevo contenido compartido en la plataforma.',
         imageUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop',
         siteName: 'Wumble Feed',

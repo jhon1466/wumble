@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wumble/core/theme.dart';
 import 'package:wumble/core/widgets/premium_matte_background.dart';
@@ -8,7 +9,7 @@ import 'package:wumble/features/community/presentation/widgets/premium_community
 import 'package:wumble/features/auth/presentation/auth_bloc.dart';
 
 class UserCommunitiesScreen extends StatefulWidget {
-  const UserCommunitiesScreen({super.key});
+  UserCommunitiesScreen({super.key});
 
   @override
   State<UserCommunitiesScreen> createState() => _UserCommunitiesScreenState();
@@ -31,7 +32,7 @@ class _UserCommunitiesScreenState extends State<UserCommunitiesScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          const PremiumMatteBackground(),
+          PremiumMatteBackground(),
           SafeArea(
             child: Column(
               children: [
@@ -94,15 +95,15 @@ class _UserCommunitiesScreenState extends State<UserCommunitiesScreen> {
 
   Widget _buildHeader(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Row(
         children: [
           IconButton(
             icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
             onPressed: () => Navigator.pop(context),
           ),
-          const Text(
-            'Mis Comunidades',
+          Text(
+            tr('Mis Comunidades'),
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -133,7 +134,7 @@ class _UserCommunitiesScreenState extends State<UserCommunitiesScreen> {
           },
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
-            hintText: 'Buscar en mis comunidades...',
+            hintText: tr('Buscar en mis comunidades...'),
             hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
             prefixIcon: Icon(Icons.search, color: Colors.white.withOpacity(0.3)),
             border: InputBorder.none,

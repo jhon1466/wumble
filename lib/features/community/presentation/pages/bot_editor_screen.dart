@@ -431,12 +431,12 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                 IconButton(
                   icon: const Icon(Icons.photo_library, size: 20, color: Wumbleheme.secondaryColor),
                   onPressed: () => _pickLocalMedia(controller, setModalState),
-                  tooltip: 'Galería Local',
+                  tooltip: tr('Galería Local'),
                 ),
                 IconButton(
                   icon: const Icon(Icons.gif_box, size: 20, color: Colors.blueAccent),
                   onPressed: () => _pickGiphyMedia(controller, setModalState, modalCtx),
-                  tooltip: 'Giphy Web',
+                  tooltip: tr('Giphy Web'),
                 ),
               ],
             ),
@@ -607,7 +607,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
 
   Widget _buildActiveToggle() {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Wumbleheme.surfaceColor,
         borderRadius: BorderRadius.circular(16),
@@ -634,7 +634,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(tr('Banner del Mini-perfil'), style: TextStyle(color: Colors.white70, fontSize: 12)),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Row(
           children: [
             Expanded(
@@ -643,12 +643,12 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
             IconButton(
               icon: const Icon(Icons.photo_library, color: Wumbleheme.secondaryColor),
               onPressed: _pickBannerImage,
-              tooltip: 'Subir Imagen',
+              tooltip: tr('Subir Imagen'),
             ),
             IconButton(
               icon: const Icon(Icons.gif_box, color: Colors.blueAccent),
               onPressed: _pickGiphyBanner,
-              tooltip: 'Buscar en Giphy',
+              tooltip: tr('Buscar en Giphy'),
             ),
           ],
         ),
@@ -720,7 +720,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
 
   Widget _buildTipItem(String emoji, String text) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
+      padding: EdgeInsets.only(bottom: 6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -736,10 +736,10 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
     return TextField(
       controller: controller,
       maxLines: maxLines,
-      style: const TextStyle(color: Colors.white, fontSize: 14),
+      style: TextStyle(color: Colors.white, fontSize: 14),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(color: Colors.white54),
+        labelStyle: TextStyle(color: Colors.white54),
         prefixIcon: Icon(icon, color: Colors.white54, size: 20),
         filled: true,
         fillColor: Colors.white.withValues(alpha: 0.05),
@@ -767,7 +767,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -954,11 +954,11 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       children: [
         _buildSectionHeader('Identidad del Agente'),
         _buildTextField(_nameController, 'Nombre del Bot', Icons.badge),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         _buildTextField(_descriptionController, 'Descripción / Protocolo Base', Icons.description, maxLines: 3),
-        const SizedBox(height: 8),
-        const Text(
-          'Define el propósito y comportamiento general de este agente.',
+        SizedBox(height: 8),
+        Text(
+          tr('Define el propósito y comportamiento general de este agente.'),
           style: TextStyle(color: Colors.white24, fontSize: 10, fontStyle: FontStyle.italic),
         ),
       ],
@@ -1027,10 +1027,10 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
 
   Widget _buildSectionHeader(String title) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.only(bottom: 12),
       child: Text(
         title.toUpperCase(),
-        style: const TextStyle(color: Wumbleheme.secondaryColor, fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 11),
+        style: TextStyle(color: Wumbleheme.secondaryColor, fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 11),
       ),
     );
   }
@@ -1039,10 +1039,10 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
     return TextField(
       controller: controller,
       maxLines: maxLines,
-      style: const TextStyle(color: Colors.white),
+      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(color: Colors.white54),
+        labelStyle: TextStyle(color: Colors.white54),
         prefixIcon: Icon(icon, color: Colors.white54, size: 22),
         filled: true,
         fillColor: Wumbleheme.surfaceColor,
@@ -1082,7 +1082,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
 
   Widget _buildGuardianSettings() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Wumbleheme.surfaceColor,
         borderRadius: BorderRadius.circular(16),
@@ -1171,8 +1171,8 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('IMAGEN DE PERFIL DEL BOT', style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 12),
+        Text('IMAGEN DE PERFIL DEL BOT', style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
+        SizedBox(height: 12),
         Row(
           children: [
             Stack(
@@ -1232,7 +1232,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildTextField(_avatarController, 'URL del Avatar (opcional)', Icons.link),
       ],
     );
@@ -1240,7 +1240,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
 
   Widget _buildTriggerSettings() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Wumbleheme.surfaceColor,
         borderRadius: BorderRadius.circular(16),
@@ -1249,7 +1249,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
         children: [
           SwitchListTile(
             title: Text(tr('Responder a Menciones'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-            subtitle: const Text('Si lo mencionas con @Nombre, el bot usará la IA (comando *) para conversar.', style: TextStyle(color: Colors.white54, fontSize: 11)),
+            subtitle: Text(tr('Si lo mencionas con @Nombre, el bot usará la IA (comando *) para conversar.'), style: TextStyle(color: Colors.white54, fontSize: 11)),
             value: _allowMention,
             onChanged: (val) => setState(() => _allowMention = val),
             activeThumbColor: Wumbleheme.secondaryColor,

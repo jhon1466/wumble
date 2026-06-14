@@ -7,7 +7,7 @@ import 'package:wumble/injection_container.dart' as di;
 import 'package:firebase_auth/firebase_auth.dart';
 
 class WalletScreen extends StatelessWidget {
-  const WalletScreen({super.key});
+  WalletScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +24,22 @@ class WalletScreen extends StatelessWidget {
       body: StreamBuilder<UserProfile>(
         stream: di.sl<ProfileRepository>().getUserProfile(userId),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
+          if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
           final user = snapshot.data!;
 
           return CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: EdgeInsets.all(24.0),
                   child: Column(
                     children: [
                       _buildBalanceCard(user.coins),
-                      const SizedBox(height: 32),
-                      const Align(
+                      SizedBox(height: 32),
+                      Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'OBTENER MONEDAS',
+                          tr('OBTENER MONEDAS'),
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w900,
@@ -67,9 +67,9 @@ class WalletScreen extends StatelessWidget {
   Widget _buildBalanceCard(int coins) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(32),
+      padding: EdgeInsets.all(32),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
@@ -85,13 +85,13 @@ class WalletScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Icon(Icons.monetization_on_rounded, size: 48, color: Colors.white),
-          const SizedBox(height: 12),
-          const Text(
-            'Saldo actual',
+          Icon(Icons.monetization_on_rounded, size: 48, color: Colors.white),
+          SizedBox(height: 12),
+          Text(
+            tr('Saldo actual'),
             style: TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             coins.toString(),
             style: const TextStyle(
@@ -100,8 +100,8 @@ class WalletScreen extends StatelessWidget {
               fontWeight: FontWeight.w900,
             ),
           ),
-          const Text(
-            'MONEDAS',
+          Text(
+            tr('MONEDAS'),
             style: TextStyle(
               color: Colors.white60,
               fontSize: 12,

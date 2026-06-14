@@ -59,7 +59,7 @@ class CommunityDetailScreen extends StatefulWidget {
   final bool isNewlyCreated;
   final bool showWelcomeModal; // Agregado para mostrar el modal de bienvenida garantizado
 
-  const CommunityDetailScreen({
+  CommunityDetailScreen({
     super.key, 
     required this.community,
     this.isNewlyCreated = false,
@@ -108,7 +108,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
     context.read<CommunityContextBloc>().add(EnterCommunity(widget.community));
 
     if (widget.isNewlyCreated || widget.showWelcomeModal) {
-      Future.delayed(const Duration(milliseconds: 800), () {
+      Future.delayed(Duration(milliseconds: 800), () {
         if (mounted) {
           WelcomeCelebrationSheet.show(context, widget.community);
         }
@@ -828,7 +828,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                 ),
               ),
               
-              const SizedBox(height: 10), // Reduced space since stack height encapsulates the buttons
+              SizedBox(height: 10), // Reduced space since stack height encapsulates the buttons
 
               
               // ── Info Principal ──
@@ -924,7 +924,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
 
   Widget _buildTopicPill(String text, Color baseColor) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
       decoration: BoxDecoration(
         color: baseColor.withOpacity(0.12),
         borderRadius: BorderRadius.circular(16),
@@ -1170,7 +1170,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
           future: _userCommunitiesFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator(strokeWidth: 2));
+              return Center(child: CircularProgressIndicator(strokeWidth: 2));
             }
             final communities = snapshot.data ?? [];
             return Column(
@@ -1291,11 +1291,11 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
         filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
         child: Container(
           decoration: BoxDecoration(
-            color: const Color(0xFF161621).withOpacity(0.95),
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+            color: Color(0xFF161621).withOpacity(0.95),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
             border: Border.all(color: Colors.white.withOpacity(0.1)),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+          padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -1308,8 +1308,8 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              const Text(
-                '¿QUÉ QUIERES CREAR?',
+              Text(
+                tr('¿QUÉ QUIERES CREAR?'),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14,
@@ -1516,18 +1516,18 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
     showModalBottomSheet(
       context: context,
       backgroundColor: Wumbleheme.surfaceColor,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2))),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           
           ListTile(
-            leading: const Icon(Icons.share_rounded, color: Colors.white),
+            leading: Icon(Icons.share_rounded, color: Colors.white),
             title: Text(tr('Compartir Comunidad'), style: TextStyle(color: Colors.white)),
             onTap: () {
               Navigator.pop(context);
@@ -1544,7 +1544,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
           ),
           
           ListTile(
-            leading: const Icon(Icons.info_outline_rounded, color: Colors.white),
+            leading: Icon(Icons.info_outline_rounded, color: Colors.white),
             title: Text(tr('Información y Guías'), style: TextStyle(color: Colors.white)),
             onTap: () {
               Navigator.pop(context);
@@ -1562,7 +1562,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
           
           if (isLeader)
             ListTile(
-              leading: const Icon(Icons.settings_outlined, color: Colors.white),
+              leading: Icon(Icons.settings_outlined, color: Colors.white),
               title: Text(tr('Ajustes de Comunidad'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -1580,7 +1580,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
             
           if (member != null)
             ListTile(
-              leading: const Icon(Icons.exit_to_app_rounded, color: Colors.redAccent),
+              leading: Icon(Icons.exit_to_app_rounded, color: Colors.redAccent),
               title: Text(tr('Abandonar Comunidad'), style: TextStyle(color: Colors.redAccent)),
               onTap: () {
                 final bloc = context.read<CommunityContextBloc>();
@@ -1612,16 +1612,16 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
               },
             ),
 
-          const Divider(color: Colors.white10),
+          Divider(color: Colors.white10),
           
           ListTile(
-            leading: const Icon(Icons.report_problem_outlined, color: Colors.orangeAccent),
+            leading: Icon(Icons.report_problem_outlined, color: Colors.orangeAccent),
             title: Text(tr('Reportar Comunidad'), style: TextStyle(color: Colors.orangeAccent)),
             onTap: () {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Reporte enviado correctamente. El equipo de moderación lo revisará pronto.'),
+                SnackBar(
+                  content: Text(tr('Reporte enviado correctamente. El equipo de moderación lo revisará pronto.')),
                   backgroundColor: Colors.orange,
                 ),
               );

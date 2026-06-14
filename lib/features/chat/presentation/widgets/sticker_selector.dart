@@ -207,7 +207,7 @@ class _StickerSelectorState extends State<StickerSelector> {
         Icon(Icons.sentiment_dissatisfied, size: 48, color: Colors.white.withValues(alpha: 0.1)),
         const SizedBox(height: 12),
         Text(
-          'No hay pegatinas aquí aún',
+          tr('No hay pegatinas aquí aún'),
           style: TextStyle(color: Colors.white.withValues(alpha: 0.3)),
         ),
       ],

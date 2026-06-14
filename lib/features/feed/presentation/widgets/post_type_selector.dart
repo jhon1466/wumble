@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../../../../core/theme.dart';
 import '../blog_editor_screen.dart';
 import '../wiki_editor_screen.dart';
@@ -31,7 +32,7 @@ class PostTypeSelector extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           Text(
-            '¿Qué quieres publicar?',
+            tr('¿Qué quieres publicar?'),
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -76,7 +77,7 @@ class PostTypeSelector extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const WikiEditorScreen(isOC: true)),
+                        builder: (context) => WikiEditorScreen(isOC: true)),
                   );
                 },
               ),

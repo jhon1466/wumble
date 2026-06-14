@@ -120,7 +120,7 @@ class _MemberPickerSheetState extends State<MemberPickerSheet> {
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
-                    hintText: 'Buscar por nombre...',
+                    hintText: tr('Buscar por nombre...'),
                     hintStyle: TextStyle(color: Colors.white54),
                     prefixIcon: Icon(Icons.search, color: Colors.white54),
                     filled: true,

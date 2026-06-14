@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,7 +40,7 @@ class UserAvatar extends StatefulWidget {
   /// When true, renders animations for the avatar frame.
   final bool isAnimated;
 
-  const UserAvatar({
+  UserAvatar({
     super.key,
     this.userId,
     required this.avatarUrl,
@@ -210,7 +211,7 @@ class _UserAvatarState extends State<UserAvatar> {
     // ── Border / gradient / shadow container ─────────────────
     if (widget.border != null || widget.gradient != null || widget.boxShadow != null) {
       avatarBody = Container(
-        padding: const EdgeInsets.all(2),
+        padding: EdgeInsets.all(2),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: widget.border,
@@ -226,7 +227,7 @@ class _UserAvatarState extends State<UserAvatar> {
         ? widget.isOnline 
         : _resolvedIsOnline;
     
-    const bool effectiveShowOnline = false; // 🛑 DISABLED BY USER REQUEST
+    bool effectiveShowOnline = false; // 🛑 DISABLED BY USER REQUEST
 
     Widget avatarWithIndicator = effectiveShowOnline && effectiveIsOnline
         ? Stack(
@@ -265,14 +266,14 @@ class _UserAvatarState extends State<UserAvatar> {
             bottom: 0,
             left: 0,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 1),
               decoration: BoxDecoration(
                 color: Colors.blueAccent,
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(color: Wumbleheme.surfaceColor, width: 1.5),
               ),
-              child: const Text(
-                'BOT',
+              child: Text(
+                tr('BOT'),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 8,

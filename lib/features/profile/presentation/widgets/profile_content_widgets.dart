@@ -228,7 +228,7 @@ class _ProfileWallState extends State<ProfileWall> {
                           }
     
                           return Container(
-                            padding: const EdgeInsets.all(12),
+                            padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               color: Wumbleheme.surfaceColor,
                               borderRadius: BorderRadius.circular(12),
@@ -328,7 +328,7 @@ class _ProfileWallState extends State<ProfileWall> {
                     },
                   ),
                   
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   
                   // Messages Stream
                   StreamBuilder<List<WallMessage>>(
@@ -340,7 +340,7 @@ class _ProfileWallState extends State<ProfileWall> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Container(
                           constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height * 0.3),
-                          child: const Center(
+                          child: Center(
                             child: CircularProgressIndicator(),
                           ),
                         );
@@ -351,15 +351,15 @@ class _ProfileWallState extends State<ProfileWall> {
                       if (messages.isEmpty) {
                         return Column(
                           children: [
-                            const SizedBox(height: 30),
-                            const Icon(Icons.message_outlined, size: 48, color: Colors.white12),
-                            const SizedBox(height: 10),
-                            const Text(
-                              'El muro está vacío.',
+                            SizedBox(height: 30),
+                            Icon(Icons.message_outlined, size: 48, color: Colors.white12),
+                            SizedBox(height: 10),
+                            Text(
+                              tr('El muro está vacío.'),
                               style: TextStyle(color: Colors.white24),
                             ),
-                            const Text(
-                              '¡Sé el primero en comentar!',
+                            Text(
+                              tr('¡Sé el primero en comentar!'),
                               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                             ),
                           ],
@@ -414,7 +414,7 @@ class _ProfileWallState extends State<ProfileWall> {
             controller: replyController,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              hintText: 'Escribe tu respuesta...',
+              hintText: tr('Escribe tu respuesta...'),
               hintStyle: TextStyle(color: Colors.white38),
               border: OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Wumbleheme.secondaryColor)),

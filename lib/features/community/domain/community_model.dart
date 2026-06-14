@@ -1,11 +1,12 @@
 import 'package:wumble/features/community/domain/navigation_tab_model.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 enum CommunityPrivacy { open, approval, private }
 
 class Community {
-  static const List<String> categories = [
+  static List<String> categories = [
     'General',
     'Anime',
     'Gaming',
@@ -115,14 +116,14 @@ class Community {
   }
 
   static List<CommunityNavigationTab> get defaultTabs => [
-        const CommunityNavigationTab(id: 'f1', title: 'Destacados', type: NavigationTabType.featured, order: 0),
-        const CommunityNavigationTab(id: 'c1', title: 'Chats', type: NavigationTabType.chats, order: 1),
-        const CommunityNavigationTab(id: 'l1', title: 'Líderes', type: NavigationTabType.leaderboard, order: 2),
-        const CommunityNavigationTab(id: 'w1', title: 'Wiki', type: NavigationTabType.wikis, order: 3),
-        const CommunityNavigationTab(id: 'q1', title: 'Quizzes', type: NavigationTabType.quizzes, order: 4),
-        const CommunityNavigationTab(id: 's1', title: 'Carpeta', type: NavigationTabType.sharedFolder, order: 5),
-        const CommunityNavigationTab(id: 'p1', title: 'Encuestas', type: NavigationTabType.polls, order: 6),
-        const CommunityNavigationTab(id: 'r1', title: 'Reciente', type: NavigationTabType.recent, order: 7),
+        CommunityNavigationTab(id: 'f1', title: tr('Destacados'), type: NavigationTabType.featured, order: 0),
+        CommunityNavigationTab(id: 'c1', title: tr('Chats'), type: NavigationTabType.chats, order: 1),
+        CommunityNavigationTab(id: 'l1', title: tr('Líderes'), type: NavigationTabType.leaderboard, order: 2),
+        CommunityNavigationTab(id: 'w1', title: tr('Wiki'), type: NavigationTabType.wikis, order: 3),
+        CommunityNavigationTab(id: 'q1', title: tr('Quizzes'), type: NavigationTabType.quizzes, order: 4),
+        CommunityNavigationTab(id: 's1', title: tr('Carpeta'), type: NavigationTabType.sharedFolder, order: 5),
+        CommunityNavigationTab(id: 'p1', title: tr('Encuestas'), type: NavigationTabType.polls, order: 6),
+        CommunityNavigationTab(id: 'r1', title: tr('Reciente'), type: NavigationTabType.recent, order: 7),
       ];
 
   // CopyWith for optimistic updates

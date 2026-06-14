@@ -109,7 +109,7 @@ class SharedFolderScreenState extends State<SharedFolderScreen> with AutomaticKe
       color: Colors.transparent,
       child: Column(
         children: [
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildHeader(),
           _buildCategorySelector(),
           Expanded(
@@ -129,12 +129,12 @@ class SharedFolderScreenState extends State<SharedFolderScreen> with AutomaticKe
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Carpeta Compartida',
+          Text(
+            tr('Carpeta Compartida'),
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -211,7 +211,7 @@ class SharedFolderScreenState extends State<SharedFolderScreen> with AutomaticKe
                   Icon(Icons.photo_library_outlined, size: 64, color: Colors.white.withOpacity(0.1)),
                   const SizedBox(height: 16),
                   Text(
-                    'No hay imágenes aún',
+                    tr('No hay imágenes aún'),
                     style: TextStyle(color: Colors.white.withOpacity(0.2), fontSize: 16),
                   ),
                 ],

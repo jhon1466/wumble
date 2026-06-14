@@ -26,7 +26,7 @@ class CommunityFeedWidget extends StatefulWidget {
   final bool? isFeatured;
   final bool showCarousel;
 
-  const CommunityFeedWidget({
+  CommunityFeedWidget({
     super.key,
     required this.communityId,
     this.sortMode = 'recent',
@@ -127,10 +127,10 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
       ),
     );
     await Future.doWhile(() async {
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future.delayed(Duration(milliseconds: 100));
       final state = context.read<CommunityFeedBloc>().state;
       return state is CommunityFeedLoading;
-    }).timeout(const Duration(seconds: 10), onTimeout: () {});
+    }).timeout(Duration(seconds: 10), onTimeout: () {});
   }
 
   @override
@@ -239,17 +239,17 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
                     child: Center(
                       child: Column(
                         children: [
-                          const Icon(Icons.wifi_off_rounded, color: Colors.white38, size: 48),
-                          const SizedBox(height: 12),
+                          Icon(Icons.wifi_off_rounded, color: Colors.white38, size: 48),
+                          SizedBox(height: 12),
                           Text(
                             'Error al cargar: ${state.message}',
-                            style: const TextStyle(color: Colors.white54),
+                            style: TextStyle(color: Colors.white54),
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
                           TextButton.icon(
                             onPressed: _onRefresh,
-                            icon: const Icon(Icons.refresh_rounded, color: Colors.white70),
+                            icon: Icon(Icons.refresh_rounded, color: Colors.white70),
                             label: Text(tr('Reintentar'), style: TextStyle(color: Colors.white70)),
                           ),
                         ],
@@ -270,7 +270,7 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
                           Text(tr('Aún no hay publicaciones'), style: TextStyle(color: Colors.white24)),
                           SizedBox(height: 4),
                           Text(
-                            'Desliza hacia abajo para actualizar',
+                            tr('Desliza hacia abajo para actualizar'),
                             style: TextStyle(color: Colors.white12, fontSize: 12),
                           ),
                         ],
@@ -293,17 +293,17 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
               // ── Load-more indicator / end caption ──
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 100),
+                  padding: EdgeInsets.fromLTRB(0, 16, 0, 100),
                   child: Center(
                     child: isLoadingMore
-                        ? const SizedBox(
+                        ? SizedBox(
                             width: 24,
                             height: 24,
                             child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white38),
                           )
                         : !hasMore && posts.isNotEmpty
-                            ? const Text(
-                                '— Fin del feed —',
+                            ? Text(
+                                tr('— Fin del feed —'),
                                 style: TextStyle(color: Colors.white24, fontSize: 12),
                               )
                             : const SizedBox.shrink(),
@@ -321,7 +321,7 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
     return BlocBuilder<CommunityContextBloc, CommunityContextState>(
       builder: (context, state) {
         final user = FirebaseAuth.instance.currentUser;
-        if (user == null) return const SizedBox.shrink();
+        if (user == null) return SizedBox.shrink();
 
         final avatarUrl = state.memberProfile?.avatarUrl ?? user.photoURL ?? '';
         final frameUrl = state.memberProfile?.avatarFrameUrl;
@@ -329,8 +329,8 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
         return GestureDetector(
           onTap: () => _showQuickPost(context, avatarUrl, frameUrl),
           child: Container(
-            margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            margin: EdgeInsets.fromLTRB(16, 12, 16, 8),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.05),
               borderRadius: BorderRadius.circular(24),
@@ -346,9 +346,9 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
                   radius: 16,
                   showOnlineIndicator: false,
                 ),
-                const SizedBox(width: 12),
-                const Text(
-                  '¿Qué estás pensando?',
+                SizedBox(width: 12),
+                Text(
+                  tr('¿Qué estás pensando?'),
                   style: TextStyle(color: Colors.white38, fontSize: 14),
                 ),
                 const Spacer(),
@@ -437,11 +437,11 @@ class _PinnedPostsList extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => PostDetailScreen(post: post)),
                 ),
-                trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white24, size: 12),
+                trailing: Icon(Icons.arrow_forward_ios_rounded, color: Colors.white24, size: 12),
               ),
               if (!isLast)
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Divider(color: Colors.white.withOpacity(0.05), height: 1),
                 ),
             ],
@@ -454,13 +454,13 @@ class _PinnedPostsList extends StatelessWidget {
 
 class _FeaturedCarousel extends StatelessWidget {
   final List<Post> featuredPosts;
-  const _FeaturedCarousel({required this.featuredPosts});
+  _FeaturedCarousel({required this.featuredPosts});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 220,
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      margin: EdgeInsets.symmetric(vertical: 8),
       child: PageView.builder(
         itemCount: featuredPosts.length,
         controller: PageController(viewportFraction: 0.92),
@@ -475,14 +475,14 @@ class _FeaturedCarousel extends StatelessWidget {
               MaterialPageRoute(builder: (context) => PostDetailScreen(post: post)),
             ),
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+              margin: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
                     blurRadius: 12,
-                    offset: const Offset(0, 6),
+                    offset: Offset(0, 6),
                   ),
                 ],
               ),
@@ -507,7 +507,7 @@ class _FeaturedCarousel extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(24),
-                          color: const Color(0xFF262626), // Gris Oscuro Mate
+                          color: Color(0xFF262626), // Gris Oscuro Mate
                         ),
                       ),
                     ),
@@ -520,7 +520,7 @@ class _FeaturedCarousel extends StatelessWidget {
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          stops: const [0.2, 1.0],
+                          stops: [0.2, 1.0],
                           colors: [
                             Colors.black.withOpacity(0.1),
                             Colors.black.withOpacity(0.85),
@@ -539,7 +539,7 @@ class _FeaturedCarousel extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             color: Colors.amber.withOpacity(0.9),
                             borderRadius: BorderRadius.circular(20),
@@ -547,13 +547,13 @@ class _FeaturedCarousel extends StatelessWidget {
                               BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 4),
                             ],
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Icon(Icons.star_rounded, size: 12, color: Colors.black),
                               SizedBox(width: 4),
                               Text(
-                                'DESTACADO',
+                                tr('DESTACADO'),
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w900,

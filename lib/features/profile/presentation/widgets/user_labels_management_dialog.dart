@@ -11,7 +11,7 @@ class UserLabelsManagementDialog extends StatefulWidget {
   final String? communityId;
   final Function(List<CommunityLabel>) onUpdate;
 
-  const UserLabelsManagementDialog({
+  UserLabelsManagementDialog({
     super.key,
     required this.user,
     this.communityId,
@@ -41,8 +41,8 @@ class _UserLabelsManagementDialogState extends State<UserLabelsManagementDialog>
         height: 400,
         child: Column(
           children: [
-            const Text(
-              'Arrastra para cambiar el orden o elimina las que ya no desees.',
+            Text(
+              tr('Arrastra para cambiar el orden o elimina las que ya no desees.'),
               style: TextStyle(color: Colors.white54, fontSize: 12),
             ),
             const SizedBox(height: 16),

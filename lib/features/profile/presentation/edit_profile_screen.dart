@@ -132,7 +132,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         title: Icon(Icons.check_circle, color: Colors.greenAccent, size: 50),
                         content: Text(
-                          '¡Perfil actualizado correctamente!',
+                          tr('¡Perfil actualizado correctamente!'),
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white),
                         ),
@@ -465,7 +465,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 border: InputBorder.none,
                                 contentPadding: const EdgeInsets.all(16),
                                 prefixIcon: const Icon(Icons.person_outline, color: Wumbleheme.primaryColor),
-                                hintText: 'Tu nombre visible',
+                                hintText: tr('Tu nombre visible'),
                                 hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                               ),
                             ),
@@ -493,7 +493,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 border: InputBorder.none,
                                 contentPadding: const EdgeInsets.all(16),
                                 prefixIcon: const Icon(Icons.alternate_email, color: Wumbleheme.primaryColor),
-                                hintText: 'Tu ID único',
+                                hintText: tr('Tu ID único'),
                                 hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                               ),
                             ),
@@ -522,7 +522,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 contentPadding: const EdgeInsets.all(16),
-                                hintText: 'Cuéntanos algo sobre ti...',
+                                hintText: tr('Cuéntanos algo sobre ti...'),
                                 counterStyle: const TextStyle(color: Wumbleheme.textSecondary),
                                 hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                               ),
@@ -550,7 +550,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               style: const TextStyle(color: Colors.white),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: '¿Qué estás pensando?',
+                                hintText: tr('¿Qué estás pensando?'),
                                 hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                                 prefixIcon: const Icon(Icons.chat_bubble_outline_rounded, color: Wumbleheme.primaryColor, size: 20),
                               ),
@@ -718,7 +718,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     ),
                                     child: const Icon(Icons.crop_square_rounded, color: Colors.white, size: 18),
                                   ),
-                                  const SizedBox(width: 12),
+                                  SizedBox(width: 12),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
@@ -727,12 +727,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         widget.user.avatarFrameUrl != null && widget.user.avatarFrameUrl!.isNotEmpty
                                             ? 'Marco equipado'
                                             : 'Sin marco',
-                                        style: const TextStyle(color: Colors.white38, fontSize: 12),
+                                        style: TextStyle(color: Colors.white38, fontSize: 12),
                                       ),
                                     ],
                                   ),
-                                  const Spacer(),
-                                  const Icon(Icons.chevron_right, color: Colors.white24),
+                                  Spacer(),
+                                  Icon(Icons.chevron_right, color: Colors.white24),
                                 ],
                               ),
                             ),
@@ -773,7 +773,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               );
                             },
                             child: Container(
-                              padding: const EdgeInsets.all(16),
+                              padding: EdgeInsets.all(16),
                               decoration: BoxDecoration(
                                 color: Colors.white.withOpacity(0.05),
                                 borderRadius: BorderRadius.circular(12),
@@ -790,14 +790,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       border: Border.all(color: Colors.white24),
                                     ),
                                   ),
-                                  const SizedBox(width: 12),
+                                  SizedBox(width: 12),
                                   Text(tr('Personalizar color del mini-perfil'), style: TextStyle(color: Colors.white70)),
-                                  const Spacer(),
+                                  Spacer(),
                                   if (_themeColor != null)
                                     IconButton(
-                                      icon: const Icon(Icons.refresh, color: Colors.white24, size: 20),
+                                      icon: Icon(Icons.refresh, color: Colors.white24, size: 20),
                                       onPressed: () => setState(() => _themeColor = null),
-                                      tooltip: 'Restablecer',
+                                      tooltip: tr('Restablecer'),
                                     ),
                                   Icon(Icons.chevron_right, color: Colors.white24),
                                 ],
@@ -941,9 +941,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
                                       title: TextField(
                                         controller: _titleControllers[index],
-                                        style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
-                                        decoration: const InputDecoration(
-                                          hintText: 'Nombre de etiqueta...',
+                                        style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                                        decoration: InputDecoration(
+                                          hintText: tr('Nombre de etiqueta...'),
                                           hintStyle: TextStyle(color: Colors.white24),
                                           border: InputBorder.none,
                                         ),
@@ -998,7 +998,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           
                           ListView.builder(
                             shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
+                            physics: NeverScrollableScrollPhysics(),
                             itemCount: _socialControllers.length,
                             itemBuilder: (context, index) {
                               return Padding(
@@ -1018,7 +1018,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           decoration: InputDecoration(
                                             border: InputBorder.none,
                                             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                                            hintText: 'Enlace (YouTube, Instagram, etc.)',
+                                            hintText: tr('Enlace (YouTube, Instagram, etc.)'),
                                             hintStyle: TextStyle(color: Colors.white.withOpacity(0.2)),
                                             prefixIcon: Padding(
                                               padding: const EdgeInsets.all(12.0),
@@ -1050,11 +1050,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                           TextButton.icon(
                             onPressed: () => setState(() => _socialControllers.add(TextEditingController())),
-                            icon: const Icon(Icons.add_circle_outline, color: Wumbleheme.secondaryColor),
+                            icon: Icon(Icons.add_circle_outline, color: Wumbleheme.secondaryColor),
                             label: Text(tr('Añadir otra red social'), style: TextStyle(color: Wumbleheme.secondaryColor)),
                           ),
                           
-                          const SizedBox(height: 40),
+                          SizedBox(height: 40),
                         ],
                       ),
                     ),
@@ -1082,8 +1082,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     child: Material(
                       color: Colors.transparent,
                       child: Container(
-                        padding: const EdgeInsets.all(24),
-                        margin: const EdgeInsets.symmetric(horizontal: 40),
+                        padding: EdgeInsets.all(24),
+                        margin: EdgeInsets.symmetric(horizontal: 40),
                         decoration: BoxDecoration(
                           color: Wumbleheme.surfaceColor,
                           borderRadius: BorderRadius.circular(20),
@@ -1099,13 +1099,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Text(
-                              'Actualizando Perfil',
+                            Text(
+                              tr('Actualizando Perfil'),
                               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
                             ),
-                             const SizedBox(height: 8),
-                            const Text(
-                              'Por favor espera...',
+                             SizedBox(height: 8),
+                            Text(
+                              tr('Por favor espera...'),
                               style: TextStyle(color: Colors.white70, fontSize: 14),
                             ),
                             const SizedBox(height: 24),

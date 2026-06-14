@@ -23,7 +23,7 @@ import 'pages/community_info_screen.dart';
 import 'pages/user_communities_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: 1000),
     );
 
     _loadData();
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       body: Stack(
         children: [
           // 1. Premium Matte Gray Background
-          const RepaintBoundary(child: PremiumMatteBackground()),
+          RepaintBoundary(child: PremiumMatteBackground()),
 
           SafeArea(
             child: RefreshIndicator(
@@ -85,11 +85,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               backgroundColor: Wumbleheme.surfaceColor,
             child: CustomScrollView(
               cacheExtent: 800,
-              physics: const AlwaysScrollableScrollPhysics(),
+              physics: AlwaysScrollableScrollPhysics(),
               slivers: [
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
                       child: Builder(
                         builder: (context) {
                           final authUser = context.watch<AuthBloc>().state.user;
@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                   },
                                 ),
                               ),
-                              const SizedBox(width: 12),
+                              SizedBox(width: 12),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -217,12 +217,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   // Horizontal Section Title
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 30, 20, 15),
+                      padding: EdgeInsets.fromLTRB(20, 30, 20, 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'Mis Comunidades',
+                          Text(
+                            tr('Mis Comunidades'),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -234,17 +234,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               HapticFeedback.lightImpact();
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const UserCommunitiesScreen()),
+                                MaterialPageRoute(builder: (context) => UserCommunitiesScreen()),
                               );
                             },
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                               decoration: BoxDecoration(
                                 color: Colors.white.withOpacity(0.05),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: const Text(
-                                'Ver todo',
+                              child: Text(
+                                tr('Ver todo'),
                                 style: TextStyle(
                                   color: Wumbleheme.secondaryColor,
                                   fontSize: 12,
@@ -332,8 +332,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         ],
       ),
       child: Container(
-        padding: const EdgeInsets.all(2),
-        decoration: const BoxDecoration(
+        padding: EdgeInsets.all(2),
+        decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
             colors: [Wumbleheme.primaryColor, Wumbleheme.secondaryColor],
@@ -377,9 +377,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(Icons.explore_outlined, size: 80, color: Colors.white.withOpacity(0.1)),
-        const SizedBox(height: 20),
-        const Text(
-          'Aún no te has unido a ninguna unidad',
+        SizedBox(height: 20),
+        Text(
+          tr('Aún no te has unido a ninguna unidad'),
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.white54, fontSize: 16),
         ),
@@ -491,7 +491,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
               _buildMenuOption(
                 icon: Icons.link_rounded,
-                title: 'Copiar ID de comunidad',
+                title: tr('Copiar ID de comunidad'),
                 onTap: () {
                   Navigator.pop(context);
                   Clipboard.setData(ClipboardData(text: community.handle));
@@ -507,7 +507,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
               _buildMenuOption(
                 icon: Icons.info_outline_rounded,
-                title: 'Ver información',
+                title: tr('Ver información'),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -521,7 +521,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
               _buildMenuOption(
                 icon: Icons.exit_to_app_rounded,
-                title: 'Abandonar comunidad',
+                title: tr('Abandonar comunidad'),
                 color: Colors.redAccent,
                 onTap: () {
                   Navigator.pop(context);

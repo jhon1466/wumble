@@ -356,7 +356,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: const Icon(Icons.format_align_left, color: Colors.white),
+              leading: Icon(Icons.format_align_left, color: Colors.white),
               title: Text(tr('Izquierda'), style: TextStyle(color: Colors.white)),
               onTap: () { Navigator.pop(context); _insertTag('L'); },
             ),
@@ -508,7 +508,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  padding: EdgeInsets.symmetric(vertical: 12),
                   child: Column(
                     children: [
                       Container(
@@ -518,36 +518,36 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           borderRadius: BorderRadius.circular(2),
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      const Text(
-                        'Vista Previa',
+                      SizedBox(height: 10),
+                      Text(
+                        tr('Vista Previa'),
                         style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ],
                   ),
                 ),
-                const Divider(color: Colors.white12, height: 1),
+                Divider(color: Colors.white12, height: 1),
                 Expanded(
                   child: ListView(
                     controller: sc,
-                    padding: const EdgeInsets.all(20),
+                    padding: EdgeInsets.all(20),
                     children: [
                       if (_titleController.text.trim().isNotEmpty) ...[
                         Text(
                           _titleController.text.trim(),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white, height: 1.3,
                           ),
                         ),
-                        const SizedBox(height: 16),
-                        const Divider(color: Colors.white24),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
+                        Divider(color: Colors.white24),
+                        SizedBox(height: 16),
                       ],
                       ..._blocks.map((block) {
                         if (block['type'] == 'text') {
                           final txt = (block['controller'] as TextEditingController).text;
                           return Padding(
-                            padding: const EdgeInsets.only(bottom: 16),
+                            padding: EdgeInsets.only(bottom: 16),
                             child: _buildPreviewRichText(txt),
                           );
                         } else if (block['type'] == 'image') {
@@ -555,13 +555,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               ? Image.file(block['file'], fit: BoxFit.cover)
                               : Image.network(block['url'] ?? '', fit: BoxFit.cover);
                           return Padding(
-                            padding: const EdgeInsets.only(bottom: 16),
+                            padding: EdgeInsets.only(bottom: 16),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(12), child: img,
                             ),
                           );
                         }
-                        return const SizedBox.shrink();
+                        return SizedBox.shrink();
                       }),
                     ],
                   ),
@@ -1038,7 +1038,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   title: Text(tr('Crear Blog'), style: TextStyle(fontWeight: FontWeight.w600)),
                   actions: [
                     isSavingDraft 
-                      ? const Padding(
+                      ? Padding(
                           padding: EdgeInsets.all(12.0),
                           child: SizedBox(
                             width: 20, 
@@ -1047,27 +1047,27 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ),
                         )
                       : IconButton(
-                          icon: const Icon(Icons.save_outlined, color: Colors.white70),
+                          icon: Icon(Icons.save_outlined, color: Colors.white70),
                           tooltip: 'Guardar borrador',
                           onPressed: isLoading ? null : () async {
                             await _saveDraft();
                           },
                         ),
                     IconButton(
-                      icon: const Icon(Icons.remove_red_eye_outlined, color: Colors.white70),
-                      tooltip: 'Vista previa',
+                      icon: Icon(Icons.remove_red_eye_outlined, color: Colors.white70),
+                      tooltip: tr('Vista previa'),
                       onPressed: _showPreview,
                     ),
                     TextButton(
                       onPressed: isLoading ? null : () => _submitPost(context),
                       child: isPublishing
-                          ? const SizedBox(
+                          ? SizedBox(
                               width: 20, 
                               height: 20, 
                               child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white)
                             )
-                          : const Text(
-                              'PUBLICAR',
+                          : Text(
+                              tr('PUBLICAR'),
                               style: TextStyle(
                                 color: Colors.blueAccent, 
                                 fontWeight: FontWeight.bold
@@ -1094,7 +1094,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   child: Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
                            color: Colors.black.withOpacity(0.2),
                         ),
@@ -1102,13 +1102,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                              IconButton(
-                               icon: const Icon(Icons.palette, color: Colors.white70),
-                               tooltip: 'Color de Fondo',
+                               icon: Icon(Icons.palette, color: Colors.white70),
+                               tooltip: tr('Color de Fondo'),
                                onPressed: _pickBackgroundColor,
                              ),
                              IconButton(
-                               icon: const Icon(Icons.image, color: Colors.white70),
-                               tooltip: 'Fondo de Portada',
+                               icon: Icon(Icons.image, color: Colors.white70),
+                               tooltip: tr('Fondo de Portada'),
                                onPressed: _pickBackgroundImage,
                              ),
                              if (_availableCategories.isNotEmpty)
@@ -1117,7 +1117,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                    _selectedCategoryId != null ? Icons.category : Icons.category_outlined,
                                    color: _selectedCategoryId != null ? Colors.blueAccent : Colors.white70,
                                  ),
-                                 tooltip: 'Seleccionar Categoría',
+                                 tooltip: tr('Seleccionar Categoría'),
                                  onPressed: _showCategoryPicker,
                                ),
                           ],
@@ -1126,27 +1126,27 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       
                       Expanded(
                         child: ListView(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: EdgeInsets.all(16.0),
                           children: [
                             TextField(
                               controller: _titleController,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 24, 
                                 fontWeight: FontWeight.bold, 
                                 color: Colors.white
                               ),
-                              decoration: const InputDecoration(
-                                hintText: 'Título del Blog...',
+                              decoration: InputDecoration(
+                                hintText: tr('Título del Blog...'),
                                 hintStyle: TextStyle(fontSize: 24, color: Colors.white54, fontWeight: FontWeight.bold),
                                 border: InputBorder.none,
                               ),
                             ),
 
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8),
                             TextFormField(
-                              style: const TextStyle(color: Colors.white70, fontSize: 14),
-                              decoration: const InputDecoration(
-                                hintText: 'Añadir etiquetas (ej: #dibujo, #noticias)',
+                              style: TextStyle(color: Colors.white70, fontSize: 14),
+                              decoration: InputDecoration(
+                                hintText: tr('Añadir etiquetas (ej: #dibujo, #noticias)'),
                                 hintStyle: TextStyle(color: Colors.white24),
                                 prefixIcon: Icon(Icons.tag, color: Colors.white24, size: 18),
                                 border: InputBorder.none,
@@ -1163,7 +1163,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               },
                             ),
 
-                            const Divider(color: Colors.white24, height: 32),
+                            Divider(color: Colors.white24, height: 32),
                             
                             ..._blocks.asMap().entries.map((entry) {
                               final index = entry.key;
@@ -1179,8 +1179,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                   children: [
                                     if (isFocused)
                                       Container(
-                                        margin: const EdgeInsets.only(bottom: 4),
-                                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                                        margin: EdgeInsets.only(bottom: 4),
+                                        padding: EdgeInsets.symmetric(horizontal: 8),
                                         decoration: BoxDecoration(
                                           color: Colors.black45,
                                           borderRadius: BorderRadius.circular(8),
@@ -1209,14 +1209,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                                   size: 20,
                                                 ),
                                                 onPressed: () => setState(() => _showTagsManual = !_showTagsManual),
-                                                tooltip: 'Mostrar/Ocultar Etiquetas',
+                                                tooltip: tr('Mostrar/Ocultar Etiquetas'),
                                               ),
                                             ],
                                           ),
                                         ),
                                       ),
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 16.0),
+                                      padding: EdgeInsets.only(bottom: 16.0),
                                       child: Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
@@ -1226,9 +1226,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                               focusNode: block['focusNode'],
                                               maxLines: null,
                                               keyboardType: TextInputType.multiline,
-                                              style: const TextStyle(fontSize: 16, color: Colors.white, height: 1.5),
-                                              decoration: const InputDecoration(
-                                                hintText: 'Toca aquí para escribir...',
+                                              style: TextStyle(fontSize: 16, color: Colors.white, height: 1.5),
+                                              decoration: InputDecoration(
+                                                hintText: tr('Toca aquí para escribir...'),
                                                 hintStyle: TextStyle(color: Colors.white38, fontSize: 14),
                                                 border: InputBorder.none,
                                               ),
@@ -1413,9 +1413,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         focusNode: FocusNode(canRequestFocus: false),
         onTap: onTap,
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
-          child: const Icon(Icons.title, color: Colors.purpleAccent, size: 24),
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+          child: Icon(Icons.title, color: Colors.purpleAccent, size: 24),
         ),
       ),
     );
@@ -1428,9 +1428,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         focusNode: FocusNode(canRequestFocus: false),
         onTap: onTap,
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
-          child: const Icon(Icons.font_download, color: Colors.greenAccent, size: 24),
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+          child: Icon(Icons.font_download, color: Colors.greenAccent, size: 24),
         ),
       ),
     );
@@ -1439,16 +1439,16 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   void _showCategoryPicker() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF1E1E2C),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      backgroundColor: Color(0xFF1E1E2C),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (context) => Container(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Seleccionar Categoría',
+            Text(
+              tr('Seleccionar Categoría'),
               style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),

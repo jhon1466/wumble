@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import '../../domain/community_model.dart';
 import '../../domain/reputation_service.dart';
@@ -9,7 +10,7 @@ class LevelUpCelebrationSheet extends StatelessWidget {
   final int newLevel;
   final String newTitle;
 
-  const LevelUpCelebrationSheet({
+  LevelUpCelebrationSheet({
     super.key,
     required this.community,
     required this.newLevel,
@@ -39,7 +40,7 @@ class LevelUpCelebrationSheet extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.7,
       decoration: BoxDecoration(
         color: Wumbleheme.backgroundColor.withOpacity(0.95),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         border: Border.all(color: themeColor.withOpacity(0.3), width: 1.5),
       ),
       child: Stack(
@@ -61,7 +62,7 @@ class LevelUpCelebrationSheet extends StatelessWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
+            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 24),
             child: Column(
               children: [
                 Container(
@@ -72,12 +73,12 @@ class LevelUpCelebrationSheet extends StatelessWidget {
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
-                const Spacer(),
+                Spacer(),
                 
                 // Animated level Badge
                 TweenAnimationBuilder<double>(
                   tween: Tween(begin: 0.0, end: 1.0),
-                  duration: const Duration(milliseconds: 1200),
+                  duration: Duration(milliseconds: 1200),
                   curve: Curves.elasticOut,
                   builder: (context, value, child) {
                     return Transform.translate(
@@ -113,8 +114,8 @@ class LevelUpCelebrationSheet extends StatelessWidget {
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text(
-                            'NIVEL',
+                          Text(
+                            tr('NIVEL'),
                             style: TextStyle(
                               color: Colors.white70,
                               fontSize: 14,
@@ -137,11 +138,11 @@ class LevelUpCelebrationSheet extends StatelessWidget {
                   ),
                 ),
                 
-                const SizedBox(height: 48),
+                SizedBox(height: 48),
 
                 // Congratulations text
-                const Text(
-                  '¡FELICIDADES!',
+                Text(
+                  tr('¡FELICIDADES!'),
                   style: TextStyle(
                     color: Colors.amber,
                     fontSize: 18,
@@ -149,9 +150,9 @@ class LevelUpCelebrationSheet extends StatelessWidget {
                     letterSpacing: 4,
                   ),
                 ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Has alcanzado un nuevo rango en',
+                SizedBox(height: 12),
+                Text(
+                  tr('Has alcanzado un nuevo rango en'),
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white70, fontSize: 16),
                 ),
@@ -165,11 +166,11 @@ class LevelUpCelebrationSheet extends StatelessWidget {
                   ),
                 ),
                 
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
                 
                 // New Title Badge
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.05),
                     borderRadius: BorderRadius.circular(20),
@@ -178,7 +179,7 @@ class LevelUpCelebrationSheet extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'NUEVO TÍTULO',
+                        tr('NUEVO TÍTULO'),
                         style: TextStyle(
                           color: themeColor.withOpacity(0.7),
                           fontSize: 10,
@@ -199,7 +200,7 @@ class LevelUpCelebrationSheet extends StatelessWidget {
                   ),
                 ),
                 
-                const Spacer(),
+                Spacer(),
                 
                 // Continue Button
                 ElevatedButton(
@@ -212,8 +213,8 @@ class LevelUpCelebrationSheet extends StatelessWidget {
                     elevation: 8,
                     shadowColor: themeColor.withOpacity(0.5),
                   ),
-                  child: const Text(
-                    'INCREÍBLE',
+                  child: Text(
+                    tr('INCREÍBLE'),
                     style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: 1.5),
                   ),
                 ),

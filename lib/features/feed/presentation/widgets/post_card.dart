@@ -144,7 +144,7 @@ class _PostCardState extends State<PostCard> {
           controller: controller,
           style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
-            hintText: 'Razón del reporte...',
+            hintText: tr('Razón del reporte...'),
             hintStyle: TextStyle(color: Colors.white38),
           ),
         ),
@@ -562,7 +562,7 @@ class _PostCardState extends State<PostCard> {
                   children: [
                     InkWell(
                       onTap: () {
-                        UserListBottomSheet.show(context, title: 'Personas que les gustó', userIds: widget.post.likes, communityId: widget.post.communityId);
+                        UserListBottomSheet.show(context, title: tr('Personas que les gustó'), userIds: widget.post.likes, communityId: widget.post.communityId);
                       },
                       borderRadius: BorderRadius.circular(20),
                       child: Container(

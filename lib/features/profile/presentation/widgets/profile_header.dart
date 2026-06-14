@@ -34,7 +34,7 @@ class ProfileHeader extends StatelessWidget {
   final bool isGlobal; // Guard for explicit isolation
   final String? communityCreatorId; // Owner (creator) of the active community
 
-  const ProfileHeader({
+  ProfileHeader({
     super.key,
     required this.user,
     this.levelTitles,
@@ -95,7 +95,7 @@ class ProfileHeader extends StatelessWidget {
                         Colors.transparent,
                         Wumbleheme.backgroundColor.withOpacity(0.85),
                       ],
-                      stops: const [0.0, 0.4, 1.0],
+                      stops: [0.0, 0.4, 1.0],
                     ),
                   ),
                   child: Column(
@@ -110,7 +110,7 @@ class ProfileHeader extends StatelessWidget {
                             IconButton(
                               icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
                               onPressed: () => Navigator.pop(context),
-                              tooltip: 'Atrás',
+                              tooltip: tr('Atrás'),
                             ),
                             if (effectiveIsOwner) ...[
                               PopupMenuButton<String>(
@@ -324,7 +324,7 @@ class ProfileHeader extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 5),
+              SizedBox(height: 5),
 
               // Level Badge
               if (!isGlobal)
@@ -342,7 +342,7 @@ class ProfileHeader extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.circular(10),
@@ -350,20 +350,20 @@ class ProfileHeader extends StatelessWidget {
                     ),
                     child: Text(
                       'LV ${user.level} • ${ReputationService.getLevelTitle(user.level, levelTitles)}',
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
                     ),
                   ),
                 ),
 
               // Custom Labels (formerly titles)
               if (user.titles.isNotEmpty) ...[
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 GestureDetector(
                   onTap: FirebaseAuth.instance.currentUser?.uid == user.id 
                       ? () => _showLabelsManager(context, user) 
                       : null,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Wrap(
                       spacing: 8,
                       runSpacing: 8,
@@ -374,7 +374,7 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ],
 
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
 
               // Display Name
               Row(
@@ -393,15 +393,15 @@ class ProfileHeader extends StatelessWidget {
                     ),
                   ),
                   if (user.isBot) ...[
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         color: Colors.blueAccent,
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: const Text(
-                        'BOT',
+                      child: Text(
+                        tr('BOT'),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 10,
@@ -500,7 +500,7 @@ class ProfileHeader extends StatelessWidget {
               ),
 
 
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
 
               // Interaction Buttons
               if (FirebaseAuth.instance.currentUser?.uid != user.id)
@@ -516,7 +516,7 @@ class ProfileHeader extends StatelessWidget {
                   ),
                 ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
             ],
           ),
         ),
@@ -555,7 +555,7 @@ class ProfileHeader extends StatelessWidget {
     final bool isCreator =
         creatorId != null && creatorId.isNotEmpty && creatorId == u.id;
     if (isCreator) {
-      return const _RoleBadge(
+      return _RoleBadge(
         label: 'Dueño',
         icon: Icons.workspace_premium,
         colors: [Color(0xFF8E2DE2), Color(0xFF7B1FA2)],
@@ -563,13 +563,13 @@ class ProfileHeader extends StatelessWidget {
     }
     switch (u.communityRole) {
       case 'leader':
-        return const _RoleBadge(
+        return _RoleBadge(
           label: 'Admin',
           icon: Icons.shield,
           colors: [Color(0xFFFFB300), Color(0xFFF57C00)],
         );
       case 'curator':
-        return const _RoleBadge(
+        return _RoleBadge(
           label: 'Moderador',
           icon: Icons.verified_user,
           colors: [Color(0xFF00BFA5), Color(0xFF00897B)],
@@ -585,8 +585,8 @@ class ProfileHeader extends StatelessWidget {
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       builder: (context) => Container(
-        padding: const EdgeInsets.all(24),
-        decoration: const BoxDecoration(
+        padding: EdgeInsets.all(24),
+        decoration: BoxDecoration(
           color: Color(0xFF000000), // Pure black as requested/in screenshot
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         ),
@@ -604,7 +604,7 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Center(
               child: Text(
                 'Estado de $name',
@@ -615,7 +615,7 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -646,7 +646,7 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: 40),
           ],
         ),
       ),
@@ -669,7 +669,7 @@ class ProfileHeader extends StatelessWidget {
             left: 20,
             right: 20,
           ),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: Color(0xFF18191C),
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
           ),
@@ -677,16 +677,16 @@ class ProfileHeader extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'EDITAR ESTADO',
+              Text(
+                tr('EDITAR ESTADO'),
                 style: TextStyle(color: Colors.white38, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.5),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               TextField(
                 controller: controller,
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  hintText: '¿Qué estás pensando?',
+                  hintText: tr('¿Qué estás pensando?'),
                   hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -698,7 +698,7 @@ class ProfileHeader extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -764,7 +764,7 @@ class ProfileHeader extends StatelessWidget {
 
 class _FollowButton extends StatelessWidget {
   final UserProfile targetUser;
-  const _FollowButton({required this.targetUser});
+  _FollowButton({required this.targetUser});
 
   @override
   Widget build(BuildContext context) {
@@ -857,7 +857,7 @@ class _FollowButton extends StatelessWidget {
 class _ChatButton extends StatelessWidget {
   final UserProfile targetUser;
   final String? communityId;
-  const _ChatButton({required this.targetUser, this.communityId});
+  _ChatButton({required this.targetUser, this.communityId});
 
   @override
   Widget build(BuildContext context) {
@@ -876,9 +876,9 @@ class _ChatButton extends StatelessWidget {
             ),
             child: TextButton.icon(
               onPressed: () => _openChat(context),
-              icon: const Icon(Icons.forum_rounded, size: 18, color: Colors.white),
-              label: const Text(
-                'CHAT',
+              icon: Icon(Icons.forum_rounded, size: 18, color: Colors.white),
+              label: Text(
+                tr('CHAT'),
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w900,

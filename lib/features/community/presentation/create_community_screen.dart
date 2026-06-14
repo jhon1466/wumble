@@ -374,7 +374,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
           backgroundColor: Wumbleheme.backgroundColor,
           elevation: 0,
           leading: _currentStep > 0 
-              ? IconButton(onPressed: _prevPage, icon: const Icon(Icons.arrow_back))
+              ? IconButton(onPressed: _prevPage, icon: Icon(Icons.arrow_back))
               : null,
         ),
         body: BlocBuilder<CommunityBloc, CommunityState>(
@@ -393,7 +393,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                     Expanded(
                       child: PageView(
                         controller: _pageController,
-                        physics: const NeverScrollableScrollPhysics(),
+                        physics: NeverScrollableScrollPhysics(),
                         children: [
                           _buildStep1Identity(),
                           _buildStep2Privacy(),
@@ -406,7 +406,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                     
                     // Next Button
                     Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: EdgeInsets.all(20),
                       child: SizedBox(
                         width: double.infinity,
                         height: 50,
@@ -418,7 +418,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                           ),
                           child: Text(
                             _currentStep == 4 ? 'Crear Comunidad' : 'Siguiente',
-                            style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -437,7 +437,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const SizedBox(
+                              SizedBox(
                                 width: 80,
                                 height: 80,
                                 child: CircularProgressIndicator(
@@ -445,9 +445,9 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                                   color: Wumbleheme.primaryColor,
                                 ),
                               ),
-                              const SizedBox(height: 30),
-                              const Text(
-                                'Creando tu Wumble...',
+                              SizedBox(height: 30),
+                              Text(
+                                tr('Creando tu Wumble...'),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 22,
@@ -455,9 +455,9 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                                   letterSpacing: 1.2,
                                 ),
                               ),
-                              const SizedBox(height: 10),
-                              const Text(
-                                'Estamos estableciendo los protocolos de tu comunidad.',
+                              SizedBox(height: 10),
+                              Text(
+                                tr('Estamos estableciendo los protocolos de tu comunidad.'),
                                 style: TextStyle(color: Colors.white60, fontSize: 14),
                               ),
                             ],
@@ -478,64 +478,64 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
 
   Widget _buildStep1Identity() {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       child: Form(
         key: _step1Key,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(tr('Dale nombre a tu mundo'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             Text(tr('Esto es lo primero que verán los miembros.'), style: TextStyle(color: Wumbleheme.textSecondary)),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
             
             TextFormField(
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(labelText: 'Nombre de la Comunidad', prefixIcon: Icon(Icons.group, color: Colors.white70)),
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(labelText: tr('Nombre de la Comunidad'), prefixIcon: Icon(Icons.group, color: Colors.white70)),
               validator: (v) => v!.isEmpty ? 'Requerido' : null,
               onSaved: (v) => _name = v!,
               onChanged: (v) => setState(() => _name = v),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             
             TextFormField(
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(labelText: 'URL (Handle)', prefixText: 'Wumble.app/c/', prefixIcon: Icon(Icons.link, color: Colors.white70)),
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(labelText: tr('URL (Handle)'), prefixText: 'Wumble.app/c/', prefixIcon: Icon(Icons.link, color: Colors.white70)),
               validator: (v) => v!.isEmpty ? 'Requerido' : null,
               onSaved: (v) => _handle = v!,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             
             TextFormField(
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white),
               maxLines: 3,
-              decoration: const InputDecoration(labelText: 'Descripción Corta', alignLabelWithHint: true, prefixIcon: Icon(Icons.description, color: Colors.white70)),
+              decoration: InputDecoration(labelText: tr('Descripción Corta'), alignLabelWithHint: true, prefixIcon: Icon(Icons.description, color: Colors.white70)),
               validator: (v) => v!.isEmpty ? 'Requerido' : null,
               onSaved: (v) => _description = v!,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
              DropdownButtonFormField<String>(
               value: _category,
-              items: _categories.map((c) => DropdownMenuItem(value: c, child: Text(c, style: const TextStyle(color: Colors.white)))).toList(),
+              items: _categories.map((c) => DropdownMenuItem(value: c, child: Text(c, style: TextStyle(color: Colors.white)))).toList(),
               onChanged: (v) => setState(() => _category = v!),
               dropdownColor: Wumbleheme.surfaceColor,
-              decoration: const InputDecoration(
-                labelText: 'Categoría',
+              decoration: InputDecoration(
+                labelText: tr('Categoría'),
                 prefixIcon: Icon(Icons.category, color: Colors.white70),
                 enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white54)),
               ),
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white),
             ),
             
             if (_category == 'Otro...') ...[
-              const SizedBox(height: 15),
+              SizedBox(height: 15),
               TextFormField(
                 controller: _customCategoryController,
-                style: const TextStyle(color: Colors.white70),
-                decoration: const InputDecoration(
-                  labelText: 'Escribe tu categoría personalizada',
-                  hintText: 'ej: Astrobiología, Fandom Específico...',
+                style: TextStyle(color: Colors.white70),
+                decoration: InputDecoration(
+                  labelText: tr('Escribe tu categoría personalizada'),
+                  hintText: tr('ej: Astrobiología, Fandom Específico...'),
                   prefixIcon: Icon(Icons.edit_note, color: Colors.blueAccent),
                   enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.blueAccent)),
                 ),
@@ -543,16 +543,16 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
               ),
             ],
             
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             
             TextFormField(
               controller: _tagsController,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                labelText: 'Etiquetas de búsqueda (separadas por comas)',
-                hintText: 'ej: gaming, rpg, español',
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelText: tr('Etiquetas de búsqueda (separadas por comas)'),
+                hintText: tr('ej: gaming, rpg, español'),
                 prefixIcon: Icon(Icons.tag, color: Colors.white70),
-                helperText: 'Ayuda a que otros encuentren tu comunidad.',
+                helperText: tr('Ayuda a que otros encuentren tu comunidad.'),
                 helperStyle: TextStyle(color: Colors.white38),
               ),
               onChanged: (v) {
@@ -573,29 +573,29 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
 
   Widget _buildStep2Privacy() {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
             Text(tr('Privacidad'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             Text(tr('¿Quién puede unirse?'), style: TextStyle(color: Wumbleheme.textSecondary)),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
             
             _buildPrivacyOption(
-                title: 'Abierta', 
+                title: tr('Abierta'), 
                 subtitle: 'Cualquiera puede entrar.', 
                 icon: Icons.public,
                 value: CommunityPrivacy.open
             ),
             _buildPrivacyOption(
-                title: 'Requiere Aprobación', 
+                title: tr('Requiere Aprobación'), 
                 subtitle: 'Debes aceptar las solicitudes.', 
                 icon: Icons.approval,
                 value: CommunityPrivacy.approval
             ),
             _buildPrivacyOption(
-                title: 'Privada', 
+                title: tr('Privada'), 
                 subtitle: 'Solo con invitación.', 
                 icon: Icons.lock,
                 value: CommunityPrivacy.private
@@ -610,8 +610,8 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
       return GestureDetector(
           onTap: () => setState(() => _privacy = value),
           child: Container(
-              margin: const EdgeInsets.only(bottom: 15),
-              padding: const EdgeInsets.all(16),
+              margin: EdgeInsets.only(bottom: 15),
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                   color: isSelected ? _themeColor.withOpacity(0.2) : Wumbleheme.surfaceColor,
                   border: Border.all(color: isSelected ? _themeColor : Colors.white10),
@@ -640,46 +640,46 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
 
   Widget _buildStep4Rules() {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(tr('Normas y Condiciones'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-          const SizedBox(height: 10),
-          const Text('Para mantener un ambiente seguro, todos los Agentes deben aceptar estas reglas:', style: TextStyle(color: Wumbleheme.textSecondary)),
-          const SizedBox(height: 30),
+          SizedBox(height: 10),
+          Text(tr('Para mantener un ambiente seguro, todos los Agentes deben aceptar estas reglas:'), style: TextStyle(color: Wumbleheme.textSecondary)),
+          SizedBox(height: 30),
           
           Expanded(
             child: Container(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Wumbleheme.surfaceColor,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Colors.white10),
               ),
-              child: const SingleChildScrollView(
+              child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _RuleItem(icon: Icons.favorite, title: 'Sé Respetuoso', description: 'Trata a todos los miembros con amabilidad y respeto.'),
+                    _RuleItem(icon: Icons.favorite, title: tr('Sé Respetuoso'), description: 'Trata a todos los miembros con amabilidad y respeto.'),
                     SizedBox(height: 20),
-                    _RuleItem(icon: Icons.no_adult_content, title: 'Contenido Apropiado', description: 'Prohibido el contenido +18, gore o violencia explícita.'),
+                    _RuleItem(icon: Icons.no_adult_content, title: tr('Contenido Apropiado'), description: 'Prohibido el contenido +18, gore o violencia explícita.'),
                     SizedBox(height: 20),
-                    _RuleItem(icon: Icons.security, title: 'Seguridad', description: 'No compartas información personal sensible ni permitas doxing.'),
+                    _RuleItem(icon: Icons.security, title: tr('Seguridad'), description: 'No compartas información personal sensible ni permitas doxing.'),
                     SizedBox(height: 20),
-                    _RuleItem(icon: Icons.copyright, title: 'Derechos de Autor', description: 'Respeta la propiedad intelectual de otros autores.'),
+                    _RuleItem(icon: Icons.copyright, title: tr('Derechos de Autor'), description: 'Respeta la propiedad intelectual de otros autores.'),
                   ],
                 ),
               ),
             ),
           ),
           
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           
           GestureDetector(
             onTap: () => setState(() => _acceptedRules = !_acceptedRules),
             child: Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: _acceptedRules ? _themeColor.withOpacity(0.2) : Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
@@ -691,10 +691,10 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                     _acceptedRules ? Icons.check_box : Icons.check_box_outline_blank,
                     color: _acceptedRules ? _themeColor : Colors.white54,
                   ),
-                  const SizedBox(width: 10),
-                  const Expanded(
+                  SizedBox(width: 10),
+                  Expanded(
                     child: Text(
-                      'He leído y acepto cumplir con las Normas de Wumble.',
+                      tr('He leído y acepto cumplir con las Normas de Wumble.'),
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

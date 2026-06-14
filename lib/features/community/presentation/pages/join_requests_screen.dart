@@ -105,9 +105,9 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 50, color: Colors.redAccent),
-            const SizedBox(height: 16),
-            Text(tr('Error al cargar solicitudes'), style: const TextStyle(color: Colors.white)),
+            Icon(Icons.error_outline, size: 50, color: Colors.redAccent),
+            SizedBox(height: 16),
+            Text(tr('Error al cargar solicitudes'), style: TextStyle(color: Colors.white)),
             TextButton(
               onPressed: _loadRequests,
               child: Text(tr('Reintentar'), style: TextStyle(color: widget.community.themeColor)),
@@ -123,9 +123,9 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.mark_email_read_rounded, size: 80, color: Colors.white.withOpacity(0.2)),
-            const SizedBox(height: 16),
-            const Text(
-              'No hay solicitudes pendientes',
+            SizedBox(height: 16),
+            Text(
+              tr('No hay solicitudes pendientes'),
               style: TextStyle(color: Colors.white54, fontSize: 16),
             ),
           ],

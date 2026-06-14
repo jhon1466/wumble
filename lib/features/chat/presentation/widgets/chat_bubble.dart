@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -466,7 +467,7 @@ class ChatBubble extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
           ],
         ),
       ),
@@ -498,14 +499,14 @@ class ChatBubble extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
           decoration: BoxDecoration(
             color: bubbleColor,
             borderRadius: BorderRadius.only(
-              topLeft: const Radius.circular(18),
-              topRight: const Radius.circular(18),
-              bottomLeft: message.isMe ? const Radius.circular(18) : const Radius.circular(0),
-              bottomRight: message.isMe ? const Radius.circular(0) : const Radius.circular(18),
+              topLeft: Radius.circular(18),
+              topRight: Radius.circular(18),
+              bottomLeft: message.isMe ? Radius.circular(18) : Radius.circular(0),
+              bottomRight: message.isMe ? Radius.circular(0) : Radius.circular(18),
             ),
             // Removed BoxShadow to save 30% of rasterization time on complex shapes
             border: Border.all(
@@ -528,17 +529,17 @@ class ChatBubble extends StatelessWidget {
               _renderMessageText(context, message.text ?? ''),
               if (message.linkPreview != null && message.linkPreview!.isNotEmpty)
                 Padding(
-                  padding: const EdgeInsets.only(top: 8),
+                  padding: EdgeInsets.only(top: 8),
                   child: LinkPreviewCard(data: message.linkPreview!, isMe: message.isMe),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     if (message.isEdited)
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(top: 2),
                         child: Text(
-                          '(editado)',
+                          tr('(editado)'),
                           style: TextStyle(
                               color: Colors.white38,
                               fontSize: 10,
@@ -837,7 +838,7 @@ class ChatBubble extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 2),
                         child: Text(
-                          '(editado)',
+                          tr('(editado)'),
                           style: TextStyle(
                               color: textColor.withOpacity(0.4),
                               fontSize: 10,

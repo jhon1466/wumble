@@ -64,7 +64,7 @@ class _CommunityManagementScreenState extends State<CommunityManagementScreen> w
           },
           builder: (context, state) {
             if (state is CommunityManagementLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator());
             }
             
             // Si cargó o se aplicó una actualización exitosa, mostramos la interfaz
@@ -142,10 +142,10 @@ class _EditDetailsTabState extends State<_EditDetailsTab> {
                   backgroundImage: _iconFile != null
                       ? FileImage(_iconFile!)
                       : NetworkImage(widget.community.iconUrl) as ImageProvider,
-                  child: const Icon(Icons.camera_alt, color: Colors.white54),
+                  child: Icon(Icons.camera_alt, color: Colors.white54),
                 ),
               ),
-              const SizedBox(width: 20),
+              SizedBox(width: 20),
               Expanded(
                 child: GestureDetector(
                   onTap: () => _pickImage(false),
@@ -160,7 +160,7 @@ class _EditDetailsTabState extends State<_EditDetailsTab> {
                               ? DecorationImage(image: NetworkImage(widget.community.bannerUrl), fit: BoxFit.cover)
                               : null),
                     ),
-                    child: const Center(child: Icon(Icons.camera_alt, color: Colors.white54)),
+                    child: Center(child: Icon(Icons.camera_alt, color: Colors.white54)),
                   ),
                 ),
               ),
@@ -172,14 +172,14 @@ class _EditDetailsTabState extends State<_EditDetailsTab> {
           TextField(
             controller: _nameController,
             style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(labelText: 'Nombre de la Comunidad', labelStyle: TextStyle(color: Colors.white70)),
+            decoration: InputDecoration(labelText: tr('Nombre de la Comunidad'), labelStyle: TextStyle(color: Colors.white70)),
           ),
           SizedBox(height: 10),
           TextField(
             controller: _descController,
             style: TextStyle(color: Colors.white),
             maxLines: 3,
-            decoration: InputDecoration(labelText: 'Descripción', labelStyle: TextStyle(color: Colors.white70)),
+            decoration: InputDecoration(labelText: tr('Descripción'), labelStyle: TextStyle(color: Colors.white70)),
           ),
           SizedBox(height: 20),
           _buildSectionTitle('Tema'),
@@ -194,7 +194,7 @@ class _EditDetailsTabState extends State<_EditDetailsTab> {
                 child: CircleAvatar(
                   backgroundColor: Color(colorValue),
                   radius: 18,
-                  child: _themeColorValue == colorValue ? const Icon(Icons.check, color: Colors.white) : null,
+                  child: _themeColorValue == colorValue ? Icon(Icons.check, color: Colors.white) : null,
                 ),
               );
             }).toList(),
@@ -272,7 +272,7 @@ class _MembersTab extends StatelessWidget {
 class _LevelTitlesTab extends StatefulWidget {
   final Community community;
 
-  const _LevelTitlesTab({required this.community});
+  _LevelTitlesTab({required this.community});
 
   @override
   State<_LevelTitlesTab> createState() => _LevelTitlesTabState();
@@ -293,19 +293,19 @@ class _LevelTitlesTabState extends State<_LevelTitlesTab> {
       children: [
         Expanded(
           child: ListView.builder(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             itemCount: 20,
             itemBuilder: (context, index) {
               final levelMethod = (index + 1).toString();
               return Padding(
-                padding: const EdgeInsets.only(bottom: 10),
+                padding: EdgeInsets.only(bottom: 10),
                 child: Row(
                   children: [
                     CircleAvatar(
                       backgroundColor: Colors.white10,
                       child: Text('$levelMethod', style: const TextStyle(color: Colors.white)),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     Expanded(
                       child: TextFormField(
                         initialValue: _titles[levelMethod],
@@ -328,7 +328,7 @@ class _LevelTitlesTabState extends State<_LevelTitlesTab> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           child: SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -348,7 +348,7 @@ class _LevelTitlesTabState extends State<_LevelTitlesTab> {
 class _NavigationManagementTab extends StatefulWidget {
   final Community community;
 
-  const _NavigationManagementTab({required this.community});
+  _NavigationManagementTab({required this.community});
 
   @override
   State<_NavigationManagementTab> createState() => _NavigationManagementTabState();
@@ -372,7 +372,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
       children: [
         Expanded(
           child: ReorderableListView.builder(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             itemCount: _tabs.length,
             onReorder: (oldIndex, newIndex) {
               setState(() {
@@ -386,10 +386,10 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
               return Card(
                 key: ValueKey(tab.id),
                 color: Colors.white.withOpacity(0.05),
-                margin: const EdgeInsets.only(bottom: 8),
+                margin: EdgeInsets.only(bottom: 8),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 child: ListTile(
-                  leading: const Icon(Icons.drag_handle, color: Colors.white24),
+                  leading: Icon(Icons.drag_handle, color: Colors.white24),
                   title: Row(
                     children: [
                       Icon(_getTabIcon(tab.type), size: 16, color: widget.community.themeColor),
@@ -411,7 +411,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
                   ),
                   subtitle: Text(
                     _getTabTypeName(tab.type).toUpperCase(),
-                    style: const TextStyle(color: Colors.white24, fontSize: 10),
+                    style: TextStyle(color: Colors.white24, fontSize: 10),
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -464,7 +464,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
                       onPressed: _showAddLinkDialog,
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                    Expanded(
                     child: OutlinedButton.icon(
                       icon: const Icon(Icons.category_outlined),
@@ -475,7 +475,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -512,13 +512,13 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
           children: [
             TextField(
               controller: titleCtrl,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(labelText: 'Título'),
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(labelText: tr('Título')),
             ),
             TextField(
               controller: urlCtrl,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(labelText: 'URL (http://...)'),
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(labelText: tr('URL (http://...)')),
             ),
           ],
         ),
@@ -551,7 +551,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
     final categories = state.categories;
     if (categories.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Primero debes crear categorías personalizadas en la pestaña "Categorías".')),
+        SnackBar(content: Text(tr('Primero debes crear categorías personalizadas en la pestaña "Categorías".'))),
       );
       return;
     }
@@ -567,17 +567,17 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'Se creará una pestaña que solo muestre publicaciones de esta categoría.', 
+              Text(
+                tr('Se creará una pestaña que solo muestre publicaciones de esta categoría.'), 
                 style: TextStyle(color: Colors.white54, fontSize: 12),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               DropdownButtonFormField<PostCategory>(
                 value: selectedCategory,
                 dropdownColor: Wumbleheme.surfaceColor,
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  labelText: 'Selecciona una Categoría',
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  labelText: tr('Selecciona una Categoría'),
                   labelStyle: TextStyle(color: Colors.white70),
                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white24)),
                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
@@ -652,30 +652,30 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
             children: [
               TextField(
                 controller: titleCtrl,
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  labelText: 'Título',
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  labelText: tr('Título'),
                   labelStyle: TextStyle(color: Colors.white70),
                 ),
               ),
               if (tab.type == NavigationTabType.externalLink)
                 TextField(
                   controller: contentCtrl,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'URL (http://...)',
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    labelText: tr('URL (http://...)'),
                     labelStyle: TextStyle(color: Colors.white70),
                   ),
                 ),
               if (tab.type == NavigationTabType.category && categories.isNotEmpty)
                 Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
+                  padding: EdgeInsets.only(top: 16.0),
                   child: DropdownButtonFormField<PostCategory>(
                     value: selectedCategory,
                     dropdownColor: Wumbleheme.surfaceColor,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      labelText: 'Selecciona una Categoría',
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      labelText: tr('Selecciona una Categoría'),
                       labelStyle: TextStyle(color: Colors.white70),
                       enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white24)),
                     ),
@@ -769,8 +769,8 @@ class _CategoriesTabState extends State<_CategoriesTab> {
           children: [
             TextField(
               controller: nameCtrl,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(labelText: 'Nombre de la categoría'),
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(labelText: tr('Nombre de la categoría')),
             ),
           ],
         ),
@@ -833,9 +833,9 @@ class _CategoriesTabState extends State<_CategoriesTab> {
           children: [
             TextField(
               controller: nameCtrl,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                labelText: 'Nombre de la categoría',
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelText: tr('Nombre de la categoría'),
                 labelStyle: TextStyle(color: Colors.white70),
               ),
             ),

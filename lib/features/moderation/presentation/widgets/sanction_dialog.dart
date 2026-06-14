@@ -36,41 +36,41 @@ class _SanctionDialogState extends State<SanctionDialog> {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(24.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Aplicar Sanción',
+              tr('Aplicar Sanción'),
               style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             if (widget.targetUsername != null) ...[
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               Text(
                 'Objetivo: @${widget.targetUsername}',
                 style: TextStyle(color: Colors.grey.shade500),
               ),
             ],
-            const SizedBox(height: 24),
-            const Text(
-              'TIPO DE SANCIÓN',
+            SizedBox(height: 24),
+            Text(
+              tr('TIPO DE SANCIÓN'),
               style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: Colors.grey, letterSpacing: 1.2),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             _buildTypeSelector(),
             if (_selectedType == SanctionType.ban) ...[
-              const SizedBox(height: 24),
-              const Text(
-                'DURACIÓN',
+              SizedBox(height: 24),
+              Text(
+                tr('DURACIÓN'),
                 style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: Colors.grey, letterSpacing: 1.2),
               ),
               const SizedBox(height: 12),
               _buildBanDurationSelector(),
             ],
-            const SizedBox(height: 24),
-            const Text(
-              'MOTIVO',
+            SizedBox(height: 24),
+            Text(
+              tr('MOTIVO'),
               style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: Colors.grey, letterSpacing: 1.2),
             ),
             const SizedBox(height: 12),
@@ -78,7 +78,7 @@ class _SanctionDialogState extends State<SanctionDialog> {
               controller: _reasonController,
               maxLines: 3,
               decoration: InputDecoration(
-                hintText: 'Explica la razón de la sanción...',
+                hintText: tr('Explica la razón de la sanción...'),
                 filled: true,
                 fillColor: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),

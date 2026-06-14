@@ -16,7 +16,7 @@ import 'dart:io';
 
 class SettingsScreen extends StatefulWidget {
   final UserProfile user;
-  const SettingsScreen({super.key, required this.user});
+  SettingsScreen({super.key, required this.user});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -155,20 +155,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
             centerTitle: true,
           ),
           body: ListView(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20),
             children: [
               // ──── CUENTA ────
               _buildSectionTitle('Cuenta'),
               _buildSettingsCard([
                 _buildListTile(
                   icon: Icons.email_outlined,
-                  title: 'Cambiar Correo Electrónico',
+                  title: tr('Cambiar Correo Electrónico'),
                   subtitle: FirebaseAuth.instance.currentUser?.email ?? 'No disponible',
                   onTap: () => _showChangeEmailDialog(context),
                 ),
                 _buildListTile(
                   icon: Icons.lock_outline_rounded,
-                  title: 'Cambiar Contraseña',
+                  title: tr('Cambiar Contraseña'),
                   subtitle: 'Actualiza tu seguridad',
                   onTap: () => _showChangePasswordDialog(context),
                 ),
@@ -194,7 +194,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _buildSettingsCard([
                 _buildSwitchTile(
                   icon: Icons.chat_bubble_outline,
-                  title: 'Mensajes nuevos',
+                  title: tr('Mensajes nuevos'),
                   value: _notifyMessages,
                   onChanged: (val) {
                     setState(() => _notifyMessages = val);
@@ -204,7 +204,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _buildDivider(),
                 _buildSwitchTile(
                   icon: Icons.favorite_border,
-                  title: 'Likes',
+                  title: tr('Likes'),
                   value: _notifyLikes,
                   onChanged: (val) {
                     setState(() => _notifyLikes = val);
@@ -214,7 +214,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _buildDivider(),
                 _buildSwitchTile(
                   icon: Icons.person_add_outlined,
-                  title: 'Nuevos seguidores',
+                  title: tr('Nuevos seguidores'),
                   value: _notifyFollowers,
                   onChanged: (val) {
                     setState(() => _notifyFollowers = val);
@@ -224,7 +224,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _buildDivider(),
                 _buildSwitchTile(
                   icon: Icons.alternate_email,
-                  title: 'Menciones',
+                  title: tr('Menciones'),
                   value: _notifyMentions,
                   onChanged: (val) {
                     setState(() => _notifyMentions = val);
@@ -238,7 +238,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _buildSectionTitle('Privacidad'),
               _buildSettingsCard([
                 _buildPrivacyTile(
-                  title: '¿Quién puede comentar en mi muro?',
+                  title: tr('¿Quién puede comentar en mi muro?'),
                   value: _wallPrivacy,
                   onChanged: (val) {
                     setState(() => _wallPrivacy = val!);
@@ -247,7 +247,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 _buildDivider(),
                 _buildPrivacyTile(
-                  title: '¿Quién puede invitarme a chats?',
+                  title: tr('¿Quién puede invitarme a chats?'),
                   value: _chatInvitePrivacy,
                   onChanged: (val) {
                     setState(() => _chatInvitePrivacy = val!);
@@ -262,7 +262,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _buildSettingsCard([
                 _buildSwitchTile(
                   icon: Icons.done_all,
-                  title: 'Confirmación de lectura',
+                  title: tr('Confirmación de lectura'),
                   subtitle: 'Mostrar el "visto" en tus mensajes',
                   value: _showReadReceipts,
                   onChanged: (val) {
@@ -278,14 +278,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _buildSettingsCard([
                 _buildListTile(
                   icon: Icons.shield_outlined,
-                  title: 'Verificación en dos pasos',
+                  title: tr('Verificación en dos pasos'),
                   subtitle: 'Protege tu cuenta con 2FA',
                   onTap: () => _show2FAInfo(context),
                 ),
                 _buildDivider(),
                 _buildListTile(
                   icon: Icons.devices_rounded,
-                  title: 'Sesiones activas',
+                  title: tr('Sesiones activas'),
                   subtitle: 'Gestiona tus dispositivos conectados',
                   onTap: () => _showActiveSessionsInfo(context),
                 ),
@@ -297,7 +297,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _buildSettingsCard([
                 _buildListTile(
                   icon: Icons.block_rounded,
-                  title: 'Usuarios bloqueados',
+                  title: tr('Usuarios bloqueados'),
                   subtitle: '${widget.user.blockedUserIds.length} usuarios',
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
@@ -313,14 +313,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _buildSettingsCard([
                 _buildListTile(
                   icon: Icons.folder_outlined,
-                  title: 'Espacio en caché',
+                  title: tr('Espacio en caché'),
                   subtitle: _cacheSize,
                   onTap: () => _showClearCacheDialog(context),
                 ),
                 _buildDivider(),
                 _buildListTile(
                   icon: Icons.cleaning_services_rounded,
-                  title: 'Limpiar caché',
+                  title: tr('Limpiar caché'),
                   subtitle: 'Libera espacio eliminando datos temporales',
                   onTap: () => _showClearCacheDialog(context),
                 ),
@@ -338,7 +338,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         : 'Cargando...';
                     return _buildListTile(
                       icon: Icons.info_outline,
-                      title: 'Versión de la app',
+                      title: tr('Versión de la app'),
                       subtitle: version,
                       onTap: () => _showAppVersionDialog(context, version),
                     );
@@ -347,7 +347,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _buildDivider(),
                 _buildListTile(
                   icon: Icons.description_outlined,
-                  title: 'Licencias',
+                  title: tr('Licencias'),
                   subtitle: 'Licencias de código abierto',
                   onTap: () {
                     showLicensePage(
@@ -360,7 +360,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _buildDivider(),
                 _buildListTile(
                   icon: Icons.support_agent_rounded,
-                  title: 'Contacto y soporte',
+                  title: tr('Contacto y soporte'),
                   subtitle: 'Escríbenos para ayuda',
                   onTap: () => _showSupportDialog(context),
                 ),
@@ -547,7 +547,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           SizedBox(height: 12),
           Text(
-            'Una vez que elimines tu cuenta, no podrás recuperar tus datos ni tu progreso.',
+            tr('Una vez que elimines tu cuenta, no podrás recuperar tus datos ni tu progreso.'),
             style: TextStyle(color: Colors.white60, fontSize: 13),
           ),
           SizedBox(height: 20),
@@ -586,13 +586,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             TextField(
               controller: emailController,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(labelText: 'Nuevo Email', labelStyle: TextStyle(color: Colors.white60)),
+              decoration: InputDecoration(labelText: tr('Nuevo Email'), labelStyle: TextStyle(color: Colors.white60)),
             ),
             TextField(
               controller: passwordController,
               obscureText: true,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(labelText: 'Contraseña Actual', labelStyle: TextStyle(color: Colors.white60)),
+              decoration: InputDecoration(labelText: tr('Contraseña Actual'), labelStyle: TextStyle(color: Colors.white60)),
             ),
           ],
         ),
@@ -625,13 +625,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               controller: oldPasswordController,
               obscureText: true,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(labelText: 'Contraseña Actual', labelStyle: TextStyle(color: Colors.white60)),
+              decoration: InputDecoration(labelText: tr('Contraseña Actual'), labelStyle: TextStyle(color: Colors.white60)),
             ),
             TextField(
               controller: newPasswordController,
               obscureText: true,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(labelText: 'Nueva Contraseña', labelStyle: TextStyle(color: Colors.white60)),
+              decoration: InputDecoration(labelText: tr('Nueva Contraseña'), labelStyle: TextStyle(color: Colors.white60)),
             ),
           ],
         ),
@@ -659,13 +659,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Esta acción es irreversible. Por favor ingresa tu contraseña para confirmar.', style: TextStyle(color: Colors.white70)),
-            const SizedBox(height: 20),
+            Text(tr('Esta acción es irreversible. Por favor ingresa tu contraseña para confirmar.'), style: TextStyle(color: Colors.white70)),
+            SizedBox(height: 20),
             TextField(
               controller: passwordController,
               obscureText: true,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(labelText: 'Contraseña', labelStyle: TextStyle(color: Colors.white60)),
+              decoration: InputDecoration(labelText: tr('Contraseña'), labelStyle: TextStyle(color: Colors.white60)),
             ),
           ],
         ),
@@ -756,7 +756,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _sessionInfoRow('Último acceso', user?.metadata.lastSignInTime?.toString().substring(0, 16) ?? 'N/A'),
             const SizedBox(height: 12),
             _sessionInfoRow('Cuenta creada', user?.metadata.creationTime?.toString().substring(0, 16) ?? 'N/A'),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
               child: OutlinedButton.icon(
@@ -813,11 +813,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(tr('¿Necesitas ayuda?'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             _supportRow(Icons.email_outlined, 'soporte@wumble.app'),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             _supportRow(Icons.language, 'wumble.app/soporte'),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             _supportRow(Icons.discord, 'discord.gg/wumble'),
           ],
         ),
@@ -832,8 +832,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Row(
       children: [
         Icon(icon, color: Colors.blueAccent, size: 18),
-        const SizedBox(width: 10),
-        Expanded(child: Text(text, style: const TextStyle(color: Colors.white70, fontSize: 14))),
+        SizedBox(width: 10),
+        Expanded(child: Text(text, style: TextStyle(color: Colors.white70, fontSize: 14))),
       ],
     );
   }
@@ -842,12 +842,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
+        backgroundColor: Color(0xFF1E1E2C),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -856,9 +856,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               child: const Icon(Icons.rocket_launch_rounded, color: Colors.blueAccent, size: 40),
             ),
-            const SizedBox(height: 20),
-            const Text(
-              'Wumble',
+            SizedBox(height: 20),
+            Text(
+              tr('Wumble'),
               style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),

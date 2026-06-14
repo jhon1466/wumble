@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../domain/community_model.dart';
@@ -8,19 +9,19 @@ import '../../../../core/theme.dart';
 class FeaturedBanner extends StatelessWidget {
   final List<Community> communities;
 
-  const FeaturedBanner({super.key, required this.communities});
+  FeaturedBanner({super.key, required this.communities});
 
   @override
   Widget build(BuildContext context) {
-    if (communities.isEmpty) return const SizedBox.shrink();
+    if (communities.isEmpty) return SizedBox.shrink();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
+        Padding(
           padding: EdgeInsets.fromLTRB(16, 20, 16, 12),
           child: Text(
-            'Comunidades Destacadas',
+            tr('Comunidades Destacadas'),
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,

@@ -1166,7 +1166,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         children: [
                           Text(
                             _otherUserName,
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                             overflow: TextOverflow.ellipsis,
                           ),
                           if (widget.otherUserId.isNotEmpty)
@@ -1180,7 +1180,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                           else 
                             Text(
                               '${_participantNames.length} miembros',
-                              style: const TextStyle(fontSize: 11, color: Colors.white70),
+                              style: TextStyle(fontSize: 11, color: Colors.white70),
                             ),
                         ],
                       ),
@@ -1201,7 +1201,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                               Icon(Icons.lock, color: Colors.redAccent, size: 12),
                               SizedBox(width: 4),
                               Text(
-                                'CERRADO',
+                                tr('CERRADO'),
                                 style: TextStyle(color: Colors.redAccent, fontSize: 10, fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -1271,7 +1271,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         children: [
                           Text(
                             isLiveActive ? 'JOIN LIVE' : 'GO LIVE',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w900,
                               fontSize: 11,
@@ -1380,7 +1380,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                           children: [
                             Icon(_isClosed ? Icons.lock_open : Icons.lock, color: Colors.blueAccent, size: 20),
                             SizedBox(width: 12),
-                            Text(_isClosed ? 'Abrir chat' : 'Cerrar chat', style: const TextStyle(color: Colors.blueAccent)),
+                            Text(_isClosed ? 'Abrir chat' : 'Cerrar chat', style: TextStyle(color: Colors.blueAccent)),
                           ],
                         ),
                       ),
@@ -1548,11 +1548,11 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                                   itemBuilder: (context, index) {
                                     if (showHeader && index == allMessages.length) {
                                       return Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 12),
+                                        padding: EdgeInsets.symmetric(vertical: 12),
                                         child: Center(
                                           child: state.isLoadingOlder
                                               ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white38))
-                                              : const Text('— Inicio del chat —', style: TextStyle(color: Colors.white24, fontSize: 11)),
+                                              : Text(tr('— Inicio del chat —'), style: TextStyle(color: Colors.white24, fontSize: 11)),
                                         ),
                                       );
                                     }
@@ -1599,7 +1599,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                           ],
                         );
                       }
-                      return const SizedBox.shrink();
+                      return SizedBox.shrink();
                     },
                   ),
                 ),
@@ -1735,7 +1735,7 @@ Widget _buildCallInvitation(LiveSession session) {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.5),
             blurRadius: 10,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -1757,10 +1757,10 @@ Widget _buildCallInvitation(LiveSession session) {
               children: [
                 Text(
                   '$hostName quiere hablar contigo',
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
                 ),
-                const Text(
-                  'Llamada de voz en curso',
+                Text(
+                  tr('Llamada de voz en curso'),
                   style: TextStyle(color: Colors.white70, fontSize: 11),
                 ),
               ],
@@ -1784,7 +1784,7 @@ Widget _buildCallInvitation(LiveSession session) {
             style: TextButton.styleFrom(
               backgroundColor: Colors.orangeAccent,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16),
             ),
             child: Text(tr('ENTRAR'), style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12)),
           ),
@@ -1819,7 +1819,7 @@ Widget _buildCallInvitation(LiveSession session) {
           ),
           child: Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white70,
               fontSize: 12,
               fontWeight: FontWeight.w500,
@@ -2002,7 +2002,7 @@ Widget _buildCallInvitation(LiveSession session) {
           child: Container(
             decoration: BoxDecoration(
               color: Wumbleheme.surfaceColor.withOpacity(0.9),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
               border: Border.all(color: Colors.white10),
             ),
             padding: EdgeInsets.only(
@@ -2017,7 +2017,7 @@ Widget _buildCallInvitation(LiveSession session) {
                   Container(
                     width: 40,
                     height: 4,
-                    margin: const EdgeInsets.only(bottom: 20),
+                    margin: EdgeInsets.only(bottom: 20),
                     decoration: BoxDecoration(
                       color: Colors.white24,
                       borderRadius: BorderRadius.circular(2),
@@ -2026,11 +2026,11 @@ Widget _buildCallInvitation(LiveSession session) {
 
                   // Message Preview (Premium touch)
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                     child: Column(
                       children: [
-                        const Text(
-                          'MENSÁJE',
+                        Text(
+                          tr('MENSÁJE'),
                           style: TextStyle(
                             color: Colors.white38,
                             fontSize: 10,
@@ -2101,7 +2101,7 @@ Widget _buildCallInvitation(LiveSession session) {
                   // Menu Options
                   _buildMenuTile(
                     icon: Icons.add_reaction_outlined,
-                    title: 'Reaccionar con Sticker',
+                    title: tr('Reaccionar con Sticker'),
                     onTap: () {
                       Navigator.pop(ctx);
                       _showStickerReactionPicker(msg);
@@ -2110,7 +2110,7 @@ Widget _buildCallInvitation(LiveSession session) {
                   if (msg.type == MessageType.text && msg.text != null)
                     _buildMenuTile(
                       icon: Icons.copy_rounded,
-                      title: 'Copiar texto',
+                      title: tr('Copiar texto'),
                       onTap: () {
                         Navigator.pop(ctx);
                         Clipboard.setData(ClipboardData(text: msg.text!));
@@ -2125,7 +2125,7 @@ Widget _buildCallInvitation(LiveSession session) {
                     ),
                   _buildMenuTile(
                     icon: Icons.reply_rounded,
-                    title: 'Responder',
+                    title: tr('Responder'),
                     onTap: () {
                       Navigator.pop(ctx);
                       setState(() {
@@ -2136,7 +2136,7 @@ Widget _buildCallInvitation(LiveSession session) {
                   if (isMe && msg.type == MessageType.text)
                     _buildMenuTile(
                       icon: Icons.edit_rounded,
-                      title: 'Editar mensaje',
+                      title: tr('Editar mensaje'),
                       onTap: () {
                         Navigator.pop(ctx);
                         _showEditDialog(msg);
@@ -2145,7 +2145,7 @@ Widget _buildCallInvitation(LiveSession session) {
                   if (isMe || canModerate)
                     _buildMenuTile(
                       icon: Icons.delete_outline_rounded,
-                      title: 'Eliminar mensaje',
+                      title: tr('Eliminar mensaje'),
                       color: Colors.redAccent,
                       onTap: () {
                         Navigator.pop(ctx);
@@ -2155,7 +2155,7 @@ Widget _buildCallInvitation(LiveSession session) {
                   if (canModerate && !isMe && !targetIsOwner && (!targetIsCurator || isOwner))
                     _buildMenuTile(
                       icon: Icons.gavel_rounded,
-                      title: 'Expulsar del chat',
+                      title: tr('Expulsar del chat'),
                       color: Colors.redAccent,
                       onTap: () {
                         Navigator.pop(ctx);
@@ -2199,7 +2199,7 @@ Widget _buildCallInvitation(LiveSession session) {
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
         title: Text(tr('Expulsar del chat'), style: TextStyle(color: Colors.white)),
-        content: Text('¿Estás seguro de que quieres expulsar a ${msg.senderName ?? 'este usuario'}? No podrá volver a unirse.', style: const TextStyle(color: Colors.white70)),
+        content: Text('¿Estás seguro de que quieres expulsar a ${msg.senderName ?? 'este usuario'}? No podrá volver a unirse.', style: TextStyle(color: Colors.white70)),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: Text(tr('CANCELAR'))),
           TextButton(
@@ -2220,7 +2220,7 @@ Widget _buildCallInvitation(LiveSession session) {
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
         title: Text(tr('Eliminar mensaje'), style: TextStyle(color: Colors.white)),
-        content: const Text(
+        content: Text(
           '¿Estás seguro de que deseas eliminar este mensaje? Esta acción no se puede deshacer.',
           style: TextStyle(color: Colors.white70),
         ),
@@ -2281,7 +2281,7 @@ Widget _buildCallInvitation(LiveSession session) {
       context: context,
       backgroundColor: Wumbleheme.surfaceColor,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (ctx) => DraggableScrollableSheet(
@@ -2291,10 +2291,10 @@ Widget _buildCallInvitation(LiveSession session) {
         expand: false,
         builder: (_, controller) => Column(
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(16),
               child: Text(
-                'Reaccionar con Sticker',
+                tr('Reaccionar con Sticker'),
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
@@ -2331,7 +2331,7 @@ Widget _buildCallInvitation(LiveSession session) {
           style: const TextStyle(color: Colors.white),
           maxLines: null,
           decoration: InputDecoration(
-            hintText: 'Escribe tu mensaje...',
+            hintText: tr('Escribe tu mensaje...'),
             hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.3)),
             enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.white24),
@@ -2560,7 +2560,7 @@ Widget _buildCallInvitation(LiveSession session) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Wumbleheme.surfaceColor,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (ctx) {
@@ -2569,15 +2569,15 @@ Widget _buildCallInvitation(LiveSession session) {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: Text(
                   'Gestionar a $name',
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
               ListTile(
                 leading: Icon(isCurator ? Icons.shield_outlined : Icons.shield, color: Colors.cyanAccent),
-                title: Text(isCurator ? 'Quitar rol de Curador' : 'Hacer Curador del chat', style: const TextStyle(color: Colors.white)),
+                title: Text(isCurator ? 'Quitar rol de Curador' : 'Hacer Curador del chat', style: TextStyle(color: Colors.white)),
                 onTap: () {
                   Navigator.pop(ctx);
                   if (isCurator) {
@@ -2588,14 +2588,14 @@ Widget _buildCallInvitation(LiveSession session) {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.gavel, color: Colors.redAccent),
+                leading: Icon(Icons.gavel, color: Colors.redAccent),
                 title: Text(tr('Expulsar del chat'), style: TextStyle(color: Colors.redAccent)),
                 onTap: () {
                   Navigator.pop(ctx);
                   _confirmBanFromList(userId, name);
                 },
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
             ],
           ),
         );
@@ -2623,7 +2623,7 @@ Widget _buildCallInvitation(LiveSession session) {
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
         title: Text(tr('Expulsar del chat'), style: TextStyle(color: Colors.white)),
-        content: Text('¿Estás seguro de que quieres expulsar a $name? No podrá volver a unirse.', style: const TextStyle(color: Colors.white70)),
+        content: Text('¿Estás seguro de que quieres expulsar a $name? No podrá volver a unirse.', style: TextStyle(color: Colors.white70)),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: Text(tr('CANCELAR'))),
           TextButton(
@@ -2645,7 +2645,7 @@ Widget _buildCallInvitation(LiveSession session) {
       context: context,
       backgroundColor: Wumbleheme.surfaceColor,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (ctx) {
@@ -2657,7 +2657,7 @@ Widget _buildCallInvitation(LiveSession session) {
           builder: (_, controller) {
             return Column(
               children: [
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Container(
                   width: 40,
                   height: 4,
@@ -2666,17 +2666,17 @@ Widget _buildCallInvitation(LiveSession session) {
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(
-                  'Miembros del Chat',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                  tr('Miembros del Chat'),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 if (_description != null && _description!.isNotEmpty)
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
+                    padding: EdgeInsets.fromLTRB(24, 12, 24, 0),
                     child: Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.all(12),
+                      padding: EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.05),
                         borderRadius: BorderRadius.circular(12),
@@ -2685,8 +2685,8 @@ Widget _buildCallInvitation(LiveSession session) {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'DESCRIPCIÓN',
+                          Text(
+                            tr('DESCRIPCIÓN'),
                             style: TextStyle(
                               color: Colors.white38,
                               fontSize: 10,
@@ -2694,7 +2694,7 @@ Widget _buildCallInvitation(LiveSession session) {
                               letterSpacing: 1.1,
                             ),
                           ),
-                          const SizedBox(height: 6),
+                          SizedBox(height: 6),
                           Text(
                             _description!,
                             style: const TextStyle(
@@ -2707,10 +2707,10 @@ Widget _buildCallInvitation(LiveSession session) {
                       ),
                     ),
                   ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 if (_communityId != null)
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     child: ElevatedButton.icon(
                       onPressed: () async {
                         final selected = await MemberPickerSheet.show(
@@ -2752,17 +2752,17 @@ Widget _buildCallInvitation(LiveSession session) {
                           }
                         }
                       },
-                      icon: const Icon(Icons.person_add, size: 18),
+                      icon: Icon(Icons.person_add, size: 18),
                       label: Text(tr('INVITAR MIEMBRO')),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Wumbleheme.primaryColor,
                         foregroundColor: Colors.black,
-                        minimumSize: const Size(double.infinity, 40),
+                        minimumSize: Size(double.infinity, 40),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
                     ),
                   ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Expanded(
                   child: ListView.builder(
                     controller: controller,
@@ -2860,7 +2860,7 @@ Widget _buildCallInvitation(LiveSession session) {
                               bio: '',
                               reputation: 0,
                               level: 1,
-                              titles: const [],
+                              titles: [],
                               followers: 0,
                               following: 0,
                               checkIns: 0,
@@ -2882,8 +2882,8 @@ Widget _buildCallInvitation(LiveSession session) {
 
   Widget _buildMentionsOverlay() {
     return Container(
-      constraints: const BoxConstraints(maxHeight: 200),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      constraints: BoxConstraints(maxHeight: 200),
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       decoration: BoxDecoration(
         color: Wumbleheme.surfaceColor,
         borderRadius: BorderRadius.circular(12),
@@ -2911,21 +2911,21 @@ Widget _buildCallInvitation(LiveSession session) {
               Flexible(
                 child: Text(
                   member.displayName ?? 'Usuario', 
-                  style: const TextStyle(color: Colors.white, fontSize: 13),
+                  style: TextStyle(color: Colors.white, fontSize: 13),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               if (member.isBot) ...[
-                const SizedBox(width: 4),
+                SizedBox(width: 4),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                  padding: EdgeInsets.symmetric(horizontal: 4, vertical: 1),
                   decoration: BoxDecoration(
                     color: Colors.blueAccent.withOpacity(0.2),
                     border: Border.all(color: Colors.blueAccent, width: 0.5),
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: const Text(
-                    'BOT',
+                  child: Text(
+                    tr('BOT'),
                     style: TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 8,
@@ -2945,12 +2945,12 @@ Widget _buildCallInvitation(LiveSession session) {
 
   Widget _buildTypingIndicator() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       alignment: Alignment.centerLeft,
       child: Row(
         children: [
           _TypingDots(color: Wumbleheme.primaryColor),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Expanded(
             child: Text(
               _typingUsers.length == 1
@@ -2974,15 +2974,15 @@ Widget _buildCallInvitation(LiveSession session) {
     final seconds = (_recordingDuration % 60).toString().padLeft(2, '0');
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       color: Colors.red.withValues(alpha: 0.1),
       child: Row(
         children: [
-          const Icon(Icons.mic, color: Colors.red, size: 16),
-          const SizedBox(width: 8),
+          Icon(Icons.mic, color: Colors.red, size: 16),
+          SizedBox(width: 8),
           Text(
             'Grabando audio... $minutes:$seconds',
-            style: const TextStyle(color: Colors.red, fontSize: 13, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.red, fontSize: 13, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -2993,12 +2993,12 @@ Widget _buildCallInvitation(LiveSession session) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Wumbleheme.surfaceColor,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (ctx) => SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 8),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -3025,7 +3025,7 @@ Widget _buildCallInvitation(LiveSession session) {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
             ],
           ),
         ),
@@ -3044,22 +3044,22 @@ Widget _buildCallInvitation(LiveSession session) {
       borderRadius: BorderRadius.circular(12),
       child: Container(
         width: 80,
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: EdgeInsets.symmetric(vertical: 12),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: color.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: color, size: 28),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               label,
-              style: const TextStyle(color: Colors.white70, fontSize: 12),
+              style: TextStyle(color: Colors.white70, fontSize: 12),
             ),
           ],
         ),
@@ -3103,11 +3103,11 @@ Widget _buildCallInvitation(LiveSession session) {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'Conversación Pública',
+                        tr('Conversación Pública'),
                         style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        'Únete a este chat para empezar a escribir.',
+                        tr('Únete a este chat para empezar a escribir.'),
                         style: TextStyle(color: Colors.white70, fontSize: 12),
                       ),
                     ],
@@ -3133,8 +3133,8 @@ Widget _buildCallInvitation(LiveSession session) {
                     backgroundColor: Colors.orangeAccent,
                     foregroundColor: Colors.black,
                     elevation: 0,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    minimumSize: const Size(0, 40),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    minimumSize: Size(0, 40),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   ),
                   child: Text(tr('UNIRME'), style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
@@ -3156,7 +3156,7 @@ Widget _buildCallInvitation(LiveSession session) {
             filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 30), // Increased bottom padding
+              padding: EdgeInsets.fromLTRB(20, 16, 20, 30), // Increased bottom padding
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -3172,31 +3172,31 @@ Widget _buildCallInvitation(LiveSession session) {
                 child: Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.forum_rounded, size: 20, color: Colors.white),
+                      child: Icon(Icons.forum_rounded, size: 20, color: Colors.white),
                     ),
-                    const SizedBox(width: 14),
+                    SizedBox(width: 14),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text(
-                            'Conversación Restringida',
+                          Text(
+                            tr('Conversación Restringida'),
                             style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                           ),
-                          const Text(
-                            'Únete a la comunidad para participar.',
+                          Text(
+                            tr('Únete a la comunidad para participar.'),
                             style: TextStyle(color: Colors.white70, fontSize: 12),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     ElevatedButton(
                       onPressed: () {
                         if (state.activeCommunity != null) {
@@ -3214,8 +3214,8 @@ Widget _buildCallInvitation(LiveSession session) {
                         backgroundColor: Wumbleheme.primaryColor,
                         foregroundColor: Colors.white,
                         elevation: 0,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        minimumSize: const Size(0, 40),
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        minimumSize: Size(0, 40),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       ),
                       child: Text(tr('UNIRME'), style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
@@ -3239,19 +3239,19 @@ Widget _buildCallInvitation(LiveSession session) {
         if (isClosedForMe) {
           return Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.redAccent.withValues(alpha: 0.1),
-              border: const Border(top: BorderSide(color: Colors.redAccent, width: 0.5)),
+              border: Border(top: BorderSide(color: Colors.redAccent, width: 0.5)),
             ),
-            child: const SafeArea(
+            child: SafeArea(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.lock, color: Colors.redAccent, size: 16),
                   SizedBox(width: 8),
                   Text(
-                    'Este chat ha sido cerrado.',
+                    tr('Este chat ha sido cerrado.'),
                     style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -3266,7 +3266,7 @@ Widget _buildCallInvitation(LiveSession session) {
           children: [
             if (_replyToMessage != null) _buildReplyInputPreview(),
             Container(
-              padding: const EdgeInsets.fromLTRB(8, 4, 12, 10), // Increased bottom padding
+              padding: EdgeInsets.fromLTRB(8, 4, 12, 10), // Increased bottom padding
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -3284,13 +3284,13 @@ Widget _buildCallInvitation(LiveSession session) {
                   children: [
                     // Plus Button (Consolidated Menu)
                     IconButton(
-                      icon: const Icon(Icons.add_circle, size: 28),
+                      icon: Icon(Icons.add_circle, size: 28),
                       color: Colors.white54,
                       onPressed: _isUploadingMedia ? null : _showAttachmentMenu,
                       padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
+                      constraints: BoxConstraints(),
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     
                     // Main Input Field
                     Expanded(
@@ -3308,7 +3308,7 @@ Widget _buildCallInvitation(LiveSession session) {
                                 controller: _controller,
                                 maxLines: 5,
                                 minLines: 1,
-                                style: const TextStyle(color: Colors.white, fontSize: 15),
+                                style: TextStyle(color: Colors.white, fontSize: 15),
                                 onChanged: (val) {
                                   _updateTypingStatus(val.isNotEmpty);
                                   _handleMentionSearch(val);
@@ -3317,8 +3317,8 @@ Widget _buildCallInvitation(LiveSession session) {
                                 onTap: () {
                                   if (_showStickers) setState(() => _showStickers = false);
                                 },
-                                decoration: const InputDecoration(
-                                  hintText: 'Escribe un mensaje...',
+                                decoration: InputDecoration(
+                                  hintText: tr('Escribe un mensaje...'),
                                   hintStyle: TextStyle(color: Colors.white38),
                                   border: InputBorder.none,
                                   enabledBorder: InputBorder.none,

@@ -299,9 +299,9 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
     return Column(
       children: [
         _buildTextField('Nombre del Wumble', _nameController),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         _buildTextField('Descripción', _descriptionController, maxLines: 3),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         _buildDropdown('Categoría', _category, _categories, (val) => setState(() => _category = val!)),
       ],
     );
@@ -311,12 +311,12 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(color: Colors.white60, fontSize: 12)),
-        const SizedBox(height: 8),
+        Text(label, style: TextStyle(color: Colors.white60, fontSize: 12)),
+        SizedBox(height: 8),
         TextField(
           controller: controller,
           maxLines: maxLines,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white.withOpacity(0.05),
@@ -332,10 +332,10 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(color: Colors.white60, fontSize: 12)),
-        const SizedBox(height: 8),
+        Text(label, style: TextStyle(color: Colors.white60, fontSize: 12)),
+        SizedBox(height: 8),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.05),
             borderRadius: BorderRadius.circular(16),
@@ -390,10 +390,10 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
             child: const Icon(Icons.colorize, color: Colors.white),
           ),
         ),
-        const SizedBox(width: 20),
-        const Expanded(
+        SizedBox(width: 20),
+        Expanded(
           child: Text(
-            'Personaliza el color que define la identidad de tu comunidad.',
+            tr('Personaliza el color que define la identidad de tu comunidad.'),
             style: TextStyle(color: Colors.white38, fontSize: 12),
           ),
         ),
@@ -576,13 +576,13 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
       tileColor: Colors.white.withOpacity(0.04),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       leading: Container(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(color: _themeColor.withOpacity(0.1), shape: BoxShape.circle),
         child: Icon(Icons.mark_email_unread_rounded, color: _themeColor),
       ),
       title: Text(tr('Solicitudes de Ingreso'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
       subtitle: Text(tr('Revisar y aprobar nuevos miembros'), style: TextStyle(color: Colors.white38, fontSize: 11)),
-      trailing: const Icon(Icons.chevron_right, color: Colors.white24),
+      trailing: Icon(Icons.chevron_right, color: Colors.white24),
       onTap: () {
         Navigator.push(
           context,
@@ -596,17 +596,17 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
 
   Widget _buildBannedUsersOption() {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       tileColor: Colors.white.withOpacity(0.04),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       leading: Container(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(color: Colors.red.withOpacity(0.1), shape: BoxShape.circle),
-        child: const Icon(Icons.gavel_rounded, color: Colors.redAccent),
+        child: Icon(Icons.gavel_rounded, color: Colors.redAccent),
       ),
       title: Text(tr('Usuarios Expulsados'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
       subtitle: Text(tr('Gestionar baneos temporales y permanentes'), style: TextStyle(color: Colors.white38, fontSize: 11)),
-      trailing: const Icon(Icons.chevron_right, color: Colors.white24),
+      trailing: Icon(Icons.chevron_right, color: Colors.white24),
       onTap: () {
         Navigator.push(
           context,
@@ -623,11 +623,11 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
 
   Widget _buildLevelTitlesOption() {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       tileColor: Colors.white.withOpacity(0.04),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       leading: Container(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(color: Colors.amber.withOpacity(0.1), shape: BoxShape.circle),
         child: Icon(Icons.stars_rounded, color: Colors.amber),
       ),
@@ -722,9 +722,9 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Define cómo se llamarán los miembros al alcanzar cada nivel de reputación.',
+                  SizedBox(height: 12),
+                  Text(
+                    tr('Define cómo se llamarán los miembros al alcanzar cada nivel de reputación.'),
                     style: TextStyle(color: Colors.white38, fontSize: 12),
                   ),
                   const SizedBox(height: 24),
@@ -841,13 +841,13 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
     return Column(
       children: [
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16),
           tileColor: Colors.redAccent.withOpacity(0.05),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16), 
             side: BorderSide(color: Colors.redAccent.withOpacity(0.1))
           ),
-          leading: const Icon(Icons.exit_to_app_rounded, color: Colors.redAccent),
+          leading: Icon(Icons.exit_to_app_rounded, color: Colors.redAccent),
           title: Text(tr('Abandonar Comunidad'), style: TextStyle(color: Colors.redAccent, fontSize: 14, fontWeight: FontWeight.bold)),
           onTap: () {
             showDialog(
@@ -855,7 +855,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
               builder: (context) => AlertDialog(
                 backgroundColor: Wumbleheme.surfaceColor,
                 title: Text(tr('¿Abandonar comunidad?'), style: TextStyle(color: Colors.white)),
-                content: const Text('¿Estás seguro de que quieres salir de esta comunidad? Perderás tu racha y reputación.'),
+                content: Text('¿Estás seguro de que quieres salir de esta comunidad? Perderás tu racha y reputación.'),
                 actions: [
                   TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
                   TextButton(
@@ -878,15 +878,15 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
           },
         ),
         if (_isAdmin && _isOwner) ...[
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16),
             tileColor: Colors.red.withOpacity(0.1),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16), 
               side: BorderSide(color: Colors.red.withOpacity(0.2))
             ),
-            leading: const Icon(Icons.delete_forever_rounded, color: Colors.red),
+            leading: Icon(Icons.delete_forever_rounded, color: Colors.red),
             title: Text(tr('Eliminar Comunidad'), style: TextStyle(color: Colors.red, fontSize: 14, fontWeight: FontWeight.bold)),
             onTap: () {
               final confirmController = TextEditingController();
@@ -894,17 +894,17 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
                 context: context,
                 builder: (context) => AlertDialog(
                   backgroundColor: Wumbleheme.surfaceColor,
-                  title: const Text('BORRAR ABSOLUTAMENTE TODO', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                  title: Text('BORRAR ABSOLUTAMENTE TODO', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                      Text(
                         'Esta acción borrará permanentemente la comunidad, todos sus miembros, todos los posts y todas las imágenes del servidor. ¡NO HAY VUELTA ATRÁS!',
                         style: TextStyle(color: Colors.white70),
                       ),
-                      const SizedBox(height: 20),
-                      const Text(
-                        'Escribe "BORRAR" para confirmar:',
+                      SizedBox(height: 20),
+                      Text(
+                        tr('Escribe "BORRAR" para confirmar:'),
                         style: TextStyle(color: Colors.white38, fontSize: 12),
                       ),
                       const SizedBox(height: 8),
@@ -912,7 +912,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
                         controller: confirmController,
                         style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
-                          hintText: 'BORRAR',
+                          hintText: tr('BORRAR'),
                           hintStyle: const TextStyle(color: Colors.white24),
                           filled: true,
                           fillColor: Colors.white.withOpacity(0.05),

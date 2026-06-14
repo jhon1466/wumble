@@ -8,7 +8,7 @@ class BannedScreen extends StatelessWidget {
   final Community community;
   final DateTime? expiresAt;
 
-  const BannedScreen({
+  BannedScreen({
     super.key, 
     required this.community, 
     this.expiresAt,
@@ -41,7 +41,7 @@ class BannedScreen extends StatelessWidget {
           SafeArea(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.all(32.0),
+                padding: EdgeInsets.all(32.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -67,22 +67,22 @@ class BannedScreen extends StatelessWidget {
                         const Icon(Icons.block, color: Colors.red, size: 140),
                       ],
                     ),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32),
                     Text(
-                      'Acceso Restringido',
+                      tr('Acceso Restringido'),
                       style: Wumbleheme.darkTheme.textTheme.headlineLarge?.copyWith(
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Text(
                       'Has sido expulsado de ${community.name}',
                       style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
@@ -98,9 +98,9 @@ class BannedScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 48),
-                    const Text(
-                      'Si crees que esto es un error, contacta con los administradores de la comunidad.',
+                    SizedBox(height: 48),
+                    Text(
+                      tr('Si crees que esto es un error, contacta con los administradores de la comunidad.'),
                       style: TextStyle(color: Colors.white54, fontSize: 12),
                       textAlign: TextAlign.center,
                     ),

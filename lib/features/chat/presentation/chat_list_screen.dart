@@ -12,7 +12,7 @@ import '../../../../core/widgets/user_avatar.dart';
 import 'widgets/chat_room_card.dart';
 
 class ChatListScreen extends StatelessWidget {
-  const ChatListScreen({super.key});
+  ChatListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class ChatListScreen extends StatelessWidget {
       body: BlocBuilder<ChatBloc, ChatState>(
           builder: (context, state) {
             if (state is ChatLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator());
             }
 
             if (state is ChatError) {
@@ -41,9 +41,9 @@ class ChatListScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.error_outline, size: 48, color: Colors.white24),
-                    const SizedBox(height: 12),
-                    Text('Error: ${state.message}', style: const TextStyle(color: Wumbleheme.textSecondary)),
+                    Icon(Icons.error_outline, size: 48, color: Colors.white24),
+                    SizedBox(height: 12),
+                    Text('Error: ${state.message}', style: TextStyle(color: Wumbleheme.textSecondary)),
                   ],
                 ),
               );
@@ -56,14 +56,14 @@ class ChatListScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.chat_bubble_outline, size: 64, color: Colors.white.withOpacity(0.1)),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'No tienes chats aún',
+                      SizedBox(height: 16),
+                      Text(
+                        tr('No tienes chats aún'),
                         style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 16),
                       ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'Visita el perfil de alguien y toca "CHAT"',
+                      SizedBox(height: 8),
+                      Text(
+                        tr('Visita el perfil de alguien y toca "CHAT"'),
                         style: TextStyle(color: Colors.white24, fontSize: 13),
                       ),
                     ],
@@ -86,7 +86,7 @@ class ChatListScreen extends StatelessWidget {
                         Icon(Icons.swipe_left, size: 16, color: Wumbleheme.primaryColor.withOpacity(0.5)),
                         const SizedBox(width: 8),
                         Text(
-                          'Desliza hacia la izquierda para eliminar',
+                          tr('Desliza hacia la izquierda para eliminar'),
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.3),
                             fontSize: 11,

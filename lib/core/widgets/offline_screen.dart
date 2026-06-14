@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/presentation/bloc/connectivity_cubit.dart';
 import '../theme.dart';
 
 class OfflineScreen extends StatelessWidget {
-  const OfflineScreen({super.key});
+  OfflineScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +28,21 @@ class OfflineScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(32),
+              padding: EdgeInsets.all(32),
               decoration: BoxDecoration(
                 color: Wumbleheme.secondaryColor.withOpacity(0.1),
                 shape: BoxShape.circle,
                 border: Border.all(color: Wumbleheme.secondaryColor.withOpacity(0.2), width: 1),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.wifi_off_rounded,
                 size: 80,
                 color: Wumbleheme.secondaryColor,
               ),
             ),
-            const SizedBox(height: 48),
-            const Text(
-              'CONEXIÓN PERDIDA',
+            SizedBox(height: 48),
+            Text(
+              tr('CONEXIÓN PERDIDA'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 28,
@@ -49,11 +50,11 @@ class OfflineScreen extends StatelessWidget {
                 letterSpacing: 2.0,
               ),
             ),
-            const SizedBox(height: 16),
-            const Padding(
+            SizedBox(height: 16),
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 50),
               child: Text(
-                'Wumble necesita una conexión a internet para funcionar correctamente.',
+                tr('Wumble necesita una conexión a internet para funcionar correctamente.'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white54,
@@ -63,7 +64,7 @@ class OfflineScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 60),
+            SizedBox(height: 60),
             ElevatedButton.icon(
               onPressed: () => BlocProvider.of<ConnectivityCubit>(context).check(),
               style: ElevatedButton.styleFrom(
@@ -76,9 +77,9 @@ class OfflineScreen extends StatelessWidget {
                 elevation: 8,
                 shadowColor: Wumbleheme.secondaryColor.withOpacity(0.5),
               ),
-              icon: const Icon(Icons.refresh_rounded),
-              label: const Text(
-                'VERIFICAR CONEXIÓN',
+              icon: Icon(Icons.refresh_rounded),
+              label: Text(
+                tr('VERIFICAR CONEXIÓN'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.2,
@@ -99,7 +100,7 @@ class OfflineScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'ESPERANDO SEÑAL...',
+                  tr('ESPERANDO SEÑAL...'),
                   style: TextStyle(
                     color: Colors.white24,
                     fontSize: 10,

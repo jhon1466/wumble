@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wumble/core/theme.dart';
@@ -82,7 +83,7 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
           color: Color(0xFF0F1115),
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         ),
-        child: const Center(child: CircularProgressIndicator(color: Colors.blueAccent)),
+        child: Center(child: CircularProgressIndicator(color: Colors.blueAccent)),
       );
     }
 
@@ -98,8 +99,8 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
     return Container(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom + 20),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F1115),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+        color: Color(0xFF0F1115),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         border: Border.all(color: accentColor.withValues(alpha: 0.1), width: 1),
         boxShadow: [
           BoxShadow(
@@ -156,7 +157,7 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
               Positioned(
                 bottom: -46,
                 child: Container(
-                  padding: const EdgeInsets.all(3),
+                  padding: EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
@@ -174,7 +175,7 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
                   ),
                   child: CircleAvatar(
                     radius: 46,
-                    backgroundColor: const Color(0xFF1A1D23),
+                    backgroundColor: Color(0xFF1A1D23),
                     backgroundImage: bot.avatarUrl.isNotEmpty
                         ? CachedNetworkImageProvider(bot.avatarUrl)
                         : null,
@@ -187,10 +188,10 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
             ],
           ),
           
-          const SizedBox(height: 56),
+          SizedBox(height: 56),
           
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
                 // Name & Type
@@ -199,16 +200,16 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
                     Text(
                       bot.name,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
                         letterSpacing: 0.5,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                       decoration: BoxDecoration(
                         color: accentColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(20),
@@ -218,7 +219,7 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.auto_awesome, size: 10, color: accentColor),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4),
                           Text(
                             'AI AGENT',
                             style: TextStyle(
@@ -234,12 +235,12 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
                   ],
                 ),
                 
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 
                 // Status Text
                 if (bot.statusType != BotStatusType.none)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.03),
                       borderRadius: BorderRadius.circular(12),
@@ -248,32 +249,32 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(_getStatusIcon(bot.statusType), size: 14, color: accentColor.withValues(alpha: 0.8)),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           '${_getStatusPrefix(bot)} ${bot.statusText}'.trim(),
-                          style: const TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.w500),
+                          style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
                   ),
 
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
 
                 // Stats/Info Row
                 Row(
                   children: [
                     _buildInfoTile('Comandos', bot.commands.length.toString(), Icons.terminal, accentColor),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     _buildInfoTile('Prefijo', bot.prefix.isEmpty ? '/' : bot.prefix, Icons.bolt, accentColor),
                   ],
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
 
                 // Description Card
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.all(20),
+                  padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.03),
                     borderRadius: BorderRadius.circular(20),
@@ -285,9 +286,9 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
                       Row(
                         children: [
                           Icon(Icons.info_outline, size: 16, color: accentColor),
-                          const SizedBox(width: 10),
-                          const Text(
-                            'Protocolos y Funciones',
+                          SizedBox(width: 10),
+                          Text(
+                            tr('Protocolos y Funciones'),
                             style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                         ],
@@ -301,16 +302,16 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
                   ),
                 ),
                 
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
 
                 // Footer
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.verified, size: 14, color: accentColor.withValues(alpha: 0.6)),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'SISTEMA VERIFICADO POR WUMBLE',
+                    SizedBox(width: 8),
+                    Text(
+                      tr('SISTEMA VERIFICADO POR WUMBLE'),
                       style: TextStyle(color: Colors.white24, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1),
                     ),
                   ],
@@ -324,10 +325,10 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
   }
 
   Widget _buildAssistantProfile() {
-    const accentColor = Colors.blueAccent;
+    final accentColor = Colors.blueAccent;
     return Container(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom + 20),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0xFF0F1115),
         borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
       ),
@@ -340,15 +341,15 @@ class _BotMiniProfileState extends State<BotMiniProfile> {
             height: 4,
             decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)),
           ),
-          const SizedBox(height: 20),
-          const CircleAvatar(
+          SizedBox(height: 20),
+          CircleAvatar(
             radius: 46,
             backgroundColor: Color(0xFF1A1D23),
             child: Icon(Icons.shield_outlined, size: 40, color: Colors.blueAccent),
           ),
-          const SizedBox(height: 16),
-          const Text(
-            'System Assistant',
+          SizedBox(height: 16),
+          Text(
+            tr('System Assistant'),
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 4),

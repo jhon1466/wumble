@@ -17,7 +17,7 @@ import 'package:wumble/features/profile/domain/user_model.dart';
 class MembersListScreen extends StatelessWidget {
   final Community community;
 
-  const MembersListScreen({
+  MembersListScreen({
     super.key,
     required this.community,
   });
@@ -34,7 +34,7 @@ class MembersListScreen extends StatelessWidget {
 class _MembersListView extends StatefulWidget {
   final Community community;
 
-  const _MembersListView({required this.community});
+  _MembersListView({required this.community});
 
   @override
   State<_MembersListView> createState() => _MembersListViewState();
@@ -100,13 +100,13 @@ class _MembersListViewState extends State<_MembersListView> {
         Scaffold(
           backgroundColor: hasBackground ? Colors.transparent : Wumbleheme.backgroundColor,
           appBar: AppBar(
-            title: Text('Miembros de ${widget.community.name}', style: const TextStyle(fontSize: 16)),
+            title: Text('Miembros de ${widget.community.name}', style: TextStyle(fontSize: 16)),
             backgroundColor: Wumbleheme.surfaceColor.withValues(alpha: 0.8),
         elevation: 0,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
@@ -130,7 +130,7 @@ class _MembersListViewState extends State<_MembersListView> {
                   borderSide: BorderSide.none,
                 ),
               ),
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white),
               onChanged: _onSearchChanged,
             ),
           ),
@@ -147,13 +147,13 @@ class _MembersListViewState extends State<_MembersListView> {
           }
 
           if (state.error != null && state.members.isEmpty) {
-            return Center(child: Text('Error: ${state.error}', style: const TextStyle(color: Colors.red)));
+            return Center(child: Text('Error: ${state.error}', style: TextStyle(color: Colors.red)));
           }
 
           if (state.members.isEmpty) {
-            return const Center(
+            return Center(
               child: Text(
-                'No se encontraron miembros',
+                tr('No se encontraron miembros'),
                 style: TextStyle(color: Colors.white54),
               ),
             );

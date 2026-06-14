@@ -192,11 +192,11 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E),
+      backgroundColor: Color(0xFF1A1A2E),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(widget.quiz != null ? 'Editar Quiz' : 'Nuevo Quiz', style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(widget.quiz != null ? 'Editar Quiz' : 'Nuevo Quiz', style: TextStyle(fontWeight: FontWeight.bold)),
         actions: [
           TextButton(
             onPressed: _isLoading ? null : _submitQuiz,
@@ -207,18 +207,18 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         children: [
           // Header Info
           _buildHeaderSection(),
-          const SizedBox(height: 24),
-          const Divider(color: Colors.white10),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
+          Divider(color: Colors.white10),
+          SizedBox(height: 24),
           
           // Questions List
           ..._questions.asMap().entries.map((entry) => _buildQuestionEditor(entry.key, entry.value)),
           
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: _addQuestion,
             icon: const Icon(Icons.add),
@@ -229,7 +229,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
               padding: const EdgeInsets.symmetric(vertical: 16),
             ),
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
         ],
       ),
     );
@@ -259,22 +259,22 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
               : null,
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         TextField(
           controller: _titleController,
-          style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
-          decoration: const InputDecoration(
-            hintText: 'Título del Quiz',
+          style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+          decoration: InputDecoration(
+            hintText: tr('Título del Quiz'),
             hintStyle: TextStyle(color: Colors.white24),
             border: InputBorder.none,
           ),
         ),
         TextField(
           controller: _descriptionController,
-          style: const TextStyle(color: Colors.white70, fontSize: 16),
+          style: TextStyle(color: Colors.white70, fontSize: 16),
           maxLines: 2,
-          decoration: const InputDecoration(
-            hintText: 'Descripción breve...',
+          decoration: InputDecoration(
+            hintText: tr('Descripción breve...'),
             hintStyle: TextStyle(color: Colors.white24, fontSize: 14),
             border: InputBorder.none,
           ),
@@ -285,8 +285,8 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
 
   Widget _buildQuestionEditor(int index, _QuestionEditorData data) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 24),
-      padding: const EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 24),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.03),
         borderRadius: BorderRadius.circular(16),
@@ -312,23 +312,23 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
                 ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           TextField(
             controller: data.textController,
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              hintText: '¿Cuál es la pregunta?',
+              hintText: tr('¿Cuál es la pregunta?'),
               hintStyle: const TextStyle(color: Colors.white24),
               filled: true,
               fillColor: Colors.white.withOpacity(0.02),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(tr('Opciones (Selecciona la correcta)'), style: TextStyle(color: Colors.white54, fontSize: 12)),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           ...List.generate(4, (optIdx) => Padding(
-            padding: const EdgeInsets.only(bottom: 8),
+            padding: EdgeInsets.only(bottom: 8),
             child: Row(
               children: [
                 Radio<int>(
@@ -354,12 +354,12 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
               ],
             ),
           )),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           TextField(
             controller: data.explanationController,
-            style: const TextStyle(color: Colors.white70, fontSize: 14),
-            decoration: const InputDecoration(
-              hintText: 'Explicación (opcional)',
+            style: TextStyle(color: Colors.white70, fontSize: 14),
+            decoration: InputDecoration(
+              hintText: tr('Explicación (opcional)'),
               hintStyle: TextStyle(color: Colors.white24),
               prefixIcon: Icon(Icons.info_outline, size: 16, color: Colors.white24),
             ),

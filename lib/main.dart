@@ -143,7 +143,7 @@ class WumbleCloneApp extends StatelessWidget {
           builder: (context, locale, _) {
             return MaterialApp(
               navigatorKey: navigatorKey,
-              title: 'Wumble',
+              title: tr('Wumble'),
               debugShowCheckedModeBanner: false,
               theme: Wumbleheme.darkTheme,
               localizationsDelegates: const [
@@ -185,7 +185,7 @@ class AuthWrapper extends StatelessWidget {
           if (state.status == AuthStatus.loading) {
             return const Scaffold(body: Center(child: CircularProgressIndicator()));
           }
-          return const LoginScreen();
+          return LoginScreen();
         },
       ),
     );
@@ -329,9 +329,9 @@ class _MainScaffoldState extends State<MainScaffold> {
   }
 
   final List<Widget> _pages = [
-    const HomeScreen(),
+    HomeScreen(),
     const ExploreScreen(),
-    const ChatListScreen(),
+    ChatListScreen(),
     ProfileScreen(),
   ];
 

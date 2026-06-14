@@ -14,19 +14,19 @@ import 'profile_bloc.dart';
 class CompleteProfileScreen extends StatelessWidget {
   final UserProfile user;
 
-  const CompleteProfileScreen({super.key, required this.user});
+  CompleteProfileScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CompleteProfileCubit(sl(), user),
-      child: const _CompleteProfileView(),
+      child: _CompleteProfileView(),
     );
   }
 }
 
 class _CompleteProfileView extends StatefulWidget {
-  const _CompleteProfileView();
+  _CompleteProfileView();
 
   @override
   State<_CompleteProfileView> createState() => _CompleteProfileViewState();
@@ -43,12 +43,12 @@ class _CompleteProfileViewState extends State<_CompleteProfileView> {
 
   void _nextPage(BuildContext context) {
     context.read<CompleteProfileCubit>().nextStep();
-    _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+    _pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
   }
 
   void _previousPage(BuildContext context) {
     context.read<CompleteProfileCubit>().previousStep();
-    _pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+    _pageController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
   }
 
   @override
@@ -73,13 +73,13 @@ class _CompleteProfileViewState extends State<_CompleteProfileView> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 leading: state.currentStep > 0
-                    ? IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => _previousPage(context))
+                    ? IconButton(icon: Icon(Icons.arrow_back, color: Colors.white), onPressed: () => _previousPage(context))
                     : null,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(4, (index) {
                     return Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      margin: EdgeInsets.symmetric(horizontal: 4),
                       width: 25,
                       height: 4,
                       decoration: BoxDecoration(
@@ -91,10 +91,10 @@ class _CompleteProfileViewState extends State<_CompleteProfileView> {
                 ),
               ),
               body: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: EdgeInsets.all(24.0),
                 child: PageView(
                   controller: _pageController,
-                  physics: const NeverScrollableScrollPhysics(), // Disable swipe, force buttons
+                  physics: NeverScrollableScrollPhysics(), // Disable swipe, force buttons
                   children: [
                     _StepIdentity(onNext: () => _nextPage(context)),
                     _StepBirthday(onNext: () => _nextPage(context)),
@@ -110,15 +110,15 @@ class _CompleteProfileViewState extends State<_CompleteProfileView> {
                 color: Colors.black.withOpacity(0.9),
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (state.errorMessage != null) ...[
-                          const Icon(Icons.cloud_off_rounded, size: 80, color: Colors.redAccent),
-                          const SizedBox(height: 24),
-                          const Text(
-                            'ERROR DE CONEXIÓN',
+                          Icon(Icons.cloud_off_rounded, size: 80, color: Colors.redAccent),
+                          SizedBox(height: 24),
+                          Text(
+                            tr('ERROR DE CONEXIÓN'),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -126,13 +126,13 @@ class _CompleteProfileViewState extends State<_CompleteProfileView> {
                               letterSpacing: 2.0,
                             ),
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
                           Text(
                             state.errorMessage!,
                             textAlign: TextAlign.center,
                             style: const TextStyle(color: Colors.white54, fontSize: 13, height: 1.5),
                           ),
-                          const SizedBox(height: 48),
+                          SizedBox(height: 48),
                           Row(
                             children: [
                               Expanded(
@@ -164,11 +164,11 @@ class _CompleteProfileViewState extends State<_CompleteProfileView> {
                             ],
                           ),
                         ] else ...[
-                          const CircularProgressIndicator(
+                          CircularProgressIndicator(
                             color: Wumbleheme.secondaryColor,
                             strokeWidth: 3,
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24),
                           Text(
                             'ACTUALIZANDO... ${(state.uploadProgress * 100).toStringAsFixed(0)}%',
                             style: const TextStyle(
@@ -178,9 +178,9 @@ class _CompleteProfileViewState extends State<_CompleteProfileView> {
                               letterSpacing: 2.0,
                             ),
                           ),
-                          const SizedBox(height: 12),
-                          const Text(
-                            'Estamos preparando todo para ti',
+                          SizedBox(height: 12),
+                          Text(
+                            tr('Estamos preparando todo para ti'),
                             style: TextStyle(color: Colors.white54, fontSize: 14, fontWeight: FontWeight.w300),
                           ),
                           const SizedBox(height: 40),
@@ -208,7 +208,7 @@ class _CompleteProfileViewState extends State<_CompleteProfileView> {
 
 class _StepIdentity extends StatefulWidget {
   final VoidCallback onNext;
-  const _StepIdentity({required this.onNext});
+  _StepIdentity({required this.onNext});
 
   @override
   State<_StepIdentity> createState() => _StepIdentityState();
@@ -263,7 +263,7 @@ class _StepIdentityState extends State<_StepIdentity> {
           style: TextStyle(color: Colors.white),
           textAlign: TextAlign.center,
           decoration: InputDecoration(
-            hintText: 'Tu nombre o apodo',
+            hintText: tr('Tu nombre o apodo'),
             hintStyle: TextStyle(color: Colors.white30),
             enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white24)),
             focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Wumbleheme.secondaryColor)),
@@ -319,7 +319,7 @@ class _StepBioState extends State<_StepBio> {
           style: TextStyle(color: Colors.white),
           maxLines: 5,
           decoration: InputDecoration(
-            hintText: 'Escribe algo genial aquí...',
+            hintText: tr('Escribe algo genial aquí...'),
             hintStyle: TextStyle(color: Colors.white30),
             fillColor: Colors.white10,
             filled: true,
@@ -465,7 +465,7 @@ class _StepStyleState extends State<_StepStyle> {
 
 class _StepBirthday extends StatefulWidget {
   final VoidCallback onNext;
-  const _StepBirthday({required this.onNext});
+  _StepBirthday({required this.onNext});
 
   @override
   State<_StepBirthday> createState() => _StepBirthdayState();
@@ -488,7 +488,7 @@ class _StepBirthdayState extends State<_StepBirthday> {
       children: [
         Text(tr('Paso 2: Tu Cumpleaños'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
         const SizedBox(height: 10),
-        const Text('¡Dinos cuándo celebrarte! Queremos enviarte confeti en tu día especial.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
+        Text(tr('¡Dinos cuándo celebrarte! Queremos enviarte confeti en tu día especial.'), textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
         const SizedBox(height: 40),
         
         InkWell(

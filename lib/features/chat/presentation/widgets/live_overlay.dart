@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../domain/chat_model.dart';
@@ -14,7 +15,7 @@ class LiveOverlay extends StatefulWidget {
   final Function(String) onSendMessage;
   final Widget chatWidget;
 
-  const LiveOverlay({
+  LiveOverlay({
     super.key,
     required this.session,
     required this.currentUserId,
@@ -49,7 +50,7 @@ class _LiveOverlayState extends State<LiveOverlay> {
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (!mounted) return;
       final start = widget.session.startedAt ?? DateTime.now();
       final diff = DateTime.now().difference(start);
@@ -84,12 +85,12 @@ class _LiveOverlayState extends State<LiveOverlay> {
             // Top Bar
             _buildTopBar(context),
             
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             
             // Speaker Grid
             _buildSpeakerGrid(),
             
-            const Spacer(),
+            Spacer(),
             
             // Chat View (Overlaid)
             Expanded(
@@ -107,7 +108,7 @@ class _LiveOverlayState extends State<LiveOverlay> {
 
   Widget _buildTopBar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
           Expanded(
@@ -116,8 +117,8 @@ class _LiveOverlayState extends State<LiveOverlay> {
               children: [
                 Row(
                   children: [
-                    const Text(
-                      'Live en curso',
+                    Text(
+                      tr('Live en curso'),
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -143,8 +144,8 @@ class _LiveOverlayState extends State<LiveOverlay> {
                     ),
                   ],
                 ),
-                const Text(
-                  'Proyección de audio',
+                Text(
+                  tr('Proyección de audio'),
                   style: TextStyle(color: Colors.white70, fontSize: 12),
                 ),
               ],
@@ -274,7 +275,7 @@ class _LiveOverlayState extends State<LiveOverlay> {
               controller: _msgController,
               style: const TextStyle(color: Colors.white, fontSize: 14),
               decoration: InputDecoration(
-                hintText: 'Escribe un mensaje...',
+                hintText: tr('Escribe un mensaje...'),
                 hintStyle: const TextStyle(color: Colors.white38, fontSize: 14),
                 filled: true,
                 fillColor: Colors.white.withOpacity(0.1),

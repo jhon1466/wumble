@@ -86,10 +86,10 @@ class _DonationModalState extends State<DonationModal> {
     final isDark = theme.brightness == Brightness.dark;
 
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1A1A1A) : Colors.white,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+        color: isDark ? Color(0xFF1A1A1A) : Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -98,20 +98,20 @@ class _DonationModalState extends State<DonationModal> {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.pinkAccent.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.volunteer_activism_rounded, color: Colors.pinkAccent),
+                child: Icon(Icons.volunteer_activism_rounded, color: Colors.pinkAccent),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Enviar Bonos',
+                    Text(
+                      tr('Enviar Bonos'),
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Text(
@@ -123,9 +123,9 @@ class _DonationModalState extends State<DonationModal> {
               ),
             ],
           ),
-          const SizedBox(height: 24),
-          const Text(
-            'SELECCIONA UNA CANTIDAD',
+          SizedBox(height: 24),
+          Text(
+            tr('SELECCIONA UNA CANTIDAD'),
             style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: Colors.grey, letterSpacing: 1.2),
           ),
           const SizedBox(height: 16),
@@ -145,15 +145,15 @@ class _DonationModalState extends State<DonationModal> {
               autofocus: true,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               decoration: InputDecoration(
-                hintText: 'Cantidad personalizada...',
-                prefixIcon: const Icon(Icons.monetization_on_rounded, color: Colors.yellowAccent),
+                hintText: tr('Cantidad personalizada...'),
+                prefixIcon: Icon(Icons.monetization_on_rounded, color: Colors.yellowAccent),
                 filled: true,
                 fillColor: Colors.black.withValues(alpha: 0.05),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
               ),
             ),
           ],
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -161,16 +161,16 @@ class _DonationModalState extends State<DonationModal> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.pinkAccent,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 elevation: 0,
               ),
               child: _isLoading
-                  ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                  ? SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
                   : Text(tr('Enviar Donación'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
         ],
       ),
     );
@@ -184,7 +184,7 @@ class _DonationModalState extends State<DonationModal> {
         _isCustom = false;
       }),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: isSelected ? Colors.yellowAccent.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(16),
@@ -193,8 +193,8 @@ class _DonationModalState extends State<DonationModal> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.monetization_on_rounded, color: Colors.yellowAccent, size: 16),
-            const SizedBox(width: 8),
+            Icon(Icons.monetization_on_rounded, color: Colors.yellowAccent, size: 16),
+            SizedBox(width: 8),
             Text(
               amount.toString(),
               style: TextStyle(fontWeight: FontWeight.bold, color: isSelected ? Colors.yellowAccent : null),
@@ -209,14 +209,14 @@ class _DonationModalState extends State<DonationModal> {
     return GestureDetector(
       onTap: () => setState(() => _isCustom = true),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: _isCustom ? Colors.pinkAccent.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: _isCustom ? Colors.pinkAccent : Colors.transparent),
         ),
         child: Text(
-          'Otro',
+          tr('Otro'),
           style: TextStyle(fontWeight: FontWeight.bold, color: _isCustom ? Colors.pinkAccent : null),
         ),
       ),
@@ -228,7 +228,7 @@ class DonationSuccessDialog extends StatelessWidget {
   final int amount;
   final String targetUsername;
 
-  const DonationSuccessDialog({
+  DonationSuccessDialog({
     super.key,
     required this.amount,
     required this.targetUsername,
@@ -240,14 +240,14 @@ class DonationSuccessDialog extends StatelessWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       child: TweenAnimationBuilder<double>(
-        duration: const Duration(milliseconds: 600),
+        duration: Duration(milliseconds: 600),
         tween: Tween(begin: 0.0, end: 1.0),
         curve: Curves.elasticOut,
         builder: (context, value, child) {
           return Transform.scale(
             scale: value,
             child: Container(
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24),
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(32),
@@ -262,19 +262,19 @@ class DonationSuccessDialog extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const PulsatingHeart(),
-                  const SizedBox(height: 20),
-                  const Text(
-                    '¡Donación Enviada!',
+                  PulsatingHeart(),
+                  SizedBox(height: 20),
+                  Text(
+                    tr('¡Donación Enviada!'),
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       letterSpacing: -0.5,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
                       color: Colors.yellowAccent.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(100),
@@ -295,7 +295,7 @@ class DonationSuccessDialog extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Text(
                     'Has apoyado a @$targetUsername con un generoso bono.',
                     textAlign: TextAlign.center,
@@ -304,7 +304,7 @@ class DonationSuccessDialog extends StatelessWidget {
                       fontSize: 15,
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -316,8 +316,8 @@ class DonationSuccessDialog extends StatelessWidget {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         elevation: 0,
                       ),
-                      child: const Text(
-                        'De nada',
+                      child: Text(
+                        tr('De nada'),
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ),

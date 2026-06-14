@@ -49,8 +49,8 @@ class _PollEditorScreenState extends State<PollEditorScreen> {
                 SnackBar(content: Text(tr('¡Encuesta publicada con éxito!'))),
               );
             },
-            child: const Text(
-              'Publicar',
+            child: Text(
+              tr('Publicar'),
               style: TextStyle(
                 color: Wumbleheme.accentColor,
                 fontWeight: FontWeight.bold,
@@ -60,25 +60,25 @@ class _PollEditorScreenState extends State<PollEditorScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Question Field
             TextField(
               controller: _questionController,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              decoration: const InputDecoration(
-                hintText: 'Haz una pregunta...',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              decoration: InputDecoration(
+                hintText: tr('Haz una pregunta...'),
                 border: InputBorder.none,
                 hintStyle: TextStyle(color: Colors.white24),
               ),
             ),
-            const Divider(color: Colors.white10),
-            const SizedBox(height: 16),
+            Divider(color: Colors.white10),
+            SizedBox(height: 16),
             
-            const Text(
-              'Opciones de respuesta',
+            Text(
+              tr('Opciones de respuesta'),
               style: TextStyle(color: Wumbleheme.textSecondary, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),

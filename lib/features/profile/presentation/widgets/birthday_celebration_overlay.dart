@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:confetti/confetti.dart';
 import 'dart:math';
 
 class BirthdayCelebrationOverlay extends StatefulWidget {
   final VoidCallback onDismiss;
 
-  const BirthdayCelebrationOverlay({super.key, required this.onDismiss});
+  BirthdayCelebrationOverlay({super.key, required this.onDismiss});
 
   static void show(BuildContext context) {
     showDialog(
@@ -34,9 +35,9 @@ class _BirthdayCelebrationOverlayState extends State<BirthdayCelebrationOverlay>
   @override
   void initState() {
     super.initState();
-    _controllerTopCenter = ConfettiController(duration: const Duration(seconds: 10));
-    _controllerTopLeft = ConfettiController(duration: const Duration(seconds: 10));
-    _controllerTopRight = ConfettiController(duration: const Duration(seconds: 10));
+    _controllerTopCenter = ConfettiController(duration: Duration(seconds: 10));
+    _controllerTopLeft = ConfettiController(duration: Duration(seconds: 10));
+    _controllerTopRight = ConfettiController(duration: Duration(seconds: 10));
     
     // Iniciar la animación de confeti
     _controllerTopCenter.play();
@@ -79,7 +80,7 @@ class _BirthdayCelebrationOverlayState extends State<BirthdayCelebrationOverlay>
               emissionFrequency: 0.1,
               numberOfParticles: 20,
               gravity: 0.2,
-              colors: const [
+              colors: [
                 Colors.green,
                 Colors.blue,
                 Colors.pink,
@@ -121,10 +122,10 @@ class _BirthdayCelebrationOverlayState extends State<BirthdayCelebrationOverlay>
           // Mensaje Central
           Center(
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 30),
-              padding: const EdgeInsets.all(30),
+              margin: EdgeInsets.symmetric(horizontal: 30),
+              padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                color: const Color(0xFF1E1E1E),
+                color: Color(0xFF1E1E1E),
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(color: Colors.purpleAccent.withOpacity(0.5), width: 2),
                 boxShadow: [
@@ -138,13 +139,13 @@ class _BirthdayCelebrationOverlayState extends State<BirthdayCelebrationOverlay>
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
+                  Text(
                     '🎂',
                     style: TextStyle(fontSize: 60),
                   ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    '¡FELIZ CUMPLEAÑOS!',
+                  SizedBox(height: 20),
+                  Text(
+                    tr('¡FELIZ CUMPLEAÑOS!'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -153,8 +154,8 @@ class _BirthdayCelebrationOverlayState extends State<BirthdayCelebrationOverlay>
                       letterSpacing: 1.2,
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
+                  SizedBox(height: 16),
+                  Text(
                     '¡De parte de todo el equipo de Wumble, te deseamos un día lleno de alegría y sorpresas! ✨',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -163,7 +164,7 @@ class _BirthdayCelebrationOverlayState extends State<BirthdayCelebrationOverlay>
                       height: 1.5,
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   ElevatedButton(
                     onPressed: widget.onDismiss,
                     style: ElevatedButton.styleFrom(
@@ -175,8 +176,8 @@ class _BirthdayCelebrationOverlayState extends State<BirthdayCelebrationOverlay>
                       ),
                       elevation: 5,
                     ),
-                    child: const Text(
-                      '¡Gritar de Alegría! 🎈',
+                    child: Text(
+                      tr('¡Gritar de Alegría! 🎈'),
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),

@@ -315,7 +315,7 @@ class _ProfileViewState extends State<_ProfileView> {
                                                   Colors.yellowAccent,
                                                   onTap: () {
                                                      if (isOwner) {
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => const WalletScreen()));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => WalletScreen()));
                                                      }
                                                   },
                                               ),

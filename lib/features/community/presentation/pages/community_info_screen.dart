@@ -23,7 +23,7 @@ class CommunityInfoScreen extends StatelessWidget {
   final Community community;
   final bool fromCommunityDetail;
 
-  const CommunityInfoScreen({
+  CommunityInfoScreen({
     super.key, 
     required this.community,
     this.fromCommunityDetail = false,
@@ -442,18 +442,18 @@ class CommunityInfoScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       backgroundColor: Wumbleheme.surfaceColor,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2))),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           
           ListTile(
-            leading: const Icon(Icons.share_rounded, color: Colors.white),
+            leading: Icon(Icons.share_rounded, color: Colors.white),
             title: Text(tr('Compartir Comunidad'), style: TextStyle(color: Colors.white)),
             onTap: () {
               Navigator.pop(context);
@@ -471,7 +471,7 @@ class CommunityInfoScreen extends StatelessWidget {
           
           if (isLeader)
             ListTile(
-              leading: const Icon(Icons.settings_outlined, color: Colors.white),
+              leading: Icon(Icons.settings_outlined, color: Colors.white),
               title: Text(tr('Ajustes de Comunidad'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -489,7 +489,7 @@ class CommunityInfoScreen extends StatelessWidget {
             
           if (member != null)
             ListTile(
-              leading: const Icon(Icons.exit_to_app_rounded, color: Colors.redAccent),
+              leading: Icon(Icons.exit_to_app_rounded, color: Colors.redAccent),
               title: Text(tr('Abandonar Comunidad'), style: TextStyle(color: Colors.redAccent)),
               onTap: () {
                 final bloc = context.read<CommunityContextBloc>();
@@ -521,16 +521,16 @@ class CommunityInfoScreen extends StatelessWidget {
               },
             ),
 
-          const Divider(color: Colors.white10),
+          Divider(color: Colors.white10),
           
           ListTile(
-            leading: const Icon(Icons.report_problem_outlined, color: Colors.orangeAccent),
+            leading: Icon(Icons.report_problem_outlined, color: Colors.orangeAccent),
             title: Text(tr('Reportar Comunidad'), style: TextStyle(color: Colors.orangeAccent)),
             onTap: () {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Reporte enviado correctamente. El equipo de moderación lo revisará pronto.'),
+                SnackBar(
+                  content: Text(tr('Reporte enviado correctamente. El equipo de moderación lo revisará pronto.')),
                   backgroundColor: Colors.orange,
                 ),
               );

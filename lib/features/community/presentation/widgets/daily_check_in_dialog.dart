@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:ui';
@@ -11,7 +12,7 @@ class DailyCheckInDialog extends StatefulWidget {
   final int rewardAmount;
   final int coinAmount;
 
-  const DailyCheckInDialog({
+  DailyCheckInDialog({
     super.key,
     required this.community,
     this.rewardAmount = 15,
@@ -51,7 +52,7 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1500),
+      duration: Duration(milliseconds: 1500),
     );
 
     _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -92,13 +93,13 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
     HapticFeedback.mediumImpact();
 
     // Small delay before starting the rep count
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    Future.delayed(Duration(milliseconds: 1000), () {
       _startCounting();
     });
   }
 
   void _startCounting() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: 500));
 
     for (int i = 1; i <= widget.rewardAmount; i++) {
       if (!mounted) return;
@@ -106,7 +107,7 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
         _currentRepValue = i;
       });
       HapticFeedback.lightImpact();
-      await Future.delayed(const Duration(milliseconds: 50));
+      await Future.delayed(Duration(milliseconds: 50));
     }
 
     if (mounted) {
@@ -133,8 +134,8 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
         child: ScaleTransition(
         scale: _scaleAnimation,
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 32),
-          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 20),
+          margin: EdgeInsets.symmetric(horizontal: 32),
+          padding: EdgeInsets.symmetric(vertical: 32, horizontal: 20),
           decoration: BoxDecoration(
             color: Wumbleheme.backgroundColor.withOpacity(0.98),
             borderRadius: BorderRadius.circular(32),
@@ -154,14 +155,14 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
               Text(
                 _hasSelectedCard ? '¡CHECK-IN EXITOSO!' : '¡ESCOGE UNA CARTA!',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w900,
                   fontSize: 20,
                   letterSpacing: 2,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 _hasSelectedCard ? widget.community.name : 'Elige tu premio diario de Wumble Coins',
                 textAlign: TextAlign.center,
@@ -172,7 +173,7 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
                 ),
               ),
               
-              const SizedBox(height: 32),
+              SizedBox(height: 32),
               
               // Cards Row (Always present and keyed for state persistence)
               Row(
@@ -182,12 +183,12 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
 
               // Reward Details (Appears after selection)
               AnimatedCrossFade(
-                duration: const Duration(milliseconds: 500),
+                duration: Duration(milliseconds: 500),
                 crossFadeState: _hasSelectedCard ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                firstChild: const SizedBox(height: 0, width: double.infinity),
+                firstChild: SizedBox(height: 0, width: double.infinity),
                 secondChild: Column(
                   children: [
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                     // Lottie celebration animation
                     SizedBox(
                       height: 100,
@@ -198,7 +199,7 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
                         fit: BoxFit.contain,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     // Reputation + Coins animated counters
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -229,8 +230,8 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
                                 ),
                               ],
                             ),
-                            const Text(
-                              'REPUTACIÓN',
+                            Text(
+                              tr('REPUTACIÓN'),
                               style: TextStyle(
                                 color: Colors.white54,
                                 fontSize: 9,
@@ -265,8 +266,8 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
                                 ),
                               ],
                             ),
-                            const Text(
-                              'AMINO COINS',
+                            Text(
+                              tr('AMINO COINS'),
                               style: TextStyle(
                                 color: Colors.white54,
                                 fontSize: 9,
@@ -278,10 +279,10 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
                         ),
                       ],
                     ),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32),
                     // Done Button
                     AnimatedOpacity(
-                      duration: const Duration(milliseconds: 300),
+                      duration: Duration(milliseconds: 300),
                       opacity: _isFinished ? 1.0 : 0.3,
                       child: ElevatedButton(
                         onPressed: _isFinished ? () => Navigator.pop(context) : null,
@@ -295,8 +296,8 @@ class _DailyCheckInDialogState extends State<DailyCheckInDialog>
                           elevation: _isFinished ? 8 : 0,
                           shadowColor: themeColor.withOpacity(0.5),
                         ),
-                        child: const Text(
-                          '¡GENIAL!',
+                        child: Text(
+                          tr('¡GENIAL!'),
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
                             fontSize: 14,

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/search_bloc.dart';
@@ -9,7 +10,7 @@ import '../../../../core/widgets/premium_matte_background.dart';
 import '../../../community/presentation/widgets/member_mini_profile.dart';
 
 class UnifiedSearchScreen extends StatefulWidget {
-  const UnifiedSearchScreen({super.key});
+  UnifiedSearchScreen({super.key});
 
   @override
   State<UnifiedSearchScreen> createState() => _UnifiedSearchScreenState();
@@ -92,11 +93,11 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
 
   Widget _buildHeader(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 10, 20, 10),
+      padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
       child: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 22),
+            icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 22),
             onPressed: () => Navigator.pop(context),
           ),
           Expanded(
@@ -114,7 +115,7 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
                 style: const TextStyle(color: Colors.white, fontSize: 15),
                 cursorColor: Wumbleheme.secondaryColor,
                 decoration: InputDecoration(
-                  hintText: 'Buscar comunidades o personas...',
+                  hintText: tr('Buscar comunidades o personas...'),
                   hintStyle: TextStyle(color: Colors.white.withOpacity(0.3), fontSize: 14),
                   prefixIcon: Icon(Icons.search_rounded, color: Colors.white.withOpacity(0.4), size: 20),
                   suffixIcon: _searchController.text.isNotEmpty
@@ -148,9 +149,9 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.search_off_rounded, size: 64, color: Colors.white.withOpacity(0.1)),
-            const SizedBox(height: 16),
-            const Text(
-              'No se encontraron resultados',
+            SizedBox(height: 16),
+            Text(
+              tr('No se encontraron resultados'),
               style: TextStyle(color: Colors.white38, fontSize: 16),
             ),
           ],
@@ -159,12 +160,12 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
     }
 
     return CustomScrollView(
-      physics: const BouncingScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       slivers: [
         if (hasCommunities) ...[
           _buildSectionHeader('Comunidades'),
           SliverPadding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             sliver: SliverGrid(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -182,7 +183,7 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
         if (hasUsers) ...[
           _buildSectionHeader('Personas'),
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
@@ -199,7 +200,7 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
             ),
           ),
         ],
-        const SliverToBoxAdapter(child: SizedBox(height: 40)),
+        SliverToBoxAdapter(child: SizedBox(height: 40)),
       ],
     );
   }
@@ -207,7 +208,7 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
   Widget _buildSectionHeader(String title) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 24, 20, 10),
+        padding: EdgeInsets.fromLTRB(20, 24, 20, 10),
         child: Row(
           children: [
             Container(
@@ -218,7 +219,7 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Text(
               title,
               style: const TextStyle(
@@ -240,10 +241,10 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.explore_rounded, size: 80, color: Colors.white),
-            const SizedBox(height: 16),
-            const Text(
-              'Explora Wumble',
+            Icon(Icons.explore_rounded, size: 80, color: Colors.white),
+            SizedBox(height: 16),
+            Text(
+              tr('Explora Wumble'),
               style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
