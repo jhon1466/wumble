@@ -117,6 +117,34 @@ void main() async {
   runApp(const WumbleCloneApp());
 }
 
+/// Wraps the app so it can be fully rebuilt from scratch (used to apply a
+/// language change cleanly, avoiding a black screen from in-place MaterialApp
+/// rebuilds).
+class RestartWidget extends StatefulWidget {
+  final Widget child;
+  const RestartWidget({super.key, required this.child});
+
+  static void restart(BuildContext context) {
+    context.findAncestorStateOfType<_RestartWidgetState>()?.restartApp();
+  }
+
+  @override
+  State<RestartWidget> createState() => _RestartWidgetState();
+}
+
+class _RestartWidgetState extends State<RestartWidget> {
+  Key _key = UniqueKey();
+
+  void restartApp() {
+    setState(() => _key = UniqueKey());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return KeyedSubtree(key: _key, child: widget.child);
+  }
+}
+
 class WumbleCloneApp extends StatelessWidget {
   const WumbleCloneApp({super.key});
 
@@ -138,28 +166,28 @@ class WumbleCloneApp extends StatelessWidget {
           BlocProvider(create: (_) => di.sl<NotificationCountBloc>()),
           BlocProvider(create: (_) => ConnectivityCubit()),
         ],
-        child: ValueListenableBuilder<Locale>(
-          valueListenable: LocaleController.locale,
-          builder: (context, locale, _) {
-            return MaterialApp(
-              navigatorKey: navigatorKey,
-              title: tr('Wumble'),
-              debugShowCheckedModeBanner: false,
-              theme: Wumbleheme.darkTheme,
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: LocaleController.supported,
-              locale: locale,
-              builder: (context, child) {
-                return ConnectivityWrapper(child: child!);
-              },
-              home: const DynamicThemeWrapper(child: AuthWrapper()),
-            );
-          },
+        // RestartWidget is INSIDE the providers so a language restart rebuilds
+        // only the MaterialApp/navigator (clean, no black screen) without
+        // disposing the singleton blocs above.
+        child: RestartWidget(
+          child: MaterialApp(
+            navigatorKey: navigatorKey,
+            title: 'Wumble',
+            debugShowCheckedModeBanner: false,
+            theme: Wumbleheme.darkTheme,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: LocaleController.supported,
+            locale: LocaleController.locale.value,
+            builder: (context, child) {
+              return ConnectivityWrapper(child: child!);
+            },
+            home: const DynamicThemeWrapper(child: AuthWrapper()),
+          ),
         ),
       ),
     );

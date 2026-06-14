@@ -9,6 +9,7 @@ import 'package:wumble/features/profile/presentation/blocked_users_screen.dart';
 import 'package:wumble/core/localization/locale_controller.dart';
 import 'package:wumble/core/localization/app_localizations.dart';
 import 'package:wumble/core/theme.dart';
+import 'package:wumble/main.dart' show RestartWidget, navigatorKey;
 import 'package:path_provider/path_provider.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -415,14 +416,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   trailing: selected
                       ? const Icon(Icons.check, color: Wumbleheme.secondaryColor)
                       : null,
-                  onTap: () {
-                    // Close the sheet FIRST, then switch locale on the next
-                    // frame so the MaterialApp rebuild doesn't happen while a
-                    // modal route is still open (which caused a black screen).
+                  onTap: () async {
+                    if (LocaleController.locale.value.languageCode == code) {
+                      Navigator.pop(ctx);
+                      return;
+                    }
                     Navigator.pop(ctx);
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      LocaleController.setLocale(code);
-                    });
+                    await LocaleController.setLocale(code);
+                    // Clean full rebuild of the app tree in the new language.
+                    final root = navigatorKey.currentContext;
+                    if (root != null) RestartWidget.restart(root);
                   },
                 );
               }),
