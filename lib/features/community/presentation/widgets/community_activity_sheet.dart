@@ -270,15 +270,38 @@ class _ActivitySheetState extends State<_ActivitySheet> {
                         return Column(
                           children: [
                             if (owner.isNotEmpty)
-                              _section('Dueño', Icons.workspace_premium, owner,
+                              _section(tr('Dueño'), Icons.workspace_premium, owner,
                                   showAll: false),
                             if (admins.isNotEmpty)
-                              _section('Administradores', Icons.shield, admins),
+                              _section(tr('Administradores'), Icons.shield, admins),
                             if (mods.isNotEmpty)
-                              _section('Mods', Icons.verified_user, mods),
+                              _section(tr('Mods'), Icons.verified_user, mods),
                           ],
                         );
                       },
+                    ),
+                    // Always-available entry to the full members list.
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          onPressed: _openMembers,
+                          icon: const Icon(Icons.people_alt_rounded,
+                              color: Wumbleheme.secondaryColor, size: 18),
+                          label: Text(
+                            '${tr('Ver todos los miembros')} (${_fmtCount(widget.community.membersCount)})',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            side: BorderSide(
+                                color: Wumbleheme.secondaryColor.withOpacity(0.4)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14)),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),

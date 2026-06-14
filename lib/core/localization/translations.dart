@@ -950,6 +950,7 @@ const Map<String, String> _en = {
   'SEGUIR': 'FOLLOW',
   'SIGUIENDO': 'FOLLOWING',
   'Creado el': 'Created on',
+  'Ver todos los miembros': 'View all members',
 };
 
 // ───────────────────────────── Russian ─────────────────────────────
@@ -1884,4 +1885,5 @@ const Map<String, String> _ru = {
   'SEGUIR': 'ПОДПИСАТЬСЯ',
   'SIGUIENDO': 'ВЫ ПОДПИСАНЫ',
   'Creado el': 'Создано',
+  'Ver todos los miembros': 'Показать всех участников',
 };
