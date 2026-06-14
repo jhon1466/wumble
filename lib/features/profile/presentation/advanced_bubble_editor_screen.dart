@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../../../core/theme.dart';
 import '../../chat/domain/chat_model.dart';
 import '../../chat/presentation/widgets/chat_bubble.dart';
@@ -28,7 +29,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
   @override
   void initState() {
     super.initState();
-    _currentStyle = widget.initialStyle ?? const ChatBubbleStyle(
+    _currentStyle = widget.initialStyle ?? ChatBubbleStyle(
       id: 'custom_draft',
       name: 'Mi Burbuja',
       backgroundColorValue: 0xFF2E7D32,
@@ -39,7 +40,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
 
   int _selectedLayerIndex = -1;
 
-  AdvancedBubbleConfig get _config => _currentStyle.advancedConfig ?? const AdvancedBubbleConfig();
+  AdvancedBubbleConfig get _config => _currentStyle.advancedConfig ?? AdvancedBubbleConfig();
 
   void _updateConfig(AdvancedBubbleConfig newConfig) {
     _updateStyle(_currentStyle.copyWith(advancedConfig: newConfig));
@@ -64,17 +65,17 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Workshop de Burbujas', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(tr('Workshop de Burbujas'), style: TextStyle(fontWeight: FontWeight.bold)),
         actions: [
           TextButton(
             onPressed: () => _showPublishDialog(),
-            child: const Text('PUBLICAR', style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold)),
+            child: Text(tr('PUBLICAR'), style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold)),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context, _currentStyle);
             },
-            child: const Text('GUARDAR', style: TextStyle(color: Wumbleheme.primaryColor, fontWeight: FontWeight.bold)),
+            child: Text(tr('GUARDAR'), style: TextStyle(color: Wumbleheme.primaryColor, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -246,10 +247,10 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
 
   Widget _buildBasicEditor() {
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
       children: [
         const Text('CONFIGURACIÓN BASE', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         _buildColorPickerTile('Fondo Principal', _currentStyle.backgroundColorValue, (color) {
           _updateStyle(_currentStyle.copyWith(backgroundColorValue: color.value));
         }),
@@ -257,8 +258,8 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
           _updateStyle(_currentStyle.copyWith(secondaryColorValue: color.value));
         }),
         ListTile(
-          title: const Text('Eliminar Gradiente', style: TextStyle(color: Colors.redAccent)),
-          leading: const Icon(Icons.format_color_reset, color: Colors.redAccent),
+          title: Text(tr('Eliminar Gradiente'), style: TextStyle(color: Colors.redAccent)),
+          leading: Icon(Icons.format_color_reset, color: Colors.redAccent),
           onTap: () {
             _updateStyle(_currentStyle.copyWith(secondaryColorValue: null));
           },
@@ -266,19 +267,19 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
         _buildColorPickerTile('Color de Texto', _currentStyle.textColorValue, (color) {
           _updateStyle(_currentStyle.copyWith(textColorValue: color.value));
         }),
-        const Divider(color: Colors.white12),
-        const Text('GEOMETRÍA', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 12),
+        Divider(color: Colors.white12),
+        Text('GEOMETRÍA', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+        SizedBox(height: 12),
         SizedBox(height: 100, child: _buildShapeSelector()),
         if (_currentStyle.shapeId == 'custom') ...[
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildCustomPathEditor(),
         ],
-        const Divider(color: Colors.white12),
-        const Text('FONDO PERSONALIZADO', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 12),
+        Divider(color: Colors.white12),
+        Text(tr('FONDO PERSONALIZADO'), style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+        SizedBox(height: 12),
         _buildBackgroundSelector(),
-        const SizedBox(height: 20),
+        SizedBox(height: 20),
       ],
     );
   }
@@ -296,7 +297,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
           onTap: () => _updateStyle(_currentStyle.copyWith(shapeId: shape)),
           child: Container(
             width: 80,
-            margin: const EdgeInsets.only(right: 12),
+            margin: EdgeInsets.only(right: 12),
             decoration: BoxDecoration(
               color: Colors.white10,
               borderRadius: BorderRadius.circular(12),
@@ -306,7 +307,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(shape == 'cloud' ? Icons.cloud : Icons.auto_awesome_mosaic, color: isSelected ? Wumbleheme.primaryColor : Colors.white54),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(shape.toUpperCase(), style: TextStyle(color: isSelected ? Wumbleheme.primaryColor : Colors.white54, fontSize: 10)),
               ],
             ),
@@ -342,12 +343,12 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
                         ? Image.asset(_currentStyle.backgroundImageUrl!, fit: BoxFit.cover)
                         : Image.file(File(_currentStyle.backgroundImageUrl!), fit: BoxFit.cover)),
                   )
-                : const Column(
+                : Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.add_photo_alternate, size: 40, color: Colors.white38),
                       SizedBox(height: 8),
-                      Text('Subir Imagen de Fondo / Textura', style: TextStyle(color: Colors.white38, fontSize: 12)),
+                      Text(tr('Subir Imagen de Fondo / Textura'), style: TextStyle(color: Colors.white38, fontSize: 12)),
                     ],
                   ),
             ),
@@ -371,7 +372,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -420,19 +421,19 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: SwitchListTile(
-            title: const Text('Recortar Capas (Clipping)', style: TextStyle(color: Colors.white, fontSize: 13)),
+            title: Text(tr('Recortar Capas (Clipping)'), style: TextStyle(color: Colors.white, fontSize: 13)),
             subtitle: const Text('Mantiene las capas dentro de la forma de la burbuja', style: TextStyle(color: Colors.white54, fontSize: 10)),
             value: _config.clipLayers,
             activeColor: Wumbleheme.primaryColor,
             onChanged: (val) => _updateConfig(_config.copyWith(clipLayers: val)),
           ),
         ),
-        const Divider(color: Colors.white12),
+        Divider(color: Colors.white12),
         Expanded(
           child: layers.isEmpty
-            ? const Center(child: Text('No hay capas adicionales.', style: TextStyle(color: Colors.white38)))
+            ? Center(child: Text(tr('No hay capas adicionales.'), style: TextStyle(color: Colors.white38)))
             : ReorderableListView.builder(
                 itemCount: layers.length,
                 onReorder: (oldIndex, newIndex) {
@@ -563,17 +564,17 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
 
   Widget _buildPaddingEditor() {
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
       children: [
         const Text('MARGENES DEL TEXTO (INTERNO)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        const Text('Controla dónde aparece el texto dentro de la burbuja.', style: TextStyle(color: Colors.white54, fontSize: 11)),
+        Text(tr('Controla dónde aparece el texto dentro de la burbuja.'), style: TextStyle(color: Colors.white54, fontSize: 11)),
         const SizedBox(height: 16),
         _buildSlider('Superior', _config.paddingTop, 0, 50, (val) => _updateConfig(_config.copyWith(paddingTop: val))),
         _buildSlider('Inferior', _config.paddingBottom, 0, 50, (val) => _updateConfig(_config.copyWith(paddingBottom: val))),
         _buildSlider('Izquierda', _config.paddingLeft, 0, 50, (val) => _updateConfig(_config.copyWith(paddingLeft: val))),
         _buildSlider('Derecha', _config.paddingRight, 0, 50, (val) => _updateConfig(_config.copyWith(paddingRight: val))),
         const Divider(color: Colors.white12),
-        const Text('ESTILO DE TEXTO', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        Text(tr('ESTILO DE TEXTO'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         const SizedBox(height: 16),
         _buildFontSelector(),
         const SizedBox(height: 16),
@@ -590,7 +591,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Tipografía', style: TextStyle(color: Colors.white70, fontSize: 12)),
+        Text(tr('Tipografía'), style: TextStyle(color: Colors.white70, fontSize: 12)),
         const SizedBox(height: 8),
         SizedBox(
           height: 40,
@@ -622,10 +623,10 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
 
   Widget _build9SliceEditor() {
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
       children: [
         const Text('9-SLICE (ESTIRAMIENTO DEL FONDO)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        const Text('Define los bordes fijos que no deben deformarse al estirar la imagen.', style: TextStyle(color: Colors.white54, fontSize: 11)),
+        Text(tr('Define los bordes fijos que no deben deformarse al estirar la imagen.'), style: TextStyle(color: Colors.white54, fontSize: 11)),
         const SizedBox(height: 20),
         _buildSlider('Guía Superior', _config.sliceTop, 0, 100, (val) => _updateConfig(_config.copyWith(sliceTop: val))),
         _buildSlider('Guía Inferior', _config.sliceBottom, 0, 100, (val) => _updateConfig(_config.copyWith(sliceBottom: val))),
@@ -671,7 +672,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
 
   Widget _buildColorPickerTile(String title, int currentColorValue, Function(Color) onColorChanged) {
     return ListTile(
-      title: Text(title, style: const TextStyle(color: Colors.white)),
+      title: Text(title, style: TextStyle(color: Colors.white)),
       trailing: Container(
         width: 30,
         height: 30,
@@ -696,7 +697,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('OK'),
+                child: Text(tr('OK')),
               ),
             ],
           ),
@@ -717,7 +718,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
         builder: (context, setStateBuilder) {
           return AlertDialog(
             backgroundColor: Wumbleheme.surfaceColor,
-            title: const Text('Publicar en Workshop', style: TextStyle(color: Colors.white)),
+            title: Text(tr('Publicar en Workshop'), style: TextStyle(color: Colors.white)),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -750,7 +751,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('CANCELAR', style: TextStyle(color: Colors.white54)),
+                child: Text(tr('CANCELAR'), style: TextStyle(color: Colors.white54)),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Wumbleheme.primaryColor, foregroundColor: Colors.white),
@@ -758,7 +759,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
                   Navigator.pop(context); // Close dialog
                   await _publishPack(nameCtrl.text, descCtrl.text, selectedCategory);
                 },
-                child: const Text('PUBLICAR'),
+                child: Text(tr('PUBLICAR')),
               ),
             ],
           );
@@ -775,7 +776,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
     showDialog(
       context: context, 
       barrierDismissible: false,
-      builder: (_) => const Center(child: CircularProgressIndicator()),
+      builder: (_) => Center(child: CircularProgressIndicator()),
     );
 
     try {
@@ -796,7 +797,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
       
       if (mounted) {
         Navigator.pop(context); // close loading
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('¡Publicado en el Workshop! 🎉')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('¡Publicado en el Workshop! 🎉'))));
       }
     } catch (e) {
       if (mounted) {
@@ -859,7 +860,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        const Text('Fondo de la Burbuja (Imagen o Animación)', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+        Text(tr('Fondo de la Burbuja (Imagen o Animación)'), style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
         const SizedBox(height: 16),
         Center(
           child: SizedBox(
@@ -869,7 +870,7 @@ class _AdvancedBubbleEditorScreenState extends State<AdvancedBubbleEditorScreen>
           ),
         ),
         const SizedBox(height: 24),
-        const Text('Ornamentos (Esquinas)', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+        Text(tr('Ornamentos (Esquinas)'), style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
         const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

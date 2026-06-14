@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,7 @@ class StatusCreationSheet extends StatefulWidget {
   final String communityId;
   final String? communityAvatarUrl;
   final String? communityAvatarFrameUrl;
-  const StatusCreationSheet({
+  StatusCreationSheet({
     super.key, 
     required this.communityId,
     this.communityAvatarUrl,
@@ -84,7 +85,7 @@ class _StatusCreationSheetState extends State<StatusCreationSheet> {
     // Validate poll if present
     if (pollOptions.isNotEmpty && pollOptions.length < 2) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Una encuesta requiere al menos 2 opciones')),
+        SnackBar(content: Text(tr('Una encuesta requiere al menos 2 opciones'))),
       );
       return;
     }
@@ -157,7 +158,7 @@ class _StatusCreationSheetState extends State<StatusCreationSheet> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,15 +171,15 @@ class _StatusCreationSheetState extends State<StatusCreationSheet> {
                   radius: 20,
                   showOnlineIndicator: false,
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Expanded(
                   child: TextField(
                     controller: _controller,
                     maxLines: 6,
                     minLines: 1,
                     autofocus: true,
-                    style: const TextStyle(color: Colors.white, fontSize: 16),
-                    decoration: const InputDecoration(
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    decoration: InputDecoration(
                       hintText: '¿Qué estás pensando?',
                       hintStyle: TextStyle(color: Colors.white38),
                       border: InputBorder.none,
@@ -192,7 +193,7 @@ class _StatusCreationSheetState extends State<StatusCreationSheet> {
             ),
 
             if (_images.isNotEmpty || _selectedStickerUrl != null) ...[
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               SizedBox(
                 height: 100,
                 child: ListView(
@@ -268,9 +269,9 @@ class _StatusCreationSheetState extends State<StatusCreationSheet> {
 
             // Integrated Poll Creation UI
             if (_pollOptionControllers.isNotEmpty) ...[
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.05),
                   borderRadius: BorderRadius.circular(16),
@@ -279,11 +280,11 @@ class _StatusCreationSheetState extends State<StatusCreationSheet> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         Icon(Icons.poll_outlined, size: 16, color: Wumbleheme.primaryColor),
                         SizedBox(width: 8),
-                        Text('Opciones de encuesta', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                        Text(tr('Opciones de encuesta'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
                       ],
                     ),
                     const SizedBox(height: 12),
@@ -319,7 +320,7 @@ class _StatusCreationSheetState extends State<StatusCreationSheet> {
                       TextButton.icon(
                         onPressed: _addPollOption,
                         icon: const Icon(Icons.add, size: 18),
-                        label: const Text('Añadir opción'),
+                        label: Text(tr('Añadir opción')),
                         style: TextButton.styleFrom(foregroundColor: Wumbleheme.primaryColor, padding: EdgeInsets.zero, visualDensity: VisualDensity.compact),
                       ),
                   ],
@@ -356,7 +357,7 @@ class _StatusCreationSheetState extends State<StatusCreationSheet> {
                   ),
                   child: _isPosting 
                     ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                    : const Text('Publicar', style: TextStyle(fontWeight: FontWeight.bold)),
+                    : Text(tr('Publicar'), style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
               ],
             ),

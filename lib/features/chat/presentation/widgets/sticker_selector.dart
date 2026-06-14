@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -152,10 +153,10 @@ class _StickerSelectorState extends State<StickerSelector> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Agregar a favoritos', style: TextStyle(color: Colors.white)),
-        content: const Text('¿Deseas guardar este sticker en tus favoritos?', style: TextStyle(color: Colors.white70)),
+        title: Text(tr('Agregar a favoritos'), style: TextStyle(color: Colors.white)),
+        content: Text(tr('¿Deseas guardar este sticker en tus favoritos?'), style: TextStyle(color: Colors.white70)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(tr('Cancelar'))),
           TextButton(
             onPressed: () async {
               Navigator.pop(ctx);
@@ -170,7 +171,7 @@ class _StickerSelectorState extends State<StickerSelector> {
                 }
               }
             }, 
-            child: const Text('Agregar', style: TextStyle(color: Wumbleheme.secondaryColor))
+            child: Text(tr('Agregar'), style: TextStyle(color: Wumbleheme.secondaryColor))
           ),
         ],
       ),
@@ -182,17 +183,17 @@ class _StickerSelectorState extends State<StickerSelector> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Quitar de favoritos', style: TextStyle(color: Colors.white)),
-        content: const Text('¿Deseas eliminar este sticker de tus favoritos?', style: TextStyle(color: Colors.white70)),
+        title: Text(tr('Quitar de favoritos'), style: TextStyle(color: Colors.white)),
+        content: Text(tr('¿Deseas eliminar este sticker de tus favoritos?'), style: TextStyle(color: Colors.white70)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(tr('Cancelar'))),
           TextButton(
             onPressed: () async {
               Navigator.pop(ctx);
               await context.read<ChatRepository>().removeStickerFromFavorites(_currentUserId, url);
               if (mounted) setState(() {}); // Trigger FutureBuilder rebuild
             }, 
-            child: const Text('Eliminar', style: TextStyle(color: Colors.redAccent))
+            child: Text(tr('Eliminar'), style: TextStyle(color: Colors.redAccent))
           ),
         ],
       ),

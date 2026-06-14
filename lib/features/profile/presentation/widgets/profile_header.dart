@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -152,64 +153,64 @@ class ProfileHeader extends StatelessWidget {
                                   }
                                 },
                                 itemBuilder: (context) => [
-                                  const PopupMenuItem(
+                                  PopupMenuItem(
                                     value: 'edit',
                                     child: Row(
                                       children: [
                                         Icon(Icons.edit_outlined, size: 20),
                                         SizedBox(width: 10),
-                                        Text('Editar Perfil'),
+                                        Text(tr('Editar Perfil')),
                                       ],
                                     ),
                                   ),
-                                  const PopupMenuItem(
+                                  PopupMenuItem(
                                     value: 'drafts',
                                     child: Row(
                                       children: [
                                         Icon(Icons.description_outlined, size: 20),
                                         SizedBox(width: 10),
-                                        Text('Borradores'),
+                                        Text(tr('Borradores')),
                                       ],
                                     ),
                                   ),
-                                  const PopupMenuItem(
+                                  PopupMenuItem(
                                     value: 'status',
                                     child: Row(
                                       children: [
                                         Icon(Icons.add_reaction_outlined, size: 20),
                                         SizedBox(width: 10),
-                                        Text('Cambiar Estado'),
+                                        Text(tr('Cambiar Estado')),
                                       ],
                                     ),
                                   ),
-                                  const PopupMenuItem(
+                                  PopupMenuItem(
                                     value: 'frames',
                                     child: Row(
                                       children: [
                                         Icon(Icons.style_outlined, size: 20),
                                         SizedBox(width: 10),
-                                        Text('Inventario de Marcos'),
+                                        Text(tr('Inventario de Marcos')),
                                       ],
                                     ),
                                   ),
-                                  const PopupMenuItem(
+                                  PopupMenuItem(
                                     value: 'settings',
                                     child: Row(
                                       children: [
                                         Icon(Icons.settings_outlined, size: 20),
                                         SizedBox(width: 10),
-                                        Text('Ajustes'),
+                                        Text(tr('Ajustes')),
                                       ],
                                     ),
                                   ),
                                   const PopupMenuDivider(),
-                                  const PopupMenuItem(
+                                  PopupMenuItem(
                                     value: 'logout',
                                     child: Row(
                                       children: [
                                         Icon(Icons.logout, color: Colors.red, size: 20),
                                         SizedBox(width: 10),
-                                        Text('Cerrar Sesión', style: TextStyle(color: Colors.red)),
+                                        Text(tr('Cerrar Sesión'), style: TextStyle(color: Colors.red)),
                                       ],
                                     ),
                                   ),
@@ -222,13 +223,13 @@ class ProfileHeader extends StatelessWidget {
                                   // Handle report or other actions
                                 },
                                 itemBuilder: (context) => [
-                                  const PopupMenuItem(
+                                  PopupMenuItem(
                                     value: 'report',
                                     child: Row(
                                       children: [
                                         Icon(Icons.report_problem_outlined, size: 20),
                                         SizedBox(width: 10),
-                                        Text('Reportar'),
+                                        Text(tr('Reportar')),
                                       ],
                                     ),
                                   ),
@@ -527,11 +528,11 @@ class ProfileHeader extends StatelessWidget {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Cerrar Sesión'),
-        content: const Text('¿Estás seguro de que quieres salir?'),
+        title: Text(tr('Cerrar Sesión')),
+        content: Text(tr('¿Estás seguro de que quieres salir?')),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancelar')),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Salir', style: TextStyle(color: Colors.red))),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(tr('Cancelar'))),
+          TextButton(onPressed: () => Navigator.pop(context, true), child: Text(tr('Salir'), style: TextStyle(color: Colors.red))),
         ],
       ),
     );
@@ -717,7 +718,7 @@ class ProfileHeader extends StatelessWidget {
                     );
                     Navigator.pop(context);
                   },
-                  child: const Text('Guardar Estado', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  child: Text(tr('Guardar Estado'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                 ),
               ),
             ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../../../../core/theme.dart';
 import '../domain/user_model.dart';
 import '../../community/domain/reputation_service.dart';
@@ -46,7 +47,7 @@ class LevelRankScreen extends StatelessWidget {
       backgroundColor: Wumbleheme.backgroundColor,
       appBar: AppBar(
         backgroundColor: Wumbleheme.backgroundColor,
-        title: const Text('Niveles y Títulos'),
+        title: Text(tr('Niveles y Títulos')),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

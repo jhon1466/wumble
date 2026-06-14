@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -16,7 +17,7 @@ class CreateQuizScreen extends StatefulWidget {
   final Color themeColor;
   final Quiz? quiz;
 
-  const CreateQuizScreen({
+  CreateQuizScreen({
     super.key, 
     required this.communityId, 
     this.themeColor = Colors.blueAccent,
@@ -92,7 +93,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
 
   Future<void> _submitQuiz() async {
     if (_titleController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ingresa un título')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Ingresa un título'))));
       return;
     }
 
@@ -221,7 +222,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
           OutlinedButton.icon(
             onPressed: _addQuestion,
             icon: const Icon(Icons.add),
-            label: const Text('Agregar Pregunta'),
+            label: Text(tr('Agregar Pregunta')),
             style: OutlinedButton.styleFrom(
               foregroundColor: widget.themeColor,
               side: BorderSide(color: widget.themeColor),
@@ -302,7 +303,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
                 child: Text('${index + 1}', style: const TextStyle(color: Colors.white, fontSize: 12)),
               ),
               const SizedBox(width: 12),
-              const Text('Pregunta', style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold)),
+              Text(tr('Pregunta'), style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold)),
               const Spacer(),
               if (_questions.length > 1)
                 IconButton(
@@ -324,7 +325,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          const Text('Opciones (Selecciona la correcta)', style: TextStyle(color: Colors.white54, fontSize: 12)),
+          Text(tr('Opciones (Selecciona la correcta)'), style: TextStyle(color: Colors.white54, fontSize: 12)),
           const SizedBox(height: 8),
           ...List.generate(4, (optIdx) => Padding(
             padding: const EdgeInsets.only(bottom: 8),

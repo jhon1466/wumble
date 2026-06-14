@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
@@ -32,12 +33,12 @@ import 'bot_mini_profile.dart'; // Add this
 
 const String _youtubeSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>';
 const String _facebookSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978 1.602 0 2.703.117 2.703.117v3.382h-1.728c-1.903 0-2.236 1.062-2.236 2.15v2.474h3.334L16.42 15.71h-2.923v7.98H9.101" fill="currentColor"/></svg>';
-const String _instagramSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.355 1.079 2.126 1.384c.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.079-1.354 1.384-2.126c.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.354-1.079-2.126-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.584-.071 4.85c-.055 1.17-.249 1.805-.415 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.164-1.056.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.584-.015-4.85-.071c-1.17-.055-1.805-.249-2.227-.415-.562-.217-.96-.477-1.382-.896-.419-.42-.819-.679-1.381-.896-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.015-3.584.071-4.85c.055-1.17.249-1.805.415-2.227.217-.562.477-.96.896-1.382.42-.419.819-.679 1.381-.896.422-.164 1.057-.36 2.227-.413 1.266-.057 1.646-.07 4.85-.07zM12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" fill="currentColor"/></svg>';
-const String _xSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" fill="currentColor"/></svg>';
-const String _discordSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2758-3.68-.2758-5.4876 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9945a.0771.0771 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1971.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z" fill="currentColor"/></svg>';
-const String _twitchSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" fill="currentColor"/></svg>';
-const String _githubSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="currentColor"/></svg>';
-const String _steamSvg = '''
+String _instagramSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.355 1.079 2.126 1.384c.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.079-1.354 1.384-2.126c.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.354-1.079-2.126-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.584-.071 4.85c-.055 1.17-.249 1.805-.415 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.164-1.056.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.584-.015-4.85-.071c-1.17-.055-1.805-.249-2.227-.415-.562-.217-.96-.477-1.382-.896-.419-.42-.819-.679-1.381-.896-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.015-3.584.071-4.85c.055-1.17.249-1.805.415-2.227.217-.562.477-.96.896-1.382.42-.419.819-.679 1.381-.896.422-.164 1.057-.36 2.227-.413 1.266-.057 1.646-.07 4.85-.07zM12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" fill="currentColor"/></svg>';
+String _xSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" fill="currentColor"/></svg>';
+String _discordSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2758-3.68-.2758-5.4876 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9945a.0771.0771 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1971.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z" fill="currentColor"/></svg>';
+String _twitchSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" fill="currentColor"/></svg>';
+String _githubSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="currentColor"/></svg>';
+String _steamSvg = '''
 <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z" fill="currentColor"/>
 </svg>
@@ -48,7 +49,7 @@ class MemberMiniProfile extends StatefulWidget {
   final CommunityMember? member;
   final String? communityId;
 
-  const MemberMiniProfile({
+  MemberMiniProfile({
     super.key,
     required this.user,
     this.member,
@@ -781,7 +782,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
               color: Colors.redAccent,
               onTap: () => _handleExpulsion(context, type: 'ban_perm'),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
           ],
         ),
       ),
@@ -792,7 +793,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
     return ListTile(
       onTap: onTap,
       leading: Container(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(color: color.withOpacity(0.1), shape: BoxShape.circle),
         child: Icon(icon, color: color, size: 24),
       ),
@@ -816,11 +817,11 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
         successMsg = 'Usuario expulsado correctamente';
         break;
       case 'ban_24h':
-        banExpiration = DateTime.now().add(const Duration(hours: 24));
+        banExpiration = DateTime.now().add(Duration(hours: 24));
         successMsg = 'Usuario sancionado por 24 horas';
         break;
       case 'ban_72h':
-        banExpiration = DateTime.now().add(const Duration(hours: 72));
+        banExpiration = DateTime.now().add(Duration(hours: 72));
         successMsg = 'Usuario sancionado por 72 horas';
         break;
       case 'ban_perm':
@@ -855,8 +856,8 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF2B2D31),
-        title: const Text('Advertir Miembro', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF2B2D31),
+        title: Text(tr('Advertir Miembro'), style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -865,10 +866,10 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
               'Estás por enviar una advertencia oficial a ${widget.user.displayName}. Indica el motivo:',
               style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 13),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             TextField(
               controller: controller,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white),
               maxLines: 3,
               decoration: InputDecoration(
                 hintText: 'Ej: Comportamiento inadecuado, spam...',
@@ -886,7 +887,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar', style: TextStyle(color: Colors.white54)),
+            child: Text(tr('Cancelar'), style: TextStyle(color: Colors.white54)),
           ),
           TextButton(
             onPressed: () async {
@@ -907,7 +908,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                 
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Advertencia enviada correctamente')),
+                    SnackBar(content: Text(tr('Advertencia enviada correctamente'))),
                   );
                 }
               } catch (e) {
@@ -918,7 +919,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                 }
               }
             },
-            child: const Text('Enviar', style: TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+            child: Text(tr('Enviar'), style: TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -985,8 +986,8 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
 
     if (!isOwner && !user.showFollows) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Este usuario ha configurado su lista como privada.'),
+        SnackBar(
+          content: Text(tr('Este usuario ha configurado su lista como privada.')),
           backgroundColor: Colors.orangeAccent,
         ),
       );
@@ -1007,11 +1008,11 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
   }
 
   Widget _buildModerationSection(BuildContext context) {
-    if (widget.communityId == null) return const SizedBox();
+    if (widget.communityId == null) return SizedBox();
     
     final state = context.read<CommunityContextBloc>().state;
     final currentUserRef = state.memberProfile;
-    if (currentUserRef == null) return const SizedBox();
+    if (currentUserRef == null) return SizedBox();
 
     final isModerator = currentUserRef.role == 'leader' || currentUserRef.role == 'curator';
     final isOwnProfile = currentUserRef.userId == widget.user.id;
@@ -1022,10 +1023,10 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       canModerate = false;
     }
 
-    if (!canModerate) return const SizedBox();
+    if (!canModerate) return SizedBox();
 
     return Padding(
-      padding: const EdgeInsets.only(top: 24, left: 20, right: 20),
+      padding: EdgeInsets.only(top: 24, left: 20, right: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -1091,7 +1092,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
     if (currentUser == null) return;
     if (currentUser.uid == widget.user.id) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No puedes enviarte un mensaje a ti mismo')),
+        SnackBar(content: Text(tr('No puedes enviarte un mensaje a ti mismo'))),
       );
       return;
     }
@@ -1191,7 +1192,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF2B2D31),
-        title: const Text('¿Bloquear usuario?', style: TextStyle(color: Colors.white)),
+        title: Text(tr('¿Bloquear usuario?'), style: TextStyle(color: Colors.white)),
         content: Text(
           'No podrás ver sus mensajes ni interactuar con sus publicaciones.',
           style: TextStyle(color: Colors.white.withOpacity(0.7)),
@@ -1199,7 +1200,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar', style: TextStyle(color: Colors.white54)),
+            child: Text(tr('Cancelar'), style: TextStyle(color: Colors.white54)),
           ),
           TextButton(
             onPressed: () {
@@ -1214,7 +1215,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
               }
               Navigator.pop(ctx);
             },
-            child: const Text('Bloquear', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+            child: Text(tr('Bloquear'), style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -1227,7 +1228,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF2B2D31),
-        title: const Text('Reportar Usuario', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Reportar Usuario'), style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1257,7 +1258,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar', style: TextStyle(color: Colors.white54)),
+            child: Text(tr('Cancelar'), style: TextStyle(color: Colors.white54)),
           ),
           TextButton(
             onPressed: () {
@@ -1276,7 +1277,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
               }
               Navigator.pop(ctx);
             },
-            child: const Text('Enviar Reporte', style: TextStyle(color: Wumbleheme.primaryColor, fontWeight: FontWeight.bold)),
+            child: Text(tr('Enviar Reporte'), style: TextStyle(color: Wumbleheme.primaryColor, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -1329,7 +1330,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       isScrollControlled: true,
       builder: (context) => Container(
         padding: const EdgeInsets.all(24),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Color(0xFF000000), // Pure black as requested/in screenshot
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         ),
@@ -1467,7 +1468,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                     // Refresh local data
 
                   },
-                  child: const Text('Guardar Estado', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  child: Text(tr('Guardar Estado'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
@@ -1510,7 +1511,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                 : Icon(icon, color: textColor, size: 24),
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           label,
           style: TextStyle(
@@ -1539,7 +1540,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       borderRadius: BorderRadius.circular(16),
       child: Container(
         width: isFullWidth ? double.infinity : null,
-        padding: const EdgeInsets.symmetric(vertical: 14),
+        padding: EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(16),
@@ -1580,7 +1581,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
           right: 20,
           bottom: MediaQuery.of(context).padding.bottom + 20,
         ),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Color(0xFF18191C),
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
@@ -1606,7 +1607,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             const SizedBox(height: 16),
             ListTile(
               leading: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white70),
-              title: const Text('Editar Estado', style: TextStyle(color: Colors.white)),
+              title: Text(tr('Editar Estado'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 _showQuickStatusEditor(context, member);
@@ -1614,7 +1615,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             ),
             ListTile(
               leading: const Icon(Icons.palette_outlined, color: Colors.white70),
-              title: const Text('Color de Tema', style: TextStyle(color: Colors.white)),
+              title: Text(tr('Color de Tema'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 _showThemeColorPicker(context, member, profileUser);
@@ -1622,7 +1623,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             ),
             ListTile(
               leading: const Icon(Icons.aspect_ratio_rounded, color: Colors.white70),
-              title: const Text('Ajustar Posición del Banner', style: TextStyle(color: Colors.white)),
+              title: Text(tr('Ajustar Posición del Banner'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 setState(() {
@@ -1633,7 +1634,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
             ),
             ListTile(
               leading: const Icon(Icons.account_circle_outlined, color: Colors.white70),
-              title: const Text('Editar Perfil Completo', style: TextStyle(color: Colors.white)),
+              title: Text(tr('Editar Perfil Completo'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 
@@ -1743,7 +1744,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
                     setState(() => _tempThemeColor = null); // Reset preview
 
                   },
-                  child: const Text('Guardar Color', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  child: Text(tr('Guardar Color'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
@@ -1766,15 +1767,15 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
 
     if (lowerUrl.contains('youtube.com') || lowerUrl.contains('youtu.be')) {
       svgData = _youtubeSvg;
-      iconColor = const Color(0xFFFF0000);
+      iconColor = Color(0xFFFF0000);
       platform = 'YouTube';
     } else if (lowerUrl.contains('facebook.com') || lowerUrl.contains('fb.com')) {
       svgData = _facebookSvg;
-      iconColor = const Color(0xFF1877F2);
+      iconColor = Color(0xFF1877F2);
       platform = 'Facebook';
     } else if (lowerUrl.contains('instagram.com')) {
       svgData = _instagramSvg;
-      iconColor = const Color(0xFFE4405F);
+      iconColor = Color(0xFFE4405F);
       platform = 'Instagram';
     } else if (lowerUrl.contains('twitter.com') || lowerUrl.contains('x.com')) {
       svgData = _xSvg;
@@ -1782,11 +1783,11 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       platform = 'X';
     } else if (lowerUrl.contains('discord.gg') || lowerUrl.contains('discord.com')) {
       svgData = _discordSvg;
-      iconColor = const Color(0xFF5865F2);
+      iconColor = Color(0xFF5865F2);
       platform = 'Discord';
     } else if (lowerUrl.contains('twitch.tv')) {
       svgData = _twitchSvg;
-      iconColor = const Color(0xFF9146FF);
+      iconColor = Color(0xFF9146FF);
       platform = 'Twitch';
     } else if (lowerUrl.contains('github.com')) {
       svgData = _githubSvg;
@@ -1794,7 +1795,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
       platform = 'GitHub';
     } else if (lowerUrl.contains('steamcommunity.com') || lowerUrl.contains('steampowered.com')) {
       svgData = _steamSvg;
-      iconColor = const Color(0xFF171A21);
+      iconColor = Color(0xFF171A21);
       platform = 'Steam';
     } else {
       icon = Icons.link_rounded;
@@ -1870,7 +1871,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: color,
           shape: BoxShape.circle,
@@ -1899,7 +1900,7 @@ class _MemberMiniProfileState extends State<MemberMiniProfile> {
           _tempAlignmentY = null;
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Posición del banner guardada')),
+          SnackBar(content: Text(tr('Posición del banner guardada'))),
         );
       }
     } catch (e) {

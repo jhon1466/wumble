@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:wumble/features/profile/domain/user_model.dart';
 import 'package:wumble/features/profile/domain/profile_repository.dart';
 import 'package:wumble/core/theme.dart';
@@ -114,7 +115,7 @@ class _FollowsListScreenState extends State<FollowsListScreen> {
           Text(_error!, style: const TextStyle(color: Colors.white70)),
           TextButton(
             onPressed: _fetchPage,
-            child: const Text('Reintentar', style: TextStyle(color: Wumbleheme.secondaryColor)),
+            child: Text(tr('Reintentar'), style: TextStyle(color: Wumbleheme.secondaryColor)),
           ),
         ],
       ),

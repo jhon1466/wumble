@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../domain/chat_model.dart';
 import '../domain/bubble_pack_model.dart';
 import 'widgets/chat_bubble.dart';
@@ -25,7 +26,7 @@ class _BubbleShopScreenState extends State<BubbleShopScreen> {
     return Scaffold(
       backgroundColor: Wumbleheme.backgroundColor,
       appBar: AppBar(
-        title: const Text('Workshop (Comunidad)'),
+        title: Text(tr('Workshop (Comunidad)')),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -228,7 +229,7 @@ class _BubbleShopScreenState extends State<BubbleShopScreen> {
                   backgroundColor: Wumbleheme.primaryColor,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
-                child: const Text('OBTENER', style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text(tr('OBTENER'), style: TextStyle(fontWeight: FontWeight.bold)),
               ),
             ),
           ),
@@ -361,7 +362,7 @@ class _BubbleShopScreenState extends State<BubbleShopScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Autor', style: TextStyle(color: Colors.white38, fontSize: 10)),
+                        Text(tr('Autor'), style: TextStyle(color: Colors.white38, fontSize: 10)),
                         _CreatorName(creatorId: pack.creatorId ?? '', small: true),
                       ],
                     ),
@@ -372,7 +373,7 @@ class _BubbleShopScreenState extends State<BubbleShopScreen> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('Cerrar', style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text(tr('Cerrar'), style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),
@@ -393,7 +394,7 @@ class _CreatorName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (creatorId.isEmpty) return const Text('Oficial', style: TextStyle(color: Colors.white24, fontSize: 10));
+    if (creatorId.isEmpty) return Text(tr('Oficial'), style: TextStyle(color: Colors.white24, fontSize: 10));
     
     return FutureBuilder<DocumentSnapshot>(
       future: FirebaseFirestore.instance.collection('users').doc(creatorId).get(),

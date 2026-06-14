@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:wumble/core/theme.dart';
 import '../../domain/moderation_models.dart';
 
@@ -6,7 +7,7 @@ class SanctionDialog extends StatefulWidget {
   final String userId;
   final String? targetUsername;
 
-  const SanctionDialog({
+  SanctionDialog({
     super.key,
     required this.userId,
     this.targetUsername,
@@ -89,7 +90,7 @@ class _SanctionDialogState extends State<SanctionDialog> {
                 Expanded(
                   child: TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Cancelar'),
+                    child: Text(tr('Cancelar')),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -103,7 +104,7 @@ class _SanctionDialogState extends State<SanctionDialog> {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     ),
-                    child: const Text('Aplicar', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: Text(tr('Aplicar'), style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],
@@ -187,7 +188,7 @@ class _SanctionDialogState extends State<SanctionDialog> {
 
   void _handleApply() {
     if (_reasonController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Por favor ingresa un motivo.')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Por favor ingresa un motivo.'))));
       return;
     }
 

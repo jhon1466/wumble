@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class ChatDetailScreen extends StatefulWidget {
   final String otherUserId;
   final String? communityId;
 
-  const ChatDetailScreen({
+  ChatDetailScreen({
     super.key,
     required this.chatRoomId,
     required this.otherUserName,
@@ -194,7 +195,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     setState(() { _highlightedMessageId = messageId; });
 
     // 2. Wait for the highlight state to be applied and widget rebuilt
-    await Future.delayed(const Duration(milliseconds: 50));
+    await Future.delayed(Duration(milliseconds: 50));
 
     final key = _messageKeys[messageId];
     
@@ -202,7 +203,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     if (key != null && key.currentContext != null) {
       Scrollable.ensureVisible(
         key.currentContext!,
-        duration: const Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
     } else {
@@ -213,16 +214,16 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
       
       await _scrollController.animateTo(
         estimatedOffset.clamp(0.0, _scrollController.position.maxScrollExtent),
-        duration: const Duration(milliseconds: 400),
+        duration: Duration(milliseconds: 400),
         curve: Curves.easeOutCubic,
       );
 
       // 5. Final try after forced scroll (the widget should be built now as it's in view)
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future.delayed(Duration(milliseconds: 100));
       if (key != null && key.currentContext != null) {
         Scrollable.ensureVisible(
           key.currentContext!,
-          duration: const Duration(milliseconds: 400),
+          duration: Duration(milliseconds: 400),
           curve: Curves.easeInOut,
         );
       }
@@ -230,7 +231,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     
     // Clear highlight after 2 seconds
     _highlightTimer?.cancel();
-    _highlightTimer = Timer(const Duration(seconds: 2), () {
+    _highlightTimer = Timer(Duration(seconds: 2), () {
       if (mounted) {
         setState(() {
           _highlightedMessageId = null;
@@ -270,7 +271,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
 
     // Debounce: write isTyping=true 500ms after the user starts typing
     _typingTimer?.cancel();
-    _typingTimer = Timer(const Duration(milliseconds: 500), () {
+    _typingTimer = Timer(Duration(milliseconds: 500), () {
       if (mounted) {
         _chatRepository.updateTypingStatus(
           widget.chatRoomId,
@@ -283,7 +284,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
 
     // Auto-clear: if user hasn't typed for 5s, clear regardless (user paused mid-message)
     _typingClearTimer?.cancel();
-    _typingClearTimer = Timer(const Duration(seconds: 5), () {
+    _typingClearTimer = Timer(Duration(seconds: 5), () {
       if (mounted) {
         _typingTimer?.cancel();
         _chatRepository.updateTypingStatus(
@@ -601,7 +602,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
         _soloStartTime = DateTime.now();
         debugPrint('ChatDetail: Solo participant detected. Starting 3-min countdown...');
         _soloParticipantTimer?.cancel();
-        _soloParticipantTimer = Timer(const Duration(minutes: 3), () {
+        _soloParticipantTimer = Timer(Duration(minutes: 3), () {
           debugPrint('ChatDetail: Ending solo session due to inactivity (3 mins)');
           _liveBloc.add(EndLiveEvent(widget.chatRoomId));
         });
@@ -943,7 +944,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
       if (await _audioRecorder.hasPermission()) {
         final directory = await Directory.systemTemp.createTemp();
         final path = '${directory.path}/voice_msg.m4a';
-        await _audioRecorder.start(const RecordConfig(), path: path);
+        await _audioRecorder.start(RecordConfig(), path: path);
         HapticFeedback.lightImpact(); // Add haptic feedback
         setState(() {
           _isRecording = true;
@@ -951,7 +952,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
         });
         
         _recordingTimer?.cancel();
-        _recordingTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        _recordingTimer = Timer.periodic(Duration(seconds: 1), (timer) {
           if (mounted) {
             setState(() => _recordingDuration++);
           }
@@ -1056,11 +1057,11 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
 
   void _scrollToBottom() {
     if (_scrollController.hasClients) {
-      Future.delayed(const Duration(milliseconds: 100), () {
+      Future.delayed(Duration(milliseconds: 100), () {
         if (_scrollController.hasClients) {
           _scrollController.animateTo(
             0.0,
-            duration: const Duration(milliseconds: 200),
+            duration: Duration(milliseconds: 200),
             curve: Curves.easeOut,
           );
           if (mounted) setState(() => _unreadCount = 0);
@@ -1130,7 +1131,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     bio: _otherUserBio,
                     reputation: 0,
                     level: 1,
-                    titles: const [],
+                    titles: [],
                     followers: 0,
                     following: 0,
                     checkIns: 0,
@@ -1155,7 +1156,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   showOnlineIndicator: widget.otherUserId.isNotEmpty,
                   emptyIcon: widget.otherUserId.isEmpty ? Icons.group : Icons.person,
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10),
                Expanded(
                  child: Row(
                   children: [
@@ -1186,15 +1187,15 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     ),
                     if (_isClosed)
                       Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
+                        padding: EdgeInsets.only(left: 8.0),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: Colors.redAccent.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(color: Colors.redAccent.withValues(alpha: 0.5)),
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Icon(Icons.lock, color: Colors.redAccent, size: 12),
@@ -1220,7 +1221,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   if (_currentUserId.isEmpty || _currentUserName == 'Usuario') {
                     if (mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Cargando datos de perfil...')),
+                        SnackBar(content: Text(tr('Cargando datos de perfil...'))),
                       );
                     }
                     return;
@@ -1256,11 +1257,11 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     final bool isGlobalOrDM = _communityId == null;
                     final bool canGoLive = (isMember || isGlobalOrDM) && _isParticipant && !(_isClosed && !isModerator);
                     
-                    if (!canGoLive || !_isParticipant) return const SizedBox.shrink();
+                    if (!canGoLive || !_isParticipant) return SizedBox.shrink();
 
                     return Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
                         color: isLiveActive ? Colors.orangeAccent : Colors.greenAccent.shade400,
                         borderRadius: BorderRadius.circular(6),
@@ -1277,7 +1278,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                               letterSpacing: 0.5,
                             ),
                           ),
-                          const SizedBox(width: 3),
+                          SizedBox(width: 3),
                           Icon(
                             isLiveActive ? Icons.headset : Icons.play_arrow,
                             color: Colors.black,
@@ -1291,7 +1292,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               ),
             if (_isParticipant || widget.otherUserId.isNotEmpty || _creatorId == _currentUserId)
               PopupMenuButton<String>(
-                icon: const Icon(Icons.more_vert),
+                icon: Icon(Icons.more_vert),
                 color: Wumbleheme.surfaceColor,
                 onSelected: (value) {
                   switch (value) {
@@ -1329,46 +1330,46 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   
                   return [
                     if (canChangeBackground)
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'background',
                         child: Row(
                           children: [
                             Icon(Icons.wallpaper, color: Colors.white70, size: 20),
                             SizedBox(width: 12),
-                            Text('Cambiar fondo', style: TextStyle(color: Colors.white)),
+                            Text(tr('Cambiar fondo'), style: TextStyle(color: Colors.white)),
                           ],
                         ),
                       ),
                     if (isCreator && !isPrivate)
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'edit',
                         child: Row(
                           children: [
                             Icon(Icons.edit, color: Colors.white70, size: 20),
                             SizedBox(width: 12),
-                            Text('Editar chat', style: TextStyle(color: Colors.white)),
+                            Text(tr('Editar chat'), style: TextStyle(color: Colors.white)),
                           ],
                         ),
                       ),
                     if (isCreator || isPrivate)
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'clear',
                         child: Row(
                           children: [
                             Icon(Icons.delete_sweep, color: Colors.orangeAccent, size: 20),
                             SizedBox(width: 12),
-                            Text('Vaciar chat', style: TextStyle(color: Colors.orangeAccent)),
+                            Text(tr('Vaciar chat'), style: TextStyle(color: Colors.orangeAccent)),
                           ],
                         ),
                       ),
                     if (isCreator || isPrivate)
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'delete',
                         child: Row(
                           children: [
                             Icon(Icons.delete_forever, color: Colors.redAccent, size: 20),
                             SizedBox(width: 12),
-                            Text('Eliminar chat', style: TextStyle(color: Colors.redAccent)),
+                            Text(tr('Eliminar chat'), style: TextStyle(color: Colors.redAccent)),
                           ],
                         ),
                       ),
@@ -1384,24 +1385,24 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         ),
                       ),
                     if (!isCreator && !isPrivate && _isParticipant)
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'leave',
                         child: Row(
                           children: [
                             Icon(Icons.exit_to_app, color: Colors.redAccent, size: 20),
                             SizedBox(width: 12),
-                            Text('Abandonar chat', style: TextStyle(color: Colors.redAccent)),
+                            Text(tr('Abandonar chat'), style: TextStyle(color: Colors.redAccent)),
                           ],
                         ),
                       ),
                     if (isPrivate)
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'leave',
                         child: Row(
                           children: [
                             Icon(Icons.exit_to_app, color: Colors.redAccent, size: 20),
                             SizedBox(width: 12),
-                            Text('Abandonar chat', style: TextStyle(color: Colors.redAccent)),
+                            Text(tr('Abandonar chat'), style: TextStyle(color: Colors.redAccent)),
                           ],
                         ),
                       ),
@@ -1509,11 +1510,11 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     },
                     builder: (context, state) {
                       if (state is ChatLoading) {
-                        return const Center(child: CircularProgressIndicator());
+                        return Center(child: CircularProgressIndicator());
                       }
                       if (state is MessagesLoaded) {
                         if (state.messages.isEmpty) {
-                          return const Center(child: Text('¡Envía el primer mensaje! 👋', style: TextStyle(color: Wumbleheme.textSecondary)));
+                          return Center(child: Text(tr('¡Envía el primer mensaje! 👋'), style: TextStyle(color: Wumbleheme.textSecondary)));
                         }
                         final allMessages = [..._optimisticMessages, ...state.messages];
                         final showHeader = state.hasMore || state.isLoadingOlder;
@@ -1697,7 +1698,7 @@ Widget _buildLiveChatView() {
         return ListView.builder(
           controller: _liveScrollController,
           reverse: true, // Also reverse in overlay
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           itemCount: messages.length,
           cacheExtent: 1000,
           addAutomaticKeepAlives: false,
@@ -1711,7 +1712,7 @@ Widget _buildLiveChatView() {
           },
         );
       }
-      return const SizedBox.shrink();
+      return SizedBox.shrink();
     },
   );
 }
@@ -1725,7 +1726,7 @@ Widget _buildCallInvitation(LiveSession session) {
     left: 10,
     right: 10,
     child: Container(
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.85),
         borderRadius: BorderRadius.circular(16),
@@ -1748,7 +1749,7 @@ Widget _buildCallInvitation(LiveSession session) {
             radius: 20,
             avatarFrameUrl: _participantAvatarFrames[session.hostId],
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1765,7 +1766,7 @@ Widget _buildCallInvitation(LiveSession session) {
               ],
             ),
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           TextButton(
             onPressed: () {
               setState(() => _manuallyClosedLive = false);
@@ -1785,7 +1786,7 @@ Widget _buildCallInvitation(LiveSession session) {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               padding: const EdgeInsets.symmetric(horizontal: 16),
             ),
-            child: const Text('ENTRAR', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12)),
+            child: Text(tr('ENTRAR'), style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12)),
           ),
         ],
       ),
@@ -1802,16 +1803,16 @@ Widget _buildCallInvitation(LiveSession session) {
     String label;
     if (_isSameDay(date, now)) {
       label = 'Hoy, ${DateFormat('h:mm a').format(date)}';
-    } else if (_isSameDay(date, now.subtract(const Duration(days: 1)))) {
+    } else if (_isSameDay(date, now.subtract(Duration(days: 1)))) {
       label = 'Ayer, ${DateFormat('h:mm a').format(date)}';
     } else {
       label = DateFormat("d MMM yyyy, h:mm", 'es').format(date);
     }
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: EdgeInsets.symmetric(vertical: 12),
       child: Center(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
           decoration: BoxDecoration(
             color: Colors.black.withValues(alpha: 0.4),
             borderRadius: BorderRadius.circular(12),
@@ -1953,7 +1954,7 @@ Widget _buildCallInvitation(LiveSession session) {
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('No se pudo abrir el enlace')),
+            SnackBar(content: Text(tr('No se pudo abrir el enlace'))),
           );
         }
       }
@@ -1968,7 +1969,7 @@ Widget _buildCallInvitation(LiveSession session) {
     _chatRepository.banUserFromChat(widget.chatRoomId, userId);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Usuario expulsado del chat')),
+        SnackBar(content: Text(tr('Usuario expulsado del chat'))),
       );
     }
   }
@@ -2114,8 +2115,8 @@ Widget _buildCallInvitation(LiveSession session) {
                         Navigator.pop(ctx);
                         Clipboard.setData(ClipboardData(text: msg.text!));
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Texto copiado al portapapeles'),
+                          SnackBar(
+                            content: Text(tr('Texto copiado al portapapeles')),
                             backgroundColor: Wumbleheme.primaryColor,
                             duration: Duration(seconds: 1),
                           ),
@@ -2177,7 +2178,7 @@ Widget _buildCallInvitation(LiveSession session) {
     Color color = Colors.white,
   }) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+      contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
       leading: Icon(icon, color: color.withOpacity(0.8), size: 22),
       title: Text(
         title,
@@ -2197,16 +2198,16 @@ Widget _buildCallInvitation(LiveSession session) {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Expulsar del chat', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Expulsar del chat'), style: TextStyle(color: Colors.white)),
         content: Text('¿Estás seguro de que quieres expulsar a ${msg.senderName ?? 'este usuario'}? No podrá volver a unirse.', style: const TextStyle(color: Colors.white70)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () {
               _banUserFromChat(msg.senderId);
               Navigator.pop(ctx);
             },
-            child: const Text('EXPULSAR', style: TextStyle(color: Colors.redAccent)),
+            child: Text(tr('EXPULSAR'), style: TextStyle(color: Colors.redAccent)),
           ),
         ],
       ),
@@ -2218,7 +2219,7 @@ Widget _buildCallInvitation(LiveSession session) {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Eliminar mensaje', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Eliminar mensaje'), style: TextStyle(color: Colors.white)),
         content: const Text(
           '¿Estás seguro de que deseas eliminar este mensaje? Esta acción no se puede deshacer.',
           style: TextStyle(color: Colors.white70),
@@ -2226,14 +2227,14 @@ Widget _buildCallInvitation(LiveSession session) {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar'),
+            child: Text(tr('Cancelar')),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(ctx);
               _deleteMessage(msg);
             },
-            child: const Text('Eliminar', style: TextStyle(color: Colors.redAccent)),
+            child: Text(tr('Eliminar'), style: TextStyle(color: Colors.redAccent)),
           ),
         ],
       ),
@@ -2261,7 +2262,7 @@ Widget _buildCallInvitation(LiveSession session) {
     
     if (!_isParticipant && _creatorId != _currentUserId && _privateChatKey == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Únete al chat para reaccionar')),
+        SnackBar(content: Text(tr('Únete al chat para reaccionar'))),
       );
       return;
     }
@@ -2272,7 +2273,7 @@ Widget _buildCallInvitation(LiveSession session) {
   void _showStickerReactionPicker(ChatMessage msg) {
     if (!_isParticipant && _creatorId != _currentUserId && _privateChatKey == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Únete al chat para usar stickers')),
+        SnackBar(content: Text(tr('Únete al chat para usar stickers'))),
       );
       return;
     }
@@ -2323,7 +2324,7 @@ Widget _buildCallInvitation(LiveSession session) {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Editar mensaje', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Editar mensaje'), style: TextStyle(color: Colors.white)),
         content: TextField(
           controller: controller,
           autofocus: true,
@@ -2343,7 +2344,7 @@ Widget _buildCallInvitation(LiveSession session) {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar'),
+            child: Text(tr('Cancelar')),
           ),
           TextButton(
             onPressed: () {
@@ -2359,7 +2360,7 @@ Widget _buildCallInvitation(LiveSession session) {
               }
               Navigator.pop(ctx);
             },
-            child: const Text('Guardar'),
+            child: Text(tr('Guardar')),
           ),
         ],
       ),
@@ -2381,7 +2382,7 @@ Widget _buildCallInvitation(LiveSession session) {
             children: [
               ListTile(
                 leading: const Icon(Icons.image, color: Colors.white70),
-                title: const Text('Elegir imagen', style: TextStyle(color: Colors.white)),
+                title: Text(tr('Elegir imagen'), style: TextStyle(color: Colors.white)),
                 onTap: () async {
                   Navigator.pop(ctx);
                   final xfile = await MediaHelper.pickImageWithOptimization(context);
@@ -2411,7 +2412,7 @@ Widget _buildCallInvitation(LiveSession session) {
               if (_backgroundImageUrl != null)
                 ListTile(
                   leading: const Icon(Icons.remove_circle_outline, color: Colors.redAccent),
-                  title: const Text('Quitar fondo', style: TextStyle(color: Colors.redAccent)),
+                  title: Text(tr('Quitar fondo'), style: TextStyle(color: Colors.redAccent)),
                   onTap: () {
                     Navigator.pop(ctx);
                     _chatBloc.add(UpdateChatBackgroundEvent(
@@ -2432,7 +2433,7 @@ Widget _buildCallInvitation(LiveSession session) {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Vaciar chat', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Vaciar chat'), style: TextStyle(color: Colors.white)),
         content: const Text(
           '¿Estás seguro de que deseas eliminar todos los mensajes? Esta acción no se puede deshacer.',
           style: TextStyle(color: Colors.white70),
@@ -2440,14 +2441,14 @@ Widget _buildCallInvitation(LiveSession session) {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar'),
+            child: Text(tr('Cancelar')),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(ctx);
               _chatBloc.add(ClearChatEvent(chatRoomId: widget.chatRoomId));
             },
-            child: const Text('Vaciar', style: TextStyle(color: Colors.orangeAccent)),
+            child: Text(tr('Vaciar'), style: TextStyle(color: Colors.orangeAccent)),
           ),
         ],
       ),
@@ -2459,7 +2460,7 @@ Widget _buildCallInvitation(LiveSession session) {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Eliminar chat', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Eliminar chat'), style: TextStyle(color: Colors.white)),
         content: const Text(
           '¿Estás seguro de que deseas eliminar este chat? Se perderán todos los datos y participantes. Esta acción no se puede deshacer.',
           style: TextStyle(color: Colors.white70),
@@ -2467,7 +2468,7 @@ Widget _buildCallInvitation(LiveSession session) {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar'),
+            child: Text(tr('Cancelar')),
           ),
           TextButton(
             onPressed: () {
@@ -2475,7 +2476,7 @@ Widget _buildCallInvitation(LiveSession session) {
               _chatBloc.add(DeleteChatRoomEvent(widget.chatRoomId));
               Navigator.pop(context); // Go back to previous screen
             },
-            child: const Text('Eliminar', style: TextStyle(color: Colors.redAccent)),
+            child: Text(tr('Eliminar'), style: TextStyle(color: Colors.redAccent)),
           ),
         ],
       ),
@@ -2487,7 +2488,7 @@ Widget _buildCallInvitation(LiveSession session) {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Abandonar chat', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Abandonar chat'), style: TextStyle(color: Colors.white)),
         content: const Text(
           '¿Estás seguro de que deseas abandonar este chat público? Dejarás de recibir notificaciones.',
           style: TextStyle(color: Colors.white70),
@@ -2495,7 +2496,7 @@ Widget _buildCallInvitation(LiveSession session) {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar'),
+            child: Text(tr('Cancelar')),
           ),
           TextButton(
             onPressed: () {
@@ -2507,7 +2508,7 @@ Widget _buildCallInvitation(LiveSession session) {
               ));
               Navigator.pop(context); // Go back to previous screen
             },
-            child: const Text('Abandonar', style: TextStyle(color: Colors.redAccent)),
+            child: Text(tr('Abandonar'), style: TextStyle(color: Colors.redAccent)),
           ),
         ],
       ),
@@ -2588,7 +2589,7 @@ Widget _buildCallInvitation(LiveSession session) {
               ),
               ListTile(
                 leading: const Icon(Icons.gavel, color: Colors.redAccent),
-                title: const Text('Expulsar del chat', style: TextStyle(color: Colors.redAccent)),
+                title: Text(tr('Expulsar del chat'), style: TextStyle(color: Colors.redAccent)),
                 onTap: () {
                   Navigator.pop(ctx);
                   _confirmBanFromList(userId, name);
@@ -2605,14 +2606,14 @@ Widget _buildCallInvitation(LiveSession session) {
   void _appointCurator(String userId) {
     context.read<ChatRepository>().appointCurator(widget.chatRoomId, userId);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Usuario nombrado Curador')),
+      SnackBar(content: Text(tr('Usuario nombrado Curador'))),
     );
   }
 
   void _removeCurator(String userId) {
     context.read<ChatRepository>().removeCurator(widget.chatRoomId, userId);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Rol de Curador revocado')),
+      SnackBar(content: Text(tr('Rol de Curador revocado'))),
     );
   }
 
@@ -2621,16 +2622,16 @@ Widget _buildCallInvitation(LiveSession session) {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Expulsar del chat', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Expulsar del chat'), style: TextStyle(color: Colors.white)),
         content: Text('¿Estás seguro de que quieres expulsar a $name? No podrá volver a unirse.', style: const TextStyle(color: Colors.white70)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () {
               _banUserFromChat(userId);
               Navigator.pop(ctx);
             },
-            child: const Text('EXPULSAR', style: TextStyle(color: Colors.redAccent)),
+            child: Text(tr('EXPULSAR'), style: TextStyle(color: Colors.redAccent)),
           ),
         ],
       ),
@@ -2752,7 +2753,7 @@ Widget _buildCallInvitation(LiveSession session) {
                         }
                       },
                       icon: const Icon(Icons.person_add, size: 18),
-                      label: const Text('INVITAR MIEMBRO'),
+                      label: Text(tr('INVITAR MIEMBRO')),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Wumbleheme.primaryColor,
                         foregroundColor: Colors.black,
@@ -3072,7 +3073,7 @@ Widget _buildCallInvitation(LiveSession session) {
         filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 30),
+          padding: EdgeInsets.fromLTRB(20, 16, 20, 30),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -3088,31 +3089,31 @@ Widget _buildCallInvitation(LiveSession session) {
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.orangeAccent.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.public_rounded, size: 20, color: Colors.orangeAccent),
+                  child: Icon(Icons.public_rounded, size: 20, color: Colors.orangeAccent),
                 ),
-                const SizedBox(width: 14),
+                SizedBox(width: 14),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                      Text(
                         'Conversación Pública',
                         style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                       ),
-                      const Text(
+                      Text(
                         'Únete a este chat para empezar a escribir.',
                         style: TextStyle(color: Colors.white70, fontSize: 12),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 ElevatedButton(
                   onPressed: () {
                     if (_currentUserId.isNotEmpty && _currentUserName != 'Usuario') {
@@ -3124,7 +3125,7 @@ Widget _buildCallInvitation(LiveSession session) {
                       ));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Cargando datos de usuario...')),
+                        SnackBar(content: Text(tr('Cargando datos de usuario...'))),
                       );
                     }
                   },
@@ -3136,7 +3137,7 @@ Widget _buildCallInvitation(LiveSession session) {
                     minimumSize: const Size(0, 40),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   ),
-                  child: const Text('UNIRME', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
+                  child: Text(tr('UNIRME'), style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
                 ),
               ],
             ),
@@ -3217,7 +3218,7 @@ Widget _buildCallInvitation(LiveSession session) {
                         minimumSize: const Size(0, 40),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       ),
-                      child: const Text('UNIRME', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
+                      child: Text(tr('UNIRME'), style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
                     ),
                   ],
                 ),
@@ -3477,7 +3478,7 @@ Widget _buildCallInvitation(LiveSession session) {
                       side: const BorderSide(color: Colors.redAccent),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text('Rechazar'),
+                    child: Text(tr('Rechazar')),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -3491,7 +3492,7 @@ Widget _buildCallInvitation(LiveSession session) {
                       foregroundColor: Colors.black,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text('Aceptar', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: Text(tr('Aceptar'), style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],

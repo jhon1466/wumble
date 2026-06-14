@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wumble/features/profile/presentation/profile_bloc.dart';
 import 'package:wumble/features/profile/domain/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wumble/injection_container.dart';
 import 'package:wumble/features/profile/presentation/blocked_users_screen.dart';
+import 'package:wumble/core/localization/locale_controller.dart';
+import 'package:wumble/core/localization/app_localizations.dart';
+import 'package:wumble/core/theme.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -98,11 +102,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Row(
+            content: Row(
               children: [
                 Icon(Icons.check_circle_outline, color: Colors.white),
                 SizedBox(width: 12),
-                Text('¡Caché y datos locales limpiados!'),
+                Text(tr('¡Caché y datos locales limpiados!')),
               ],
             ), 
             backgroundColor: Colors.green.shade700,
@@ -143,11 +147,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           }
         },
         child: Scaffold(
-          backgroundColor: const Color(0xFF0F0F1A),
+          backgroundColor: Color(0xFF0F0F1A),
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: const Text('Ajustes del Sistema', style: TextStyle(fontWeight: FontWeight.bold)),
+            title: Text(tr('Ajustes del Sistema'), style: TextStyle(fontWeight: FontWeight.bold)),
             centerTitle: true,
           ),
           body: ListView(
@@ -167,6 +171,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: 'Cambiar Contraseña',
                   subtitle: 'Actualiza tu seguridad',
                   onTap: () => _showChangePasswordDialog(context),
+                ),
+              ]),
+              const SizedBox(height: 24),
+
+              // ──── IDIOMA ────
+              _buildSectionTitle(context.t('language')),
+              _buildSettingsCard([
+                _buildListTile(
+                  icon: Icons.language,
+                  title: context.t('language'),
+                  subtitle: LocaleController.displayNames[
+                          LocaleController.locale.value.languageCode] ??
+                      'Español',
+                  onTap: () => _showLanguagePicker(context),
                 ),
               ]),
               const SizedBox(height: 24),
@@ -367,9 +385,53 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ));
   }
 
+  void _showLanguagePicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Wumbleheme.surfaceColor,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (ctx) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 16),
+              Text(context.t('choose_language'),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16)),
+              const SizedBox(height: 8),
+              ...LocaleController.supported.map((l) {
+                final code = l.languageCode;
+                final selected =
+                    LocaleController.locale.value.languageCode == code;
+                return ListTile(
+                  title: Text(
+                    LocaleController.displayNames[code] ?? code,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  trailing: selected
+                      ? const Icon(Icons.check, color: Wumbleheme.secondaryColor)
+                      : null,
+                  onTap: () async {
+                    await LocaleController.setLocale(code);
+                    if (ctx.mounted) Navigator.pop(ctx);
+                  },
+                );
+              }),
+              const SizedBox(height: 12),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Widget _buildSectionTitle(String title) {
     return Padding(
-      padding: const EdgeInsets.only(left: 4, bottom: 12),
+      padding: EdgeInsets.only(left: 4, bottom: 12),
       child: Text(
         title.toUpperCase(),
         style: TextStyle(
@@ -385,7 +447,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildSettingsCard(List<Widget> children) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1E2C),
+        color: Color(0xFF1E1E2C),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.white.withOpacity(0.05)),
       ),
@@ -396,16 +458,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildListTile({required IconData icon, required String title, required String subtitle, required VoidCallback onTap}) {
     return ListTile(
       leading: Container(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Icon(icon, color: Colors.white70, size: 20),
       ),
-      title: Text(title, style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500)),
+      title: Text(title, style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500)),
       subtitle: Text(subtitle, style: TextStyle(color: Colors.white.withOpacity(0.4), fontSize: 13)),
-      trailing: const Icon(Icons.chevron_right_rounded, color: Colors.white24),
+      trailing: Icon(Icons.chevron_right_rounded, color: Colors.white24),
       onTap: onTap,
     );
   }
@@ -421,14 +483,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }) {
     return ListTile(
       leading: Container(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Icon(icon, color: iconColor ?? Colors.white70, size: iconSize),
       ),
-      title: Text(title, style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500)),
+      title: Text(title, style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500)),
       subtitle: subtitle != null ? Text(subtitle, style: TextStyle(color: Colors.white.withOpacity(0.4), fontSize: 13)) : null,
       trailing: Switch.adaptive(
         value: value,
@@ -440,21 +502,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildPrivacyTile({required String title, required String value, required ValueChanged<String?> onChanged}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(color: Colors.white, fontSize: 14)),
-          const SizedBox(height: 8),
+          Text(title, style: TextStyle(color: Colors.white, fontSize: 14)),
+          SizedBox(height: 8),
           DropdownButton<String>(
             value: value,
             isExpanded: true,
-            dropdownColor: const Color(0xFF1E1E2C),
-            underline: const SizedBox(),
-            items: const [
-              DropdownMenuItem(value: 'everyone', child: Text('Todos', style: TextStyle(color: Colors.white70))),
-              DropdownMenuItem(value: 'members', child: Text('Solo seguidores', style: TextStyle(color: Colors.white70))),
-              DropdownMenuItem(value: 'nobody', child: Text('Nadie', style: TextStyle(color: Colors.white70))),
+            dropdownColor: Color(0xFF1E1E2C),
+            underline: SizedBox(),
+            items: [
+              DropdownMenuItem(value: 'everyone', child: Text(tr('Todos'), style: const TextStyle(color: Colors.white70))),
+              DropdownMenuItem(value: 'members', child: Text(tr('Solo seguidores'), style: TextStyle(color: Colors.white70))),
+              DropdownMenuItem(value: 'nobody', child: Text(tr('Nadie'), style: TextStyle(color: Colors.white70))),
             ],
             onChanged: onChanged,
           ),
@@ -467,7 +529,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildDangerZone() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.red.withOpacity(0.05),
         borderRadius: BorderRadius.circular(20),
@@ -476,19 +538,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
               Icon(Icons.warning_amber_rounded, color: Colors.redAccent, size: 20),
               SizedBox(width: 8),
-              Text('Zona de Peligro', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+              Text(tr('Zona de Peligro'), style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
             ],
           ),
-          const SizedBox(height: 12),
-          const Text(
+          SizedBox(height: 12),
+          Text(
             'Una vez que elimines tu cuenta, no podrás recuperar tus datos ni tu progreso.',
             style: TextStyle(color: Colors.white60, fontSize: 13),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -500,7 +562,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 side: const BorderSide(color: Colors.redAccent),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              child: const Text('ELIMINAR MI CUENTA', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(tr('ELIMINAR MI CUENTA'), style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           ),
         ],
@@ -516,8 +578,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('Actualizar Email', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('Actualizar Email'), style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -535,13 +597,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () {
               sl<ProfileBloc>().add(UpdateEmailRequested(newEmail: emailController.text, password: passwordController.text));
               Navigator.pop(context);
             },
-            child: const Text('VERIFICAR', style: TextStyle(color: Colors.blueAccent)),
+            child: Text(tr('VERIFICAR'), style: TextStyle(color: Colors.blueAccent)),
           ),
         ],
       ),
@@ -554,8 +616,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('Cambiar Contraseña', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('Cambiar Contraseña'), style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -574,13 +636,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () {
               sl<ProfileBloc>().add(UpdatePasswordRequested(oldPassword: oldPasswordController.text, newPassword: newPasswordController.text));
               Navigator.pop(context);
             },
-            child: const Text('CAMBIAR', style: TextStyle(color: Colors.blueAccent)),
+            child: Text(tr('CAMBIAR'), style: TextStyle(color: Colors.blueAccent)),
           ),
         ],
       ),
@@ -592,8 +654,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('¿Estás seguro?', style: TextStyle(color: Colors.redAccent)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('¿Estás seguro?'), style: TextStyle(color: Colors.redAccent)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -608,13 +670,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () {
               sl<ProfileBloc>().add(DeleteAccountRequested(password: passwordController.text));
               Navigator.pop(context);
             },
-            child: const Text('ELIMINAR', style: TextStyle(color: Colors.redAccent)),
+            child: Text(tr('ELIMINAR'), style: TextStyle(color: Colors.redAccent)),
           ),
         ],
       ),
@@ -625,20 +687,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('Limpiar Caché', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('Limpiar Caché'), style: TextStyle(color: Colors.white)),
         content: Text(
           'Se eliminarán $_cacheSize de datos temporales. Las imágenes en caché se descargarán de nuevo cuando las necesites.',
-          style: const TextStyle(color: Colors.white70),
+          style: TextStyle(color: Colors.white70),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               _clearCache();
             },
-            child: const Text('LIMPIAR', style: TextStyle(color: Colors.blueAccent)),
+            child: Text(tr('LIMPIAR'), style: TextStyle(color: Colors.blueAccent)),
           ),
         ],
       ),
@@ -649,22 +711,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Row(
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Row(
           children: [
             Icon(Icons.shield_outlined, color: Colors.blueAccent),
             SizedBox(width: 8),
-            Text('Verificación en 2 Pasos', style: TextStyle(color: Colors.white)),
+            Text(tr('Verificación en 2 Pasos'), style: TextStyle(color: Colors.white)),
           ],
         ),
-        content: const Text(
+        content: Text(
           'La verificación en dos pasos se gestiona a través de tu proveedor de autenticación (Google, Email).\n\n'
           'Para activar 2FA en tu cuenta de Google, visita myaccount.google.com > Seguridad.\n\n'
           'Para cuentas de email, puedes solicitar un restablecimiento de contraseña periódicamente para mantener tu cuenta segura.',
           style: TextStyle(color: Colors.white70, height: 1.5),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('ENTENDIDO')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('ENTENDIDO'))),
         ],
       ),
     );
@@ -675,12 +737,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Row(
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Row(
           children: [
             Icon(Icons.devices_rounded, color: Colors.blueAccent),
             SizedBox(width: 8),
-            Text('Sesión Activa', style: TextStyle(color: Colors.white)),
+            Text(tr('Sesión Activa'), style: TextStyle(color: Colors.white)),
           ],
         ),
         content: Column(
@@ -703,7 +765,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   FirebaseAuth.instance.signOut();
                 },
                 icon: const Icon(Icons.logout, size: 18),
-                label: const Text('Cerrar todas las sesiones'),
+                label: Text(tr('Cerrar todas las sesiones')),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.redAccent,
                   side: const BorderSide(color: Colors.redAccent),
@@ -713,7 +775,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CERRAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CERRAR'))),
         ],
       ),
     );
@@ -728,7 +790,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Text(label, style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 13)),
         ),
         Expanded(
-          child: Text(value, style: const TextStyle(color: Colors.white, fontSize: 13)),
+          child: Text(value, style: TextStyle(color: Colors.white, fontSize: 13)),
         ),
       ],
     );
@@ -738,19 +800,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Row(
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Row(
           children: [
             Icon(Icons.support_agent_rounded, color: Colors.blueAccent),
             SizedBox(width: 8),
-            Text('Soporte', style: TextStyle(color: Colors.white)),
+            Text(tr('Soporte'), style: TextStyle(color: Colors.white)),
           ],
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('¿Necesitas ayuda?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            Text(tr('¿Necesitas ayuda?'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             _supportRow(Icons.email_outlined, 'soporte@wumble.app'),
             const SizedBox(height: 8),
@@ -760,7 +822,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CERRAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CERRAR'))),
         ],
       ),
     );
@@ -821,7 +883,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
-                child: const Text('GENIAL', style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text(tr('GENIAL'), style: TextStyle(fontWeight: FontWeight.bold)),
               ),
             ),
           ],

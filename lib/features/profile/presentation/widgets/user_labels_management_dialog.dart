@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wumble/core/theme.dart';
 import 'package:wumble/features/community/domain/community_member_model.dart';
@@ -34,7 +35,7 @@ class _UserLabelsManagementDialogState extends State<UserLabelsManagementDialog>
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Wumbleheme.surfaceColor,
-      title: const Text('Gestionar mis Etiquetas', style: TextStyle(color: Colors.white)),
+      title: Text(tr('Gestionar mis Etiquetas'), style: TextStyle(color: Colors.white)),
       content: SizedBox(
         width: double.maxFinite,
         height: 400,
@@ -83,7 +84,7 @@ class _UserLabelsManagementDialogState extends State<UserLabelsManagementDialog>
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+        TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
         ElevatedButton(
           onPressed: () {
             widget.onUpdate(_labels);
@@ -93,7 +94,7 @@ class _UserLabelsManagementDialogState extends State<UserLabelsManagementDialog>
             backgroundColor: Wumbleheme.secondaryColor,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           ),
-          child: const Text('GUARDAR ORDEN', style: TextStyle(fontWeight: FontWeight.bold)),
+          child: Text(tr('GUARDAR ORDEN'), style: TextStyle(fontWeight: FontWeight.bold)),
         ),
       ],
     );

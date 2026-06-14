@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:wumble/features/community/domain/wiki_model.dart';
 import 'package:wumble/features/community/domain/wiki_repository.dart';
 import 'package:wumble/injection_container.dart';
@@ -6,7 +7,7 @@ import 'package:wumble/injection_container.dart';
 class WikiApprovalScreen extends StatefulWidget {
   final String communityId;
 
-  const WikiApprovalScreen({super.key, required this.communityId});
+  WikiApprovalScreen({super.key, required this.communityId});
 
   @override
   State<WikiApprovalScreen> createState() => _WikiApprovalScreenState();
@@ -44,7 +45,7 @@ class _WikiApprovalScreenState extends State<WikiApprovalScreen> {
       await _repository.approveWiki(wikiId);
       _loadPendingWikis();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Wiki aprobada con éxito')),
+        SnackBar(content: Text(tr('Wiki aprobada con éxito'))),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -57,12 +58,12 @@ class _WikiApprovalScreenState extends State<WikiApprovalScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pendientes de Aprobación'),
+        title: Text(tr('Pendientes de Aprobación')),
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : _pendingWikis.isEmpty
-              ? const Center(child: Text('No hay wikis pendientes.'))
+              ? Center(child: Text(tr('No hay wikis pendientes.')))
               : ListView.builder(
                   itemCount: _pendingWikis.length,
                   itemBuilder: (context, index) {

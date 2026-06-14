@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wumble/core/theme.dart';
@@ -10,7 +11,7 @@ import '../domain/moderation_models.dart';
 import 'widgets/sanction_dialog.dart';
 
 class ReportCenterScreen extends StatefulWidget {
-  const ReportCenterScreen({super.key});
+  ReportCenterScreen({super.key});
 
   @override
   State<ReportCenterScreen> createState() => _ReportCenterScreenState();
@@ -37,7 +38,7 @@ class _ReportCenterScreenState extends State<ReportCenterScreen> with SingleTick
       create: (context) => sl<ModerationBloc>()..add(LoadModerationDashboard()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Centro de Reportes', style: TextStyle(fontWeight: FontWeight.bold)),
+          title: Text(tr('Centro de Reportes'), style: TextStyle(fontWeight: FontWeight.bold)),
           bottom: TabBar(
             controller: _tabController,
             indicatorColor: Wumbleheme.primaryColor,
@@ -77,7 +78,7 @@ class _ReportCenterScreenState extends State<ReportCenterScreen> with SingleTick
               );
             }
 
-            return const Center(child: Text('Cargando panel de moderación...'));
+            return Center(child: Text(tr('Cargando panel de moderación...')));
           },
         ),
       ),
@@ -193,7 +194,7 @@ class _ReportCard extends StatelessWidget {
                       side: const BorderSide(color: Colors.grey),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text('Descartar'),
+                    child: Text(tr('Descartar')),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -206,7 +207,7 @@ class _ReportCard extends StatelessWidget {
                       elevation: 0,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text('Resolver'),
+                    child: Text(tr('Resolver')),
                   ),
                 ),
               ],

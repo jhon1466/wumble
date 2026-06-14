@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../../../../injection_container.dart';
 import '../../../chat/domain/chat_model.dart';
 import '../../../chat/domain/chat_repository.dart';
@@ -7,7 +8,7 @@ import '../../../chat/presentation/chat_detail_screen.dart';
 class PublicChatsWidget extends StatelessWidget {
   final String communityId;
 
-  const PublicChatsWidget({super.key, required this.communityId});
+  PublicChatsWidget({super.key, required this.communityId});
 
   @override
   Widget build(BuildContext context) {
@@ -15,22 +16,22 @@ class PublicChatsWidget extends StatelessWidget {
       stream: sl<ChatRepository>().getPublicChats(communityId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}', style: const TextStyle(color: Colors.red)));
+          return Center(child: Text('Error: ${snapshot.error}', style: TextStyle(color: Colors.red)));
         }
         
         final chats = snapshot.data ?? [];
 
         if (chats.isEmpty) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.chat_bubble_outline, size: 60, color: Colors.white24),
                 SizedBox(height: 10),
-                Text('No hay chats públicos activos', style: TextStyle(color: Colors.white24)),
+                Text(tr('No hay chats públicos activos'), style: TextStyle(color: Colors.white24)),
               ],
             ),
           );

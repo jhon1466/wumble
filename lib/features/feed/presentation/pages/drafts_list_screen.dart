@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
@@ -10,7 +11,7 @@ import 'package:wumble/injection_container.dart';
 class DraftsListScreen extends StatefulWidget {
   final String communityId;
 
-  const DraftsListScreen({super.key, required this.communityId});
+  DraftsListScreen({super.key, required this.communityId});
 
   @override
   State<DraftsListScreen> createState() => _DraftsListScreenState();
@@ -20,7 +21,7 @@ class _DraftsListScreenState extends State<DraftsListScreen> {
   @override
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.uid;
-    if (userId == null) return const Scaffold(body: Center(child: Text('Inicia sesión para ver borradores')));
+    if (userId == null) return Scaffold(body: Center(child: Text(tr('Inicia sesión para ver borradores'))));
 
     return BlocProvider(
       create: (context) => sl<CreatePostCubit>()..loadDrafts(userId),
@@ -29,7 +30,7 @@ class _DraftsListScreenState extends State<DraftsListScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: const Text('Borradores', style: TextStyle(fontWeight: FontWeight.bold)),
+          title: Text(tr('Borradores'), style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         body: BlocBuilder<CreatePostCubit, CreatePostState>(
           builder: (context, state) {
@@ -45,7 +46,7 @@ class _DraftsListScreenState extends State<DraftsListScreen> {
                     children: [
                       Icon(Icons.notes, size: 64, color: Colors.white24),
                       const SizedBox(height: 16),
-                      const Text('No tienes borradores guardados', style: TextStyle(color: Colors.white54)),
+                      Text(tr('No tienes borradores guardados'), style: TextStyle(color: Colors.white54)),
                     ],
                   ),
                 );
@@ -107,19 +108,19 @@ class _DraftsListScreenState extends State<DraftsListScreen> {
       context: context,
       builder: (dialogCtx) => AlertDialog(
         backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('Eliminar borrador', style: TextStyle(color: Colors.white)),
-        content: const Text('¿Estás seguro de que quieres eliminar este borrador?', style: TextStyle(color: Colors.white70)),
+        title: Text(tr('Eliminar borrador'), style: TextStyle(color: Colors.white)),
+        content: Text(tr('¿Estás seguro de que quieres eliminar este borrador?'), style: TextStyle(color: Colors.white70)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogCtx),
-            child: const Text('CANCELAR', style: TextStyle(color: Colors.white54)),
+            child: Text(tr('CANCELAR'), style: TextStyle(color: Colors.white54)),
           ),
           TextButton(
             onPressed: () {
               context.read<CreatePostCubit>().deleteDraft(userId, draftId);
               Navigator.pop(dialogCtx);
             },
-            child: const Text('ELIMINAR', style: TextStyle(color: Colors.redAccent)),
+            child: Text(tr('ELIMINAR'), style: TextStyle(color: Colors.redAccent)),
           ),
         ],
       ),

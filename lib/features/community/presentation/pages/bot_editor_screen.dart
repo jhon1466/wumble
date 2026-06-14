@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../../../../core/theme.dart';
 import '../../../../injection_container.dart' as di;
 import '../../domain/community_repository.dart';
@@ -18,7 +19,7 @@ class BotEditorScreen extends StatefulWidget {
   final BotConfig bot;
   final bool isNew;
 
-  const BotEditorScreen({
+  BotEditorScreen({
     super.key,
     required this.community,
     required this.bot,
@@ -90,7 +91,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
   Future<void> _saveBot() async {
     if (_nameController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('El nombre no puede estar vacío')),
+        SnackBar(content: Text(tr('El nombre no puede estar vacío'))),
       );
       return;
     }
@@ -132,7 +133,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       if (mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Bot guardado correctamente')),
+          SnackBar(content: Text(tr('Bot guardado correctamente'))),
         );
       }
     } catch (e) {
@@ -148,7 +149,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
 
   void _addCommand() {
     setState(() {
-      _commands.add(const BotCommand(
+      _commands.add(BotCommand(
         trigger: 'nuevo',
         response: 'Escribe aquí la respuesta',
       ));
@@ -177,7 +178,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
         builder: (modalCtx, setModalState) => AlertDialog(
           backgroundColor: Wumbleheme.surfaceColor,
           insetPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          title: const Text('Editar Comando'),
+          title: Text(tr('Editar Comando')),
           content: SizedBox(
             width: MediaQuery.of(dialogCtx).size.width * 0.9,
             child: SingleChildScrollView(
@@ -199,7 +200,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                           children: [
                             Icon(Icons.lightbulb_outline, size: 16, color: Colors.blueAccent),
                             const SizedBox(width: 8),
-                            const Text('Tips de Inteligencia', style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 12)),
+                            Text(tr('Tips de Inteligencia'), style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 12)),
                           ],
                         ),
                         const SizedBox(height: 8),
@@ -216,21 +217,21 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                     padding: EdgeInsets.only(top: 4, left: 4),
                     child: Text('Usa "*" para capturar cualquier mensaje no definido.', style: TextStyle(color: Colors.white24, fontSize: 10, fontStyle: FontStyle.italic)),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   _buildModalTextField(responseController, 'Respuesta Principal', Icons.chat_bubble),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 4, left: 4),
                     child: Text('Variables: {user}, {community}, {time}, {user_id}', style: TextStyle(color: Colors.white24, fontSize: 10, fontStyle: FontStyle.italic)),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   _buildModalTextField(responsesController, 'Otras Respuestas (una por línea)', Icons.shuffle, maxLines: 3),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   // --- AI Provider Section ---
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('PROVEEDOR DE RESPUESTA', style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
+                      Text(tr('PROVEEDOR DE RESPUESTA'), style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -256,20 +257,20 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   
                   if (provider == BotCommandProvider.webhook)
                     _buildModalTextField(webhookController, 'Webhook URL', Icons.api),
                   
                   if (provider == BotCommandProvider.groq || provider == BotCommandProvider.gemini) ...[
                     _buildModalTextField(apiKeyController, 'API Key (Privada)', Icons.key),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildModalTextField(aiModelController, 'Modelo (ej: llama3-8b-8192)', Icons.auto_awesome),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildModalTextField(promptController, 'Instrucciones del Sistema (Prompt)', Icons.psychology, maxLines: 3),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(top: 4, left: 4),
-                      child: Text('Define la personalidad y reglas de la IA para este comando.', style: TextStyle(color: Colors.white24, fontSize: 10, fontStyle: FontStyle.italic)),
+                      child: Text(tr('Define la personalidad y reglas de la IA para este comando.'), style: TextStyle(color: Colors.white24, fontSize: 10, fontStyle: FontStyle.italic)),
                     ),
                   ],
                   const SizedBox(height: 12),
@@ -283,8 +284,8 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                   const SizedBox(height: 16),
                   
                   SwitchListTile(
-                    title: const Text('Formato Embed', style: TextStyle(color: Colors.white, fontSize: 14)),
-                    subtitle: const Text('Título, color y pie de página', style: TextStyle(color: Colors.white54, fontSize: 11)),
+                    title: Text(tr('Formato Embed'), style: TextStyle(color: Colors.white, fontSize: 14)),
+                    subtitle: Text(tr('Título, color y pie de página'), style: TextStyle(color: Colors.white54, fontSize: 11)),
                     value: isEmbed,
                     onChanged: (val) => setModalState(() => isEmbed = val),
                     activeThumbColor: _embedColor,
@@ -301,7 +302,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
             ),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(modalCtx), child: const Text('Cancelar')),
+            TextButton(onPressed: () => Navigator.pop(modalCtx), child: Text(tr('Cancelar'))),
             ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -324,7 +325,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                 });
                 Navigator.pop(modalCtx);
               },
-              child: const Text('Guardar'),
+              child: Text(tr('Guardar')),
             ),
           ],
         ),
@@ -339,7 +340,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('Botones Interactivos', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+            Text(tr('Botones Interactivos'), style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
             IconButton(
               icon: const Icon(Icons.add_circle_outline, size: 20, color: Wumbleheme.secondaryColor),
               onPressed: () => _addBotButton(buttons, setModalState, modalCtx),
@@ -347,7 +348,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
           ],
         ),
         if (buttons.isEmpty)
-          const Text('Sin botones añadidos', style: TextStyle(color: Colors.white24, fontSize: 11)),
+          Text(tr('Sin botones añadidos'), style: TextStyle(color: Colors.white24, fontSize: 11)),
         ...buttons.asMap().entries.map((entry) {
           final idx = entry.key;
           final btn = entry.value;
@@ -371,7 +372,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
   }
 
   void _addBotButton(List<BotButton> buttons, StateSetter setModalState, BuildContext modalCtx, {int? index}) {
-    final btn = index != null ? buttons[index] : const BotButton(label: '', trigger: '');
+    final btn = index != null ? buttons[index] : BotButton(label: '', trigger: '');
     final labelCtrl = TextEditingController(text: btn.label);
     final triggerCtrl = TextEditingController(text: btn.trigger);
     bool isUrl = btn.isUrl;
@@ -390,7 +391,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
               _buildModalTextField(triggerCtrl, 'Activador (Comando o URL)', Icons.bolt),
               const SizedBox(height: 8),
               SwitchListTile(
-                title: const Text('Es un enlace (URL)', style: TextStyle(color: Colors.white70, fontSize: 13)),
+                title: Text(tr('Es un enlace (URL)'), style: TextStyle(color: Colors.white70, fontSize: 13)),
                 value: isUrl,
                 onChanged: (v) => setSubModalState(() => isUrl = v),
                 contentPadding: EdgeInsets.zero,
@@ -398,7 +399,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
             ],
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(btnModalCtx), child: const Text('Cancelar')),
+            TextButton(onPressed: () => Navigator.pop(btnModalCtx), child: Text(tr('Cancelar'))),
             ElevatedButton(
               onPressed: () {
                 if (labelCtrl.text.isEmpty || triggerCtrl.text.isEmpty) return;
@@ -409,7 +410,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                 });
                 Navigator.pop(btnModalCtx);
               },
-              child: const Text('Aceptar'),
+              child: Text(tr('Aceptar')),
             ),
           ],
         ),
@@ -424,7 +425,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('Imagen / GIF', style: TextStyle(color: Colors.white70, fontSize: 12)),
+            Text(tr('Imagen / GIF'), style: TextStyle(color: Colors.white70, fontSize: 12)),
             Row(
               children: [
                 IconButton(
@@ -494,7 +495,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Medio subido con éxito')),
+          SnackBar(content: Text(tr('Medio subido con éxito'))),
         );
       }
     } catch (e) {
@@ -556,7 +557,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Avatar subido con éxito')),
+          SnackBar(content: Text(tr('Avatar subido con éxito'))),
         );
       }
     } catch (e) {
@@ -617,7 +618,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       child: SwitchListTile(
         title: Text(_isActive ? 'BOT ACTIVO' : 'BOT DESACTIVADO', 
           style: TextStyle(color: _isActive ? Colors.greenAccent : Colors.redAccent, fontWeight: FontWeight.bold)),
-        subtitle: const Text('Si está desactivado, el bot no responderá a ningún comando.', 
+        subtitle: Text(tr('Si está desactivado, el bot no responderá a ningún comando.'), 
           style: TextStyle(color: Colors.white54, fontSize: 11)),
         value: _isActive,
         onChanged: (val) => setState(() => _isActive = val),
@@ -632,7 +633,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Banner del Mini-perfil', style: TextStyle(color: Colors.white70, fontSize: 12)),
+        Text(tr('Banner del Mini-perfil'), style: TextStyle(color: Colors.white70, fontSize: 12)),
         const SizedBox(height: 8),
         Row(
           children: [
@@ -828,7 +829,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                 child: TextButton.icon(
                   onPressed: _confirmDelete,
                   icon: const Icon(Icons.delete_forever, color: Colors.redAccent),
-                  label: const Text('DESACTIVAR Y ELIMINAR AGENTE', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+                  label: Text(tr('DESACTIVAR Y ELIMINAR AGENTE'), style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
@@ -934,7 +935,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Color de Mensajes'),
+        title: Text(tr('Color de Mensajes')),
         content: SingleChildScrollView(
           child: ColorPicker(
             pickerColor: _embedColor,
@@ -942,7 +943,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
             enableAlpha: false,
           ),
         ),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cerrar'))],
+        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('Cerrar')))],
       ),
     );
   }
@@ -1011,7 +1012,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Color de Perfil'),
+        title: Text(tr('Color de Perfil')),
         content: SingleChildScrollView(
           child: ColorPicker(
             pickerColor: _profileColor,
@@ -1019,7 +1020,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
             enableAlpha: false,
           ),
         ),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cerrar'))],
+        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('Cerrar')))],
       ),
     );
   }
@@ -1055,10 +1056,10 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Eliminar Bot'),
-        content: const Text('¿Estás seguro? Se perderán todos los comandos.'),
+        title: Text(tr('Eliminar Bot')),
+        content: Text(tr('¿Estás seguro? Se perderán todos los comandos.')),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('Cancelar'))),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () async {
@@ -1072,7 +1073,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                 navigator.pop(); // Close screen
               }
             },
-            child: const Text('Eliminar'),
+            child: Text(tr('Eliminar')),
           ),
         ],
       ),
@@ -1092,8 +1093,8 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       child: Column(
         children: [
           SwitchListTile(
-            title: const Text('Modo Guardián (IA)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            subtitle: const Text('Detecta y elimina mensajes tóxicos/spam localmente', style: TextStyle(color: Colors.white54, fontSize: 11)),
+            title: Text(tr('Modo Guardián (IA)'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            subtitle: Text(tr('Detecta y elimina mensajes tóxicos/spam localmente'), style: TextStyle(color: Colors.white54, fontSize: 11)),
             value: _isGuardian,
             onChanged: (val) => setState(() => _isGuardian = val),
             activeThumbColor: Colors.greenAccent,
@@ -1104,7 +1105,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('SENSIBILIDAD POR CANAL', style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
+                Text(tr('SENSIBILIDAD POR CANAL'), style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 16),
                 
                 // Chat Sensitivity
@@ -1208,7 +1209,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                   OutlinedButton.icon(
                     onPressed: _pickAvatarImage,
                     icon: const Icon(Icons.photo_library, size: 18),
-                    label: const Text('SUBIR FOTO'),
+                    label: Text(tr('SUBIR FOTO')),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Wumbleheme.secondaryColor,
                       side: const BorderSide(color: Wumbleheme.secondaryColor),
@@ -1219,7 +1220,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
                   OutlinedButton.icon(
                     onPressed: _pickGiphyAvatar,
                     icon: const Icon(Icons.gif_box, size: 18),
-                    label: const Text('ELEGIR GIF'),
+                    label: Text(tr('ELEGIR GIF')),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.blueAccent,
                       side: const BorderSide(color: Colors.blueAccent),
@@ -1247,7 +1248,7 @@ class _BotEditorScreenState extends State<BotEditorScreen> {
       child: Column(
         children: [
           SwitchListTile(
-            title: const Text('Responder a Menciones', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+            title: Text(tr('Responder a Menciones'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
             subtitle: const Text('Si lo mencionas con @Nombre, el bot usará la IA (comando *) para conversar.', style: TextStyle(color: Colors.white54, fontSize: 11)),
             value: _allowMention,
             onChanged: (val) => setState(() => _allowMention = val),

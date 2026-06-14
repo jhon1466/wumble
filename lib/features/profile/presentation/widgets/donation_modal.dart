@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wumble/core/theme.dart';
 import 'package:wumble/features/profile/domain/profile_repository.dart';
@@ -12,7 +13,7 @@ class DonationModal extends StatefulWidget {
   final String? wikiId;
   final String? communityId;
 
-  const DonationModal({
+  DonationModal({
     super.key,
     required this.targetUser,
     this.postId,
@@ -40,7 +41,7 @@ class _DonationModalState extends State<DonationModal> {
     
     if (amount <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Introduce una cantidad válida.')),
+        SnackBar(content: Text(tr('Introduce una cantidad válida.'))),
       );
       return;
     }
@@ -166,7 +167,7 @@ class _DonationModalState extends State<DonationModal> {
               ),
               child: _isLoading
                   ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                  : const Text('Enviar Donación', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  : Text(tr('Enviar Donación'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ),
           ),
           const SizedBox(height: 12),

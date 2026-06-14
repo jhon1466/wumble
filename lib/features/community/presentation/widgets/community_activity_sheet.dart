@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -136,9 +137,9 @@ class _ActivitySheetState extends State<_ActivitySheet> {
                   builder: (context, snap) {
                     final users = snap.data ?? const [];
                     if (users.isEmpty) {
-                      return const Center(
-                          child: Text('Nadie conectado.',
-                              style: TextStyle(color: Colors.white24)));
+                      return Center(
+                          child: Text(tr('Nadie conectado.'),
+                              style: const TextStyle(color: Colors.white24)));
                     }
                     return ListView.builder(
                       controller: scrollController,
@@ -225,8 +226,8 @@ class _ActivitySheetState extends State<_ActivitySheet> {
                   children: [
                     const Icon(Icons.bolt, color: Wumbleheme.secondaryColor),
                     const SizedBox(width: 8),
-                    const Expanded(
-                      child: Text('Miembros activos',
+                    Expanded(
+                      child: Text(tr('Miembros activos'),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -333,10 +334,10 @@ class _ActivitySheetState extends State<_ActivitySheet> {
                   iconColor: const Color(0xFF22C55E)),
               const SizedBox(height: 8),
               if (users.isEmpty)
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Text('Nadie conectado por ahora.',
-                      style: TextStyle(color: Colors.white24, fontSize: 13)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(tr('Nadie conectado por ahora.'),
+                      style: const TextStyle(color: Colors.white24, fontSize: 13)),
                 )
               else
                 SizedBox(
@@ -445,7 +446,7 @@ class _ActivitySheetState extends State<_ActivitySheet> {
         if (trailingTap != null)
           GestureDetector(
             onTap: trailingTap,
-            child: const Text('Ver todo',
+            child: Text(tr('Ver todo'),
                 style: TextStyle(color: Wumbleheme.secondaryColor, fontSize: 12)),
           ),
       ],

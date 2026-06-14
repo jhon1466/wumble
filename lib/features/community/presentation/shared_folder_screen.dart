@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wumble/core/utils/media_helper.dart';
@@ -12,7 +13,7 @@ import 'package:wumble/features/community/presentation/widgets/shared_image_view
 class SharedFolderScreen extends StatefulWidget {
   final String communityId;
 
-  const SharedFolderScreen({super.key, required this.communityId});
+  SharedFolderScreen({super.key, required this.communityId});
 
   @override
   State<SharedFolderScreen> createState() => SharedFolderScreenState();
@@ -73,7 +74,7 @@ class SharedFolderScreenState extends State<SharedFolderScreen> with AutomaticKe
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const Center(child: CircularProgressIndicator(color: Colors.white)),
+        builder: (context) => Center(child: CircularProgressIndicator(color: Colors.white)),
       );
 
       try {
@@ -87,7 +88,7 @@ class SharedFolderScreenState extends State<SharedFolderScreen> with AutomaticKe
           Navigator.pop(context); // Close loading
           _loadData(); // Reload
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Imagen subida con éxito')),
+            SnackBar(content: Text(tr('Imagen subida con éxito'))),
           );
         }
       } catch (e) {

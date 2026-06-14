@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -13,7 +14,7 @@ import '../../domain/join_request_model.dart';
 class JoinRequestsScreen extends StatefulWidget {
   final Community community;
 
-  const JoinRequestsScreen({super.key, required this.community});
+  JoinRequestsScreen({super.key, required this.community});
 
   @override
   State<JoinRequestsScreen> createState() => _JoinRequestsScreenState();
@@ -60,7 +61,7 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
       await _repository.approveJoinRequest(widget.community.id, request.userId);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Solicitud aprobada y usuario notificado')),
+          SnackBar(content: Text(tr('Solicitud aprobada y usuario notificado'))),
         );
       }
     } catch (e) {
@@ -88,7 +89,7 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
       backgroundColor: Wumbleheme.backgroundColor,
       appBar: AppBar(
         backgroundColor: widget.community.themeColor,
-        title: const Text('Solicitudes de Ingreso', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(tr('Solicitudes de Ingreso'), style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: _buildBody(),
     );
@@ -106,10 +107,10 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
           children: [
             const Icon(Icons.error_outline, size: 50, color: Colors.redAccent),
             const SizedBox(height: 16),
-            Text('Error al cargar solicitudes', style: const TextStyle(color: Colors.white)),
+            Text(tr('Error al cargar solicitudes'), style: const TextStyle(color: Colors.white)),
             TextButton(
               onPressed: _loadRequests,
-              child: Text('Reintentar', style: TextStyle(color: widget.community.themeColor)),
+              child: Text(tr('Reintentar'), style: TextStyle(color: widget.community.themeColor)),
             )
           ],
         ),
@@ -240,7 +241,7 @@ class _RequestTile extends StatelessWidget {
                         side: const BorderSide(color: Colors.redAccent),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       ),
-                      child: const Text('Rechazar'),
+                      child: Text(tr('Rechazar')),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -252,7 +253,7 @@ class _RequestTile extends StatelessWidget {
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       ),
-                      child: const Text('Aprobar', style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text(tr('Aprobar'), style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ],

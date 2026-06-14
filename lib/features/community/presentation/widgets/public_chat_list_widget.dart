@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -198,10 +199,10 @@ class _PublicChatListWidgetState extends State<PublicChatListWidget> with Automa
                         '${chat.participants.length} participantes',
                         style: TextStyle(color: widget.themeColor, fontSize: 12, fontWeight: FontWeight.w500),
                       ),
-                      const Spacer(),
+                      Spacer(),
                       Text(
                         _formatLastMessageTime(chat.lastMessageTime),
-                        style: const TextStyle(color: Colors.white24, fontSize: 11),
+                        style: TextStyle(color: Colors.white24, fontSize: 11),
                       ),
                     ],
                   ),
@@ -210,29 +211,29 @@ class _PublicChatListWidgetState extends State<PublicChatListWidget> with Automa
             ),
             
             // Trailing
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             BlocBuilder<CommunityContextBloc, CommunityContextState>(
               builder: (context, state) {
                 final bool isModerator = state.memberProfile?.role == 'leader' || state.memberProfile?.role == 'curator';
-                if (!isModerator) return const Icon(Icons.chevron_right_rounded, color: Colors.white24);
+                if (!isModerator) return Icon(Icons.chevron_right_rounded, color: Colors.white24);
                 
                 return PopupMenuButton<String>(
-                  icon: const Icon(Icons.more_vert, color: Colors.white54),
+                  icon: Icon(Icons.more_vert, color: Colors.white54),
                   padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
+                  constraints: BoxConstraints(),
                   onSelected: (value) async {
                     if (value == 'delete') {
                       final confirm = await showDialog<bool>(
                         context: context,
                         builder: (ctx) => AlertDialog(
                           backgroundColor: Wumbleheme.surfaceColor,
-                          title: const Text('¿Eliminar sala de chat?', style: TextStyle(color: Colors.white)),
-                          content: const Text('Esta acción borrará permanentemente la sala y todos sus mensajes para todos los miembros.'),
+                          title: Text(tr('¿Eliminar sala de chat?'), style: TextStyle(color: Colors.white)),
+                          content: Text('Esta acción borrará permanentemente la sala y todos sus mensajes para todos los miembros.'),
                           actions: [
-                            TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('CANCELAR')),
+                            TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('CANCELAR'))),
                             TextButton(
                               onPressed: () => Navigator.pop(ctx, true),
-                              child: const Text('ELIMINAR', style: TextStyle(color: Colors.redAccent)),
+                              child: Text(tr('ELIMINAR'), style: TextStyle(color: Colors.redAccent)),
                             ),
                           ],
                         ),
@@ -242,7 +243,7 @@ class _PublicChatListWidgetState extends State<PublicChatListWidget> with Automa
                         try {
                           await di.sl<ChatRepository>().deleteChatRoom(chat.id);
                           if (mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Chat eliminado')));
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Chat eliminado'))));
                           }
                         } catch (e) {
                           if (mounted) {
@@ -259,7 +260,7 @@ class _PublicChatListWidgetState extends State<PublicChatListWidget> with Automa
                         children: [
                           Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),
                           const SizedBox(width: 8),
-                          const Text('Eliminar Chat', style: TextStyle(color: Colors.redAccent)),
+                          Text(tr('Eliminar Chat'), style: TextStyle(color: Colors.redAccent)),
                         ],
                       ),
                     ),

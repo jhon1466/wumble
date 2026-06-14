@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -15,7 +16,7 @@ class ShareHelper {
       if (imageUrl != null && imageUrl.isNotEmpty) {
         // Show loading indicator in snackbar
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Row(
               children: [
                 SizedBox(
@@ -23,7 +24,7 @@ class ShareHelper {
                   child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                 ),
                 SizedBox(width: 12),
-                Text('Preparando para compartir...'),
+                Text(tr('Preparando para compartir...')),
               ],
             ),
             duration: Duration(seconds: 2),

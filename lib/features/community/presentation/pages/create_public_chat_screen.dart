@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -14,7 +15,7 @@ class CreatePublicChatScreen extends StatefulWidget {
   final Color themeColor;
   final ChatRoom? existingChat;
 
-  const CreatePublicChatScreen({
+  CreatePublicChatScreen({
     super.key,
     required this.communityId,
     required this.themeColor,
@@ -68,7 +69,7 @@ class _CreatePublicChatScreenState extends State<CreatePublicChatScreen> {
   Future<void> _createChat() async {
     if (_titleController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor, ingresa un título')),
+        SnackBar(content: Text(tr('Por favor, ingresa un título'))),
       );
       return;
     }
@@ -150,7 +151,7 @@ class _CreatePublicChatScreenState extends State<CreatePublicChatScreen> {
         actions: [
           if (!_isLoading)
             Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+              padding: EdgeInsets.only(right: 8.0),
               child: TextButton(
                 onPressed: _createChat,
                 child: Text(
@@ -166,7 +167,7 @@ class _CreatePublicChatScreenState extends State<CreatePublicChatScreen> {
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,7 +201,7 @@ class _CreatePublicChatScreenState extends State<CreatePublicChatScreen> {
                                       children: [
                                         Icon(Icons.wallpaper, color: Colors.white24, size: 48),
                                         const SizedBox(height: 8),
-                                        const Text('Toca para añadir un banner', style: TextStyle(color: Colors.white38, fontSize: 13)),
+                                        Text(tr('Toca para añadir un banner'), style: TextStyle(color: Colors.white38, fontSize: 13)),
                                       ],
                                     ),
                                   ),
@@ -217,14 +218,14 @@ class _CreatePublicChatScreenState extends State<CreatePublicChatScreen> {
                                   top: 12,
                                   right: 12,
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                     decoration: BoxDecoration(color: Colors.black45, borderRadius: BorderRadius.circular(10)),
-                                    child: const Row(
+                                    child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Icon(Icons.edit, color: Colors.white70, size: 14),
                                         SizedBox(width: 4),
-                                        const Text('Banner', style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
+                                        Text(tr('Banner'), style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
                                       ],
                                     ),
                                   ),
@@ -340,7 +341,7 @@ class _CreatePublicChatScreenState extends State<CreatePublicChatScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Imagen de Fondo', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+                                      Text(tr('Imagen de Fondo'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
                                       const SizedBox(height: 2),
                                       Text(
                                         (_backgroundFile == null && widget.existingChat?.backgroundImageUrl == null)
@@ -369,8 +370,8 @@ class _CreatePublicChatScreenState extends State<CreatePublicChatScreen> {
                           ),
                           child: SwitchListTile(
                             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                            title: const Text('Chat Público', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-                            subtitle: const Text('Cualquiera en la comunidad puede unirse', style: TextStyle(color: Colors.white38, fontSize: 12)),
+                            title: Text(tr('Chat Público'), style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                            subtitle: Text(tr('Cualquiera en la comunidad puede unirse'), style: TextStyle(color: Colors.white38, fontSize: 12)),
                             value: _isPublic,
                             activeColor: widget.themeColor,
                             onChanged: (val) => setState(() => _isPublic = val),

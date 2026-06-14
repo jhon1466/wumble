@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/widgets/user_avatar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -52,16 +53,16 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Borrar todo', style: TextStyle(color: Colors.white)),
-        content: const Text('¿Estás seguro de que quieres borrar todas las notificaciones?', style: TextStyle(color: Colors.white70)),
+        title: Text(tr('Borrar todo'), style: TextStyle(color: Colors.white)),
+        content: Text(tr('¿Estás seguro de que quieres borrar todas las notificaciones?'), style: TextStyle(color: Colors.white70)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar', style: TextStyle(color: Colors.white54)),
+            child: Text(tr('Cancelar'), style: TextStyle(color: Colors.white54)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Borrar todo', style: TextStyle(color: Colors.redAccent)),
+            child: Text(tr('Borrar todo'), style: TextStyle(color: Colors.redAccent)),
           ),
         ],
       ),
@@ -166,7 +167,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Scaffold(
       backgroundColor: Wumbleheme.backgroundColor,
       appBar: AppBar(
-        title: const Text('Notificaciones'),
+        title: Text(tr('Notificaciones')),
         backgroundColor: Wumbleheme.backgroundColor,
         elevation: 0,
         actions: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,7 @@ import 'package:wumble/features/profile/domain/custom_frame_model.dart';
 import 'publish_frame_screen.dart';
 
 class CommunityWorkshopScreen extends StatefulWidget {
-  const CommunityWorkshopScreen({super.key});
+  CommunityWorkshopScreen({super.key});
 
   @override
   State<CommunityWorkshopScreen> createState() => _CommunityWorkshopScreenState();
@@ -59,9 +60,9 @@ class _CommunityWorkshopScreenState extends State<CommunityWorkshopScreen> with 
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message, style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: Text(message, style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.green,
-        duration: const Duration(seconds: 4),
+        duration: Duration(seconds: 4),
       ),
     );
 
@@ -109,13 +110,13 @@ class _CommunityWorkshopScreenState extends State<CommunityWorkshopScreen> with 
           appBar: AppBar(
             backgroundColor: Wumbleheme.surfaceColor,
             elevation: 0,
-            title: const Text('Workshop', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            title: Text(tr('Workshop'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
             bottom: TabBar(
               controller: _tabController,
               indicatorColor: Wumbleheme.primaryColor,
               labelColor: Wumbleheme.primaryColor,
               unselectedLabelColor: Colors.grey,
-              tabs: const [
+              tabs: [
                 Tab(text: 'Marcos'),
                 Tab(text: 'Packs'),
                 Tab(text: 'Tus Creaciones'),
@@ -141,7 +142,7 @@ class _CommunityWorkshopScreenState extends State<CommunityWorkshopScreen> with 
             ],
           ),
           body: userProfile == null
-              ? const Center(child: CircularProgressIndicator())
+              ? Center(child: CircularProgressIndicator())
               : TabBarView(
                   controller: _tabController,
                   children: [
@@ -154,11 +155,11 @@ class _CommunityWorkshopScreenState extends State<CommunityWorkshopScreen> with 
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PublishFrameScreen()),
+                MaterialPageRoute(builder: (context) => PublishFrameScreen()),
               );
             },
             backgroundColor: Wumbleheme.primaryColor,
-            child: const Icon(Icons.add, color: Colors.white, size: 28),
+            child: Icon(Icons.add, color: Colors.white, size: 28),
           ),
         );
       },
@@ -169,7 +170,7 @@ class _CommunityWorkshopScreenState extends State<CommunityWorkshopScreen> with 
 class _FramesMarketplaceTab extends StatelessWidget {
   final UserProfile userProfile;
 
-  const _FramesMarketplaceTab({required this.userProfile});
+  _FramesMarketplaceTab({required this.userProfile});
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +178,7 @@ class _FramesMarketplaceTab extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection('avatar_frames').orderBy('createdAt', descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator());
         }
         
         final docs = snapshot.data?.docs ?? [];
@@ -199,8 +200,8 @@ class _FramesMarketplaceTab extends StatelessWidget {
         final List<AvatarFrame> allFrames = [...defaultFrames, ...dynamicFramesList];
 
         return GridView.builder(
-          padding: const EdgeInsets.all(16),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          padding: EdgeInsets.all(16),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
@@ -223,7 +224,7 @@ class _FrameCard extends StatelessWidget {
   final AvatarFrame frame;
   final UserProfile userProfile;
 
-  const _FrameCard({
+  _FrameCard({
     required this.frame,
     required this.userProfile,
   });
@@ -236,9 +237,9 @@ class _FrameCard extends StatelessWidget {
       builder: (ctx) => Container(
         decoration: BoxDecoration(
           color: Wumbleheme.surfaceColor,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -253,13 +254,13 @@ class _FrameCard extends StatelessWidget {
                 isPreview: true,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Text(
               frame.name,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             // Autor Detail
             if (frame.uploaderId != null)
               FutureBuilder<DocumentSnapshot>(
@@ -291,7 +292,7 @@ class _FrameCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       'Publicado el: ${frame.createdAt!.day.toString().padLeft(2, '0')}/${frame.createdAt!.month.toString().padLeft(2, '0')}/${frame.createdAt!.year}',
-                      style: const TextStyle(color: Colors.white70),
+                      style: TextStyle(color: Colors.white70),
                     ),
                   ],
                 ),
@@ -299,23 +300,23 @@ class _FrameCard extends StatelessWidget {
             // Credits Detail
             if (frame.credits != null && frame.credits!.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.only(bottom: 32),
+                padding: EdgeInsets.only(bottom: 32),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.attribution_rounded, color: Colors.white54, size: 18),
-                    const SizedBox(width: 8),
+                    Icon(Icons.attribution_rounded, color: Colors.white54, size: 18),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Créditos: ${frame.credits}',
-                        style: const TextStyle(color: Colors.white70, fontStyle: FontStyle.italic),
+                        style: TextStyle(color: Colors.white70, fontStyle: FontStyle.italic),
                       ),
                     ),
                   ],
                 ),
               )
             else
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
             // Action Buttons
             if (isCreator)
               Row(
@@ -324,11 +325,11 @@ class _FrameCard extends StatelessWidget {
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.indigoAccent,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
-                      icon: const Icon(Icons.edit, color: Colors.white),
-                      label: const Text('Editar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      icon: Icon(Icons.edit, color: Colors.white),
+                      label: Text(tr('Editar'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                       onPressed: () {
                         Navigator.pop(ctx);
                         Navigator.push(
@@ -353,21 +354,21 @@ class _FrameCard extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent.withOpacity(0.8),
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
-                      icon: const Icon(Icons.delete, color: Colors.white),
-                      label: const Text('Borrar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      icon: Icon(Icons.delete, color: Colors.white),
+                      label: Text(tr('Borrar'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                       onPressed: () {
                         Navigator.pop(ctx);
                         FirebaseFirestore.instance.collection('avatar_frames').doc(frame.id).delete();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Marco eliminado exitosamente.'), backgroundColor: Colors.redAccent),
+                          SnackBar(content: Text(tr('Marco eliminado exitosamente.')), backgroundColor: Colors.redAccent),
                         );
                       },
                     ),
@@ -382,7 +383,7 @@ class _FrameCard extends StatelessWidget {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 onPressed: null,
-                child: const Text('Ya lo posees', style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold)),
+                child: Text(tr('Ya lo posees'), style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold)),
               )
             else
               ElevatedButton(
@@ -398,13 +399,13 @@ class _FrameCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Comprar por ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    Text(tr('Comprar por '), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                     const Icon(Icons.monetization_on, color: Colors.yellowAccent, size: 18),
                     Text(' ${frame.price}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
           ],
         ),
       ),
@@ -436,24 +437,24 @@ class _FrameCard extends StatelessWidget {
               showOnlineIndicator: false,
               isPreview: true,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               frame.name,
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             if (isCreator)
-              const Chip(
-                label: Text('Tú Creador', style: TextStyle(color: Colors.white, fontSize: 10)),
+              Chip(
+                label: Text(tr('Tú Creador'), style: TextStyle(color: Colors.white, fontSize: 10)),
                 backgroundColor: Colors.indigoAccent,
                 visualDensity: VisualDensity.compact,
               )
             else if (isOwned)
-              const Chip(
-                label: Text('Obtenido', style: TextStyle(color: Colors.white, fontSize: 10)),
+              Chip(
+                label: Text(tr('Obtenido'), style: TextStyle(color: Colors.white, fontSize: 10)),
                 backgroundColor: Colors.green,
                 visualDensity: VisualDensity.compact,
               )
@@ -474,7 +475,7 @@ class _FrameCard extends StatelessWidget {
 class _MyCreationsTab extends StatelessWidget {
   final UserProfile userProfile;
 
-  const _MyCreationsTab({required this.userProfile});
+  _MyCreationsTab({required this.userProfile});
 
   @override
   Widget build(BuildContext context) {
@@ -484,19 +485,19 @@ class _MyCreationsTab extends StatelessWidget {
           .orderBy('createdAt', descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator());
         }
         
         final docs = snapshot.data?.docs ?? [];
         if (docs.isEmpty) {
-          return const Center(child: Text('Aún no has creado ningún marco público.', style: TextStyle(color: Colors.white54)));
+          return Center(child: Text(tr('Aún no has creado ningún marco público.'), style: TextStyle(color: Colors.white54)));
         }
 
         final dynamicFrames = docs.map<AvatarFrame>((doc) => CustomAvatarFrame.fromMap(doc.data() as Map<String, dynamic>, doc.id).toAvatarFrame()).toList();
 
         return GridView.builder(
-          padding: const EdgeInsets.all(16),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          padding: EdgeInsets.all(16),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
@@ -518,7 +519,7 @@ class _MyCreationsTab extends StatelessWidget {
 class _PacksMarketplaceTab extends StatelessWidget {
   final UserProfile userProfile;
 
-  const _PacksMarketplaceTab({required this.userProfile});
+  _PacksMarketplaceTab({required this.userProfile});
 
   @override
   Widget build(BuildContext context) {
@@ -526,13 +527,13 @@ class _PacksMarketplaceTab extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection('avatar_frames').where('packId', isNull: false).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator());
         }
 
         final docs = snapshot.data?.docs ?? [];
         if (docs.isEmpty) {
-          return const Center(
-            child: Text('Aún no hay packs creados en la comunidad.', style: TextStyle(color: Colors.white54)),
+          return Center(
+            child: Text(tr('Aún no hay packs creados en la comunidad.'), style: TextStyle(color: Colors.white54)),
           );
         }
 
@@ -556,8 +557,8 @@ class _PacksMarketplaceTab extends StatelessWidget {
         final packEntries = packs.values.toList();
 
         return GridView.builder(
-          padding: const EdgeInsets.all(16),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          padding: EdgeInsets.all(16),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
@@ -580,7 +581,7 @@ class _PackCard extends StatelessWidget {
   final List<AvatarFrame> packFrames;
   final UserProfile userProfile;
 
-  const _PackCard({
+  _PackCard({
     required this.packFrames,
     required this.userProfile,
   });
@@ -609,9 +610,9 @@ class _PackCard extends StatelessWidget {
       builder: (ctx) => Container(
         decoration: BoxDecoration(
           color: Wumbleheme.surfaceColor,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -625,24 +626,24 @@ class _PackCard extends StatelessWidget {
                 showOnlineIndicator: false,
               ),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
             Text(
               packFrames.first.packName ?? 'Pack sin nombre',
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'Contiene ${packFrames.length} marcos',
-              style: const TextStyle(color: Colors.white54, fontSize: 13),
+              style: TextStyle(color: Colors.white54, fontSize: 13),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             // Frames Grid inside BottomSheet
-            const Divider(color: Colors.white10),
-            const Padding(
+            Divider(color: Colors.white10),
+            Padding(
               padding: EdgeInsets.symmetric(vertical: 8),
-              child: Text('Marcos incluidos:', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+              child: Text(tr('Marcos incluidos:'), style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
             ),
             ConstrainedBox(
               constraints: BoxConstraints(
@@ -651,8 +652,8 @@ class _PackCard extends StatelessWidget {
               child: GridView.builder(
                 shrinkWrap: true,
                 padding: EdgeInsets.zero,
-                physics: const BouncingScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                physics: BouncingScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
@@ -668,7 +669,7 @@ class _PackCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: alreadyOwned ? Colors.green.withOpacity(0.3) : Colors.white10),
                     ),
-                    padding: const EdgeInsets.all(4),
+                    padding: EdgeInsets.all(4),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -690,28 +691,28 @@ class _PackCard extends StatelessWidget {
                 },
               ),
             ),
-            const Divider(color: Colors.white10),
-            const SizedBox(height: 16),
+            Divider(color: Colors.white10),
+            SizedBox(height: 16),
             // Credits Detail
             if (packFrames.first.credits != null && packFrames.first.credits!.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.only(bottom: 12),
+                padding: EdgeInsets.only(bottom: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.attribution_rounded, color: Colors.white54, size: 18),
-                    const SizedBox(width: 8),
+                    Icon(Icons.attribution_rounded, color: Colors.white54, size: 18),
+                    SizedBox(width: 8),
                     Flexible(
                       child: Text(
                         'Créditos: ${packFrames.first.credits}',
-                        style: const TextStyle(color: Colors.white70, fontStyle: FontStyle.italic),
+                        style: TextStyle(color: Colors.white70, fontStyle: FontStyle.italic),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ],
                 ),
               ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             // Action Button
             if (isCreator)
               Row(
@@ -720,11 +721,11 @@ class _PackCard extends StatelessWidget {
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.indigoAccent,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
-                      icon: const Icon(Icons.edit, color: Colors.white),
-                      label: const Text('Editar Pack', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      icon: Icon(Icons.edit, color: Colors.white),
+                      label: Text(tr('Editar Pack'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                       onPressed: () {
                         Navigator.pop(ctx);
                         Navigator.push(
@@ -751,29 +752,29 @@ class _PackCard extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent.withOpacity(0.8),
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
-                      icon: const Icon(Icons.delete, color: Colors.white),
-                      label: const Text('Borrar Todo', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      icon: Icon(Icons.delete, color: Colors.white),
+                      label: Text(tr('Borrar Todo'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                       onPressed: () async {
                         final confirm = await showDialog<bool>(
                           context: context,
                           builder: (c) => AlertDialog(
                             backgroundColor: Wumbleheme.surfaceColor,
-                            title: const Text('¿Eliminar Pack?', style: TextStyle(color: Colors.white)),
-                            content: const Text('Esto eliminará todos los marcos del pack de forma permanente.', style: TextStyle(color: Colors.white70)),
+                            title: Text(tr('¿Eliminar Pack?'), style: TextStyle(color: Colors.white)),
+                            content: Text(tr('Esto eliminará todos los marcos del pack de forma permanente.'), style: TextStyle(color: Colors.white70)),
                             actions: [
-                              TextButton(onPressed: () => Navigator.pop(c, false), child: const Text('Cancelar')),
+                              TextButton(onPressed: () => Navigator.pop(c, false), child: Text(tr('Cancelar'))),
                               TextButton(
                                 onPressed: () => Navigator.pop(c, true),
                                 style: TextButton.styleFrom(foregroundColor: Colors.redAccent),
-                                child: const Text('Eliminar'),
+                                child: Text(tr('Eliminar')),
                               ),
                             ],
                           ),
@@ -785,7 +786,7 @@ class _PackCard extends StatelessWidget {
                             FirebaseFirestore.instance.collection('avatar_frames').doc(f.id).delete();
                           }
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Pack eliminado exitosamente.'), backgroundColor: Colors.redAccent),
+                            SnackBar(content: Text(tr('Pack eliminado exitosamente.')), backgroundColor: Colors.redAccent),
                           );
                         }
                       },
@@ -797,11 +798,11 @@ class _PackCard extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey[800],
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  padding: EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 onPressed: null,
-                child: const Text('Ya posees todos los marcos', style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold)),
+                child: Text(tr('Ya posees todos los marcos'), style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold)),
               )
             else
               Column(
@@ -833,12 +834,12 @@ class _PackCard extends StatelessWidget {
                           delay += 350;
                         }
                       }
-                      ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Comprando marcos del pack...')));
+                      ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(tr('Comprando marcos del pack...'))));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Comprar Pack por ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                        Text(tr('Comprar Pack por '), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                         const Icon(Icons.monetization_on, color: Colors.yellowAccent, size: 18),
                         Text(' $finalPrice', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                       ],
@@ -846,7 +847,7 @@ class _PackCard extends StatelessWidget {
                   ),
                 ],
               ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
           ],
         ),
       ),
@@ -855,7 +856,7 @@ class _PackCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (packFrames.isEmpty) return const SizedBox();
+    if (packFrames.isEmpty) return SizedBox();
     
     final AvatarFrame firstFrame = packFrames.first;
     final bool isCreator = firstFrame.uploaderId == userProfile.id;
@@ -886,29 +887,29 @@ class _PackCard extends StatelessWidget {
               isClickable: false,
               showOnlineIndicator: false,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Text(
               firstFrame.packName ?? 'Pack',
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 6),
+            SizedBox(height: 6),
             Text(
               '${packFrames.length} marcos',
-              style: const TextStyle(color: Colors.white54, fontSize: 11),
+              style: TextStyle(color: Colors.white54, fontSize: 11),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             if (isCreator)
-              const Chip(
-                label: Text('Tú Creador', style: TextStyle(color: Colors.white, fontSize: 10)),
+              Chip(
+                label: Text(tr('Tú Creador'), style: TextStyle(color: Colors.white, fontSize: 10)),
                 backgroundColor: Colors.indigoAccent,
                 visualDensity: VisualDensity.compact,
               )
             else if (allOwned)
-              const Chip(
-                label: Text('Obtenido', style: TextStyle(color: Colors.white, fontSize: 10)),
+              Chip(
+                label: Text(tr('Obtenido'), style: TextStyle(color: Colors.white, fontSize: 10)),
                 backgroundColor: Colors.green,
                 visualDensity: VisualDensity.compact,
               )

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -43,7 +44,7 @@ class MediaHelper {
                  mainAxisSize: MainAxisSize.min,
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                   const Text('⚠️ GIF Pesado Detectado', style: TextStyle(fontWeight: FontWeight.bold)),
+                   Text(tr('⚠️ GIF Pesado Detectado'), style: TextStyle(fontWeight: FontWeight.bold)),
                    Text('Este archivo pesa ${originalSizeInMb.toStringAsFixed(1)}MB. La subida tardará un poco.'),
                  ],
                ),

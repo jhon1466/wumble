@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 import '../../domain/poll_model.dart';
@@ -13,7 +14,7 @@ class CreatePollScreen extends StatefulWidget {
   final Color themeColor;
   final Poll? poll;
 
-  const CreatePollScreen({
+  CreatePollScreen({
     super.key, 
     required this.communityId, 
     this.themeColor = Colors.blueAccent,
@@ -82,14 +83,14 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
 
     if (question.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor, ingresa una pregunta.')),
+        SnackBar(content: Text(tr('Por favor, ingresa una pregunta.'))),
       );
       return;
     }
 
     if (optionsText.length < 2) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Se requieren al menos 2 opciones.')),
+        SnackBar(content: Text(tr('Se requieren al menos 2 opciones.'))),
       );
       return;
     }
@@ -237,7 +238,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
               TextButton.icon(
                 onPressed: _addOption,
                 icon: Icon(Icons.add, color: widget.themeColor),
-                label: Text('Agregar opción', style: TextStyle(color: widget.themeColor)),
+                label: Text(tr('Agregar opción'), style: TextStyle(color: widget.themeColor)),
               ),
             const SizedBox(height: 24),
             const Text(

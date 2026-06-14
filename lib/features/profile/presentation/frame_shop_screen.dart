@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wumble/features/profile/domain/user_model.dart';
 import 'package:wumble/features/profile/presentation/profile_bloc.dart';
@@ -58,7 +59,7 @@ class _FrameShopScreenState extends State<FrameShopScreen> {
         return Scaffold(
           backgroundColor: Wumbleheme.backgroundColor,
           appBar: AppBar(
-            title: const Text('Inventario de Marcos'),
+            title: Text(tr('Inventario de Marcos')),
             backgroundColor: Wumbleheme.surfaceColor,
           ),
           body: Column(
@@ -319,7 +320,7 @@ class _FrameShopScreenState extends State<FrameShopScreen> {
                 children: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('CANCELAR'),
+                    child: Text(tr('CANCELAR')),
                   ),
                   ElevatedButton(
                     onPressed: () {

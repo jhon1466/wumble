@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -114,7 +115,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Nuevo campo', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Nuevo campo'), style: TextStyle(color: Colors.white)),
         content: TextField(
           controller: controller,
           autofocus: true,
@@ -128,11 +129,11 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar'),
+            child: Text(tr('Cancelar')),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, controller.text.trim()),
-            child: const Text('Añadir', style: TextStyle(color: Wumbleheme.secondaryColor)),
+            child: Text(tr('Añadir'), style: TextStyle(color: Wumbleheme.secondaryColor)),
           ),
         ],
       ),
@@ -257,7 +258,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
       }
     }
 
-    const String order = 'BICUSLMRJ';
+    String order = 'BICUSLMRJ';
     String finalTags = '';
     for (final c in order.split('')) {
       if (tagChars.contains(c)) finalTags += c;
@@ -286,13 +287,13 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
 
   Future<void> _saveWiki() async {
     if (_nameController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('El nombre es obligatorio')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('El nombre es obligatorio'))));
       return;
     }
 
     if (widget.communityId == null) {
       // In a real app we might pick a community, here we assume it enters from a community
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error: No hay comunidad seleccionada')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Error: No hay comunidad seleccionada'))));
       return;
     }
 
@@ -339,7 +340,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) throw Exception('Usuario no autenticado');
 
-      final wikiId = widget.wikiToEdit?.id ?? const Uuid().v4();
+      final wikiId = widget.wikiToEdit?.id ?? Uuid().v4();
       final labels = {
         for (var field in _infoFields)
           if (field['value']!.trim().isNotEmpty) field['label']!: field['value']!
@@ -429,7 +430,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
       if (mounted) {
         Navigator.pop(context, true); // Return true to trigger refresh
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('¡Wiki guardada con éxito!')),
+          SnackBar(content: Text(tr('¡Wiki guardada con éxito!'))),
         );
       }
     } catch (e) {
@@ -580,7 +581,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
                               initialValue: entry.value['value'], // Use initialValue instead of controller for simplicity here
                               onChanged: (val) => _infoFields[idx]['value'] = val,
                               decoration: InputDecoration(
-                                hintText: 'Añadir...',
+                                hintText: tr('Añadir...'),
                                 hintStyle: const TextStyle(color: Colors.white10),
                                 isDense: true,
                                 contentPadding: const EdgeInsets.symmetric(vertical: 4),
@@ -603,7 +604,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
                     child: TextButton.icon(
                       onPressed: _addCustomField,
                       icon: const Icon(Icons.add_circle_outline, size: 18, color: Wumbleheme.secondaryColor),
-                      label: const Text('Añadir campo', style: TextStyle(color: Wumbleheme.secondaryColor)),
+                      label: Text(tr('Añadir campo'), style: TextStyle(color: Wumbleheme.secondaryColor)),
                     ),
                   ),
                 ],
@@ -618,7 +619,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Sobre', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  Text(tr('Sobre'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   const SizedBox(height: 12),
                   
                   // Blocks List
@@ -741,7 +742,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
                   decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)),
                 ),
               ),
-              const Text('Vista Previa', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              Text(tr('Vista Previa'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
               const Divider(color: Colors.white10),
               
               Expanded(
@@ -816,7 +817,7 @@ class _WikiEditorScreenState extends State<WikiEditorScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Sobre', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                          Text(tr('Sobre'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                           const SizedBox(height: 12),
                           ..._blocks.map((block) {
                             if (block['type'] == 'text') {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../../../../core/theme.dart';
 import '../../../../injection_container.dart' as di;
 import '../../domain/community_repository.dart';
@@ -17,7 +18,7 @@ class BotManagementScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Wumbleheme.backgroundColor,
       appBar: AppBar(
-        title: const Text('Gestión de Bots'),
+        title: Text(tr('Gestión de Bots')),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -44,12 +45,12 @@ class BotManagementScreen extends StatelessWidget {
                 children: [
                   Icon(Icons.smart_toy_outlined, size: 80, color: Colors.white.withOpacity(0.2)),
                   const SizedBox(height: 16),
-                  const Text('No hay bots en esta comunidad', style: TextStyle(color: Colors.white54)),
+                  Text(tr('No hay bots en esta comunidad'), style: TextStyle(color: Colors.white54)),
                   const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () => _createNewBot(context),
                     style: ElevatedButton.styleFrom(backgroundColor: community.themeColor),
-                    child: const Text('Crear Primer Bot'),
+                    child: Text(tr('Crear Primer Bot')),
                   ),
                 ],
               ),

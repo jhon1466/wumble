@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/theme.dart';
 import '../../../../injection_container.dart';
@@ -91,7 +92,7 @@ class WikiListWidgetState extends State<WikiListWidget> with AutomaticKeepAliveC
                             children: [
                               const Icon(Icons.book_outlined, size: 60, color: Colors.white24),
                               const SizedBox(height: 10),
-                              const Text('El catálogo está vacío', style: TextStyle(color: Colors.white24)),
+                              Text(tr('El catálogo está vacío'), style: TextStyle(color: Colors.white24)),
                             ],
                           ),
                         ),

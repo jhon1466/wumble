@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../../../../core/theme.dart';
 import '../../domain/community_model.dart';
 import 'package:intl/intl.dart';
@@ -112,7 +113,7 @@ class BannedScreen extends StatelessWidget {
                           foregroundColor: Colors.white,
                         ),
                         onPressed: () => Navigator.of(context).pop(),
-                        child: const Text('Volver al Explorador'),
+                        child: Text(tr('Volver al Explorador')),
                       ),
                     ),
                   ],

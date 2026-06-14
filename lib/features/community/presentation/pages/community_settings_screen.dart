@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,7 @@ class CommunitySettingsScreen extends StatefulWidget {
   final Community community;
   final CommunityMember? member;
 
-  const CommunitySettingsScreen({
+  CommunitySettingsScreen({
     super.key, 
     required this.community,
     this.member,
@@ -125,19 +126,19 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
       listener: (context, state) {
         if (state is CommunityUpdated) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Ajustes guardados correctamente')),
+            SnackBar(content: Text(tr('Ajustes guardados correctamente'))),
           );
           Navigator.pop(context);
         } else if (state is CommunityLeft) {
           context.read<CommunityContextBloc>().add(ExitCommunity());
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Has abandonado la comunidad.')),
+            SnackBar(content: Text(tr('Has abandonado la comunidad.'))),
           );
           Navigator.of(context).popUntil((route) => route.isFirst);
         } else if (state is CommunityDeletedState) {
           context.read<CommunityContextBloc>().add(ExitCommunity());
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Comunidad eliminada permanentemente.')),
+            SnackBar(content: Text(tr('Comunidad eliminada permanentemente.'))),
           );
           Navigator.of(context).popUntil((route) => route.isFirst);
         } else if (state is CommunityError) {
@@ -156,7 +157,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
             if (_isAdmin)
               TextButton(
                 onPressed: _saveChanges,
-                child: Text('GUARDAR', style: TextStyle(color: _themeColor, fontWeight: FontWeight.bold)),
+                child: Text(tr('GUARDAR'), style: TextStyle(color: _themeColor, fontWeight: FontWeight.bold)),
               ),
           ],
         ),
@@ -362,7 +363,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
               context: context,
               builder: (context) => AlertDialog(
                 backgroundColor: Wumbleheme.surfaceColor,
-                title: const Text('Color de Tema', style: TextStyle(color: Colors.white)),
+                title: Text(tr('Color de Tema'), style: TextStyle(color: Colors.white)),
                 content: SingleChildScrollView(
                   child: ColorPicker(
                     pickerColor: _themeColor,
@@ -372,7 +373,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
                   ),
                 ),
                 actions: [
-                  TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
+                  TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('OK'))),
                 ],
               ),
             );
@@ -526,8 +527,8 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
         decoration: BoxDecoration(color: _themeColor.withOpacity(0.1), shape: BoxShape.circle),
         child: Icon(Icons.admin_panel_settings, color: _themeColor),
       ),
-      title: const Text('Gestión de Staff y Miembros', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: const Text('Administrar roles y moderación', style: TextStyle(color: Colors.white38, fontSize: 11)),
+      title: Text(tr('Gestión de Staff y Miembros'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+      subtitle: Text(tr('Administrar roles y moderación'), style: TextStyle(color: Colors.white38, fontSize: 11)),
       trailing: const Icon(Icons.chevron_right, color: Colors.white24),
       onTap: () {
         Navigator.push(
@@ -553,8 +554,8 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
         decoration: BoxDecoration(color: Colors.orange.withOpacity(0.1), shape: BoxShape.circle),
         child: const Icon(Icons.security_rounded, color: Colors.orangeAccent),
       ),
-      title: const Text('Centro de Moderación (Líderes)', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: const Text('Cola de revisión y reportes de IA', style: TextStyle(color: Colors.white38, fontSize: 11)),
+      title: Text(tr('Centro de Moderación (Líderes)'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+      subtitle: Text(tr('Cola de revisión y reportes de IA'), style: TextStyle(color: Colors.white38, fontSize: 11)),
       trailing: const Icon(Icons.chevron_right, color: Colors.white24),
       onTap: () {
         Navigator.push(
@@ -579,8 +580,8 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
         decoration: BoxDecoration(color: _themeColor.withOpacity(0.1), shape: BoxShape.circle),
         child: Icon(Icons.mark_email_unread_rounded, color: _themeColor),
       ),
-      title: const Text('Solicitudes de Ingreso', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: const Text('Revisar y aprobar nuevos miembros', style: TextStyle(color: Colors.white38, fontSize: 11)),
+      title: Text(tr('Solicitudes de Ingreso'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+      subtitle: Text(tr('Revisar y aprobar nuevos miembros'), style: TextStyle(color: Colors.white38, fontSize: 11)),
       trailing: const Icon(Icons.chevron_right, color: Colors.white24),
       onTap: () {
         Navigator.push(
@@ -603,8 +604,8 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
         decoration: BoxDecoration(color: Colors.red.withOpacity(0.1), shape: BoxShape.circle),
         child: const Icon(Icons.gavel_rounded, color: Colors.redAccent),
       ),
-      title: const Text('Usuarios Expulsados', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: const Text('Gestionar baneos temporales y permanentes', style: TextStyle(color: Colors.white38, fontSize: 11)),
+      title: Text(tr('Usuarios Expulsados'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+      subtitle: Text(tr('Gestionar baneos temporales y permanentes'), style: TextStyle(color: Colors.white38, fontSize: 11)),
       trailing: const Icon(Icons.chevron_right, color: Colors.white24),
       onTap: () {
         Navigator.push(
@@ -628,28 +629,28 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
       leading: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(color: Colors.amber.withOpacity(0.1), shape: BoxShape.circle),
-        child: const Icon(Icons.stars_rounded, color: Colors.amber),
+        child: Icon(Icons.stars_rounded, color: Colors.amber),
       ),
-      title: const Text('Niveles de la Comunidad', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: const Text('Personaliza los nombres de los 20 niveles', style: TextStyle(color: Colors.white38, fontSize: 11)),
-      trailing: const Icon(Icons.chevron_right, color: Colors.white24),
+      title: Text(tr('Niveles de la Comunidad'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+      subtitle: Text(tr('Personaliza los nombres de los 20 niveles'), style: TextStyle(color: Colors.white38, fontSize: 11)),
+      trailing: Icon(Icons.chevron_right, color: Colors.white24),
       onTap: () => _showLevelTitlesEditor(),
     );
   }
 
   Widget _buildNavigationManagementOption() {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       tileColor: Colors.white.withOpacity(0.04),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       leading: Container(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(color: _themeColor.withOpacity(0.1), shape: BoxShape.circle),
         child: Icon(Icons.explore_outlined, color: _themeColor),
       ),
-      title: const Text('Configurar Navegación', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: const Text('Reordenar, renombrar y añadir pestañas', style: TextStyle(color: Colors.white38, fontSize: 11)),
-      trailing: const Icon(Icons.chevron_right, color: Colors.white24),
+      title: Text(tr('Configurar Navegación'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+      subtitle: Text(tr('Reordenar, renombrar y añadir pestañas'), style: TextStyle(color: Colors.white38, fontSize: 11)),
+      trailing: Icon(Icons.chevron_right, color: Colors.white24),
       onTap: () {
         Navigator.push(
           context,
@@ -675,22 +676,22 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Wumbleheme.backgroundColor,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setModalState) {
             return Container(
               height: MediaQuery.of(context).size.height * 0.85,
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.white10, borderRadius: BorderRadius.circular(2))),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Niveles de la Comunidad', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                      Text(tr('Niveles de la Comunidad'), style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                       TextButton(
                         onPressed: () async {
                           final newTitles = <String, String>{};
@@ -705,7 +706,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
                             if (context.mounted) {
                               Navigator.pop(context);
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Niveles de la comunidad actualizados')),
+                                SnackBar(content: Text(tr('Niveles de la comunidad actualizados'))),
                               );
                               // Refrescar estado local si es necesario o esperar a que el stream de Firebase haga su magia
                             }
@@ -717,7 +718,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
                             }
                           }
                         },
-                        child: Text('GUARDAR', style: TextStyle(color: _themeColor, fontWeight: FontWeight.bold)),
+                        child: Text(tr('GUARDAR'), style: TextStyle(color: _themeColor, fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),
@@ -781,29 +782,29 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
 
   Widget _buildOptimizeMembersOption() {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       tileColor: Colors.white.withOpacity(0.04),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       leading: Container(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), shape: BoxShape.circle),
-        child: const Icon(Icons.auto_fix_high_rounded, color: Colors.blueAccent),
+        child: Icon(Icons.auto_fix_high_rounded, color: Colors.blueAccent),
       ),
-      title: const Text('Optimizar Datos de Miembros', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: const Text('Prepara a los miembros antiguos para el nuevo sistema', style: TextStyle(color: Colors.white38, fontSize: 11)),
-      trailing: const Icon(Icons.bolt_rounded, color: Colors.blueAccent),
+      title: Text(tr('Optimizar Datos de Miembros'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+      subtitle: Text(tr('Prepara a los miembros antiguos para el nuevo sistema'), style: TextStyle(color: Colors.white38, fontSize: 11)),
+      trailing: Icon(Icons.bolt_rounded, color: Colors.blueAccent),
       onTap: () async {
         final confirm = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
             backgroundColor: Wumbleheme.surfaceColor,
-            title: const Text('¿Optimizar datos?', style: TextStyle(color: Colors.white)),
-            content: const Text('Esta acción actualizará a los miembros antiguos para que sean compatibles con el nuevo sistema de baneos y mejora el rendimiento general.'),
+            title: Text(tr('¿Optimizar datos?'), style: TextStyle(color: Colors.white)),
+            content: Text('Esta acción actualizará a los miembros antiguos para que sean compatibles con el nuevo sistema de baneos y mejora el rendimiento general.'),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('CANCELAR')),
+              TextButton(onPressed: () => Navigator.pop(context, false), child: Text(tr('CANCELAR'))),
               TextButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: Text('OPTIMIZAR', style: TextStyle(color: _themeColor)),
+                child: Text(tr('OPTIMIZAR'), style: TextStyle(color: _themeColor)),
               ),
             ],
           ),
@@ -814,14 +815,14 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
           
           // Show progress
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Optimizando miembros...'), duration: Duration(seconds: 1)),
+            SnackBar(content: Text(tr('Optimizando miembros...')), duration: Duration(seconds: 1)),
           );
 
           try {
             await di.sl<CommunityRepository>().migrateMemberBanData(widget.community.id);
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('¡Optimización completada con éxito!')),
+                SnackBar(content: Text(tr('¡Optimización completada con éxito!'))),
               );
             }
           } catch (e) {
@@ -847,16 +848,16 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
             side: BorderSide(color: Colors.redAccent.withOpacity(0.1))
           ),
           leading: const Icon(Icons.exit_to_app_rounded, color: Colors.redAccent),
-          title: const Text('Abandonar Comunidad', style: TextStyle(color: Colors.redAccent, fontSize: 14, fontWeight: FontWeight.bold)),
+          title: Text(tr('Abandonar Comunidad'), style: TextStyle(color: Colors.redAccent, fontSize: 14, fontWeight: FontWeight.bold)),
           onTap: () {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
                 backgroundColor: Wumbleheme.surfaceColor,
-                title: const Text('¿Abandonar comunidad?', style: TextStyle(color: Colors.white)),
+                title: Text(tr('¿Abandonar comunidad?'), style: TextStyle(color: Colors.white)),
                 content: const Text('¿Estás seguro de que quieres salir de esta comunidad? Perderás tu racha y reputación.'),
                 actions: [
-                  TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+                  TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
                   TextButton(
                     onPressed: () {
                       // Usar Auth directamente como protección contra miembros oxidados o en caché pasados por UI
@@ -869,7 +870,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
                       );
                       Navigator.pop(context); // Close dialog
                     }, 
-                    child: const Text('ABANDONAR', style: TextStyle(color: Colors.redAccent)),
+                    child: Text(tr('ABANDONAR'), style: TextStyle(color: Colors.redAccent)),
                   ),
                 ],
               ),
@@ -886,7 +887,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
               side: BorderSide(color: Colors.red.withOpacity(0.2))
             ),
             leading: const Icon(Icons.delete_forever_rounded, color: Colors.red),
-            title: const Text('Eliminar Comunidad', style: TextStyle(color: Colors.red, fontSize: 14, fontWeight: FontWeight.bold)),
+            title: Text(tr('Eliminar Comunidad'), style: TextStyle(color: Colors.red, fontSize: 14, fontWeight: FontWeight.bold)),
             onTap: () {
               final confirmController = TextEditingController();
               showDialog(
@@ -921,7 +922,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
                     ],
                   ),
                   actions: [
-                    TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+                    TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
                     TextButton(
                       onPressed: () {
                         if (confirmController.text == 'BORRAR') {
@@ -931,7 +932,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
                           Navigator.pop(context); // Close dialog
                         }
                       }, 
-                      child: const Text('ELIMINAR TODO', style: TextStyle(color: Colors.red)),
+                      child: Text(tr('ELIMINAR TODO'), style: TextStyle(color: Colors.red)),
                     ),
                   ],
                 ),
@@ -949,13 +950,13 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
       tileColor: Colors.white.withOpacity(0.04),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       leading: Container(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(color: Colors.amber.withOpacity(0.1), shape: BoxShape.circle),
-        child: const Icon(Icons.book_rounded, color: Colors.amber),
+        child: Icon(Icons.book_rounded, color: Colors.amber),
       ),
-      title: const Text('Entregas al Wiki', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: const Text('Revisar y aprobar wikis oficiales', style: TextStyle(color: Colors.white38, fontSize: 11)),
-      trailing: const Icon(Icons.chevron_right, color: Colors.white24),
+      title: Text(tr('Entregas al Wiki'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+      subtitle: Text(tr('Revisar y aprobar wikis oficiales'), style: TextStyle(color: Colors.white38, fontSize: 11)),
+      trailing: Icon(Icons.chevron_right, color: Colors.white24),
       onTap: () {
         Navigator.push(
           context,
@@ -969,17 +970,17 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
 
   Widget _buildBotManagementOption() {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       tileColor: Colors.white.withOpacity(0.04),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       leading: Container(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(color: _themeColor.withOpacity(0.1), shape: BoxShape.circle),
         child: Icon(Icons.smart_toy_outlined, color: _themeColor),
       ),
-      title: const Text('Gestión de Bots', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: const Text('Crea y configura bots personalizados', style: TextStyle(color: Colors.white38, fontSize: 11)),
-      trailing: const Icon(Icons.chevron_right, color: Colors.white24),
+      title: Text(tr('Gestión de Bots'), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+      subtitle: Text(tr('Crea y configura bots personalizados'), style: TextStyle(color: Colors.white38, fontSize: 11)),
+      trailing: Icon(Icons.chevron_right, color: Colors.white24),
       onTap: () {
         Navigator.push(
           context,
@@ -993,7 +994,7 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
 
   Widget _buildWelcomeMessageConfig() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.04),
         borderRadius: BorderRadius.circular(20),
@@ -1005,11 +1006,11 @@ class _CommunitySettingsScreenState extends State<CommunitySettingsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Mensaje Automático', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                  Text('Se muestra al unirse un nuevo miembro', style: TextStyle(color: Colors.white38, fontSize: 11)),
+                  Text(tr('Mensaje Automático'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  Text(tr('Se muestra al unirse un nuevo miembro'), style: TextStyle(color: Colors.white38, fontSize: 11)),
                 ],
               ),
               Switch(

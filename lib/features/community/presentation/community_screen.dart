@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
@@ -331,7 +332,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                         width: 32,
                                         height: 32,
                                         decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
+                                          borderRadius: BorderRadius.circular(9),
                                           border: Border.all(color: Colors.white24, width: 1),
                                           image: community.iconUrl.isNotEmpty
                                               ? DecorationImage(image: CachedNetworkImageProvider(community.iconUrl), fit: BoxFit.cover)
@@ -868,7 +869,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                               isClickable: true,
                             ),
                             const SizedBox(width: 8),
-                            const Text('Creado por ', style: TextStyle(color: Colors.white54, fontSize: 13)),
+                            Text(tr('Creado por '), style: TextStyle(color: Colors.white54, fontSize: 13)),
                             Text(
                               creator.displayName,
                               style: TextStyle(color: community.themeColor, fontWeight: FontWeight.bold, fontSize: 13),
@@ -882,7 +883,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                     const SizedBox(height: 24),
                     
                     // ── Topics ──
-                    const Text('Categorías', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                    Text(tr('Categorías'), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
                     const SizedBox(height: 12),
                     Wrap(
                       spacing: 8,
@@ -899,7 +900,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                     const SizedBox(height: 32),
                     
                     // ── Descripción Larga ──
-                    const Text('Descripción', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                    Text(tr('Descripción'), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
                     const SizedBox(height: 12),
                     Text(
                       community.description.isEmpty 
@@ -1082,12 +1083,12 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                 ],
                                 ListTile(
                                   leading: const Icon(Icons.home_rounded, color: Colors.white70),
-                                  title: const Text('Inicio', style: TextStyle(color: Colors.white)),
+                                  title: Text(tr('Inicio'), style: TextStyle(color: Colors.white)),
                                   onTap: () => Navigator.pop(context),
                                 ),
                                 ListTile(
                                   leading: const Icon(Icons.chat_bubble_rounded, color: Colors.white70),
-                                  title: const Text('Mis Chats', style: TextStyle(color: Colors.white)),
+                                  title: Text(tr('Mis Chats'), style: TextStyle(color: Colors.white)),
                                   onTap: () {
                                     Navigator.pop(context);
                                     _navigateToTab(tabContext, visibleTabs, NavigationTabType.chats);
@@ -1095,7 +1096,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                 ),
                                 ListTile(
                                   leading: const Icon(Icons.emoji_events_rounded, color: Colors.white70),
-                                  title: const Text('Líderes', style: TextStyle(color: Colors.white)),
+                                  title: Text(tr('Líderes'), style: TextStyle(color: Colors.white)),
                                   onTap: () {
                                     Navigator.pop(context);
                                     _navigateToTab(tabContext, visibleTabs, NavigationTabType.leaderboard);
@@ -1103,7 +1104,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                 ),
                                 ListTile(
                                   leading: const Icon(Icons.people_alt_rounded, color: Colors.white70),
-                                  title: const Text('Miembros', style: TextStyle(color: Colors.white)),
+                                  title: Text(tr('Miembros'), style: TextStyle(color: Colors.white)),
                                   onTap: () {
                                     Navigator.pop(context);
                                     showCommunityActivity(context, community);
@@ -1112,7 +1113,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                 const Divider(color: Colors.white10, height: 1),
                                 ListTile(
                                   leading: const Icon(Icons.menu_book_rounded, color: Colors.white70),
-                                  title: const Text('Wiki', style: TextStyle(color: Colors.white)),
+                                  title: Text(tr('Wiki'), style: TextStyle(color: Colors.white)),
                                   onTap: () {
                                     Navigator.pop(context);
                                     _navigateToTab(tabContext, visibleTabs, NavigationTabType.wikis);
@@ -1120,7 +1121,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                 ),
                                 ListTile(
                                   leading: const Icon(Icons.quiz_outlined, color: Colors.white70),
-                                  title: const Text('Quizzes', style: TextStyle(color: Colors.white)),
+                                  title: Text(tr('Quizzes'), style: TextStyle(color: Colors.white)),
                                   onTap: () {
                                     Navigator.pop(context);
                                     _navigateToTab(tabContext, visibleTabs, NavigationTabType.quizzes);
@@ -1128,7 +1129,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                 ),
                                 ListTile(
                                   leading: const Icon(Icons.folder_shared_outlined, color: Colors.white70),
-                                  title: const Text('Carpeta Compartida', style: TextStyle(color: Colors.white)),
+                                  title: Text(tr('Carpeta Compartida'), style: TextStyle(color: Colors.white)),
                                   onTap: () {
                                     Navigator.pop(context);
                                     _navigateToTab(tabContext, visibleTabs, NavigationTabType.sharedFolder);
@@ -1136,7 +1137,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                 ),
                                 ListTile(
                                   leading: const Icon(Icons.poll_outlined, color: Colors.white70),
-                                  title: const Text('Encuestas', style: TextStyle(color: Colors.white)),
+                                  title: Text(tr('Encuestas'), style: TextStyle(color: Colors.white)),
                                   onTap: () {
                                     Navigator.pop(context);
                                     _navigateToTab(tabContext, visibleTabs, NavigationTabType.polls);
@@ -1527,7 +1528,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
           
           ListTile(
             leading: const Icon(Icons.share_rounded, color: Colors.white),
-            title: const Text('Compartir Comunidad', style: TextStyle(color: Colors.white)),
+            title: Text(tr('Compartir Comunidad'), style: TextStyle(color: Colors.white)),
             onTap: () {
               Navigator.pop(context);
               final String shareUrl = 'https://wumble.link/c/${widget.community.handle ?? widget.community.id}';
@@ -1544,7 +1545,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
           
           ListTile(
             leading: const Icon(Icons.info_outline_rounded, color: Colors.white),
-            title: const Text('Información y Guías', style: TextStyle(color: Colors.white)),
+            title: Text(tr('Información y Guías'), style: TextStyle(color: Colors.white)),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
@@ -1562,7 +1563,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
           if (isLeader)
             ListTile(
               leading: const Icon(Icons.settings_outlined, color: Colors.white),
-              title: const Text('Ajustes de Comunidad', style: TextStyle(color: Colors.white)),
+              title: Text(tr('Ajustes de Comunidad'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -1580,7 +1581,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
           if (member != null)
             ListTile(
               leading: const Icon(Icons.exit_to_app_rounded, color: Colors.redAccent),
-              title: const Text('Abandonar Comunidad', style: TextStyle(color: Colors.redAccent)),
+              title: Text(tr('Abandonar Comunidad'), style: TextStyle(color: Colors.redAccent)),
               onTap: () {
                 final bloc = context.read<CommunityContextBloc>();
                 Navigator.pop(context); // Close bottom sheet
@@ -1588,7 +1589,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                   context: context,
                   builder: (dialogContext) => AlertDialog(
                     backgroundColor: Wumbleheme.surfaceColor,
-                    title: const Text('¿Abandonar Comunidad?', style: TextStyle(color: Colors.white)),
+                    title: Text(tr('¿Abandonar Comunidad?'), style: TextStyle(color: Colors.white)),
                     content: const Text(
                       'Perderás tu rango y progreso en esta comunidad. ¿Estás seguro de que quieres salir?',
                       style: TextStyle(color: Colors.white70),
@@ -1596,14 +1597,14 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(dialogContext),
-                        child: const Text('Cancelar', style: TextStyle(color: Colors.white54)),
+                        child: Text(tr('Cancelar'), style: TextStyle(color: Colors.white54)),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.pop(dialogContext); // Close dialog
                           bloc.add(LeaveCommunityRequested());
                         },
-                        child: const Text('Abandonar', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+                        child: Text(tr('Abandonar'), style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),
@@ -1615,7 +1616,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
           
           ListTile(
             leading: const Icon(Icons.report_problem_outlined, color: Colors.orangeAccent),
-            title: const Text('Reportar Comunidad', style: TextStyle(color: Colors.orangeAccent)),
+            title: Text(tr('Reportar Comunidad'), style: TextStyle(color: Colors.orangeAccent)),
             onTap: () {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
@@ -2122,11 +2123,11 @@ class _CommunityWebViewTabState extends State<_CommunityWebViewTab> with Automat
           children: [
             const Icon(Icons.error_outline_rounded, color: Colors.white24, size: 48),
             const SizedBox(height: 16),
-            const Text('No se pudo cargar la página.', style: TextStyle(color: Colors.white54)),
+            Text(tr('No se pudo cargar la página.'), style: TextStyle(color: Colors.white54)),
             const SizedBox(height: 16),
             OutlinedButton.icon(
               icon: Icon(Icons.open_in_browser_rounded, color: widget.themeColor),
-              label: Text('ABRIR EN NAVEGADOR', style: TextStyle(color: widget.themeColor)),
+              label: Text(tr('ABRIR EN NAVEGADOR'), style: TextStyle(color: widget.themeColor)),
               onPressed: () async {
                 final url = _parseUrl(widget.url);
                 if (await canLaunchUrl(url)) {

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -143,7 +144,7 @@ class _CompleteProfileViewState extends State<_CompleteProfileView> {
                                     padding: const EdgeInsets.symmetric(vertical: 16),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                   ),
-                                  child: const Text('CANCELAR'),
+                                  child: Text(tr('CANCELAR')),
                                 ),
                               ),
                               const SizedBox(width: 16),
@@ -157,7 +158,7 @@ class _CompleteProfileViewState extends State<_CompleteProfileView> {
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                     elevation: 0,
                                   ),
-                                  child: const Text('REINTENTAR', style: TextStyle(fontWeight: FontWeight.bold)),
+                                  child: Text(tr('REINTENTAR'), style: TextStyle(fontWeight: FontWeight.bold)),
                                 ),
                               ),
                             ],
@@ -243,9 +244,9 @@ class _StepIdentityState extends State<_StepIdentity> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Paso 1: Tu Identidad', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+        Text(tr('Paso 1: Tu Identidad'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
         const SizedBox(height: 10),
-        const Text('¡Elige tu mejor ángulo y un nombre que te represente!', textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
+        Text(tr('¡Elige tu mejor ángulo y un nombre que te represente!'), textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
         const SizedBox(height: 40),
         GestureDetector(
           onTap: _pickImage,
@@ -259,16 +260,16 @@ class _StepIdentityState extends State<_StepIdentity> {
         const SizedBox(height: 30),
         TextField(
           controller: _nameController,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white),
           textAlign: TextAlign.center,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: 'Tu nombre o apodo',
             hintStyle: TextStyle(color: Colors.white30),
             enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white24)),
             focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Wumbleheme.secondaryColor)),
           ),
         ),
-        const Spacer(),
+        Spacer(),
         SizedBox(
           width: double.infinity,
           height: 50,
@@ -278,7 +279,7 @@ class _StepIdentityState extends State<_StepIdentity> {
               context.read<CompleteProfileCubit>().updateIdentity(_nameController.text, _avatarFile);
               widget.onNext();
             },
-            child: const Text('SIGUIENTE', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+            child: Text(tr('SIGUIENTE'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
           ),
         ),
       ],
@@ -288,7 +289,7 @@ class _StepIdentityState extends State<_StepIdentity> {
 
 class _StepBio extends StatefulWidget {
   final VoidCallback onNext;
-  const _StepBio({required this.onNext});
+  _StepBio({required this.onNext});
 
   @override
   State<_StepBio> createState() => _StepBioState();
@@ -309,23 +310,23 @@ class _StepBioState extends State<_StepBio> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Paso 2: Háblanos de ti', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-        const SizedBox(height: 10),
-        const Text('Las mejores amistades empiezan con un "Hola". ¿Qué te apasiona?', textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
-        const SizedBox(height: 40),
+        Text(tr('Paso 2: Háblanos de ti'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+        SizedBox(height: 10),
+        Text(tr('Las mejores amistades empiezan con un "Hola". ¿Qué te apasiona?'), textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
+        SizedBox(height: 40),
         TextField(
           controller: _bioController,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white),
           maxLines: 5,
           decoration: InputDecoration(
             hintText: 'Escribe algo genial aquí...',
-            hintStyle: const TextStyle(color: Colors.white30),
+            hintStyle: TextStyle(color: Colors.white30),
             fillColor: Colors.white10,
             filled: true,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
           ),
         ),
-        const Spacer(),
+        Spacer(),
         SizedBox(
           width: double.infinity,
           height: 50,
@@ -335,7 +336,7 @@ class _StepBioState extends State<_StepBio> {
               context.read<CompleteProfileCubit>().updateBio(_bioController.text);
               widget.onNext();
             },
-            child: const Text('SIGUIENTE', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+            child: Text(tr('SIGUIENTE'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
           ),
         ),
       ],
@@ -345,7 +346,7 @@ class _StepBioState extends State<_StepBio> {
 
 class _StepStyle extends StatefulWidget {
   final VoidCallback onNext;
-  const _StepStyle({required this.onNext});
+  _StepStyle({required this.onNext});
 
   @override
   State<_StepStyle> createState() => _StepStyleState();
@@ -379,10 +380,10 @@ class _StepStyleState extends State<_StepStyle> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Paso 3: Tu Estilo', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-        const SizedBox(height: 10),
-        const Text('¡Dale color a tu muro! Haz que tu perfil sea 100% tú.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
-        const SizedBox(height: 40),
+        Text(tr('Paso 3: Tu Estilo'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+        SizedBox(height: 10),
+        Text(tr('¡Dale color a tu muro! Haz que tu perfil sea 100% tú.'), textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
+        SizedBox(height: 40),
         
         // Custom Banner Picker
         GestureDetector(
@@ -402,18 +403,18 @@ class _StepStyleState extends State<_StepStyle> {
                 : null,
             ),
             child: _bannerFile == null 
-              ? const Column(
+              ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.photo_size_select_actual, color: Colors.white54, size: 30),
                     SizedBox(height: 8),
-                    Text('Añadir Portada', style: TextStyle(color: Colors.white54)),
+                    Text(tr('Añadir Portada'), style: TextStyle(color: Colors.white54)),
                   ],
                 )
-              : const Align(alignment: Alignment.topRight, child: Padding(padding: EdgeInsets.all(8), child: Icon(Icons.edit, color: Colors.white))),
+              : Align(alignment: Alignment.topRight, child: Padding(padding: EdgeInsets.all(8), child: Icon(Icons.edit, color: Colors.white))),
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: 20),
         
         // Custom Background Picker
         GestureDetector(
@@ -433,12 +434,12 @@ class _StepStyleState extends State<_StepStyle> {
                 : null,
             ),
              child: _bgFile == null 
-              ? const Column(
+              ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.wallpaper, color: Colors.white54, size: 30),
                     SizedBox(height: 8),
-                    Text('Fondo de Perfil', style: TextStyle(color: Colors.white54)),
+                    Text(tr('Fondo de Perfil'), style: TextStyle(color: Colors.white54)),
                   ],
                 )
               : const Align(alignment: Alignment.topRight, child: Padding(padding: EdgeInsets.all(8), child: Icon(Icons.edit, color: Colors.white))),
@@ -454,7 +455,7 @@ class _StepStyleState extends State<_StepStyle> {
             onPressed: isSubmitting ? null : widget.onNext,
             child: isSubmitting 
               ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-              : const Text('¡EMPEZAR!', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+              : Text(tr('¡EMPEZAR!'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
           ),
         ),
       ],
@@ -485,7 +486,7 @@ class _StepBirthdayState extends State<_StepBirthday> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Paso 2: Tu Cumpleaños', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+        Text(tr('Paso 2: Tu Cumpleaños'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
         const SizedBox(height: 10),
         const Text('¡Dinos cuándo celebrarte! Queremos enviarte confeti en tu día especial.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
         const SizedBox(height: 40),
@@ -557,7 +558,7 @@ class _StepBirthdayState extends State<_StepBirthday> {
               disabledBackgroundColor: Wumbleheme.secondaryColor.withOpacity(0.3),
             ),
             onPressed: _selectedDate == null ? null : widget.onNext,
-            child: const Text('SIGUIENTE', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+            child: Text(tr('SIGUIENTE'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
           ),
         ),
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -26,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
   final String? communityId;
   final bool isGlobal;
 
-  const ProfileScreen({
+  ProfileScreen({
     super.key,
     this.userId,
     this.communityId,
@@ -80,7 +81,7 @@ class _ProfileView extends StatefulWidget {
   final bool isGlobal;
   final String? communityId;
   final String? userId;
-  const _ProfileView({super.key, required this.isGlobal, this.communityId, this.userId});
+  _ProfileView({super.key, required this.isGlobal, this.communityId, this.userId});
 
   @override
   _ProfileViewState createState() => _ProfileViewState();
@@ -340,7 +341,7 @@ class _ProfileViewState extends State<_ProfileView> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const Text('Biografía',
+                                            Text(tr('Biografía'),
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 16, color: Colors.white)),
@@ -444,8 +445,8 @@ class _ProfileViewState extends State<_ProfileView> {
 
     if (!isOwner && !user.showFollows) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Este usuario ha configurado su lista como privada.'),
+        SnackBar(
+          content: Text(tr('Este usuario ha configurado su lista como privada.')),
           backgroundColor: Colors.orangeAccent,
         ),
       );
@@ -474,13 +475,13 @@ class _ProfileViewState extends State<_ProfileView> {
           color: Wumbleheme.surfaceColor,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         ),
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
               leading: const Icon(Icons.article_outlined, color: Colors.white),
-              title: const Text('Crear Post',
+              title: Text(tr('Crear Post'),
                   style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -496,7 +497,7 @@ class _ProfileViewState extends State<_ProfileView> {
             ListTile(
               leading: const Icon(Icons.menu_book_outlined,
                   color: Colors.white),
-              title: const Text('Crear Wiki',
+              title: Text(tr('Crear Wiki'),
                   style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -512,7 +513,7 @@ class _ProfileViewState extends State<_ProfileView> {
             ListTile(
               leading: const Icon(Icons.face_retouching_natural,
                   color: Colors.white),
-              title: const Text('Crear Personaje (OC)',
+              title: Text(tr('Crear Personaje (OC)'),
                   style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -535,15 +536,15 @@ class _ProfileViewState extends State<_ProfileView> {
 class _ProfileSanctions extends StatelessWidget {
   final List<Sanction> sanctions;
 
-  const _ProfileSanctions({required this.sanctions});
+  _ProfileSanctions({required this.sanctions});
 
   @override
   Widget build(BuildContext context) {
     if (sanctions.isEmpty) {
-      return const Padding(
+      return Padding(
         padding: EdgeInsets.symmetric(vertical: 40),
         child: Center(
-          child: Text('Este usuario no tiene sanciones registradas.',
+          child: Text(tr('Este usuario no tiene sanciones registradas.'),
               style: TextStyle(color: Colors.white54)),
         ),
       );
@@ -597,7 +598,7 @@ class _ProfileSanctions extends StatelessWidget {
                   ),
                   const Spacer(),
                   if (!sanction.isActive)
-                    const Text('REVOCADA', style: TextStyle(color: Colors.grey, fontSize: 10, fontWeight: FontWeight.w900)),
+                    Text(tr('REVOCADA'), style: TextStyle(color: Colors.grey, fontSize: 10, fontWeight: FontWeight.w900)),
                 ],
               ),
               const SizedBox(height: 12),

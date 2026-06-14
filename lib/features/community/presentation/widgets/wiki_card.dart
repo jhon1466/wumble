@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +17,7 @@ class WikiCard extends StatefulWidget {
   final WikiPage wiki;
   final VoidCallback? onDeleted;
 
-  const WikiCard({super.key, required this.wiki, this.onDeleted});
+  WikiCard({super.key, required this.wiki, this.onDeleted});
 
   @override
   State<WikiCard> createState() => _WikiCardState();
@@ -82,7 +83,7 @@ class _WikiCardState extends State<WikiCard> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Color(0xFF1E1E2C),
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
@@ -90,8 +91,8 @@ class _WikiCardState extends State<WikiCard> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: const Icon(Icons.ios_share_rounded, color: Colors.white70),
-              title: const Text('Compartir', style: TextStyle(color: Colors.white)),
+              leading: Icon(Icons.ios_share_rounded, color: Colors.white70),
+              title: Text(tr('Compartir'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 _handleShare();
@@ -116,14 +117,14 @@ class _WikiCardState extends State<WikiCard> {
               ),
               ListTile(
                 leading: const Icon(Icons.delete_outline, color: Colors.redAccent),
-                title: const Text('Eliminar definitivamente', style: TextStyle(color: Colors.redAccent)),
+                title: Text(tr('Eliminar definitivamente'), style: TextStyle(color: Colors.redAccent)),
                 onTap: () {
                   Navigator.pop(context);
                   _confirmDelete();
                 },
               ),
             ],
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
           ],
         ),
       ),
@@ -134,21 +135,21 @@ class _WikiCardState extends State<WikiCard> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: Text(widget.wiki.type == 'oc' ? '¿Eliminar Personaje?' : '¿Eliminar Wiki?', style: const TextStyle(color: Colors.white)),
-        content: const Text('Esta acción no se puede deshacer.', style: TextStyle(color: Colors.white70)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(widget.wiki.type == 'oc' ? '¿Eliminar Personaje?' : '¿Eliminar Wiki?', style: TextStyle(color: Colors.white)),
+        content: Text(tr('Esta acción no se puede deshacer.'), style: TextStyle(color: Colors.white70)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('Cancelar'))),
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
               await sl<WikiRepository>().deleteWiki(widget.wiki.id);
               if (mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Wiki eliminada')));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Wiki eliminada'))));
                 widget.onDeleted?.call();
               }
             }, 
-            child: const Text('Eliminar', style: TextStyle(color: Colors.redAccent))
+            child: Text(tr('Eliminar'), style: TextStyle(color: Colors.redAccent))
           ),
         ],
       ),

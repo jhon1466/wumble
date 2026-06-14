@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,7 +45,7 @@ import 'package:wumble/core/widgets/linkify_text.dart';
 class PostDetailScreen extends StatefulWidget {
   final Post post;
 
-  const PostDetailScreen({super.key, required this.post});
+  PostDetailScreen({super.key, required this.post});
 
   @override
   State<PostDetailScreen> createState() => _PostDetailScreenState();
@@ -123,7 +124,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     } catch (e) {
       if (mounted) {
         setState(() => _isSaved = !_isSaved);
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al guardar')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Error al guardar'))));
       }
     }
   }
@@ -134,15 +135,15 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('¡Únete a la comunidad!', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        content: const Text(
+        title: Text(tr('¡Únete a la comunidad!'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        content: Text(
           'Para interactuar con esta publicación, dar corazón, guardar o donar, necesitas ser miembro de esta comunidad.',
           style: TextStyle(color: Colors.white70),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('CANCELAR', style: TextStyle(color: Colors.white54)),
+            child: Text(tr('CANCELAR'), style: TextStyle(color: Colors.white54)),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -166,7 +167,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             ),
-            child: const Text('UNIRSE AHORA'),
+            child: Text(tr('UNIRSE AHORA')),
           ),
         ],
       ),
@@ -192,7 +193,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     } catch (e) {
       if (mounted) {
         setState(() => _isPinned = !newPinnedStatus);
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al cambiar estado de fijación')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Error al cambiar estado de fijación'))));
       }
     }
   }
@@ -202,26 +203,26 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('Reportar Publicación', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('Reportar Publicación'), style: TextStyle(color: Colors.white)),
         content: TextField(
           controller: controller,
-          style: const TextStyle(color: Colors.white),
-          decoration: const InputDecoration(
+          style: TextStyle(color: Colors.white),
+          decoration: InputDecoration(
             hintText: 'Razón del reporte...',
             hintStyle: TextStyle(color: Colors.white54),
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () async {
               if (controller.text.trim().isEmpty) return;
               Navigator.pop(context);
               await _feedRepository.reportPost(widget.post.id, _currentUserId ?? 'anon', controller.text);
-              if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Reporte enviado')));
+              if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Reporte enviado'))));
             },
-            child: const Text('ENVIAR', style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text(tr('ENVIAR'), style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -415,7 +416,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       } catch (e) {
         debugPrint('Error uploading comment image: $e');
         if (mounted) {
-           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al subir imagen')));
+           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Error al subir imagen'))));
            setState(() => _isUploadingImage = false);
         }
         return;
@@ -573,7 +574,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     } catch (e) {
       debugPrint('Error uploading custom sticker: $e');
       if (mounted) {
-         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al enviar sticker personalizado')));
+         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Error al enviar sticker personalizado'))));
          setState(() => _isUploadingImage = false);
       }
     }
@@ -612,7 +613,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
           child: Container(
             decoration: BoxDecoration(
               color: Wumbleheme.surfaceColor.withOpacity(0.9),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
               border: Border.all(color: Colors.white10),
             ),
             padding: EdgeInsets.only(
@@ -761,8 +762,8 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                         Navigator.pop(context);
                         Clipboard.setData(ClipboardData(text: comment.content));
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Comentario copiado'),
+                          SnackBar(
+                            content: Text(tr('Comentario copiado')),
                             backgroundColor: Wumbleheme.primaryColor,
                             duration: Duration(seconds: 1),
                           ),
@@ -815,7 +816,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     Color color = Colors.white,
   }) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+      contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
       leading: Icon(icon, color: color.withOpacity(0.8), size: 22),
       title: Text(
         title,
@@ -834,19 +835,19 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('Editar comentario', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('Editar comentario'), style: TextStyle(color: Colors.white)),
         content: TextField(
           controller: controller,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white),
           maxLines: null,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: 'Escribe algo...',
             hintStyle: TextStyle(color: Colors.white54),
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () async {
               final newContent = controller.text.trim();
@@ -860,11 +861,11 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                   }
                   _loadComments();
                 } catch (e) {
-                  if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al editar')));
+                  if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Error al editar'))));
                 }
               }
             },
-            child: const Text('GUARDAR', style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text(tr('GUARDAR'), style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -875,10 +876,10 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('¿Eliminar comentario?', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('¿Eliminar comentario?'), style: TextStyle(color: Colors.white)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('NO')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('NO'))),
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
@@ -890,17 +891,17 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 }
                 _loadComments();
               } catch (e) {
-                 if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al eliminar')));
+                 if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Error al eliminar'))));
               }
             },
-            child: const Text('SÍ', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+            child: Text(tr('SÍ'), style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
     );
   }
   Widget _buildRichText(String text) {
-    if (text.isEmpty) return const SizedBox.shrink();
+    if (text.isEmpty) return SizedBox.shrink();
 
     final lines = text.split('\n');
     return Column(
@@ -910,7 +911,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   }
 
   Widget _buildRichTextLine(String line) {
-    if (line.isEmpty) return const SizedBox(height: 8);
+    if (line.isEmpty) return SizedBox(height: 8);
 
     final tagMatch = RegExp(r'^\[([^\]]+)\]').firstMatch(line);
     String cleanText = line;
@@ -979,7 +980,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     );
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: EdgeInsets.symmetric(vertical: 4),
       child: textAlign == TextAlign.center ? Center(child: content) : content,
     );
   }
@@ -988,23 +989,23 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('¿Eliminar publicación?', style: TextStyle(color: Colors.white)),
-        content: const Text(
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('¿Eliminar publicación?'), style: TextStyle(color: Colors.white)),
+        content: Text(
           'Esta acción borrará permanentemente el post, sus comentarios y todos sus archivos multimedia. No se puede deshacer.',
           style: TextStyle(color: Colors.white70),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('CANCELAR', style: TextStyle(color: Colors.white54)),
+            child: Text(tr('CANCELAR'), style: TextStyle(color: Colors.white54)),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               _deletePost();
             },
-            child: const Text('ELIMINAR', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+            child: Text(tr('ELIMINAR'), style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -1014,12 +1015,12 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   Future<void> _deletePost() async {
     // Show a loading snackbar or use a cubit listener
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         content: Row(
           children: [
             SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)),
             SizedBox(width: 16),
-            Text('Eliminando publicación...'),
+            Text(tr('Eliminando publicación...')),
           ],
         ),
         duration: Duration(days: 1), // Semi-permanent until done
@@ -1031,7 +1032,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Publicación eliminada correctamente')),
+          SnackBar(content: Text(tr('Publicación eliminada correctamente'))),
         );
         Navigator.pop(context, true); // Return true to indicate feed should refresh
       }
@@ -1070,7 +1071,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     return Scaffold(
       backgroundColor: postBgColor ?? Wumbleheme.backgroundColor,
       appBar: AppBar(
-        title: const Text('Publicación'),
+        title: Text(tr('Publicación')),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -1096,13 +1097,13 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 icon: const Icon(Icons.more_vert),
                 itemBuilder: (context) => [
                   if (isAuthor)
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'edit',
                       child: Row(
                         children: [
                           Icon(Icons.edit, color: Colors.blueAccent, size: 20),
                           SizedBox(width: 8),
-                          Text('Editar'),
+                          Text(tr('Editar')),
                         ],
                       ),
                     ),
@@ -1117,13 +1118,13 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                     ),
                   ),
                   if (!isAuthor)
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'report',
                       child: Row(
                         children: [
                           Icon(Icons.report_problem, color: Colors.redAccent, size: 20),
                           SizedBox(width: 8),
-                          Text('Reportar', style: TextStyle(color: Colors.redAccent)),
+                          Text(tr('Reportar'), style: TextStyle(color: Colors.redAccent)),
                         ],
                       ),
                     ),
@@ -1139,13 +1140,13 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                       ),
                     ),
                   if (isAuthor || isModerator)
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'delete',
                       child: Row(
                         children: [
                           Icon(Icons.delete, color: Colors.redAccent, size: 20),
                           SizedBox(width: 8),
-                          Text('Eliminar', style: TextStyle(color: Colors.redAccent)),
+                          Text(tr('Eliminar'), style: TextStyle(color: Colors.redAccent)),
                         ],
                       ),
                     ),
@@ -1696,7 +1697,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                                                     borderRadius: BorderRadius.circular(4),
                                                     border: Border.all(color: Wumbleheme.secondaryColor.withOpacity(0.5)),
                                                   ),
-                                                  child: Text('Autor', style: TextStyle(color: Wumbleheme.secondaryColor, fontSize: 9, fontWeight: FontWeight.bold)),
+                                                  child: Text(tr('Autor'), style: TextStyle(color: Wumbleheme.secondaryColor, fontSize: 9, fontWeight: FontWeight.bold)),
                                                 ),
                                               ],
                                               const Spacer(),
@@ -1854,7 +1855,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                     ),
-                    child: const Text('UNIRSE', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12, letterSpacing: 0.5)),
+                    child: Text(tr('UNIRSE'), style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12, letterSpacing: 0.5)),
                   ),
                 ],
               ),

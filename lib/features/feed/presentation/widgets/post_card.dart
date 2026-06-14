@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,7 +25,7 @@ class PostCard extends StatefulWidget {
   final Post post;
   final VoidCallback? onTap;
 
-  const PostCard({super.key, required this.post, this.onTap});
+  PostCard({super.key, required this.post, this.onTap});
 
   @override
   State<PostCard> createState() => _PostCardState();
@@ -68,7 +69,7 @@ class _PostCardState extends State<PostCard> {
       setState(() => _isPinned = !newPinnedStatus);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error al cambiar pin')),
+          SnackBar(content: Text(tr('Error al cambiar pin'))),
         );
       }
     }
@@ -92,7 +93,7 @@ class _PostCardState extends State<PostCard> {
       setState(() => _isFeatured = !newFeaturedStatus);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error al cambiar destacado')),
+          SnackBar(content: Text(tr('Error al cambiar destacado'))),
         );
       }
     }
@@ -114,7 +115,7 @@ class _PostCardState extends State<PostCard> {
         );
       }
     } catch (e) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al procesar')));
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Error al procesar'))));
     }
   }
 
@@ -137,26 +138,26 @@ class _PostCardState extends State<PostCard> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('Reportar Publicación', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('Reportar Publicación'), style: TextStyle(color: Colors.white)),
         content: TextField(
           controller: controller,
-          style: const TextStyle(color: Colors.white),
-          decoration: const InputDecoration(
+          style: TextStyle(color: Colors.white),
+          decoration: InputDecoration(
             hintText: 'Razón del reporte...',
             hintStyle: TextStyle(color: Colors.white38),
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () async {
               if (controller.text.trim().isEmpty) return;
               Navigator.pop(context);
               await di.sl<FeedRepository>().reportPost(widget.post.id, _currentUserId ?? 'anon', controller.text);
-              if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Reporte enviado')));
+              if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Reporte enviado'))));
             },
-            child: const Text('ENVIAR', style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text(tr('ENVIAR'), style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -167,10 +168,10 @@ class _PostCardState extends State<PostCard> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('¿Eliminar publicación?', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('¿Eliminar publicación?'), style: TextStyle(color: Colors.white)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
@@ -180,10 +181,10 @@ class _PostCardState extends State<PostCard> {
                 try {
                   context.read<CommunityFeedBloc>().add(CommunityFeedPostDeleted(widget.post.id));
                 } catch (_) {}
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Publicación eliminada')));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr('Publicación eliminada'))));
               }
             },
-            child: const Text('ELIMINAR', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+            child: Text(tr('ELIMINAR'), style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -237,7 +238,7 @@ class _PostCardState extends State<PostCard> {
             ),
             ListTile(
               leading: const Icon(Icons.ios_share_rounded, color: Colors.white70),
-              title: const Text('Compartir', style: TextStyle(color: Colors.white)),
+              title: Text(tr('Compartir'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 _handleShare();
@@ -266,7 +267,7 @@ class _PostCardState extends State<PostCard> {
             if (!isAuthor)
               ListTile(
                 leading: const Icon(Icons.report_problem_outlined, color: Colors.redAccent),
-                title: const Text('Reportar contenido', style: TextStyle(color: Colors.redAccent)),
+                title: Text(tr('Reportar contenido'), style: TextStyle(color: Colors.redAccent)),
                 onTap: () {
                   Navigator.pop(context);
                   _showReportDialog();
@@ -275,7 +276,7 @@ class _PostCardState extends State<PostCard> {
             if (isAuthor) ...[
               ListTile(
                 leading: const Icon(Icons.edit_outlined, color: Colors.blueAccent),
-                title: const Text('Editar post', style: TextStyle(color: Colors.white)),
+                title: Text(tr('Editar post'), style: TextStyle(color: Colors.white)),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(context, MaterialPageRoute(builder: (_) => CreatePostScreen(communityId: widget.post.communityId ?? '', existingPost: widget.post)));
@@ -283,7 +284,7 @@ class _PostCardState extends State<PostCard> {
               ),
               ListTile(
                 leading: const Icon(Icons.delete_outline, color: Colors.redAccent),
-                title: const Text('Eliminar definitivamente', style: TextStyle(color: Colors.redAccent)),
+                title: Text(tr('Eliminar definitivamente'), style: TextStyle(color: Colors.redAccent)),
                 onTap: () {
                   Navigator.pop(context);
                   _showDeleteConfirmation();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/post_card.dart';
 import '../domain/post_model.dart';
@@ -16,7 +17,7 @@ class GlobalFeedScreen extends StatelessWidget {
           shaderCallback: (bounds) => const LinearGradient(
             colors: [Wumbleheme.primaryColor, Wumbleheme.secondaryColor],
           ).createShader(bounds),
-          child: const Text('Muro Global'),
+          child: Text(tr('Muro Global')),
         ),
         actions: [
           IconButton(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import '../../domain/poll_model.dart';
@@ -11,7 +12,7 @@ import '../../../../core/widgets/user_avatar.dart';
 class PollListWidget extends StatefulWidget {
   final String communityId;
 
-  const PollListWidget({super.key, required this.communityId});
+  PollListWidget({super.key, required this.communityId});
 
   @override
   State<PollListWidget> createState() => PollListWidgetState();
@@ -64,25 +65,25 @@ class PollListWidgetState extends State<PollListWidget> with AutomaticKeepAliveC
     return RefreshIndicator(
       onRefresh: _onRefresh,
       color: Colors.white,
-      backgroundColor: const Color(0xFF1E1E2C),
+      backgroundColor: Color(0xFF1E1E2C),
       child: FutureBuilder<List<Poll>>(
         future: _pollsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}', style: const TextStyle(color: Colors.white70)));
+            return Center(child: Text('Error: ${snapshot.error}', style: TextStyle(color: Colors.white70)));
           }
           final polls = snapshot.data ?? [];
           if (polls.isEmpty) {
             return ListView(
-              physics: const AlwaysScrollableScrollPhysics(),
+              physics: AlwaysScrollableScrollPhysics(),
               children: [
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.6,
-                  child: const Center(
-                    child: Text('No hay encuestas aún.', style: TextStyle(color: Colors.white38)),
+                  child: Center(
+                    child: Text(tr('No hay encuestas aún.'), style: TextStyle(color: Colors.white38)),
                   ),
                 ),
               ],
@@ -130,7 +131,7 @@ class _PollCard extends StatelessWidget {
           children: [
             ListTile(
               leading: const Icon(Icons.edit_outlined, color: Colors.white70),
-              title: const Text('Editar Encuesta', style: TextStyle(color: Colors.white)),
+              title: Text(tr('Editar Encuesta'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -148,19 +149,19 @@ class _PollCard extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.delete_outline, color: Colors.redAccent),
-              title: const Text('Eliminar Encuesta', style: TextStyle(color: Colors.redAccent)),
+              title: Text(tr('Eliminar Encuesta'), style: TextStyle(color: Colors.redAccent)),
               onTap: () async {
                 final confirm = await showDialog<bool>(
                   context: context,
                   builder: (context) => AlertDialog(
                     backgroundColor: const Color(0xFF1E1E2C),
-                    title: const Text('¿Eliminar Encuesta?', style: TextStyle(color: Colors.white)),
-                    content: const Text('Esta acción no se puede deshacer.', style: TextStyle(color: Colors.white70)),
+                    title: Text(tr('¿Eliminar Encuesta?'), style: TextStyle(color: Colors.white)),
+                    content: Text(tr('Esta acción no se puede deshacer.'), style: TextStyle(color: Colors.white70)),
                     actions: [
-                      TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('CANCELAR')),
+                      TextButton(onPressed: () => Navigator.pop(context, false), child: Text(tr('CANCELAR'))),
                       TextButton(
                         onPressed: () => Navigator.pop(context, true), 
-                        child: const Text('ELIMINAR', style: TextStyle(color: Colors.redAccent))
+                        child: Text(tr('ELIMINAR'), style: TextStyle(color: Colors.redAccent))
                       ),
                     ],
                   ),

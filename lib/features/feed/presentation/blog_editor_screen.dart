@@ -1,10 +1,11 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/utils/media_helper.dart';
 import '../../../../core/theme.dart';
 
 class BlogEditorScreen extends StatefulWidget {
-  const BlogEditorScreen({super.key});
+  BlogEditorScreen({super.key});
 
   @override
   State<BlogEditorScreen> createState() => _BlogEditorScreenState();
@@ -33,20 +34,20 @@ class _BlogEditorScreenState extends State<BlogEditorScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.close),
+          icon: Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text('Crear Blog'),
+        title: Text(tr('Crear Blog')),
         actions: [
           TextButton(
             onPressed: () {
               // Logic to publish will go here
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('¡Blog publicado con éxito!')),
+                SnackBar(content: Text(tr('¡Blog publicado con éxito!'))),
               );
             },
-            child: const Text(
+            child: Text(
               'Publicar',
               style: TextStyle(
                 color: Wumbleheme.accentColor,
@@ -57,7 +58,7 @@ class _BlogEditorScreenState extends State<BlogEditorScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -79,12 +80,12 @@ class _BlogEditorScreenState extends State<BlogEditorScreen> {
                       : null,
                 ),
                 child: _selectedImageUrl == null
-                    ? const Column(
+                    ? Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.add_photo_alternate_outlined, size: 48, color: Wumbleheme.textSecondary),
                           SizedBox(height: 8),
-                          Text('Añadir imagen de portada', style: TextStyle(color: Wumbleheme.textSecondary)),
+                          Text(tr('Añadir imagen de portada'), style: TextStyle(color: Wumbleheme.textSecondary)),
                         ],
                       )
                     : null,

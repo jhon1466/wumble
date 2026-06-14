@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:wumble/features/feed/domain/category_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -143,7 +144,7 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
         final bool hasMore;
 
         if (state is CommunityFeedLoading) {
-          posts = const [];
+          posts = [];
           isInitialLoad = true;
           isLoadingMore = false;
           hasMore = false;
@@ -158,12 +159,12 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
           isLoadingMore = false;
           hasMore = state.hasMore;
         } else if (state is CommunityFeedError) {
-          posts = const [];
+          posts = [];
           isInitialLoad = false;
           isLoadingMore = false;
           hasMore = false;
         } else {
-          posts = const [];
+          posts = [];
           isInitialLoad = false;
           isLoadingMore = false;
           hasMore = false;
@@ -177,10 +178,10 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
         return RefreshIndicator(
           onRefresh: _onRefresh,
           color: Colors.white,
-          backgroundColor: const Color(0xFF1E1E2C),
+          backgroundColor: Color(0xFF1E1E2C),
           child: CustomScrollView(
             controller: _scrollController,
-            physics: const AlwaysScrollableScrollPhysics(),
+            physics: AlwaysScrollableScrollPhysics(),
             slivers: [
               // ── Pinned Posts (Pins) ──
               if (widget.showCarousel && state is CommunityFeedLoaded && state.posts.any((p) => p.isPinned == true))
@@ -224,7 +225,7 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
                 ),
               // ── Initial loading spinner ──
               if (isInitialLoad)
-                const SliverToBoxAdapter(
+                SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.all(40.0),
                     child: Center(child: CircularProgressIndicator()),
@@ -234,7 +235,7 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
               else if (state is CommunityFeedError)
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: EdgeInsets.all(20.0),
                     child: Center(
                       child: Column(
                         children: [
@@ -249,7 +250,7 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
                           TextButton.icon(
                             onPressed: _onRefresh,
                             icon: const Icon(Icons.refresh_rounded, color: Colors.white70),
-                            label: const Text('Reintentar', style: TextStyle(color: Colors.white70)),
+                            label: Text(tr('Reintentar'), style: TextStyle(color: Colors.white70)),
                           ),
                         ],
                       ),
@@ -258,7 +259,7 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
                 )
               // ── Empty state ──
               else if (posts.isEmpty)
-                const SliverToBoxAdapter(
+                SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.all(40.0),
                     child: Center(
@@ -266,7 +267,7 @@ class CommunityFeedWidgetState extends State<CommunityFeedWidget> with Automatic
                         children: [
                           Icon(Icons.feed_outlined, size: 60, color: Colors.white24),
                           SizedBox(height: 10),
-                          Text('Aún no hay publicaciones', style: TextStyle(color: Colors.white24)),
+                          Text(tr('Aún no hay publicaciones'), style: TextStyle(color: Colors.white24)),
                           SizedBox(height: 4),
                           Text(
                             'Desliza hacia abajo para actualizar',
@@ -641,7 +642,7 @@ class _CategoryBarDelegate extends SliverPersistentHeaderDelegate {
             return Padding(
               padding: const EdgeInsets.only(right: 8),
               child: ChoiceChip(
-                label: const Text('Todo'),
+                label: Text(tr('Todo')),
                 selected: isAll,
                 onSelected: (_) => onCategorySelected(null),
                 backgroundColor: Colors.white.withOpacity(0.05),

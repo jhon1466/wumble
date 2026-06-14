@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -9,7 +10,7 @@ import '../../domain/community_model.dart';
 class ModerationCenterScreen extends StatefulWidget {
   final Community community;
 
-  const ModerationCenterScreen({super.key, required this.community});
+  ModerationCenterScreen({super.key, required this.community});
 
   @override
   State<ModerationCenterScreen> createState() => _ModerationCenterScreenState();
@@ -38,11 +39,11 @@ class _ModerationCenterScreenState extends State<ModerationCenterScreen> with Si
       appBar: AppBar(
         backgroundColor: Wumbleheme.backgroundColor,
         elevation: 0,
-        title: const Column(
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Centro de Moderación', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-            Text('Reportes de IA y Usuarios', style: TextStyle(color: Colors.white38, fontSize: 12)),
+            Text(tr('Centro de Moderación'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            Text(tr('Reportes de IA y Usuarios'), style: TextStyle(color: Colors.white38, fontSize: 12)),
           ],
         ),
         bottom: TabBar(
@@ -213,7 +214,7 @@ class _ModerationCenterScreenState extends State<ModerationCenterScreen> with Si
                     child: ElevatedButton.icon(
                       onPressed: () => _handleAction(report, ModerationReportStatus.approved),
                       icon: const Icon(Icons.check, size: 18),
-                      label: const Text('APROBAR'),
+                      label: Text(tr('APROBAR')),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green.withOpacity(0.2),
                         foregroundColor: Colors.greenAccent,
@@ -227,7 +228,7 @@ class _ModerationCenterScreenState extends State<ModerationCenterScreen> with Si
                     child: ElevatedButton.icon(
                       onPressed: () => _handleAction(report, ModerationReportStatus.rejected),
                       icon: const Icon(Icons.delete_outline, size: 18),
-                      label: const Text('ELIMINAR'),
+                      label: Text(tr('ELIMINAR')),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red.withOpacity(0.2),
                         foregroundColor: Colors.redAccent,
@@ -328,13 +329,13 @@ class _ModerationCenterScreenState extends State<ModerationCenterScreen> with Si
         context: context,
         builder: (context) => AlertDialog(
           backgroundColor: Wumbleheme.surfaceColor,
-          title: const Text('¿Eliminar contenido?', style: TextStyle(color: Colors.white)),
+          title: Text(tr('¿Eliminar contenido?'), style: TextStyle(color: Colors.white)),
           content: const Text('Esta acción eliminará permanentemente el contenido reportado y notificará al usuario.'),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('CANCELAR')),
+            TextButton(onPressed: () => Navigator.pop(context, false), child: Text(tr('CANCELAR'))),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
-              child: const Text('ELIMINAR', style: TextStyle(color: Colors.redAccent)),
+              child: Text(tr('ELIMINAR'), style: TextStyle(color: Colors.redAccent)),
             ),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:wumble/features/profile/domain/user_model.dart';
 import 'package:wumble/features/profile/domain/profile_repository.dart';
 import 'package:wumble/features/profile/presentation/profile_bloc.dart';
@@ -16,7 +17,7 @@ class BlockedUsersScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Usuarios Bloqueados', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(tr('Usuarios Bloqueados'), style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
       body: StreamBuilder<List<UserProfile>>(
@@ -88,7 +89,7 @@ class BlockedUsersScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     ),
-                    child: const Text('Desbloquear', style: TextStyle(fontSize: 12)),
+                    child: Text(tr('Desbloquear'), style: TextStyle(fontSize: 12)),
                   ),
                 ),
               );
@@ -104,13 +105,13 @@ class BlockedUsersScreen extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('Desbloquear usuario', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Desbloquear usuario'), style: TextStyle(color: Colors.white)),
         content: Text(
           '¿Deseas desbloquear a ${user.displayName}? Podrá volver a interactuar contigo.',
           style: const TextStyle(color: Colors.white70),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () {
               sl<ProfileBloc>().add(UnblockUserRequested(
@@ -125,7 +126,7 @@ class BlockedUsersScreen extends StatelessWidget {
                 ),
               );
             },
-            child: const Text('DESBLOQUEAR', style: TextStyle(color: Colors.blueAccent)),
+            child: Text(tr('DESBLOQUEAR'), style: TextStyle(color: Colors.blueAccent)),
           ),
         ],
       ),

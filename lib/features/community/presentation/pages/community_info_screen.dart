@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wumble/core/theme.dart';
@@ -233,7 +234,7 @@ class CommunityInfoScreen extends StatelessWidget {
                                              await di.sl<CommunityRepository>().requestJoinCommunity(community.id, userId);
                                              scaffoldMessenger.showSnackBar(
                                                SnackBar(
-                                                 content: const Text('Solicitud enviada correctamente.'),
+                                                 content: Text(tr('Solicitud enviada correctamente.')),
                                                  backgroundColor: community.themeColor,
                                                ),
                                              );
@@ -378,7 +379,7 @@ class CommunityInfoScreen extends StatelessWidget {
                                       isAnimated: false,
                                     ),
                                     const SizedBox(width: 8),
-                                    const Text('Creado por ', style: TextStyle(color: Colors.white54, fontSize: 13)),
+                                    Text(tr('Creado por '), style: TextStyle(color: Colors.white54, fontSize: 13)),
                                     Text(
                                       creator.displayName,
                                       style: TextStyle(color: community.themeColor, fontWeight: FontWeight.bold, fontSize: 13),
@@ -392,7 +393,7 @@ class CommunityInfoScreen extends StatelessWidget {
                             const SizedBox(height: 24),
                             
                             // ── Topics ──
-                            const Text('Categorías', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                            Text(tr('Categorías'), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
                             const SizedBox(height: 12),
                             Wrap(
                               spacing: 8,
@@ -409,7 +410,7 @@ class CommunityInfoScreen extends StatelessWidget {
                             const SizedBox(height: 32),
                             
                             // ── Descripción Larga ──
-                            const Text('Descripción', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                            Text(tr('Descripción'), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
                             const SizedBox(height: 12),
                             Text(
                               community.description.isEmpty 
@@ -453,7 +454,7 @@ class CommunityInfoScreen extends StatelessWidget {
           
           ListTile(
             leading: const Icon(Icons.share_rounded, color: Colors.white),
-            title: const Text('Compartir Comunidad', style: TextStyle(color: Colors.white)),
+            title: Text(tr('Compartir Comunidad'), style: TextStyle(color: Colors.white)),
             onTap: () {
               Navigator.pop(context);
               final String shareUrl = 'https://wumble.link/c/${community.handle ?? community.id}';
@@ -471,7 +472,7 @@ class CommunityInfoScreen extends StatelessWidget {
           if (isLeader)
             ListTile(
               leading: const Icon(Icons.settings_outlined, color: Colors.white),
-              title: const Text('Ajustes de Comunidad', style: TextStyle(color: Colors.white)),
+              title: Text(tr('Ajustes de Comunidad'), style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -489,7 +490,7 @@ class CommunityInfoScreen extends StatelessWidget {
           if (member != null)
             ListTile(
               leading: const Icon(Icons.exit_to_app_rounded, color: Colors.redAccent),
-              title: const Text('Abandonar Comunidad', style: TextStyle(color: Colors.redAccent)),
+              title: Text(tr('Abandonar Comunidad'), style: TextStyle(color: Colors.redAccent)),
               onTap: () {
                 final bloc = context.read<CommunityContextBloc>();
                 Navigator.pop(context); // Close bottom sheet
@@ -497,7 +498,7 @@ class CommunityInfoScreen extends StatelessWidget {
                   context: context,
                   builder: (dialogContext) => AlertDialog(
                     backgroundColor: Wumbleheme.surfaceColor,
-                    title: const Text('¿Abandonar Comunidad?', style: TextStyle(color: Colors.white)),
+                    title: Text(tr('¿Abandonar Comunidad?'), style: TextStyle(color: Colors.white)),
                     content: const Text(
                       'Perderás tu rango y progreso en esta comunidad. ¿Estás seguro de que quieres salir?',
                       style: TextStyle(color: Colors.white70),
@@ -505,14 +506,14 @@ class CommunityInfoScreen extends StatelessWidget {
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(dialogContext),
-                        child: const Text('Cancelar', style: TextStyle(color: Colors.white54)),
+                        child: Text(tr('Cancelar'), style: TextStyle(color: Colors.white54)),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.pop(dialogContext); // Close dialog
                           bloc.add(LeaveCommunityRequested());
                         },
-                        child: const Text('Abandonar', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+                        child: Text(tr('Abandonar'), style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),
@@ -524,7 +525,7 @@ class CommunityInfoScreen extends StatelessWidget {
           
           ListTile(
             leading: const Icon(Icons.report_problem_outlined, color: Colors.orangeAccent),
-            title: const Text('Reportar Comunidad', style: TextStyle(color: Colors.orangeAccent)),
+            title: Text(tr('Reportar Comunidad'), style: TextStyle(color: Colors.orangeAccent)),
             onTap: () {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(

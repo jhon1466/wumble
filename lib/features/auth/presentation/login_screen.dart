@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
 import 'auth_bloc.dart';
@@ -146,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: () {
                                     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
                                       ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(content: Text('Por favor llena todos los campos')),
+                                        SnackBar(content: Text(tr('Por favor llena todos los campos'))),
                                       );
                                       return;
                                     }
@@ -205,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                        height: 24,
                                        errorBuilder: (context, error, stackTrace) => const Icon(Icons.g_mobiledata, color: Colors.white, size: 24),
                                      ),
-                                     label: const Text('Continuar con Google', style: TextStyle(color: Colors.white)),
+                                     label: Text(tr('Continuar con Google'), style: TextStyle(color: Colors.white)),
                                      style: OutlinedButton.styleFrom(
                                        backgroundColor: Colors.black, // Dark background to make RGB pop
                                        padding: const EdgeInsets.symmetric(vertical: 16),

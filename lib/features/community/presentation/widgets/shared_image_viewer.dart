@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wumble/features/community/domain/shared_image_model.dart';
 import 'package:wumble/features/community/domain/shared_folder_repository.dart';
@@ -17,7 +18,7 @@ class SharedImageViewer extends StatefulWidget {
   final String communityId;
   final VoidCallback? onDelete;
 
-  const SharedImageViewer({
+  SharedImageViewer({
     super.key,
     required this.image,
     required this.communityId,
@@ -65,7 +66,7 @@ class _SharedImageViewerState extends State<SharedImageViewer> {
       );
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Icono de la comunidad actualizado')),
+          SnackBar(content: Text(tr('Icono de la comunidad actualizado'))),
         );
       }
     } catch (e) {
@@ -81,17 +82,17 @@ class _SharedImageViewerState extends State<SharedImageViewer> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
-        title: const Text('¿Eliminar imagen?', style: TextStyle(color: Colors.white)),
-        content: const Text('Esta acción no se puede deshacer.', style: TextStyle(color: Colors.white70)),
+        backgroundColor: Color(0xFF1E1E2C),
+        title: Text(tr('¿Eliminar imagen?'), style: TextStyle(color: Colors.white)),
+        content: Text(tr('Esta acción no se puede deshacer.'), style: TextStyle(color: Colors.white70)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('CANCELAR', style: TextStyle(color: Colors.white38)),
+            child: Text(tr('CANCELAR'), style: TextStyle(color: Colors.white38)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('ELIMINAR', style: TextStyle(color: Colors.redAccent)),
+            child: Text(tr('ELIMINAR'), style: TextStyle(color: Colors.redAccent)),
           ),
         ],
       ),
@@ -108,7 +109,7 @@ class _SharedImageViewerState extends State<SharedImageViewer> {
           Navigator.pop(context); // Close viewer
           widget.onDelete?.call();
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Imagen eliminada')),
+            SnackBar(content: Text(tr('Imagen eliminada'))),
           );
         }
       } catch (e) {
@@ -130,7 +131,7 @@ class _SharedImageViewerState extends State<SharedImageViewer> {
       await Gal.putImage(path);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Imagen guardada en la galería')),
+          SnackBar(content: Text(tr('Imagen guardada en la galería'))),
         );
       }
     } catch (e) {
@@ -154,7 +155,7 @@ class _SharedImageViewerState extends State<SharedImageViewer> {
         children: [
           ListTile(
             leading: const Icon(Icons.download_rounded, color: Colors.white),
-            title: const Text('Guardar en el dispositivo', style: TextStyle(color: Colors.white)),
+            title: Text(tr('Guardar en el dispositivo'), style: TextStyle(color: Colors.white)),
             onTap: () {
               Navigator.pop(context);
               _downloadImage();
@@ -163,7 +164,7 @@ class _SharedImageViewerState extends State<SharedImageViewer> {
           if (isLeader)
             ListTile(
               leading: const Icon(Icons.admin_panel_settings_outlined, color: Colors.amber),
-              title: const Text('Establecer como icono del Amino', style: TextStyle(color: Colors.amber)),
+              title: Text(tr('Establecer como icono del Amino'), style: TextStyle(color: Colors.amber)),
               onTap: () {
                 Navigator.pop(context);
                 _setAsCommunityIcon();
@@ -171,7 +172,7 @@ class _SharedImageViewerState extends State<SharedImageViewer> {
             ),
           ListTile(
             leading: const Icon(Icons.report_problem_outlined, color: Colors.white70),
-            title: const Text('Reportar imagen', style: TextStyle(color: Colors.white70)),
+            title: Text(tr('Reportar imagen'), style: TextStyle(color: Colors.white70)),
             onTap: () {
               Navigator.pop(context);
               // TODO: Implement report
@@ -201,7 +202,7 @@ class _SharedImageViewerState extends State<SharedImageViewer> {
             leadingWidth: 80,
             leading: TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cerrar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              child: Text(tr('Cerrar'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
             ),
             actions: [
               if (_isDownloading)

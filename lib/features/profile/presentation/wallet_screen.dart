@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:wumble/core/theme.dart';
 import 'package:wumble/features/profile/domain/profile_repository.dart';
 import 'package:wumble/features/profile/domain/user_model.dart';
@@ -11,12 +12,12 @@ class WalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.uid;
-    if (userId == null) return const Scaffold(body: Center(child: Text('No has iniciado sesión')));
+    if (userId == null) return Scaffold(body: Center(child: Text(tr('No has iniciado sesión'))));
 
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Mi Monedero', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(tr('Mi Monedero'), style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -154,9 +155,9 @@ class WalletScreen extends StatelessWidget {
                         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       if (isFree)
-                        const Text('Regalo especial por ser beta tester', style: TextStyle(color: Colors.blue, fontSize: 12))
+                        Text(tr('Regalo especial por ser beta tester'), style: TextStyle(color: Colors.blue, fontSize: 12))
                       else
-                        const Text('Compra segura con un click', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                        Text(tr('Compra segura con un click'), style: TextStyle(color: Colors.grey, fontSize: 12)),
                     ],
                   ),
                 ),

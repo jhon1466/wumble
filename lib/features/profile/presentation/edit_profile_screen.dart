@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,14 +16,14 @@ import 'bubble_selector_screen.dart';
 import 'frame_shop_screen.dart';
 import '../../chat/domain/chat_model.dart';
 
-const String _youtubeSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>';
-const String _facebookSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978 1.602 0 2.703.117 2.703.117v3.382h-1.728c-1.903 0-2.236 1.062-2.236 2.15v2.474h3.334L16.42 15.71h-2.923v7.98H9.101" fill="currentColor"/></svg>';
-const String _instagramSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.355 1.079 2.126 1.384c.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.079-1.354 1.384-2.126c.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.354-1.079-2.126-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.584-.071 4.85c-.055 1.17-.249 1.805-.415 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.164-1.056.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.584-.015-4.85-.071c-1.17-.055-1.805-.249-2.227-.415-.562-.217-.96-.477-1.382-.896-.419-.42-.679-.819-.896-1.381-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.015-3.584.071-4.85c.055-1.17.249-1.805.415-2.227.217-.562.477-.96.896-1.382.42-.419.819-.679 1.381-.896.422-.164 1.057-.36 2.227-.413 1.266-.057 1.646-.07 4.85-.07zM12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" fill="currentColor"/></svg>';
-const String _xSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" fill="currentColor"/></svg>';
-const String _discordSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2758-3.68-.2758-5.4876 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9945a.0771.0771 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1971.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z" fill="currentColor"/></svg>';
-const String _twitchSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" fill="currentColor"/></svg>';
-const String _githubSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="currentColor"/></svg>';
-const String _steamSvg = '''
+String _youtubeSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>';
+String _facebookSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978 1.602 0 2.703.117 2.703.117v3.382h-1.728c-1.903 0-2.236 1.062-2.236 2.15v2.474h3.334L16.42 15.71h-2.923v7.98H9.101" fill="currentColor"/></svg>';
+String _instagramSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.355 1.079 2.126 1.384c.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.079-1.354 1.384-2.126c.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.354-1.079-2.126-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.584-.071 4.85c-.055 1.17-.249 1.805-.415 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.164-1.056.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.584-.015-4.85-.071c-1.17-.055-1.805-.249-2.227-.415-.562-.217-.96-.477-1.382-.896-.419-.42-.679-.819-.896-1.381-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.015-3.584.071-4.85c.055-1.17.249-1.805.415-2.227.217-.562.477-.96.896-1.382.42-.419.819-.679 1.381-.896.422-.164 1.057-.36 2.227-.413 1.266-.057 1.646-.07 4.85-.07zM12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" fill="currentColor"/></svg>';
+String _xSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" fill="currentColor"/></svg>';
+String _discordSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2758-3.68-.2758-5.4876 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9945a.0771.0771 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1971.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z" fill="currentColor"/></svg>';
+String _twitchSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" fill="currentColor"/></svg>';
+String _githubSvg = '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="currentColor"/></svg>';
+String _steamSvg = '''
 <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z" fill="currentColor"/>
 </svg>
@@ -32,7 +33,7 @@ class EditProfileScreen extends StatefulWidget {
   final UserProfile user;
   final String? communityId;
   final bool isGlobal;
-  const EditProfileScreen({super.key, required this.user, this.communityId, this.isGlobal = false});
+  EditProfileScreen({super.key, required this.user, this.communityId, this.isGlobal = false});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -118,7 +119,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       children: [
         Scaffold(
           appBar: AppBar(
-            title: const Text('Editar Perfil'),
+            title: Text(tr('Editar Perfil')),
             backgroundColor: Wumbleheme.backgroundColor,
             actions: [
               BlocListener<ProfileBloc, ProfileState>(
@@ -129,8 +130,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       builder: (ctx) => AlertDialog(
                         backgroundColor: Wumbleheme.surfaceColor,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                        title: const Icon(Icons.check_circle, color: Colors.greenAccent, size: 50),
-                        content: const Text(
+                        title: Icon(Icons.check_circle, color: Colors.greenAccent, size: 50),
+                        content: Text(
                           '¡Perfil actualizado correctamente!',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white),
@@ -141,7 +142,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               Navigator.of(ctx).pop(); // Close Success Dialog
                               Navigator.of(context).pop(); // Close Edit Screen
                             },
-                            child: const Text('Genial', style: TextStyle(color: Wumbleheme.secondaryColor)),
+                            child: Text(tr('Genial'), style: TextStyle(color: Wumbleheme.secondaryColor)),
                           ),
                         ],
                       ),
@@ -151,12 +152,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       context: context,
                       builder: (ctx) => AlertDialog(
                         backgroundColor: Wumbleheme.surfaceColor,
-                        title: const Text('Error', style: TextStyle(color: Colors.white)),
-                        content: Text(state.message, style: const TextStyle(color: Colors.white70)),
+                        title: Text(tr('Error'), style: TextStyle(color: Colors.white)),
+                        content: Text(state.message, style: TextStyle(color: Colors.white70)),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(ctx),
-                            child: const Text('Cerrar', style: TextStyle(color: Colors.redAccent)),
+                            child: Text(tr('Cerrar'), style: TextStyle(color: Colors.redAccent)),
                           ),
                         ],
                       ),
@@ -328,20 +329,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: Padding(
-                                padding: const EdgeInsets.all(16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.6),
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(color: Colors.white24, width: 1),
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(Icons.camera_alt_outlined, color: Colors.white, size: 14),
                                       SizedBox(width: 6),
-                                      Text('Cambiar Banner', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
+                                      Text(tr('Cambiar Banner'), style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
                                     ],
                                   ),
                                 ),
@@ -437,18 +438,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ],
                     ),
                     
-                    const SizedBox(height: 50), // Added space for avatar overlap
+                    SizedBox(height: 50), // Added space for avatar overlap
 
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.0),
                       child: Column(
                         children: [
                           // Name Field
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(left: 4, bottom: 4),
-                              child: Text('Nombre (Apodo)', style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
+                              child: Text(tr('Nombre (Apodo)'), style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
                             ),
                           ),
                           Container(
@@ -469,14 +470,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           
                           // Username Field (ID)
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(left: 4, bottom: 4),
-                              child: Text('ID de Usuario', style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
+                              child: Text(tr('ID de Usuario'), style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
                             ),
                           ),
                           Container(
@@ -497,14 +498,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24),
                           
                           // Bio Field
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 4, bottom: 4),
-                              child: Text('Biografía', style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
+                              padding: const EdgeInsets.only(left: 4, bottom: 4),
+                              child: Text(tr('Biografía'), style: const TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
                             ),
                           ),
                           Container(
@@ -527,18 +528,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24),
                           
                           // Status & Mood
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 4, bottom: 4),
-                              child: Text('Estado', style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
+                              padding: const EdgeInsets.only(left: 4, bottom: 4),
+                              child: Text(tr('Estado'), style: const TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
                             ),
                           ),
                            Container(
-                            padding: const EdgeInsets.all(12),
+                            padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.05),
                               borderRadius: BorderRadius.circular(16),
@@ -556,14 +557,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                           ),
                           
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
                           
                           // Birthday Field
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(left: 4, bottom: 4),
-                              child: Text('Fecha de Nacimiento', style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
+                              child: Text(tr('Fecha de Nacimiento'), style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
                             ),
                           ),
                           InkWell(
@@ -621,14 +622,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                           ),
 
-                          const SizedBox(height: 30),
+                          SizedBox(height: 30),
 
                           // Personalización (Bubbles + Frames)
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(left: 4, bottom: 8),
-                              child: Text('Personalización', style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
+                              child: Text(tr('Personalización'), style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
                             ),
                           ),
                           InkWell(
@@ -674,7 +675,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Burbuja de Chat', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                      Text(tr('Burbuja de Chat'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                                       Text(_bubbleStyle?.name ?? 'Clásico', style: const TextStyle(color: Colors.white38, fontSize: 12)),
                                     ],
                                   ),
@@ -685,7 +686,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                           ),
 
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8),
 
                           // Avatar Frame Card
                           InkWell(
@@ -721,7 +722,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Marco de Avatar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                      Text(tr('Marco de Avatar'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                                       Text(
                                         widget.user.avatarFrameUrl != null && widget.user.avatarFrameUrl!.isNotEmpty
                                             ? 'Marco equipado'
@@ -737,14 +738,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                           ),
 
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24),
 
                           // Theme Color Section
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(left: 4, bottom: 8),
-                              child: Text('Color de Tema (Mini-Perfil)', style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
+                              child: Text(tr('Color de Tema (Mini-Perfil)'), style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
                             ),
                           ),
                           InkWell(
@@ -753,7 +754,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 context: context,
                                 builder: (ctx) => AlertDialog(
                                   backgroundColor: Wumbleheme.surfaceColor,
-                                  title: const Text('Elige un color', style: TextStyle(color: Colors.white)),
+                                  title: Text(tr('Elige un color'), style: TextStyle(color: Colors.white)),
                                   content: SingleChildScrollView(
                                     child: ColorPicker(
                                       pickerColor: _themeColor ?? Wumbleheme.primaryColor,
@@ -765,7 +766,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   actions: [
                                     TextButton(
                                       onPressed: () => Navigator.pop(ctx),
-                                      child: const Text('Hecho', style: TextStyle(color: Wumbleheme.secondaryColor)),
+                                      child: Text(tr('Hecho'), style: TextStyle(color: Wumbleheme.secondaryColor)),
                                     ),
                                   ],
                                 ),
@@ -790,7 +791,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     ),
                                   ),
                                   const SizedBox(width: 12),
-                                  const Text('Personalizar color del mini-perfil', style: TextStyle(color: Colors.white70)),
+                                  Text(tr('Personalizar color del mini-perfil'), style: TextStyle(color: Colors.white70)),
                                   const Spacer(),
                                   if (_themeColor != null)
                                     IconButton(
@@ -798,13 +799,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       onPressed: () => setState(() => _themeColor = null),
                                       tooltip: 'Restablecer',
                                     ),
-                                  const Icon(Icons.chevron_right, color: Colors.white24),
+                                  Icon(Icons.chevron_right, color: Colors.white24),
                                 ],
                               ),
                             ),
                           ),
 
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           
                           // Background Buttons
                           Row(
@@ -813,43 +814,43 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 child: OutlinedButton.icon(
                                   onPressed: () => _pickImage('Fondo'),
                                   style: OutlinedButton.styleFrom(
-                                    side: const BorderSide(color: Colors.white24),
-                                    padding: const EdgeInsets.symmetric(vertical: 16),
+                                    side: BorderSide(color: Colors.white24),
+                                    padding: EdgeInsets.symmetric(vertical: 16),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                   ),
-                                  icon: const Icon(Icons.image, color: Colors.white70),
+                                  icon: Icon(Icons.image, color: Colors.white70),
                                   label: Text(
                                     (_backgroundPath != null && _backgroundPath != "[DELETE]") || widget.user.backgroundUrl.isNotEmpty 
                                         ? 'Cambiar Fondo' 
                                         : 'Añadir Fondo', 
-                                    style: const TextStyle(color: Colors.white, fontSize: 13)
+                                    style: TextStyle(color: Colors.white, fontSize: 13)
                                   ),
                                 ),
                               ),
                               if (_backgroundPath != "[DELETE]" && (_backgroundPath != null || widget.user.backgroundUrl.isNotEmpty)) ...[
-                                const SizedBox(width: 12),
+                                SizedBox(width: 12),
                                 OutlinedButton(
                                   onPressed: () => setState(() => _backgroundPath = "[DELETE]"),
                                   style: OutlinedButton.styleFrom(
                                     side: BorderSide(color: Colors.redAccent.withOpacity(0.5)),
-                                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                     backgroundColor: Colors.redAccent.withOpacity(0.05),
                                   ),
-                                  child: const Icon(Icons.delete_outline, color: Colors.redAccent),
+                                  child: Icon(Icons.delete_outline, color: Colors.redAccent),
                                 ),
                               ],
                             ],
                           ),
                           
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           
                           // Privacy Section
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(left: 4, bottom: 8),
-                              child: Text('Privacidad', style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
+                              child: Text(tr('Privacidad'), style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
                             ),
                           ),
                           Container(
@@ -861,21 +862,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: SwitchListTile(
                               value: _showFollows,
                               onChanged: (v) => setState(() => _showFollows = v),
-                              title: const Text('Mostrar Seguidores y Siguiendo', style: TextStyle(color: Colors.white, fontSize: 14)),
-                              subtitle: const Text('Si se desactiva, otros no podrán ver estas listas.', style: TextStyle(color: Colors.white38, fontSize: 11)),
+                              title: Text(tr('Mostrar Seguidores y Siguiendo'), style: TextStyle(color: Colors.white, fontSize: 14)),
+                              subtitle: Text(tr('Si se desactiva, otros no podrán ver estas listas.'), style: TextStyle(color: Colors.white38, fontSize: 11)),
                               activeColor: Wumbleheme.secondaryColor,
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                             ),
                           ),
                           
-                          const SizedBox(height: 30),
+                          SizedBox(height: 30),
 
                           // Mis Etiquetas Section
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(left: 4, bottom: 8),
-                              child: Text('Mis Etiquetas (Títulos)', style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
+                              child: Text(tr('Mis Etiquetas (Títulos)'), style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
                             ),
                           ),
                           Container(
@@ -887,9 +888,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: Column(
                               children: [
                                 if (_titleControllers.isEmpty)
-                                  const Padding(
+                                  Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text('No tienes etiquetas personalizadas.', 
+                                    child: Text(tr('No tienes etiquetas personalizadas.'), 
                                       style: TextStyle(color: Colors.white24, fontSize: 12)),
                                   ),
                                 ...List.generate(_titleControllers.length, (index) {
@@ -900,14 +901,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           : null,
                                     ),
                                     child: ListTile(
-                                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                                      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                                       leading: GestureDetector(
                                         onTap: () {
                                           showDialog(
                                             context: context,
                                             builder: (ctx) => AlertDialog(
                                               backgroundColor: Wumbleheme.surfaceColor,
-                                              title: const Text('Color de la etiqueta', style: TextStyle(color: Colors.white)),
+                                              title: Text(tr('Color de la etiqueta'), style: TextStyle(color: Colors.white)),
                                               content: SingleChildScrollView(
                                                 child: BlockPicker(
                                                   pickerColor: _titleColors[index] != null ? Color(_titleColors[index]!) : Wumbleheme.primaryColor,
@@ -921,7 +922,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               actions: [
                                                 TextButton(
                                                   onPressed: () => Navigator.pop(ctx),
-                                                  child: const Text('Listo', style: TextStyle(color: Wumbleheme.secondaryColor)),
+                                                  child: Text(tr('Listo'), style: TextStyle(color: Wumbleheme.secondaryColor)),
                                                 ),
                                               ],
                                             ),
@@ -963,19 +964,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     _titleControllers.add(TextEditingController(text: 'Nueva Etiqueta'));
                                     _titleColors.add(0xFF18191C);
                                   }),
-                                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(12)),
+                                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(12)),
                                   child: Container(
                                     width: double.infinity,
-                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                    padding: EdgeInsets.symmetric(vertical: 12),
                                     decoration: BoxDecoration(
                                       color: Colors.white.withOpacity(0.02),
                                     ),
-                                    child: const Row(
+                                    child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Icon(Icons.add_circle_outline, color: Wumbleheme.secondaryColor, size: 16),
                                         SizedBox(width: 8),
-                                        Text('Añadir Etiqueta', style: TextStyle(color: Wumbleheme.secondaryColor, fontWeight: FontWeight.bold)),
+                                        Text(tr('Añadir Etiqueta'), style: TextStyle(color: Wumbleheme.secondaryColor, fontWeight: FontWeight.bold)),
                                       ],
                                     ),
                                   ),
@@ -984,14 +985,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                           ),
 
-                          const SizedBox(height: 30),
+                          SizedBox(height: 30),
 
                           // Social Links Section
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(left: 4, bottom: 8),
-                              child: Text('Redes Sociales (Conexiones)', style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
+                              child: Text(tr('Redes Sociales (Conexiones)'), style: TextStyle(color: Wumbleheme.textSecondary, fontSize: 12)),
                             ),
                           ),
                           
@@ -1050,7 +1051,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           TextButton.icon(
                             onPressed: () => setState(() => _socialControllers.add(TextEditingController())),
                             icon: const Icon(Icons.add_circle_outline, color: Wumbleheme.secondaryColor),
-                            label: const Text('Añadir otra red social', style: TextStyle(color: Wumbleheme.secondaryColor)),
+                            label: Text(tr('Añadir otra red social'), style: TextStyle(color: Wumbleheme.secondaryColor)),
                           ),
                           
                           const SizedBox(height: 40),

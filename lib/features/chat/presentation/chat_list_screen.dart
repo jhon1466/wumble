@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -17,14 +18,14 @@ class ChatListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser == null) {
-      return const Scaffold(
-        body: Center(child: Text('Inicia sesión para ver tus chats')),
+      return Scaffold(
+        body: Center(child: Text(tr('Inicia sesión para ver tus chats'))),
       );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mis Chats'),
+        title: Text(tr('Mis Chats')),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -124,7 +125,7 @@ class ChatListScreen extends StatelessWidget {
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.of(context).pop(false),
-                              child: const Text('CANCELAR', style: TextStyle(color: Colors.white38)),
+                              child: Text(tr('CANCELAR'), style: TextStyle(color: Colors.white38)),
                             ),
                             TextButton(
                               onPressed: () => Navigator.of(context).pop(true),

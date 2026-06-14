@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:ota_update/ota_update.dart';
 import 'package:wumble/core/services/update_service.dart';
 import 'package:wumble/core/theme.dart';
@@ -12,7 +13,7 @@ Future<void> checkAndPromptUpdate(BuildContext context,
   if (info == null) {
     if (!silent && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Ya tienes la última versión.')),
+        SnackBar(content: Text(tr('Ya tienes la última versión.'))),
       );
     }
     return;
@@ -108,7 +109,7 @@ class _UpdateDialogState extends State<_UpdateDialog> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Hay una nueva versión disponible.',
+          Text(tr('Hay una nueva versión disponible.'),
               style: TextStyle(color: Colors.white70)),
           if (widget.info.releaseNotes.trim().isNotEmpty) ...[
             const SizedBox(height: 12),
@@ -146,14 +147,14 @@ class _UpdateDialogState extends State<_UpdateDialog> {
           : [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Más tarde',
+                child: Text(tr('Más tarde'),
                     style: TextStyle(color: Wumbleheme.textSecondary)),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Wumbleheme.secondaryColor),
                 onPressed: _startUpdate,
-                child: const Text('Actualizar',
+                child: Text(tr('Actualizar'),
                     style: TextStyle(color: Colors.white)),
               ),
             ],

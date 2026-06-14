@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:firebase_auth/firebase_auth.dart';
@@ -258,7 +259,7 @@ class _QuizPlayScreenState extends State<QuizPlayScreen> {
             Icon(_correctAnswers == widget.quiz.questions.length ? Icons.emoji_events : Icons.sentiment_very_dissatisfied, 
                  size: 80, color: Colors.amber),
             const SizedBox(height: 24),
-            const Text('Quiz Finalizado', style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
+            Text(tr('Quiz Finalizado'), style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             Text('Puntaje Final: $_score', style: const TextStyle(color: Colors.blueAccent, fontSize: 22, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
@@ -267,7 +268,7 @@ class _QuizPlayScreenState extends State<QuizPlayScreen> {
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.white10, foregroundColor: Colors.white),
-              child: const Text('Volver a la comunidad'),
+              child: Text(tr('Volver a la comunidad')),
             ),
           ],
         ),

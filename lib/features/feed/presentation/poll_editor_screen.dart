@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../../../../core/theme.dart';
 
 class PollEditorScreen extends StatefulWidget {
-  const PollEditorScreen({super.key});
+  PollEditorScreen({super.key});
 
   @override
   State<PollEditorScreen> createState() => _PollEditorScreenState();
@@ -36,16 +37,16 @@ class _PollEditorScreenState extends State<PollEditorScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.close),
+          icon: Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text('Nueva Encuesta'),
+        title: Text(tr('Nueva Encuesta')),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('¡Encuesta publicada con éxito!')),
+                SnackBar(content: Text(tr('¡Encuesta publicada con éxito!'))),
               );
             },
             child: const Text(
@@ -130,7 +131,7 @@ class _PollEditorScreenState extends State<PollEditorScreen> {
               TextButton.icon(
                 onPressed: _addOption,
                 icon: const Icon(Icons.add, color: Wumbleheme.accentColor),
-                label: const Text('Añadir opción', style: TextStyle(color: Wumbleheme.accentColor)),
+                label: Text(tr('Añadir opción'), style: TextStyle(color: Wumbleheme.accentColor)),
               ),
               
             const SizedBox(height: 24),
@@ -141,8 +142,8 @@ class _PollEditorScreenState extends State<PollEditorScreen> {
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.timer_outlined, color: Wumbleheme.textSecondary),
-              title: const Text('Duración de la encuesta'),
-              trailing: const Text('30 días', style: TextStyle(color: Wumbleheme.accentColor)),
+              title: Text(tr('Duración de la encuesta')),
+              trailing: Text(tr('30 días'), style: TextStyle(color: Wumbleheme.accentColor)),
               onTap: () {},
             ),
           ],

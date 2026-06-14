@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,7 +23,7 @@ class CreatePostScreen extends StatefulWidget {
   final Post? existingPost;
   final PostDraft? draft;
 
-  const CreatePostScreen({super.key, required this.communityId, this.existingPost, this.draft});
+  CreatePostScreen({super.key, required this.communityId, this.existingPost, this.draft});
 
   @override
   State<CreatePostScreen> createState() => _CreatePostScreenState();
@@ -284,7 +285,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     }
 
     // Rebuild the tag string in a canonical order
-    const String order = 'BICUSLMRJ';
+    String order = 'BICUSLMRJ';
     String finalTags = '';
     for (final c in order.split('')) {
       if (tagChars.contains(c)) finalTags += c;
@@ -329,12 +330,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     showModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        color: const Color(0xFF1E1E2C),
+        color: Color(0xFF1E1E2C),
         child: ListView(
           shrinkWrap: true,
           children: colors.entries.map((e) => ListTile(
             leading: Container(width: 24, height: 24, color: Color(int.parse('FF${e.value}', radix: 16))),
-            title: Text(e.key, style: const TextStyle(color: Colors.white)),
+            title: Text(e.key, style: TextStyle(color: Colors.white)),
             onTap: () {
               Navigator.pop(context);
               _insertTag('G', value: e.value);
@@ -350,28 +351,28 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     showModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        color: const Color(0xFF1E1E2C),
+        color: Color(0xFF1E1E2C),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
               leading: const Icon(Icons.format_align_left, color: Colors.white),
-              title: const Text('Izquierda', style: TextStyle(color: Colors.white)),
+              title: Text(tr('Izquierda'), style: TextStyle(color: Colors.white)),
               onTap: () { Navigator.pop(context); _insertTag('L'); },
             ),
             ListTile(
-              leading: const Icon(Icons.format_align_center, color: Colors.white),
-              title: const Text('Centro', style: TextStyle(color: Colors.white)),
+              leading: Icon(Icons.format_align_center, color: Colors.white),
+              title: Text(tr('Centro'), style: TextStyle(color: Colors.white)),
               onTap: () { Navigator.pop(context); _insertTag('C'); },
             ),
             ListTile(
-              leading: const Icon(Icons.format_align_right, color: Colors.white),
-              title: const Text('Derecha', style: TextStyle(color: Colors.white)),
+              leading: Icon(Icons.format_align_right, color: Colors.white),
+              title: Text(tr('Derecha'), style: TextStyle(color: Colors.white)),
               onTap: () { Navigator.pop(context); _insertTag('R'); },
             ),
             ListTile(
-              leading: const Icon(Icons.format_align_justify, color: Colors.white),
-              title: const Text('Justificado', style: TextStyle(color: Colors.white)),
+              leading: Icon(Icons.format_align_justify, color: Colors.white),
+              title: Text(tr('Justificado'), style: TextStyle(color: Colors.white)),
               onTap: () { Navigator.pop(context); _insertTag('J'); },
             ),
           ],
@@ -386,12 +387,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       context: context,
       builder: (context) => Container(
         height: 200,
-        color: const Color(0xFF1E1E2C),
+        color: Color(0xFF1E1E2C),
         child: Column(
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(16.0),
-              child: Text('Tamaño de Letra', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              child: Text(tr('Tamaño de Letra'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -413,7 +414,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         Navigator.pop(context);
         _insertTag('T', value: value);
       },
-      child: Text(label, style: const TextStyle(color: Colors.blueAccent)),
+      child: Text(label, style: TextStyle(color: Colors.blueAccent)),
     );
   }
 
@@ -432,7 +433,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     showModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        color: const Color(0xFF1E1E2C),
+        color: Color(0xFF1E1E2C),
         child: ListView(
           shrinkWrap: true,
           children: colors.entries.map((e) => ListTile(
@@ -458,11 +459,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     showModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        color: const Color(0xFF1E1E2C),
+        color: Color(0xFF1E1E2C),
         child: ListView(
           shrinkWrap: true,
           children: List.generate(fonts.length, (i) => ListTile(
-            title: Text(labels[i], style: const TextStyle(color: Colors.white)),
+            title: Text(labels[i], style: TextStyle(color: Colors.white)),
             onTap: () {
               Navigator.pop(context);
               _insertTag('K', value: fonts[i]);
@@ -479,7 +480,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (ctx) => DraggableScrollableSheet(
@@ -487,10 +488,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         initialChildSize: 0.9,
         maxChildSize: 0.97,
         builder: (_, sc) => ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           child: Container(
             decoration: BoxDecoration(
-              color: bgColor ?? const Color(0xFF1A1A2E),
+              color: bgColor ?? Color(0xFF1A1A2E),
               image: _backgroundImage != null || _backgroundImageUrl != null
                   ? DecorationImage(
                       image: (_backgroundImage != null
@@ -583,7 +584,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     final lineWidgets = raw.split('\n').map<Widget>((line) {
       final m = tagRe.firstMatch(line);
       if (m == null) {
-        return Text(line, style: const TextStyle(color: Colors.white, fontSize: 16, height: 1.5));
+        return Text(line, style: TextStyle(color: Colors.white, fontSize: 16, height: 1.5));
       }
       final tags    = m.group(1)!;
       final content = line.substring(m.group(0)!.length);
@@ -740,7 +741,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
     if (parsedBlocks.isEmpty && _titleController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('El post no puede estar vacío')),
+        SnackBar(content: Text(tr('El post no puede estar vacío'))),
       );
       return;
     }
@@ -838,8 +839,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       SnackBar(
         content: Row(
           children: [
-            const Icon(Icons.security, color: Colors.white),
-            const SizedBox(width: 12),
+            Icon(Icons.security, color: Colors.white),
+            SizedBox(width: 12),
             Expanded(child: Text(message)),
           ],
         ),
@@ -919,23 +920,23 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2C),
+        backgroundColor: Color(0xFF1E1E2C),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('¿Guardar borrador?', style: TextStyle(color: Colors.white)),
-        content: const Text('Puedes terminar de editar este post más tarde.', style: TextStyle(color: Colors.white70)),
+        title: Text(tr('¿Guardar borrador?'), style: TextStyle(color: Colors.white)),
+        content: Text(tr('Puedes terminar de editar este post más tarde.'), style: TextStyle(color: Colors.white70)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, 'discard'),
-            child: const Text('DESCARTAR', style: TextStyle(color: Colors.redAccent)),
+            child: Text(tr('DESCARTAR'), style: TextStyle(color: Colors.redAccent)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, 'cancel'),
-            child: const Text('CANCELAR', style: TextStyle(color: Colors.white60)),
+            child: Text(tr('CANCELAR'), style: TextStyle(color: Colors.white60)),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, 'save'),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
-            child: const Text('GUARDAR', style: TextStyle(color: Colors.white)),
+            child: Text(tr('GUARDAR'), style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -1006,7 +1007,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           if (state is CreatePostSuccess) {
             Navigator.pop(context, true); 
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Blog publicado con éxito')),
+              SnackBar(content: Text(tr('Blog publicado con éxito'))),
             );
           } else if (state is CreatePostFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -1015,7 +1016,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           } else if (state is DraftOperationSuccess) {
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Borrador guardado con éxito')),
+                SnackBar(content: Text(tr('Borrador guardado con éxito'))),
               );
             }
           }
@@ -1034,7 +1035,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
                   elevation: 0,
-                  title: const Text('Crear Blog', style: TextStyle(fontWeight: FontWeight.w600)),
+                  title: Text(tr('Crear Blog'), style: TextStyle(fontWeight: FontWeight.w600)),
                   actions: [
                     isSavingDraft 
                       ? const Padding(
@@ -1299,12 +1300,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             TextButton.icon(
                               onPressed: _addTextBlock,
                               icon: const Icon(Icons.text_fields, color: Colors.white),
-                              label: const Text('Texto', style: TextStyle(color: Colors.white)),
+                              label: Text(tr('Texto'), style: TextStyle(color: Colors.white)),
                             ),
                             TextButton.icon(
                               onPressed: _addImageBlock,
                               icon: const Icon(Icons.add_photo_alternate, color: Colors.blueAccent),
-                              label: const Text('Imagen', style: TextStyle(color: Colors.blueAccent)),
+                              label: Text(tr('Imagen'), style: TextStyle(color: Colors.blueAccent)),
                             ),
                           ],
                         ),
@@ -1459,7 +1460,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   if (index == 0) {
                     return ListTile(
                       leading: const Icon(Icons.clear, color: Colors.white54),
-                      title: const Text('Ninguna', style: TextStyle(color: Colors.white)),
+                      title: Text(tr('Ninguna'), style: TextStyle(color: Colors.white)),
                       selected: _selectedCategoryId == null,
                       onTap: () {
                         setState(() => _selectedCategoryId = null);

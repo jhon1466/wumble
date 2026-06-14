@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -387,7 +388,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           onPressed: () {
             // Ir a Explorar
           },
-          child: const Text('Descubrir comunidades', style: TextStyle(color: Wumbleheme.secondaryColor)),
+          child: Text(tr('Descubrir comunidades'), style: TextStyle(color: Wumbleheme.secondaryColor)),
         ),
       ],
     );
@@ -495,8 +496,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   Navigator.pop(context);
                   Clipboard.setData(ClipboardData(text: community.handle));
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('ID copiado al portapapeles'),
+                    SnackBar(
+                      content: Text(tr('ID copiado al portapapeles')),
                       behavior: SnackBarBehavior.floating,
                       backgroundColor: Color(0xFF2E2E3E),
                     ),
@@ -573,7 +574,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           children: [
             const Icon(Icons.warning_amber_rounded, color: Colors.redAccent),
             const SizedBox(width: 12),
-            const Text('¿Abandonar comunidad?', style: TextStyle(color: Colors.white, fontSize: 18)),
+            Text(tr('¿Abandonar comunidad?'), style: TextStyle(color: Colors.white, fontSize: 18)),
           ],
         ),
         content: Text(
@@ -583,7 +584,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('CANCELAR', style: TextStyle(color: Colors.white54)),
+            child: Text(tr('CANCELAR'), style: TextStyle(color: Colors.white54)),
           ),
           ElevatedButton(
             onPressed: () {
@@ -598,7 +599,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
-            child: const Text('CONFIRMAR'),
+            child: Text(tr('CONFIRMAR')),
           ),
         ],
       ),

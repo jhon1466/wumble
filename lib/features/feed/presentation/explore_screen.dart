@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import 'widgets/user_card.dart';
@@ -317,20 +318,20 @@ class _ExploreScreenState extends State<ExploreScreen> {
           const SizedBox(height: 16),
           ListTile(
             leading: const Icon(Icons.storefront_rounded, color: Colors.amber, size: 28),
-            title: const Text('Workshop de Marcos', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            subtitle: const Text('Compra o publica marcos de perfil', style: TextStyle(color: Colors.white54, fontSize: 12)),
+            title: Text(tr('Workshop de Marcos'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            subtitle: Text(tr('Compra o publica marcos de perfil'), style: TextStyle(color: Colors.white54, fontSize: 12)),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CommunityWorkshopScreen()),
+                MaterialPageRoute(builder: (context) => CommunityWorkshopScreen()),
               );
             },
           ),
           ListTile(
             leading: const Icon(Icons.chat_bubble_rounded, color: Colors.lightBlue, size: 28),
-            title: const Text('Tienda de Burbujas', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            subtitle: const Text('Personaliza tus chats', style: TextStyle(color: Colors.white54, fontSize: 12)),
+            title: Text(tr('Tienda de Burbujas'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            subtitle: Text(tr('Personaliza tus chats'), style: TextStyle(color: Colors.white54, fontSize: 12)),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(

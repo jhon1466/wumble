@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wumble/injection_container.dart';
 import 'package:wumble/features/community/presentation/widgets/member_mini_profile.dart';
@@ -137,7 +138,7 @@ class _LeaderboardListState extends State<_LeaderboardList> with AutomaticKeepAl
               slivers: [
                 SliverFillRemaining(
                   child: Center(
-                    child: Text('No hay datos aún', style: const TextStyle(color: Colors.white54)),
+                    child: Text(tr('No hay datos aún'), style: const TextStyle(color: Colors.white54)),
                   ),
                 ),
               ],

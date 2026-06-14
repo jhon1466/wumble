@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../../../../core/theme.dart';
 import '../../domain/community_member_model.dart';
 import '../../domain/community_repository.dart';
@@ -11,7 +12,7 @@ class BannedUsersScreen extends StatefulWidget {
   final String communityId;
   final Color themeColor;
 
-  const BannedUsersScreen({
+  BannedUsersScreen({
     super.key,
     required this.communityId,
     required this.themeColor,
@@ -55,13 +56,13 @@ class _BannedUsersScreenState extends State<BannedUsersScreen> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('¿Permitir reingreso?', style: TextStyle(color: Colors.white)),
+        title: Text(tr('¿Permitir reingreso?'), style: TextStyle(color: Colors.white)),
         content: Text('¿Estás seguro de que quieres levantar la expulsión de ${member.displayName ?? "este usuario"}?'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('CANCELAR')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(tr('CANCELAR'))),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text('PERMITIR', style: TextStyle(color: widget.themeColor)),
+            child: Text(tr('PERMITIR'), style: TextStyle(color: widget.themeColor)),
           ),
         ],
       ),
@@ -73,7 +74,7 @@ class _BannedUsersScreenState extends State<BannedUsersScreen> {
         _loadBannedMembers(); // Refresh list
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Acceso restaurado')),
+            SnackBar(content: Text(tr('Acceso restaurado'))),
           );
         }
       } catch (e) {
@@ -92,7 +93,7 @@ class _BannedUsersScreenState extends State<BannedUsersScreen> {
       backgroundColor: Wumbleheme.backgroundColor,
       appBar: AppBar(
         backgroundColor: Wumbleheme.backgroundColor,
-        title: const Text('Usuarios Expulsados', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(tr('Usuarios Expulsados'), style: TextStyle(fontWeight: FontWeight.bold)),
         elevation: 0,
       ),
       body: _isLoading
@@ -168,7 +169,7 @@ class _BannedUsersScreenState extends State<BannedUsersScreen> {
         ),
         trailing: TextButton(
           onPressed: () => _unbanUser(member),
-          child: Text('PERDONAR', style: TextStyle(color: widget.themeColor, fontWeight: FontWeight.bold, fontSize: 12)),
+          child: Text(tr('PERDONAR'), style: TextStyle(color: widget.themeColor, fontWeight: FontWeight.bold, fontSize: 12)),
         ),
       ),
     );

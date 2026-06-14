@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:io';
 import 'dart:ui';
 import 'package:image_picker/image_picker.dart';
@@ -13,7 +14,7 @@ import 'bloc/community_bloc.dart';
 import 'community_screen.dart';
 
 class CreateCommunityScreen extends StatefulWidget {
-  const CreateCommunityScreen({super.key});
+  CreateCommunityScreen({super.key});
 
   @override
   State<CreateCommunityScreen> createState() => _CreateCommunityScreenState();
@@ -69,7 +70,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Color Personalizado', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Color Personalizado'), style: TextStyle(color: Colors.white)),
         backgroundColor: Wumbleheme.surfaceColor,
         content: SingleChildScrollView(
           child: ColorPicker(
@@ -83,7 +84,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Aceptar', style: TextStyle(color: Colors.white)),
+            child: Text(tr('Aceptar'), style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -94,29 +95,29 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
 
   Widget _buildStep3Branding() {
     return SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                const Text('Estilo Visual', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-                const SizedBox(height: 10),
-                const Text('Define la identidad visual de tu comunidad.', style: TextStyle(color: Wumbleheme.textSecondary)),
-                const SizedBox(height: 30),
+                Text(tr('Estilo Visual'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+                SizedBox(height: 10),
+                Text(tr('Define la identidad visual de tu comunidad.'), style: TextStyle(color: Wumbleheme.textSecondary)),
+                SizedBox(height: 30),
                 
                 // Color Picker Row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Color Tema', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    Text(tr('Color Tema'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                     TextButton.icon(
                       onPressed: _showColorPicker,
-                      icon: const Icon(Icons.colorize, size: 16),
-                      label: const Text('Personalizar'),
+                      icon: Icon(Icons.colorize, size: 16),
+                      label: Text(tr('Personalizar')),
                       style: TextButton.styleFrom(foregroundColor: _themeColor),
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 SizedBox(
                   height: 45,
                   child: ListView(
@@ -128,7 +129,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                     ].map((color) => GestureDetector(
                         onTap: () => setState(() => _themeColor = color),
                         child: Container(
-                          margin: const EdgeInsets.only(right: 12),
+                          margin: EdgeInsets.only(right: 12),
                           decoration: BoxDecoration(
                              shape: BoxShape.circle,
                              border: Border.all(
@@ -139,19 +140,19 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                           child: CircleAvatar(
                               backgroundColor: color,
                               radius: 18,
-                              child: _themeColor == color ? const Icon(Icons.check, color: Colors.white, size: 14) : null,
+                              child: _themeColor == color ? Icon(Icons.check, color: Colors.white, size: 14) : null,
                           ),
                         ),
                     )).toList(),
                   ),
                 ),
                 
-                const SizedBox(height: 35),
+                SizedBox(height: 35),
                 
                 // Icon Picker
-                const Text('Icono de Comunidad', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                const Text('Imagen cuadrada representativa', style: TextStyle(color: Colors.white54, fontSize: 11)),
-                const SizedBox(height: 12),
+                Text(tr('Icono de Comunidad'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                Text(tr('Imagen cuadrada representativa'), style: TextStyle(color: Colors.white54, fontSize: 11)),
+                SizedBox(height: 12),
                 GestureDetector(
                   onTap: () => _pickImage('icon'),
                   child: Container(
@@ -166,19 +167,19 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                           : null,
                     ),
                     child: _iconFile == null 
-                        ? const Column(
+                        ? Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(Icons.add_a_photo, size: 32, color: Colors.white54),
                               SizedBox(height: 4),
-                              Text('Subir Icono', style: TextStyle(color: Colors.white24, fontSize: 10)),
+                              Text(tr('Subir Icono'), style: TextStyle(color: Colors.white24, fontSize: 10)),
                             ],
                           )
                         : null,
                   ),
                 ),
                 
-                const SizedBox(height: 35),
+                SizedBox(height: 35),
 
                 // Images Grid for Banner and Background
                 Row(
@@ -189,9 +190,9 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Banner de Comunidad', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
-                          const Text('Imagen vertical para listados.', style: TextStyle(color: Colors.white54, fontSize: 10)),
-                          const SizedBox(height: 12),
+                          Text(tr('Banner de Comunidad'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                          Text(tr('Imagen vertical para listados.'), style: TextStyle(color: Colors.white54, fontSize: 10)),
+                          SizedBox(height: 12),
                           GestureDetector(
                             onTap: () => _pickImage('banner'),
                             child: Container(
@@ -205,12 +206,12 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                                     : null,
                               ),
                               child: _bannerFile == null 
-                                  ? const Column(
+                                  ? Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Icon(Icons.add_photo_alternate_rounded, size: 36, color: Colors.white54),
                                         SizedBox(height: 8),
-                                        Text('Subir Banner', style: TextStyle(color: Colors.white24, fontSize: 10)),
+                                        Text(tr('Subir Banner'), style: TextStyle(color: Colors.white24, fontSize: 10)),
                                       ],
                                     )
                                   : null,
@@ -219,15 +220,15 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 20),
+                    SizedBox(width: 20),
                     // Background Picker
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Fondo Inmersivo', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
-                          const Text('Imagen desenfocada de fondo.', style: TextStyle(color: Colors.white54, fontSize: 10)),
-                          const SizedBox(height: 12),
+                          Text(tr('Fondo Inmersivo'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                          Text(tr('Imagen desenfocada de fondo.'), style: TextStyle(color: Colors.white54, fontSize: 10)),
+                          SizedBox(height: 12),
                           GestureDetector(
                             onTap: () => _pickImage('background'),
                             child: Container(
@@ -241,12 +242,12 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
                                     : null,
                               ),
                               child: _backgroundFile == null 
-                                  ? const Column(
+                                  ? Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Icon(Icons.auto_awesome_rounded, size: 36, color: Colors.white54),
                                         SizedBox(height: 8),
-                                        Text('Subir Fondo', style: TextStyle(color: Colors.white24, fontSize: 10)),
+                                        Text(tr('Subir Fondo'), style: TextStyle(color: Colors.white24, fontSize: 10)),
                                       ],
                                     )
                                   : null,
@@ -273,14 +274,14 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
     // Validate Rules acceptance at step 3 (0-indexed)
     if (_currentStep == 3 && !_acceptedRules) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Debes aceptar las normas para continuar.')),
+        SnackBar(content: Text(tr('Debes aceptar las normas para continuar.'))),
       );
       return;
     }
     
     if (_currentStep < 4) {
       _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
       setState(() => _currentStep++);
@@ -292,7 +293,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
   void _prevPage() {
     if (_currentStep > 0) {
       _pageController.previousPage(
-        duration: const Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
       setState(() => _currentStep--);
@@ -303,13 +304,13 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Error: Debes iniciar sesión para crear una comunidad.'), backgroundColor: Colors.red),
+        SnackBar(content: Text('Error: Debes iniciar sesión para crear una comunidad.'), backgroundColor: Colors.red),
       );
       return;
     }
     
     final userId = user.uid;
-    final communityId = const Uuid().v4();
+    final communityId = Uuid().v4();
     print('DEBUG: UI - Initiating creation for $communityId by $userId');
 
     final community = Community(
@@ -352,7 +353,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
       listener: (context, state) {
         if (state is CommunityCreated) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('¡Comunidad creada con éxito! 🎉')),
+            SnackBar(content: Text(tr('¡Comunidad creada con éxito! 🎉'))),
           );
           // Navigate to the community screen and replace the wizard
           Navigator.pushReplacement(
@@ -483,9 +484,9 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Dale nombre a tu mundo', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(tr('Dale nombre a tu mundo'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 10),
-            const Text('Esto es lo primero que verán los miembros.', style: TextStyle(color: Wumbleheme.textSecondary)),
+            Text(tr('Esto es lo primero que verán los miembros.'), style: TextStyle(color: Wumbleheme.textSecondary)),
             const SizedBox(height: 30),
             
             TextFormField(
@@ -576,9 +577,9 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-            const Text('Privacidad', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(tr('Privacidad'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 10),
-            const Text('¿Quién puede unirse?', style: TextStyle(color: Wumbleheme.textSecondary)),
+            Text(tr('¿Quién puede unirse?'), style: TextStyle(color: Wumbleheme.textSecondary)),
             const SizedBox(height: 30),
             
             _buildPrivacyOption(
@@ -643,7 +644,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Normas y Condiciones', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+          Text(tr('Normas y Condiciones'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
           const SizedBox(height: 10),
           const Text('Para mantener un ambiente seguro, todos los Agentes deben aceptar estas reglas:', style: TextStyle(color: Wumbleheme.textSecondary)),
           const SizedBox(height: 30),
@@ -714,7 +715,7 @@ class _CreateCommunityScreenState extends State<CreateCommunityScreen> {
               children: [
                   const Icon(Icons.check_circle_outline, size: 80, color: Colors.greenAccent),
                   const SizedBox(height: 20),
-                  const Text('¡Todo listo!', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white)),
+                  Text(tr('¡Todo listo!'), style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white)),
                   const SizedBox(height: 10),
                   Text('Estás a punto de crear "$_name".\nAl hacerlo, aceptas los Términos de Servicio de Wumble y asumes el rol de Agente.', 
                     textAlign: TextAlign.center,

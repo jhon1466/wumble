@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wumble/core/widgets/update_dialog.dart';
+import 'package:wumble/core/localization/locale_controller.dart';
+import 'package:wumble/core/localization/app_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide AuthState;
 import 'package:wumble/core/services/presence_service_supabase.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -89,8 +92,13 @@ void main() async {
   await NotificationService.initialize();
   NotificationService.navigatorKey = navigatorKey;
 
-  // Initialize Date Formatting for Spanish
+  // Initialize Date Formatting
   await initializeDateFormatting('es', null);
+  await initializeDateFormatting('en', null);
+  await initializeDateFormatting('ru', null);
+
+  // Load the persisted app language (Spanish by default)
+  await LocaleController.load();
 
   // Load Global Config (Feature Toggles, Moderation, etc)
   await ModerationService.ensureConfig();
@@ -130,25 +138,28 @@ class WumbleCloneApp extends StatelessWidget {
           BlocProvider(create: (_) => di.sl<NotificationCountBloc>()),
           BlocProvider(create: (_) => ConnectivityCubit()),
         ],
-        child: MaterialApp(
-          navigatorKey: navigatorKey,
-          title: 'Wumble',
-          debugShowCheckedModeBanner: false,
-          theme: Wumbleheme.darkTheme,
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('es', 'ES'),
-            Locale('en', 'US'),
-          ],
-          locale: const Locale('es', 'ES'),
-          builder: (context, child) {
-            return ConnectivityWrapper(child: child!);
+        child: ValueListenableBuilder<Locale>(
+          valueListenable: LocaleController.locale,
+          builder: (context, locale, _) {
+            return MaterialApp(
+              navigatorKey: navigatorKey,
+              title: 'Wumble',
+              debugShowCheckedModeBanner: false,
+              theme: Wumbleheme.darkTheme,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: LocaleController.supported,
+              locale: locale,
+              builder: (context, child) {
+                return ConnectivityWrapper(child: child!);
+              },
+              home: const DynamicThemeWrapper(child: AuthWrapper()),
+            );
           },
-          home: const DynamicThemeWrapper(child: AuthWrapper()),
         ),
       ),
     );
@@ -231,7 +242,7 @@ class _ProfileCheckWrapperState extends State<ProfileCheckWrapper> {
                         _profileStream = di.sl<ProfileRepository>().getUserProfile(widget.userId);
                       });
                     },
-                    child: const Text('Reintentar'),
+                    child: Text(tr('Reintentar')),
                   ),
                 ],
               ),
@@ -321,7 +332,7 @@ class _MainScaffoldState extends State<MainScaffold> {
     const HomeScreen(),
     const ExploreScreen(),
     const ChatListScreen(),
-    const ProfileScreen(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -360,8 +371,8 @@ class _MainScaffoldState extends State<MainScaffold> {
             if (_lastPressedAt == null || now.difference(_lastPressedAt!) > const Duration(seconds: 2)) {
               _lastPressedAt = now;
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Presiona atrás de nuevo para salir'),
+                SnackBar(
+                  content: Text(tr('Presiona atrás de nuevo para salir')),
                   duration: Duration(seconds: 2),
                   behavior: SnackBarBehavior.floating,
                   margin: const EdgeInsets.only(bottom: 140, left: 20, right: 20),
@@ -574,7 +585,7 @@ class _MainScaffoldState extends State<MainScaffold> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const CreateCommunityScreen()),
+          MaterialPageRoute(builder: (context) => CreateCommunityScreen()),
         );
       },
       child: Container(

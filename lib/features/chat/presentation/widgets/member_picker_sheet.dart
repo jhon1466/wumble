@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wumble/core/theme.dart';
 import 'package:wumble/features/community/domain/community_member_model.dart';
@@ -113,15 +114,15 @@ class _MemberPickerSheetState extends State<MemberPickerSheet> {
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
                     hintText: 'Buscar por nombre...',
-                    hintStyle: const TextStyle(color: Colors.white54),
-                    prefixIcon: const Icon(Icons.search, color: Colors.white54),
+                    hintStyle: TextStyle(color: Colors.white54),
+                    prefixIcon: Icon(Icons.search, color: Colors.white54),
                     filled: true,
                     fillColor: Colors.white10,
                     border: OutlineInputBorder(
@@ -130,7 +131,7 @@ class _MemberPickerSheetState extends State<MemberPickerSheet> {
                     ),
                     contentPadding: EdgeInsets.zero,
                   ),
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                   onChanged: (val) {
                     if (val.isEmpty) {
                       context.read<CommunityMembersBloc>().add(ClearSearch(widget.communityId));
@@ -140,19 +141,19 @@ class _MemberPickerSheetState extends State<MemberPickerSheet> {
                   },
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Expanded(
                 child: BlocBuilder<CommunityMembersBloc, CommunityMembersState>(
                   builder: (context, state) {
                     if (state.isLoading && state.members.isEmpty) {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(child: CircularProgressIndicator());
                     }
                     
                     final filteredMembers = state.members.where((m) => !widget.excludedIds.contains(m.userId)).toList();
 
                     if (filteredMembers.isEmpty) {
-                      return const Center(
-                        child: Text('No hay más miembros para invitar', style: TextStyle(color: Colors.white38)),
+                      return Center(
+                        child: Text(tr('No hay más miembros para invitar'), style: TextStyle(color: Colors.white38)),
                       );
                     }
 

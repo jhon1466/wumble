@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:gal/gal.dart';
@@ -8,7 +9,7 @@ import '../../../../core/theme.dart';
 class ImageViewerScreen extends StatefulWidget {
   final String imageUrl;
 
-  const ImageViewerScreen({super.key, required this.imageUrl});
+  ImageViewerScreen({super.key, required this.imageUrl});
 
   @override
   State<ImageViewerScreen> createState() => _ImageViewerScreenState();
@@ -35,7 +36,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Imagen guardada en la galería')),
+          SnackBar(content: Text(tr('Imagen guardada en la galería'))),
         );
       }
     } catch (e) {
@@ -58,7 +59,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
         backgroundColor: Colors.black.withOpacity(0.5),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
@@ -92,7 +93,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
 
 class OptimizedImage extends StatelessWidget {
   final String imageUrl;
-  const OptimizedImage({super.key, required this.imageUrl});
+  OptimizedImage({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -103,16 +104,16 @@ class OptimizedImage extends StatelessWidget {
       height: double.infinity,
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) return child;
-        return const Center(child: CircularProgressIndicator(color: Colors.white24));
+        return Center(child: CircularProgressIndicator(color: Colors.white24));
       },
       errorBuilder: (context, error, stackTrace) {
-        return const Center(
+        return Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.error, color: Colors.white24, size: 50),
               SizedBox(height: 10),
-              Text('No se pudo cargar la imagen', style: TextStyle(color: Colors.white38)),
+              Text(tr('No se pudo cargar la imagen'), style: TextStyle(color: Colors.white38)),
             ],
           ),
         );

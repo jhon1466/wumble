@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wumble/core/theme.dart';
@@ -95,7 +96,7 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
       backgroundColor: Wumbleheme.backgroundColor,
       appBar: AppBar(
         backgroundColor: Wumbleheme.backgroundColor,
-        title: const Text('Gestionar Miembros'),
+        title: Text(tr('Gestionar Miembros')),
         elevation: 0,
       ),
       body: ListView.builder(
@@ -241,7 +242,7 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
       context: context,
       builder: (context) => SimpleDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Seleccionar Rol', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Seleccionar Rol'), style: TextStyle(color: Colors.white)),
         children: ['member', 'curator', 'leader'].map((role) => SimpleDialogOption(
           onPressed: () async {
             await _repository.updateMemberRole(widget.communityId, member.userId, role);
@@ -264,12 +265,12 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
       const Color(0xFFF44336), // Red
       const Color(0xFFE91E63), // Pink
       const Color(0xFF9C27B0), // Purple
-      const Color(0xFF2196F3), // Blue
-      const Color(0xFF00BCD4), // Cyan
-      const Color(0xFF4CAF50), // Green
-      const Color(0xFFFFEB3B), // Yellow
-      const Color(0xFFFF9800), // Orange
-      const Color(0xFF607D8B), // Blue Grey
+      Color(0xFF2196F3), // Blue
+      Color(0xFF00BCD4), // Cyan
+      Color(0xFF4CAF50), // Green
+      Color(0xFFFFEB3B), // Yellow
+      Color(0xFFFF9800), // Orange
+      Color(0xFF607D8B), // Blue Grey
     ];
 
     showDialog(
@@ -277,16 +278,16 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
           backgroundColor: Wumbleheme.surfaceColor,
-          title: Text('Etiquetas: ${member.displayName}', style: const TextStyle(color: Colors.white)),
+          title: Text('Etiquetas: ${member.displayName}', style: TextStyle(color: Colors.white)),
           content: SizedBox(
             width: double.maxFinite,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (currentLabels.isEmpty)
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Text('Sin etiquetas asignadas', style: TextStyle(color: Colors.white38)),
+                    child: Text(tr('Sin etiquetas asignadas'), style: TextStyle(color: Colors.white38)),
                   )
                 else
                   Wrap(
@@ -368,7 +369,7 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
             ),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: const Text('CANCELAR')),
+            TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('CANCELAR'))),
             TextButton(
               onPressed: () async {
                 await _repository.updateMemberTitles(widget.communityId, member.userId, currentLabels.map((l) => l.toFirestore()).toList() as List<dynamic>);
@@ -377,7 +378,7 @@ class _MemberManagementScreenState extends State<MemberManagementScreen> {
                   _refreshMembers();
                 }
               },
-              child: Text('GUARDAR', style: TextStyle(color: widget.themeColor)),
+              child: Text(tr('GUARDAR'), style: TextStyle(color: widget.themeColor)),
             ),
           ],
         ),

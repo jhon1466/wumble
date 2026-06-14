@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _FrameEntry {
     this.networkUrl,
     required this.type,
     String? existingId,
-  })  : id = existingId ?? const Uuid().v4(),
+  })  : id = existingId ?? Uuid().v4(),
         nameCtrl = TextEditingController();
 
   void dispose() => nameCtrl.dispose();
@@ -39,7 +40,7 @@ class _FrameEntry {
 class PublishFrameScreen extends StatefulWidget {
   final List<CustomAvatarFrame>? initialFrames;
 
-  const PublishFrameScreen({super.key, this.initialFrames});
+  PublishFrameScreen({super.key, this.initialFrames});
 
   @override
   State<PublishFrameScreen> createState() => _PublishFrameScreenState();
@@ -72,7 +73,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
     super.initState();
     _pulseController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1800),
+      duration: Duration(milliseconds: 1800),
     )..repeat(reverse: true);
     _pulseAnim = Tween<double>(begin: 0.97, end: 1.03).animate(
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
@@ -172,7 +173,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
     showModalBottomSheet(
       context: context,
       backgroundColor: Wumbleheme.surfaceColor,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (ctx) => Padding(
@@ -204,7 +205,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
                 ),
                 child: const Icon(Icons.image_rounded, color: Colors.blueAccent),
               ),
-              title: const Text('Marco Normal (Clásico)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+              title: Text(tr('Marco Normal (Clásico)'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
               subtitle: const Text('PNG o GIF transparente en tamaño estándar', style: TextStyle(color: Colors.white38, fontSize: 11)),
               onTap: () { Navigator.pop(ctx); _addFrame(false); },
             ),
@@ -217,7 +218,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
                 ),
                 child: const Icon(Icons.auto_awesome_rounded, color: Colors.amberAccent),
               ),
-              title: const Text('Efecto Especial (Animado)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+              title: Text(tr('Efecto Especial (Animado)'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
               subtitle: const Text('Fondo negro desaparece, tamaño gigante', style: TextStyle(color: Colors.white38, fontSize: 11)),
               onTap: () { Navigator.pop(ctx); _addFrame(true); },
             ),
@@ -234,7 +235,7 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
     if (!_formKey.currentState!.validate()) return;
     if (_frames.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Agrega al menos un marco al pack'), backgroundColor: Colors.orange),
+        SnackBar(content: Text(tr('Agrega al menos un marco al pack')), backgroundColor: Colors.orange),
       );
       return;
     }
@@ -753,12 +754,12 @@ class _PublishFrameScreenState extends State<PublishFrameScreen>
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: Colors.white12, style: BorderStyle.solid),
                     ),
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.add_rounded, color: Colors.white38, size: 28),
-                        SizedBox(height: 4),
-                        Text('Añadir', style: TextStyle(color: Colors.white38, fontSize: 10)),
+                        const Icon(Icons.add_rounded, color: Colors.white38, size: 28),
+                        const SizedBox(height: 4),
+                        Text(tr('Añadir'), style: const TextStyle(color: Colors.white38, fontSize: 10)),
                       ],
                     ),
                   ),

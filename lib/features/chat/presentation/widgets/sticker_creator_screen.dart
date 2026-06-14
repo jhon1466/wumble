@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_selfie_segmentation/google_mlkit_selfie_segmentation.dart';
@@ -192,7 +193,7 @@ class _StickerCreatorScreenState extends State<StickerCreatorScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Creador de Sticker', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Creador de Sticker'), style: TextStyle(color: Colors.white)),
         leading: IconButton(
           icon: const Icon(Icons.close, color: Colors.white),
           onPressed: () => Navigator.pop(context),
@@ -234,7 +235,7 @@ class _StickerCreatorScreenState extends State<StickerCreatorScreen> {
                         ],
                       ),
                     )
-                  : const Text('Error al cargar imagen', style: TextStyle(color: Colors.white70)),
+                  : Text(tr('Error al cargar imagen'), style: TextStyle(color: Colors.white70)),
             ),
           ),
           _buildControls(),
@@ -334,7 +335,7 @@ class _StickerCreatorScreenState extends State<StickerCreatorScreen> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
                 elevation: 0,
               ),
-              child: const Text('LISTO', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, letterSpacing: 1.2)),
+              child: Text(tr('LISTO'), style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, letterSpacing: 1.2)),
             ),
           ),
         ],

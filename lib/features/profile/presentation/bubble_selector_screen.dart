@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import '../../../core/theme.dart';
 import '../../chat/domain/chat_model.dart';
 import '../../chat/presentation/widgets/chat_bubble.dart';
@@ -116,7 +117,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
       shapeId: 'jagged',
       hasGlow: true,
     ),
-    const ChatBubbleStyle(
+    ChatBubbleStyle(
       id: 'ocean_wavy',
       name: 'Ocean Wave',
       backgroundColorValue: 0xFF0277BD,
@@ -124,7 +125,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
       textColorValue: 0xFFFFFFFF,
       shapeId: 'wavy',
     ),
-    const ChatBubbleStyle(
+    ChatBubbleStyle(
       id: 'vapor_sun',
       name: 'Vaporwave Sun',
       backgroundColorValue: 0xFF212121,
@@ -134,7 +135,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
       topRightOrnamentUrl: 'assets/images/vapor_sun.png',
       hasGlow: true,
     ),
-    const ChatBubbleStyle(
+    ChatBubbleStyle(
       id: 'gothic_cross',
       name: 'Silver Cross',
       backgroundColorValue: 0xFF121212,
@@ -143,7 +144,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
       shapeId: 'jagged',
       topRightOrnamentUrl: 'assets/images/gothic_cross.png',
     ),
-    const ChatBubbleStyle(
+    ChatBubbleStyle(
       id: 'kawaii_cat_style',
       name: 'Neko Pink',
       backgroundColorValue: 0xFFFCE4EC,
@@ -152,7 +153,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
       shapeId: 'cloud',
       topRightOrnamentUrl: 'assets/images/kawaii_cat.png',
     ),
-    const ChatBubbleStyle(
+    ChatBubbleStyle(
       id: 'classic_quill',
       name: 'Script Feather',
       backgroundColorValue: 0xFFFFF9C4,
@@ -161,7 +162,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
       shapeId: 'wavy',
       topRightOrnamentUrl: 'assets/images/classic_feather.png',
     ),
-    const ChatBubbleStyle(
+    ChatBubbleStyle(
       id: 'dreamy_soft',
       name: 'Soft Cloud',
       backgroundColorValue: 0xFFF8BBD0,
@@ -170,7 +171,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
       shapeId: 'cloud',
       topRightOrnamentUrl: 'assets/images/sparkle.png',
     ),
-    const ChatBubbleStyle(
+    ChatBubbleStyle(
       id: 'cyber_neon',
       name: 'Neon Grid',
       backgroundColorValue: 0xFF000000,
@@ -243,7 +244,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Burbuja actualizada correctamente')),
+          SnackBar(content: Text(tr('Burbuja actualizada correctamente'))),
         );
         Navigator.pop(context, styleToSave);
       }
@@ -263,7 +264,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
     return Scaffold(
       backgroundColor: Wumbleheme.backgroundColor,
       appBar: AppBar(
-        title: const Text('Estilo de Burbuja'),
+        title: Text(tr('Estilo de Burbuja')),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -272,7 +273,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
           else
             TextButton(
               onPressed: _saveStyle,
-              child: const Text('GUARDAR', style: TextStyle(color: Wumbleheme.primaryColor, fontWeight: FontWeight.bold)),
+              child: Text(tr('GUARDAR'), style: TextStyle(color: Wumbleheme.primaryColor, fontWeight: FontWeight.bold)),
             ),
         ],
       ),
@@ -292,7 +293,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 const Text('Vista Previa', style: TextStyle(color: Colors.white38, fontSize: 12, fontWeight: FontWeight.bold)),
+                 Text(tr('Vista Previa'), style: TextStyle(color: Colors.white38, fontSize: 12, fontWeight: FontWeight.bold)),
                  const SizedBox(height: 24),
                  _buildPreviewBubble(isMe: false, text: '¡Hola! Mira mi nueva burbuja personalizada. ✨'),
                  const SizedBox(height: 16),
@@ -314,9 +315,9 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Personalizar Ornamentos', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text(tr('Personalizar Ornamentos'), style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
-                    const Text('Toca cada esquina para elegir una imagen.', style: TextStyle(color: Colors.white38, fontSize: 13)),
+                    Text(tr('Toca cada esquina para elegir una imagen.'), style: TextStyle(color: Colors.white38, fontSize: 13)),
                     const SizedBox(height: 24),
                     
                     // Corner Selector Grid (Visual Representation)
@@ -347,7 +348,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Tus Estilos & Tienda', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                        Text(tr('Tus Estilos & Tienda'), style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
                         if (ModerationService.workshopEnabled)
                           ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
@@ -356,7 +357,7 @@ class _BubbleSelectorScreenState extends State<BubbleSelectorScreen> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                             ),
                             icon: const Icon(Icons.edit, size: 16),
-                            label: const Text('Workshop', style: TextStyle(fontWeight: FontWeight.bold)),
+                            label: Text(tr('Workshop'), style: TextStyle(fontWeight: FontWeight.bold)),
                             onPressed: () async {
                                final newStyle = await Navigator.push<ChatBubbleStyle>(
                                  context,

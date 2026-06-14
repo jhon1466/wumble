@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,7 +31,7 @@ class ProfileWall extends StatefulWidget {
   final UserProfile user;
   final String? communityId;
 
-  const ProfileWall({
+  ProfileWall({
     super.key, 
     required this.user,
     this.communityId,
@@ -113,7 +114,7 @@ class _ProfileWallState extends State<ProfileWall> {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, authState) {
         final currentUser = authState.user;
-        if (currentUser == null) return const SizedBox.shrink();
+        if (currentUser == null) return SizedBox.shrink();
 
         // 14/02/2026: Sincronización en tiempo real del usuario actual para el input bar
         // 23/02/2026: AISLAMIENTO - Escuchar perfil de miembro si hay comunidad
@@ -141,7 +142,7 @@ class _ProfileWallState extends State<ProfileWall> {
             }
 
             return Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
+              padding: EdgeInsets.only(left: 16, right: 16, top: 20),
               child: Column(
                 children: [
                   // Comment Input logic with Privacy Check
@@ -218,7 +219,7 @@ class _ProfileWallState extends State<ProfileWall> {
                                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
                                         minimumSize: const Size(0, 32),
                                       ),
-                                      child: const Text('UNIRSE AHORA', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                                      child: Text(tr('UNIRSE AHORA'), style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
                                     ),
                                   ],
                                 ],
@@ -408,11 +409,11 @@ class _ProfileWallState extends State<ProfileWall> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: Wumbleheme.surfaceColor,
-          title: const Text('Responder a comentario', style: TextStyle(color: Colors.white, fontSize: 16)),
+          title: Text(tr('Responder a comentario'), style: TextStyle(color: Colors.white, fontSize: 16)),
           content: TextField(
             controller: replyController,
-            style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
+            style: TextStyle(color: Colors.white),
+            decoration: InputDecoration(
               hintText: 'Escribe tu respuesta...',
               hintStyle: TextStyle(color: Colors.white38),
               border: OutlineInputBorder(),
@@ -425,7 +426,7 @@ class _ProfileWallState extends State<ProfileWall> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cancelar', style: TextStyle(color: Colors.white54)),
+              child: Text(tr('Cancelar'), style: TextStyle(color: Colors.white54)),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Wumbleheme.secondaryColor),
@@ -460,7 +461,7 @@ class _ProfileWallState extends State<ProfileWall> {
                   }
                 }
               },
-              child: const Text('Responder', style: TextStyle(color: Colors.white)),
+              child: Text(tr('Responder'), style: TextStyle(color: Colors.white)),
             ),
           ],
         );
@@ -472,7 +473,7 @@ class _ProfileWallState extends State<ProfileWall> {
 class ProfilePosts extends StatefulWidget {
   final UserProfile user;
   final String? communityId;
-  const ProfilePosts({super.key, required this.user, this.communityId});
+  ProfilePosts({super.key, required this.user, this.communityId});
 
   @override
   State<ProfilePosts> createState() => _ProfilePostsState();
@@ -509,7 +510,7 @@ class _ProfilePostsState extends State<ProfilePosts> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
             constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height * 0.4),
-            child: const Center(
+            child: Center(
               child: CircularProgressIndicator(color: Wumbleheme.secondaryColor),
             ),
           );
@@ -517,7 +518,7 @@ class _ProfilePostsState extends State<ProfilePosts> {
 
         if (snapshot.hasError) {
           return Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: EdgeInsets.all(40.0),
             child: Column(
               children: [
                 const Icon(Icons.error_outline, size: 48, color: Colors.redAccent),
@@ -535,13 +536,13 @@ class _ProfilePostsState extends State<ProfilePosts> {
         final posts = snapshot.data ?? [];
 
         if (posts.isEmpty) {
-          return const Padding(
+          return Padding(
             padding: EdgeInsets.all(40.0),
             child: Column(
               children: [
                 Icon(Icons.article_outlined, size: 48, color: Colors.white12),
                 SizedBox(height: 10),
-                Text('No hay publicaciones aún.', style: TextStyle(color: Colors.white24)),
+                Text(tr('No hay publicaciones aún.'), style: TextStyle(color: Colors.white24)),
               ],
             ),
           );
@@ -564,7 +565,7 @@ class ProfileWikis extends StatefulWidget {
   final UserProfile user;
   final String? communityId;
   final bool ocOnly; // true -> show only Original Characters; false -> only wikis
-  const ProfileWikis({super.key, required this.user, this.communityId, this.ocOnly = false});
+  ProfileWikis({super.key, required this.user, this.communityId, this.ocOnly = false});
 
   @override
   State<ProfileWikis> createState() => _ProfileWikisState();
@@ -601,7 +602,7 @@ class _ProfileWikisState extends State<ProfileWikis> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
             constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height * 0.4),
-            child: const Center(
+            child: Center(
               child: CircularProgressIndicator(color: Wumbleheme.secondaryColor),
             ),
           );
@@ -609,7 +610,7 @@ class _ProfileWikisState extends State<ProfileWikis> {
 
         if (snapshot.hasError) {
           return Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: EdgeInsets.all(40.0),
             child: Column(
               children: [
                 const Icon(Icons.error_outline, size: 48, color: Colors.redAccent),
@@ -631,7 +632,7 @@ class _ProfileWikisState extends State<ProfileWikis> {
 
         if (wikis.isEmpty) {
           return Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: EdgeInsets.all(40.0),
             child: Column(
               children: [
                 Icon(widget.ocOnly ? Icons.face_retouching_natural : Icons.book_outlined,
@@ -659,7 +660,7 @@ class _ProfileWikisState extends State<ProfileWikis> {
 
 class ProfileSavedPosts extends StatefulWidget {
   final UserProfile user;
-  const ProfileSavedPosts({super.key, required this.user});
+  ProfileSavedPosts({super.key, required this.user});
 
   @override
   State<ProfileSavedPosts> createState() => _ProfileSavedPostsState();
@@ -690,20 +691,20 @@ class _ProfileSavedPostsState extends State<ProfileSavedPosts> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
             constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height * 0.4),
-            child: const Center(
+            child: Center(
               child: CircularProgressIndicator(color: Wumbleheme.secondaryColor),
             ),
           );
         }
 
         if (snapshot.hasError) {
-          return const Padding(
+          return Padding(
             padding: EdgeInsets.all(40.0),
             child: Column(
               children: [
                 Icon(Icons.error_outline, size: 48, color: Colors.redAccent),
                 SizedBox(height: 10),
-                Text('Error al cargar guardados', style: TextStyle(color: Colors.white24)),
+                Text(tr('Error al cargar guardados'), style: TextStyle(color: Colors.white24)),
               ],
             ),
           );
@@ -712,13 +713,13 @@ class _ProfileSavedPostsState extends State<ProfileSavedPosts> {
         final posts = snapshot.data ?? [];
 
         if (posts.isEmpty) {
-          return const Padding(
+          return Padding(
             padding: EdgeInsets.all(40.0),
             child: Column(
               children: [
                 Icon(Icons.bookmark_border, size: 48, color: Colors.white12),
                 SizedBox(height: 10),
-                Text('No tienes publicaciones guardadas.', style: TextStyle(color: Colors.white24)),
+                Text(tr('No tienes publicaciones guardadas.'), style: TextStyle(color: Colors.white24)),
               ],
             ),
           );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/services.dart';
@@ -126,7 +127,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('¡Únete a la comunidad!', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: Text(tr('¡Únete a la comunidad!'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         content: const Text(
           'Para interactuar con esta wiki, dar corazón o donar, necesitas ser miembro de esta comunidad.',
           style: TextStyle(color: Colors.white70),
@@ -134,7 +135,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('CANCELAR', style: TextStyle(color: Colors.white54)),
+            child: Text(tr('CANCELAR'), style: TextStyle(color: Colors.white54)),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -158,7 +159,7 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             ),
-            child: const Text('UNIRSE AHORA'),
+            child: Text(tr('UNIRSE AHORA')),
           ),
         ],
       ),
@@ -209,10 +210,10 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
             ? '¿Estás seguro de que quieres borrar este personaje? Esta acción no se puede deshacer.'
             : '¿Estás seguro de que quieres borrar esta Wiki? Esta acción no se puede deshacer.'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancelar')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(tr('Cancelar'))),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Borrar', style: TextStyle(color: Colors.red)),
+            child: Text(tr('Borrar'), style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -305,23 +306,23 @@ class _WikiDetailScreenState extends State<WikiDetailScreen> {
                       },
                       itemBuilder: (context) => [
                         if (isAuthor)
-                          const PopupMenuItem(
+                          PopupMenuItem(
                             value: 'edit',
                             child: Row(
                               children: [
                                 Icon(Icons.edit_outlined, color: Colors.white70, size: 20),
                                 SizedBox(width: 12),
-                                Text('Editar', style: TextStyle(color: Colors.white)),
+                                Text(tr('Editar'), style: TextStyle(color: Colors.white)),
                               ],
                             ),
                           ),
-                        const PopupMenuItem(
+                        PopupMenuItem(
                           value: 'delete',
                           child: Row(
                             children: [
                               Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),
                               SizedBox(width: 12),
-                              Text('Borrar', style: TextStyle(color: Colors.redAccent)),
+                              Text(tr('Borrar'), style: TextStyle(color: Colors.redAccent)),
                             ],
                           ),
                         ),
@@ -1124,7 +1125,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
             child: _isLoading 
               ? Center(child: CircularProgressIndicator())
               : _comments.isEmpty
-                ? Center(child: Text('Sin comentarios aún', style: TextStyle(color: Colors.white54)))
+                ? Center(child: Text(tr('Sin comentarios aún'), style: TextStyle(color: Colors.white54)))
                 : ListView.builder(
                     controller: _scrollController,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -1407,7 +1408,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           ),
-                          child: const Text('UNIRSE', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                          child: Text(tr('UNIRSE'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                         ),
                       ],
                     ),
@@ -1605,8 +1606,8 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
                       Navigator.pop(ctx);
                       Clipboard.setData(ClipboardData(text: comment.content));
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Comentario copiado'),
+                        SnackBar(
+                          content: Text(tr('Comentario copiado')),
                           backgroundColor: Wumbleheme.primaryColor,
                           duration: Duration(seconds: 1),
                         ),
@@ -1689,7 +1690,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('¡Únete a la comunidad!', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: Text(tr('¡Únete a la comunidad!'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         content: const Text(
           'Para reaccionar a comentarios necesitas ser miembro de esta comunidad.',
           style: TextStyle(color: Colors.white70),
@@ -1697,7 +1698,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('CANCELAR', style: TextStyle(color: Colors.white54)),
+            child: Text(tr('CANCELAR'), style: TextStyle(color: Colors.white54)),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -1721,7 +1722,7 @@ class _WikiCommentsSheetState extends State<_WikiCommentsSheet> {
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             ),
-            child: const Text('UNIRSE AHORA'),
+            child: Text(tr('UNIRSE AHORA')),
           ),
         ],
       ),

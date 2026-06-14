@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,7 +16,7 @@ import '../bloc/community_management_state.dart';
 class CommunityManagementScreen extends StatefulWidget {
   final Community community;
 
-  const CommunityManagementScreen({super.key, required this.community});
+  CommunityManagementScreen({super.key, required this.community});
 
   @override
   State<CommunityManagementScreen> createState() => _CommunityManagementScreenState();
@@ -38,12 +39,12 @@ class _CommunityManagementScreenState extends State<CommunityManagementScreen> w
         backgroundColor: Wumbleheme.backgroundColor,
         appBar: AppBar(
           backgroundColor: widget.community.themeColor,
-          title: const Text('Navegación y Categorías'),
+          title: Text(tr('Navegación y Categorías')),
           bottom: TabBar(
             controller: _tabController,
             isScrollable: true,
             indicatorColor: Colors.white,
-            tabs: const [
+            tabs: [
               Tab(text: 'Categorías'),
               Tab(text: 'Navegación'),
             ],
@@ -77,7 +78,7 @@ class _CommunityManagementScreenState extends State<CommunityManagementScreen> w
               );
             }
 
-            return const Center(child: Text('Cargando...'));
+            return Center(child: Text(tr('Cargando...')));
           },
         ),
       ),
@@ -88,7 +89,7 @@ class _CommunityManagementScreenState extends State<CommunityManagementScreen> w
 class _EditDetailsTab extends StatefulWidget {
   final Community community;
 
-  const _EditDetailsTab({required this.community});
+  _EditDetailsTab({required this.community});
 
   @override
   State<_EditDetailsTab> createState() => _EditDetailsTabState();
@@ -126,12 +127,12 @@ class _EditDetailsTabState extends State<_EditDetailsTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildSectionTitle('Apariencia'),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           Row(
             children: [
               GestureDetector(
@@ -165,24 +166,24 @@ class _EditDetailsTabState extends State<_EditDetailsTab> {
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           _buildSectionTitle('Información'),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           TextField(
             controller: _nameController,
-            style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(labelText: 'Nombre de la Comunidad', labelStyle: TextStyle(color: Colors.white70)),
+            style: TextStyle(color: Colors.white),
+            decoration: InputDecoration(labelText: 'Nombre de la Comunidad', labelStyle: TextStyle(color: Colors.white70)),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           TextField(
             controller: _descController,
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white),
             maxLines: 3,
-            decoration: const InputDecoration(labelText: 'Descripción', labelStyle: TextStyle(color: Colors.white70)),
+            decoration: InputDecoration(labelText: 'Descripción', labelStyle: TextStyle(color: Colors.white70)),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           _buildSectionTitle('Tema'),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           Wrap(
             spacing: 10,
             children: [
@@ -198,7 +199,7 @@ class _EditDetailsTabState extends State<_EditDetailsTab> {
               );
             }).toList(),
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -214,7 +215,7 @@ class _EditDetailsTabState extends State<_EditDetailsTab> {
                   currentCommunity: widget.community,
                 );
               },
-              child: const Text('GUARDAR CAMBIOS', style: TextStyle(color: Colors.white)),
+              child: Text(tr('GUARDAR CAMBIOS'), style: TextStyle(color: Colors.white)),
             ),
           ),
         ],
@@ -223,7 +224,7 @@ class _EditDetailsTabState extends State<_EditDetailsTab> {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Text(title, style: const TextStyle(color: Wumbleheme.secondaryColor, fontWeight: FontWeight.bold, fontSize: 16));
+    return Text(title, style: TextStyle(color: Wumbleheme.secondaryColor, fontWeight: FontWeight.bold, fontSize: 16));
   }
 }
 
@@ -231,7 +232,7 @@ class _MembersTab extends StatelessWidget {
   final List<CommunityMember> members;
   final String communityId;
 
-  const _MembersTab({required this.members, required this.communityId});
+  _MembersTab({required this.members, required this.communityId});
 
   @override
   Widget build(BuildContext context) {
@@ -242,12 +243,12 @@ class _MembersTab extends StatelessWidget {
         return ListTile(
           leading: CircleAvatar(
             backgroundImage: member.avatarUrl != null ? NetworkImage(member.avatarUrl!) : null,
-            child: member.avatarUrl == null ? const Icon(Icons.person) : null,
+            child: member.avatarUrl == null ? Icon(Icons.person) : null,
           ),
-          title: Text(member.displayName ?? 'Usuario', style: const TextStyle(color: Colors.white)),
+          title: Text(member.displayName ?? 'Usuario', style: TextStyle(color: Colors.white)),
           subtitle: Text(member.role, style: TextStyle(color: Colors.white.withOpacity(0.7))),
           trailing: PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert, color: Colors.white),
+            icon: Icon(Icons.more_vert, color: Colors.white),
             onSelected: (value) {
               if (value == 'kick') {
                 context.read<CommunityManagementCubit>().kickMember(communityId, member.userId);
@@ -256,10 +257,10 @@ class _MembersTab extends StatelessWidget {
               }
             },
             itemBuilder: (context) => [
-              const PopupMenuItem(value: 'leader', child: Text('Promover a Líder')),
-              const PopupMenuItem(value: 'curator', child: Text('Promover a Curador')),
-              const PopupMenuItem(value: 'member', child: Text('Degradar a Miembro')),
-              const PopupMenuItem(value: 'kick', child: Text('Expulsar', style: TextStyle(color: Colors.red))),
+              PopupMenuItem(value: 'leader', child: Text(tr('Promover a Líder'))),
+              PopupMenuItem(value: 'curator', child: Text(tr('Promover a Curador'))),
+              PopupMenuItem(value: 'member', child: Text(tr('Degradar a Miembro'))),
+              PopupMenuItem(value: 'kick', child: Text(tr('Expulsar'), style: TextStyle(color: Colors.red))),
             ],
           ),
         );
@@ -335,7 +336,7 @@ class _LevelTitlesTabState extends State<_LevelTitlesTab> {
               onPressed: () {
                 context.read<CommunityManagementCubit>().updateLevelTitles(widget.community.id, _titles);
               },
-              child: const Text('GUARDAR TÍTULOS', style: TextStyle(color: Colors.white)),
+              child: Text(tr('GUARDAR TÍTULOS'), style: TextStyle(color: Colors.white)),
             ),
           ),
         ),
@@ -450,7 +451,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
         ),
         
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           child: Column(
             children: [
               Row(
@@ -458,7 +459,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
                   Expanded(
                     child: OutlinedButton.icon(
                       icon: const Icon(Icons.add),
-                      label: const Text('ENLACE WEB'),
+                      label: Text(tr('ENLACE WEB')),
                       style: OutlinedButton.styleFrom(foregroundColor: widget.community.themeColor),
                       onPressed: _showAddLinkDialog,
                     ),
@@ -467,7 +468,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
                    Expanded(
                     child: OutlinedButton.icon(
                       icon: const Icon(Icons.category_outlined),
-                      label: const Text('CATEGORÍA'),
+                      label: Text(tr('CATEGORÍA')),
                       style: OutlinedButton.styleFrom(foregroundColor: widget.community.themeColor),
                       onPressed: _showAddCategoryDialog,
                     ),
@@ -487,7 +488,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
                     
                     context.read<CommunityManagementCubit>().updateNavigationTabs(widget.community.id, orderedTabs);
                   },
-                  child: const Text('GUARDAR NAVEGACIÓN', style: TextStyle(color: Colors.white)),
+                  child: Text(tr('GUARDAR NAVEGACIÓN'), style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],
@@ -505,7 +506,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Nuevo Enlace Externo', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Nuevo Enlace Externo'), style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -522,7 +523,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('Cancelar'))),
           ElevatedButton(
             onPressed: () {
               setState(() {
@@ -536,7 +537,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
               });
               Navigator.pop(context);
             },
-            child: const Text('Agregar'),
+            child: Text(tr('Agregar')),
           ),
         ],
       ),
@@ -550,7 +551,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
     final categories = state.categories;
     if (categories.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Primero debes crear categorías personalizadas en la pestaña "Categorías".')),
+        SnackBar(content: Text('Primero debes crear categorías personalizadas en la pestaña "Categorías".')),
       );
       return;
     }
@@ -562,7 +563,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
       builder: (context) => StatefulBuilder(
         builder: (context, setStateModal) => AlertDialog(
           backgroundColor: Wumbleheme.surfaceColor,
-          title: const Text('Nueva Pestaña de Categoría', style: TextStyle(color: Colors.white)),
+          title: Text(tr('Nueva Pestaña de Categoría'), style: TextStyle(color: Colors.white)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -596,7 +597,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context), 
-              child: const Text('Cancelar', style: TextStyle(color: Colors.white70)),
+              child: Text(tr('Cancelar'), style: TextStyle(color: Colors.white70)),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: widget.community.themeColor),
@@ -612,7 +613,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
                 });
                 Navigator.pop(context);
               },
-              child: const Text('Agregar', style: TextStyle(color: Colors.white)),
+              child: Text(tr('Agregar'), style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
@@ -644,7 +645,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
           backgroundColor: Wumbleheme.surfaceColor,
           title: Text(
             tab.type == NavigationTabType.externalLink ? 'Editar Enlace Web' : 'Editar Pestaña de Categoría', 
-            style: const TextStyle(color: Colors.white)
+            style: TextStyle(color: Colors.white)
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -687,7 +688,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context), 
-              child: const Text('Cancelar', style: TextStyle(color: Colors.white70))
+              child: Text(tr('Cancelar'), style: TextStyle(color: Colors.white70))
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: widget.community.themeColor),
@@ -702,7 +703,7 @@ class _NavigationManagementTabState extends State<_NavigationManagementTab> {
                 });
                 Navigator.pop(context);
               },
-              child: const Text('Guardar', style: TextStyle(color: Colors.white)),
+              child: Text(tr('Guardar'), style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
@@ -747,7 +748,7 @@ class _CategoriesTab extends StatefulWidget {
   final Community community;
   final List<PostCategory> categories;
 
-  const _CategoriesTab({required this.community, required this.categories});
+  _CategoriesTab({required this.community, required this.categories});
 
   @override
   State<_CategoriesTab> createState() => _CategoriesTabState();
@@ -762,7 +763,7 @@ class _CategoriesTabState extends State<_CategoriesTab> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Nueva Categoría', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Nueva Categoría'), style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -774,7 +775,7 @@ class _CategoriesTabState extends State<_CategoriesTab> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('Cancelar'))),
           ElevatedButton(
             onPressed: () {
               if (nameCtrl.text.trim().isEmpty) return;
@@ -788,7 +789,7 @@ class _CategoriesTabState extends State<_CategoriesTab> {
               cubit.createCategory(widget.community.id, newCat);
               Navigator.pop(context);
             },
-            child: const Text('Crear'),
+            child: Text(tr('Crear')),
           ),
         ],
       ),
@@ -801,17 +802,17 @@ class _CategoriesTabState extends State<_CategoriesTab> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Eliminar Categoría', style: TextStyle(color: Colors.white)),
-        content: Text('¿Seguro que quieres eliminar "${category.name}"?', style: const TextStyle(color: Colors.white70)),
+        title: Text(tr('Eliminar Categoría'), style: TextStyle(color: Colors.white)),
+        content: Text('¿Seguro que quieres eliminar "${category.name}"?', style: TextStyle(color: Colors.white70)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr('Cancelar'))),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {
               cubit.deleteCategory(widget.community.id, category.id);
               Navigator.pop(context);
             },
-            child: const Text('Eliminar', style: TextStyle(color: Colors.white)),
+            child: Text(tr('Eliminar'), style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -826,7 +827,7 @@ class _CategoriesTabState extends State<_CategoriesTab> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Wumbleheme.surfaceColor,
-        title: const Text('Editar Categoría', style: TextStyle(color: Colors.white)),
+        title: Text(tr('Editar Categoría'), style: TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -843,7 +844,7 @@ class _CategoriesTabState extends State<_CategoriesTab> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context), 
-            child: const Text('Cancelar', style: TextStyle(color: Colors.white70))
+            child: Text(tr('Cancelar'), style: TextStyle(color: Colors.white70))
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: widget.community.themeColor),
@@ -853,7 +854,7 @@ class _CategoriesTabState extends State<_CategoriesTab> {
               cubit.updateCategory(widget.community.id, updatedCat);
               Navigator.pop(context);
             },
-            child: const Text('Guardar', style: TextStyle(color: Colors.white)),
+            child: Text(tr('Guardar'), style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -865,7 +866,7 @@ class _CategoriesTabState extends State<_CategoriesTab> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0),
           child: Row(
             children: [
               Expanded(
@@ -878,16 +879,16 @@ class _CategoriesTabState extends State<_CategoriesTab> {
               ElevatedButton.icon(
                 onPressed: _showAddCategoryDialog,
                 icon: const Icon(Icons.add),
-                label: const Text('Nueva'),
+                label: Text(tr('Nueva')),
                 style: ElevatedButton.styleFrom(backgroundColor: widget.community.themeColor),
               ),
             ],
           ),
         ),
-        const Divider(color: Colors.white24, height: 1),
+        Divider(color: Colors.white24, height: 1),
         Expanded(
           child: widget.categories.isEmpty
-              ? const Center(child: Text('No hay categorías personalizadas', style: TextStyle(color: Colors.white54)))
+              ? Center(child: Text(tr('No hay categorías personalizadas'), style: TextStyle(color: Colors.white54)))
               : ReorderableListView.builder(
                   itemCount: widget.categories.length,
                   onReorder: (oldIndex, newIndex) {
