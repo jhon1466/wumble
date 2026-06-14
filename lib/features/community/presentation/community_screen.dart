@@ -846,7 +846,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                     
                     // Meta Data
                     Text(
-                      '${community.membersCount} miembros · Creado el ${community.createdAt.day}/${community.createdAt.month}/${community.createdAt.year}',
+                      '${community.membersCount} ${tr('miembros')} · ${tr('Creado el')} ${community.createdAt.day}/${community.createdAt.month}/${community.createdAt.year}',
                       style: const TextStyle(color: Colors.white54, fontSize: 13),
                     ),
                     const SizedBox(height: 12),
@@ -1061,7 +1061,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen>
                                               _buildStatDivider(),
                                               _buildStatItem('$followingCount', 'Siguiendo'),
                                               _buildStatDivider(),
-                                              _buildStatItem('${community.membersCount}', 'Miembros'),
+                                              _buildStatItem('${community.membersCount}', tr('Miembros')),
                                             ],
                                           ),
                                         ],

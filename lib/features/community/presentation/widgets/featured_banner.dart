@@ -161,7 +161,7 @@ class _FeaturedCard extends StatelessWidget {
                       Icon(Icons.people_alt_rounded, size: 14, color: community.themeColor),
                       const SizedBox(width: 6),
                       Text(
-                        '${community.membersCount} miembros',
+                        '${community.membersCount} ${tr('miembros')}',
                         style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
                       ),
                     ],

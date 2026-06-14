@@ -461,7 +461,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            '@${community.handle} • ${community.membersCount} miembros',
+                            '@${community.handle} • ${community.membersCount} ${tr('miembros')}',
                             style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 13),
                           ),
                         ],

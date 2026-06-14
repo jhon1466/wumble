@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../domain/community_model.dart';
@@ -154,7 +155,7 @@ class PremiumCommunityCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          '${_formatNumber(community.membersCount)} miembros',
+                          '${_formatNumber(community.membersCount)} ${tr('miembros')}',
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.8),
                             fontSize: 10,

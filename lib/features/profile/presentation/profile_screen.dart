@@ -376,7 +376,7 @@ class _ProfileViewState extends State<_ProfileView> {
                                       horizontal: (MediaQuery.of(context).size.width / 3 - 36) / 2,
                                     ),
                                     dividerColor: Colors.white.withOpacity(0.08),
-                                    tabs: visibleTabs.map((t) => Tab(text: t['label'])).toList(),
+                                    tabs: visibleTabs.map((t) => Tab(text: tr(t['label']))).toList(),
                                   ),
                                 ),
                               ),
@@ -460,7 +460,7 @@ class _ProfileViewState extends State<_ProfileView> {
         builder: (context) => FollowsListScreen(
           userId: user.id,
           type: type,
-          title: type == 'followers' ? 'Seguidores' : 'Siguiendo',
+          title: type == 'followers' ? tr('Seguidores') : tr('Siguiendo'),
         ),
       ),
     );

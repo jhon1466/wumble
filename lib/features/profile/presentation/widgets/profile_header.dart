@@ -828,7 +828,7 @@ class _FollowButton extends StatelessWidget {
                 color: isFollowing ? secondaryColor : Colors.white,
               ),
               label: Text(
-                isFollowing ? 'SIGUIENDO' : 'SEGUIR',
+                isFollowing ? tr('SIGUIENDO') : tr('SEGUIR'),
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 12,

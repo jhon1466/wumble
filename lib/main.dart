@@ -172,7 +172,7 @@ class WumbleCloneApp extends StatelessWidget {
         child: RestartWidget(
           child: MaterialApp(
             navigatorKey: navigatorKey,
-            title: 'Wumble',
+            title: tr('Wumble'),
             debugShowCheckedModeBanner: false,
             theme: Wumbleheme.darkTheme,
             localizationsDelegates: const [
