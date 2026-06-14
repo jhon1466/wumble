@@ -896,6 +896,14 @@ const Map<String, String> _en = {
   'Perderás tu rango y progreso en esta comunidad. ¿Estás seguro de que quieres salir?': 'You will lose your rank and progress in this community. Are you sure you want to leave?',
   'Símbolo para activar comandos (ej: /)': 'Symbol to trigger commands (e.g. /)',
   'Usa "*" para capturar cualquier mensaje no definido.': 'Use "*" to capture any undefined message.',
+  // Batch 7 — greetings, saved toggles, interpolated
+  '¡Buenos días!': 'Good morning!',
+  '¡Buenas tardes!': 'Good afternoon!',
+  '¡Buenas noches!': 'Good evening!',
+  'Quitar de guardados': 'Remove from saved',
+  'Guardar publicación': 'Save post',
+  'Guardado en tu perfil': 'Saved to your profile',
+  'Eliminado de guardados': 'Removed from saved',
 };
 
 // ───────────────────────────── Russian ─────────────────────────────
@@ -1776,4 +1784,12 @@ const Map<String, String> _ru = {
   'Perderás tu rango y progreso en esta comunidad. ¿Estás seguro de que quieres salir?': 'Вы потеряете ранг и прогресс в этом сообществе. Точно хотите выйти?',
   'Símbolo para activar comandos (ej: /)': 'Символ для активации команд (напр. /)',
   'Usa "*" para capturar cualquier mensaje no definido.': 'Используйте «*» для перехвата любого неопределённого сообщения.',
+  // Batch 7
+  '¡Buenos días!': 'Доброе утро!',
+  '¡Buenas tardes!': 'Добрый день!',
+  '¡Buenas noches!': 'Добрый вечер!',
+  'Quitar de guardados': 'Убрать из сохранённого',
+  'Guardar publicación': 'Сохранить публикацию',
+  'Guardado en tu perfil': 'Сохранено в профиле',
+  'Eliminado de guardados': 'Удалено из сохранённого',
 };

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wumble/core/localization/translations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wumble/core/theme.dart';
@@ -73,7 +74,7 @@ class _OnlineNowBarState extends State<OnlineNowBar> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'En línea ahora · ${users.length}',
+                      '${tr('En línea ahora')} · ${users.length}',
                       style: const TextStyle(
                         color: Colors.white70,
                         fontWeight: FontWeight.w600,

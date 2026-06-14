@@ -1113,7 +1113,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                       children: [
                         Icon(_isSaved ? Icons.bookmark : Icons.bookmark_border, color: Colors.white70, size: 20),
                         const SizedBox(width: 8),
-                        Text(_isSaved ? 'Quitar de guardados' : 'Guardar'),
+                        Text(_isSaved ? tr('Quitar de guardados') : tr('Guardar')),
                       ],
                     ),
                   ),

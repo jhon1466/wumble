@@ -121,7 +121,7 @@ class _ActivitySheetState extends State<_ActivitySheet> {
                     StreamBuilder<List<OnlineUser>>(
                       stream: _presence.stream,
                       builder: (context, snap) => Text(
-                        'En línea ahora · ${snap.data?.length ?? 0}',
+                        '${tr('En línea ahora')} · ${snap.data?.length ?? 0}',
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -329,7 +329,7 @@ class _ActivitySheetState extends State<_ActivitySheet> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _cardHeader(Icons.circle, 'En línea ahora',
+              _cardHeader(Icons.circle, tr('En línea ahora'),
                   trailingTap: users.isEmpty ? null : _openAllOnline,
                   iconColor: const Color(0xFF22C55E)),
               const SizedBox(height: 8),

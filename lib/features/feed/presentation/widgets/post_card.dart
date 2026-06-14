@@ -111,7 +111,7 @@ class _PostCardState extends State<PostCard> {
       if (mounted) {
         setState(() => _isSaved = !_isSaved);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(_isSaved ? 'Guardado en tu perfil' : 'Eliminado de guardados')),
+          SnackBar(content: Text(_isSaved ? tr('Guardado en tu perfil') : tr('Eliminado de guardados'))),
         );
       }
     } catch (e) {
@@ -230,7 +230,7 @@ class _PostCardState extends State<PostCard> {
           children: [
             ListTile(
               leading: Icon(_isSaved ? Icons.bookmark : Icons.bookmark_border, color: Colors.white70),
-              title: Text(_isSaved ? 'Quitar de guardados' : 'Guardar publicación', style: const TextStyle(color: Colors.white)),
+              title: Text(_isSaved ? tr('Quitar de guardados') : tr('Guardar publicación'), style: const TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 _toggleSave();
